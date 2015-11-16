@@ -1,0 +1,432 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		DC3CF6401BF7700700840D3F /* assets in CopyFiles */ = {isa = PBXBuildFile; fileRef = DC3CF63F1BF76FE800840D3F /* assets */; };
+		DC3CF64D1BF771BA00840D3F /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DC3CF64C1BF771BA00840D3F /* main.cpp */; settings = {ASSET_TAGS = (); }; };
+		DC3CF64F1BF771DD00840D3F /* GameObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DC3CF64E1BF771DD00840D3F /* GameObject.cpp */; settings = {ASSET_TAGS = (); }; };
+		DC3CF6551BF778DD00840D3F /* PlayerShip.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DC3CF6541BF778DD00840D3F /* PlayerShip.cpp */; settings = {ASSET_TAGS = (); }; };
+		DC3CF65D1BF79CC000840D3F /* PixelPosition.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DC3CF65C1BF79CC000840D3F /* PixelPosition.cpp */; settings = {ASSET_TAGS = (); }; };
+		DC3CF6621BF7A0E000840D3F /* LinearMovement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DC3CF6611BF7A0E000840D3F /* LinearMovement.cpp */; settings = {ASSET_TAGS = (); }; };
+		DC3CF6671BF7B53600840D3F /* SpriteDrawing.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DC3CF6661BF7B53600840D3F /* SpriteDrawing.cpp */; settings = {ASSET_TAGS = (); }; };
+		DC3CF6771BF9F50F00840D3F /* EventManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DC3CF6761BF9F50F00840D3F /* EventManager.cpp */; settings = {ASSET_TAGS = (); }; };
+		DC3CF67F1BFA010700840D3F /* ObjectManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DC3CF67E1BFA010700840D3F /* ObjectManager.cpp */; settings = {ASSET_TAGS = (); }; };
+		DC3CF6841BFA1B3400840D3F /* FrameManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DC3CF6831BFA1B3400840D3F /* FrameManager.cpp */; settings = {ASSET_TAGS = (); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		DC3CF63C1BF76F7400840D3F /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 7;
+			files = (
+				DC3CF6401BF7700700840D3F /* assets in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		DC3CF62D1BF76CAE00840D3F /* MMP2a_SpaceGame */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = MMP2a_SpaceGame; sourceTree = BUILT_PRODUCTS_DIR; };
+		DC3CF63F1BF76FE800840D3F /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; path = assets; sourceTree = SOURCE_ROOT; };
+		DC3CF64C1BF771BA00840D3F /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = source/main.cpp; sourceTree = SOURCE_ROOT; };
+		DC3CF64E1BF771DD00840D3F /* GameObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GameObject.cpp; path = source/GameObject.cpp; sourceTree = SOURCE_ROOT; };
+		DC3CF6501BF771F200840D3F /* GameObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = GameObject.h; path = include/GameObject.h; sourceTree = SOURCE_ROOT; };
+		DC3CF6511BF7730800840D3F /* IComponent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = IComponent.h; path = include/IComponent.h; sourceTree = SOURCE_ROOT; };
+		DC3CF6541BF778DD00840D3F /* PlayerShip.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PlayerShip.cpp; path = source/PlayerShip.cpp; sourceTree = SOURCE_ROOT; };
+		DC3CF6571BF778FE00840D3F /* PlayerShip.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PlayerShip.h; path = include/PlayerShip.h; sourceTree = SOURCE_ROOT; };
+		DC3CF65A1BF77B0C00840D3F /* IPosition.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = IPosition.h; path = include/IPosition.h; sourceTree = SOURCE_ROOT; };
+		DC3CF65C1BF79CC000840D3F /* PixelPosition.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PixelPosition.cpp; path = source/PixelPosition.cpp; sourceTree = SOURCE_ROOT; };
+		DC3CF65E1BF79CCD00840D3F /* PixelPosition.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PixelPosition.h; path = include/PixelPosition.h; sourceTree = SOURCE_ROOT; };
+		DC3CF6601BF7A09D00840D3F /* IMovement.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = IMovement.h; path = include/IMovement.h; sourceTree = SOURCE_ROOT; };
+		DC3CF6611BF7A0E000840D3F /* LinearMovement.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LinearMovement.cpp; path = source/LinearMovement.cpp; sourceTree = SOURCE_ROOT; };
+		DC3CF6631BF7A0F300840D3F /* LinearMovement.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = LinearMovement.h; path = include/LinearMovement.h; sourceTree = SOURCE_ROOT; };
+		DC3CF6651BF7B0BF00840D3F /* IDrawing.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = IDrawing.h; path = include/IDrawing.h; sourceTree = SOURCE_ROOT; };
+		DC3CF6661BF7B53600840D3F /* SpriteDrawing.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SpriteDrawing.cpp; path = source/SpriteDrawing.cpp; sourceTree = SOURCE_ROOT; };
+		DC3CF6681BF7B54200840D3F /* SpriteDrawing.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SpriteDrawing.h; path = include/SpriteDrawing.h; sourceTree = SOURCE_ROOT; };
+		DC3CF6691BF7CD6000840D3F /* EComponentType.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = EComponentType.h; path = include/EComponentType.h; sourceTree = SOURCE_ROOT; };
+		DC3CF6701BF99EA400840D3F /* IManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = IManager.h; path = include/IManager.h; sourceTree = SOURCE_ROOT; };
+		DC3CF6761BF9F50F00840D3F /* EventManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = EventManager.cpp; path = source/EventManager.cpp; sourceTree = SOURCE_ROOT; };
+		DC3CF6781BF9F52900840D3F /* EventManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = EventManager.h; path = include/EventManager.h; sourceTree = SOURCE_ROOT; };
+		DC3CF67C1BF9F97500840D3F /* IEventObserver.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = IEventObserver.h; path = include/IEventObserver.h; sourceTree = SOURCE_ROOT; };
+		DC3CF67E1BFA010700840D3F /* ObjectManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ObjectManager.cpp; path = source/ObjectManager.cpp; sourceTree = SOURCE_ROOT; };
+		DC3CF6801BFA011300840D3F /* ObjectManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ObjectManager.h; path = include/ObjectManager.h; sourceTree = SOURCE_ROOT; };
+		DC3CF6811BFA177000840D3F /* IFrameObserver.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = IFrameObserver.h; path = include/IFrameObserver.h; sourceTree = SOURCE_ROOT; };
+		DC3CF6831BFA1B3400840D3F /* FrameManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FrameManager.cpp; path = source/FrameManager.cpp; sourceTree = SOURCE_ROOT; };
+		DC3CF6851BFA1B4000840D3F /* FrameManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = FrameManager.h; path = include/FrameManager.h; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DC3CF62B1BF76CAE00840D3F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		DC3CF6251BF76CAE00840D3F = {
+			isa = PBXGroup;
+			children = (
+				DC3CF62F1BF76CAE00840D3F /* MMP2a_SpaceGame */,
+				DC3CF62E1BF76CAE00840D3F /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		DC3CF62E1BF76CAE00840D3F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DC3CF62D1BF76CAE00840D3F /* MMP2a_SpaceGame */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DC3CF62F1BF76CAE00840D3F /* MMP2a_SpaceGame */ = {
+			isa = PBXGroup;
+			children = (
+				DC3CF66A1BF8704D00840D3F /* Managers */,
+				DC3CF6591BF77AF400840D3F /* Components */,
+				DC3CF6561BF778EB00840D3F /* GameObjects */,
+				DC3CF64C1BF771BA00840D3F /* main.cpp */,
+				DC3CF63F1BF76FE800840D3F /* assets */,
+			);
+			path = MMP2a_SpaceGame;
+			sourceTree = "<group>";
+		};
+		DC3CF6561BF778EB00840D3F /* GameObjects */ = {
+			isa = PBXGroup;
+			children = (
+				DC3CF64E1BF771DD00840D3F /* GameObject.cpp */,
+				DC3CF6501BF771F200840D3F /* GameObject.h */,
+				DC3CF6711BF9A04100840D3F /* PlayerShip */,
+			);
+			name = GameObjects;
+			sourceTree = "<group>";
+		};
+		DC3CF6591BF77AF400840D3F /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				DC3CF6511BF7730800840D3F /* IComponent.h */,
+				DC3CF6691BF7CD6000840D3F /* EComponentType.h */,
+				DC3CF6641BF7B0B000840D3F /* IDrawing */,
+				DC3CF65F1BF7A09100840D3F /* IMovement */,
+				DC3CF65B1BF79C8C00840D3F /* IPosition */,
+			);
+			name = Components;
+			sourceTree = "<group>";
+		};
+		DC3CF65B1BF79C8C00840D3F /* IPosition */ = {
+			isa = PBXGroup;
+			children = (
+				DC3CF65A1BF77B0C00840D3F /* IPosition.h */,
+				DC3CF65C1BF79CC000840D3F /* PixelPosition.cpp */,
+				DC3CF65E1BF79CCD00840D3F /* PixelPosition.h */,
+			);
+			name = IPosition;
+			sourceTree = "<group>";
+		};
+		DC3CF65F1BF7A09100840D3F /* IMovement */ = {
+			isa = PBXGroup;
+			children = (
+				DC3CF6601BF7A09D00840D3F /* IMovement.h */,
+				DC3CF6611BF7A0E000840D3F /* LinearMovement.cpp */,
+				DC3CF6631BF7A0F300840D3F /* LinearMovement.h */,
+			);
+			name = IMovement;
+			sourceTree = "<group>";
+		};
+		DC3CF6641BF7B0B000840D3F /* IDrawing */ = {
+			isa = PBXGroup;
+			children = (
+				DC3CF6651BF7B0BF00840D3F /* IDrawing.h */,
+				DC3CF6661BF7B53600840D3F /* SpriteDrawing.cpp */,
+				DC3CF6681BF7B54200840D3F /* SpriteDrawing.h */,
+				DC3CF6811BFA177000840D3F /* IFrameObserver.h */,
+			);
+			name = IDrawing;
+			sourceTree = "<group>";
+		};
+		DC3CF66A1BF8704D00840D3F /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				DC3CF6821BFA1B2300840D3F /* FrameManager */,
+				DC3CF67D1BFA00E600840D3F /* ObjectManager */,
+				DC3CF6751BF9F4FB00840D3F /* EventManager */,
+				DC3CF6701BF99EA400840D3F /* IManager.h */,
+			);
+			name = Managers;
+			sourceTree = "<group>";
+		};
+		DC3CF6711BF9A04100840D3F /* PlayerShip */ = {
+			isa = PBXGroup;
+			children = (
+				DC3CF6541BF778DD00840D3F /* PlayerShip.cpp */,
+				DC3CF6571BF778FE00840D3F /* PlayerShip.h */,
+			);
+			name = PlayerShip;
+			sourceTree = "<group>";
+		};
+		DC3CF6751BF9F4FB00840D3F /* EventManager */ = {
+			isa = PBXGroup;
+			children = (
+				DC3CF6761BF9F50F00840D3F /* EventManager.cpp */,
+				DC3CF6781BF9F52900840D3F /* EventManager.h */,
+				DC3CF67C1BF9F97500840D3F /* IEventObserver.h */,
+			);
+			name = EventManager;
+			sourceTree = "<group>";
+		};
+		DC3CF67D1BFA00E600840D3F /* ObjectManager */ = {
+			isa = PBXGroup;
+			children = (
+				DC3CF67E1BFA010700840D3F /* ObjectManager.cpp */,
+				DC3CF6801BFA011300840D3F /* ObjectManager.h */,
+			);
+			name = ObjectManager;
+			sourceTree = "<group>";
+		};
+		DC3CF6821BFA1B2300840D3F /* FrameManager */ = {
+			isa = PBXGroup;
+			children = (
+				DC3CF6831BFA1B3400840D3F /* FrameManager.cpp */,
+				DC3CF6851BFA1B4000840D3F /* FrameManager.h */,
+			);
+			name = FrameManager;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		DC3CF62C1BF76CAE00840D3F /* MMP2a_SpaceGame */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DC3CF6391BF76CAE00840D3F /* Build configuration list for PBXNativeTarget "MMP2a_SpaceGame" */;
+			buildPhases = (
+				DC3CF62A1BF76CAE00840D3F /* Sources */,
+				DC3CF62B1BF76CAE00840D3F /* Frameworks */,
+				DC3CF63C1BF76F7400840D3F /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MMP2a_SpaceGame;
+			productName = MMP2a_SpaceGame;
+			productReference = DC3CF62D1BF76CAE00840D3F /* MMP2a_SpaceGame */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		DC3CF6261BF76CAE00840D3F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0700;
+				ORGANIZATIONNAME = "Friedrich Schmidt";
+				TargetAttributes = {
+					DC3CF62C1BF76CAE00840D3F = {
+						CreatedOnToolsVersion = 7.0;
+					};
+				};
+			};
+			buildConfigurationList = DC3CF6291BF76CAE00840D3F /* Build configuration list for PBXProject "MMP2a_SpaceGame" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = DC3CF6251BF76CAE00840D3F;
+			productRefGroup = DC3CF62E1BF76CAE00840D3F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				DC3CF62C1BF76CAE00840D3F /* MMP2a_SpaceGame */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		DC3CF62A1BF76CAE00840D3F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DC3CF6771BF9F50F00840D3F /* EventManager.cpp in Sources */,
+				DC3CF6841BFA1B3400840D3F /* FrameManager.cpp in Sources */,
+				DC3CF6551BF778DD00840D3F /* PlayerShip.cpp in Sources */,
+				DC3CF67F1BFA010700840D3F /* ObjectManager.cpp in Sources */,
+				DC3CF6671BF7B53600840D3F /* SpriteDrawing.cpp in Sources */,
+				DC3CF6621BF7A0E000840D3F /* LinearMovement.cpp in Sources */,
+				DC3CF65D1BF79CC000840D3F /* PixelPosition.cpp in Sources */,
+				DC3CF64F1BF771DD00840D3F /* GameObject.cpp in Sources */,
+				DC3CF64D1BF771BA00840D3F /* main.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		DC3CF6371BF76CAE00840D3F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = (
+					i386,
+					x86_64,
+				);
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CONFIGURATION_BUILD_DIR = "$(PROJECT_DIR)/build";
+				CONFIGURATION_TEMP_DIR = "$(PROJECT_DIR)/tmp";
+				FRAMEWORK_SEARCH_PATHS = (
+					/Library/Frameworks/,
+					"$(inherited)",
+				);
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				HEADER_SEARCH_PATHS = (
+					/usr/local/include/,
+					"$(inherited)",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					/usr/local/lib/,
+					"$(inherited)",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				OBJROOT = "$(PROJECT_DIR)/tmp";
+				ON_DEMAND_RESOURCES_PREFETCH_ORDER = "";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"$(SFML_SYSTEM)",
+					"$(SFML_WINDOW)",
+					"$(SFML_GRAPHICS)",
+					"$(SFML_AUDIO)",
+					"$(SFML_NETWORK)",
+				);
+				SFML_AUDIO = "$(SFML_LINK_PREFIX) sfml-audio$(SFML_LINK_SUFFIX)";
+				SFML_BINARY_TYPE = FRAMEWORKS;
+				SFML_GRAPHICS = "$(SFML_LINK_PREFIX) sfml-graphics$(SFML_LINK_SUFFIX)";
+				SFML_LINK_DYLIBS_PREFIX = "-l";
+				SFML_LINK_DYLIBS_SUFFIX = "";
+				SFML_LINK_FRAMEWORKS_PREFIX = "-framework";
+				SFML_LINK_FRAMEWORKS_SUFFIX = "";
+				SFML_LINK_PREFIX = "$(SFML_LINK_$(SFML_BINARY_TYPE)_PREFIX)";
+				SFML_LINK_SUFFIX = "$(SFML_LINK_$(SFML_BINARY_TYPE)_SUFFIX)";
+				SFML_NETWORK = "";
+				SFML_SYSTEM = "$(SFML_LINK_PREFIX) sfml-system$(SFML_LINK_SUFFIX)";
+				SFML_WINDOW = "$(SFML_LINK_PREFIX) sfml-window$(SFML_LINK_SUFFIX)";
+				SUPPORTED_PLATFORMS = macosx;
+				SYMROOT = "$(PROJECT_DIR)/build";
+			};
+			name = Debug;
+		};
+		DC3CF6381BF76CAE00840D3F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = (
+					i386,
+					x86_64,
+				);
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CONFIGURATION_BUILD_DIR = "$(PROJECT_DIR)/build";
+				CONFIGURATION_TEMP_DIR = "$(PROJECT_DIR)/tmp";
+				FRAMEWORK_SEARCH_PATHS = (
+					/Library/Frameworks/,
+					"$(inherited)",
+				);
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				HEADER_SEARCH_PATHS = (
+					/usr/local/include/,
+					"$(inherited)",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					/usr/local/lib/,
+					"$(inherited)",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				OBJROOT = "$(PROJECT_DIR)/tmp";
+				ON_DEMAND_RESOURCES_PREFETCH_ORDER = "";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"$(SFML_SYSTEM)",
+					"$(SFML_WINDOW)",
+					"$(SFML_GRAPHICS)",
+					"$(SFML_AUDIO)",
+					"$(SFML_NETWORK)",
+				);
+				SFML_AUDIO = "$(SFML_LINK_PREFIX) sfml-audio$(SFML_LINK_SUFFIX)";
+				SFML_BINARY_TYPE = FRAMEWORKS;
+				SFML_GRAPHICS = "$(SFML_LINK_PREFIX) sfml-graphics$(SFML_LINK_SUFFIX)";
+				SFML_LINK_DYLIBS_PREFIX = "-l";
+				SFML_LINK_DYLIBS_SUFFIX = "";
+				SFML_LINK_FRAMEWORKS_PREFIX = "-framework";
+				SFML_LINK_FRAMEWORKS_SUFFIX = "";
+				SFML_LINK_PREFIX = "$(SFML_LINK_$(SFML_BINARY_TYPE)_PREFIX)";
+				SFML_LINK_SUFFIX = "$(SFML_LINK_$(SFML_BINARY_TYPE)_SUFFIX)";
+				SFML_NETWORK = "";
+				SFML_SYSTEM = "$(SFML_LINK_PREFIX) sfml-system$(SFML_LINK_SUFFIX)";
+				SFML_WINDOW = "$(SFML_LINK_PREFIX) sfml-window$(SFML_LINK_SUFFIX)";
+				SUPPORTED_PLATFORMS = macosx;
+				SYMROOT = "$(PROJECT_DIR)/build";
+			};
+			name = Release;
+		};
+		DC3CF63A1BF76CAE00840D3F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				HEADER_SEARCH_PATHS = (
+					/usr/local/include/,
+					"$(inherited)",
+					"$(PROJECT_DIR)/include",
+				);
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		DC3CF63B1BF76CAE00840D3F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				HEADER_SEARCH_PATHS = (
+					/usr/local/include/,
+					"$(inherited)",
+					"$(PROJECT_DIR)/include",
+				);
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		DC3CF6291BF76CAE00840D3F /* Build configuration list for PBXProject "MMP2a_SpaceGame" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DC3CF6371BF76CAE00840D3F /* Debug */,
+				DC3CF6381BF76CAE00840D3F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DC3CF6391BF76CAE00840D3F /* Build configuration list for PBXNativeTarget "MMP2a_SpaceGame" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DC3CF63A1BF76CAE00840D3F /* Debug */,
+				DC3CF63B1BF76CAE00840D3F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = DC3CF6261BF76CAE00840D3F /* Project object */;
+}
