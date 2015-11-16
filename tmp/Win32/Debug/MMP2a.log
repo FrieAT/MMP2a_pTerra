@@ -1,0 +1,33 @@
+﻿Build started 16.11.2015 18:21:31.
+     1>Project "D:\Eigene Daten\Dokumente\Studium\MP2_A\MMP2a_Stadlberger_Schmidt_Friedle\MMP2a.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         D:\Programme\Visual Studio 2015\VC\bin\CL.exe /c /I"D:\Eigene Daten\Dokumente\Studium\MP2_A\SFML-2.3.2/include" /I"D:\Eigene Daten\Dokumente\Studium\MP2_A\MMP2a_Stadlberger_Schmidt_Friedle\include" /AI"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\\" /AI"C:\Program Files (x86)\Windows Kits\8.1\References\CommonConfiguration\Neutral" /AI"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\Facades\\" /Zi /clr /nologo /W3 /WX- /O2 /Oi /Oy- /D WIN32 /D _DEBUG /D _UNICODE /D UNICODE /EHa /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"D:\Eigene Daten\Dokumente\Studium\MP2_A\MMP2a_Stadlberger_Schmidt_Friedle\tmp\Win32\Debug\\" /Fd"D:\Eigene Daten\Dokumente\Studium\MP2_A\MMP2a_Stadlberger_Schmidt_Friedle\tmp\Win32\Debug\vc140.pdb" /TP /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\mscorlib.dll" /analyze- /errorReport:prompt /clr:nostdlib source\EventManager.cpp source\FrameManager.cpp source\GameObject.cpp source\LinearMovement.cpp source\main.cpp source\ObjectManager.cpp source\PixelPosition.cpp source\PlayerShip.cpp source\SpriteDrawing.cpp
+         EventManager.cpp
+         FrameManager.cpp
+         GameObject.cpp
+         LinearMovement.cpp
+         main.cpp
+         ObjectManager.cpp
+         PixelPosition.cpp
+         PlayerShip.cpp
+         SpriteDrawing.cpp
+         Generating Code...
+         D:\Programme\Visual Studio 2015\VC\bin\CL.exe /c /I"D:\Eigene Daten\Dokumente\Studium\MP2_A\SFML-2.3.2/include" /I"D:\Eigene Daten\Dokumente\Studium\MP2_A\MMP2a_Stadlberger_Schmidt_Friedle\include" /Zi /clr /nologo /W3 /WX- /O2 /Oi /Oy- /D WIN32 /D _DEBUG /D _UNICODE /D UNICODE /EHa /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fp"D:\Eigene Daten\Dokumente\Studium\MP2_A\MMP2a_Stadlberger_Schmidt_Friedle\tmp\Win32\Debug\MMP2a-x86-Debug.pch" /Fa"D:\Eigene Daten\Dokumente\Studium\MP2_A\MMP2a_Stadlberger_Schmidt_Friedle\tmp\Win32\Debug\\" /Fo"D:\Eigene Daten\Dokumente\Studium\MP2_A\MMP2a_Stadlberger_Schmidt_Friedle\tmp\Win32\Debug\\" /Fd"D:\Eigene Daten\Dokumente\Studium\MP2_A\MMP2a_Stadlberger_Schmidt_Friedle\tmp\Win32\Debug\vc140.pdb" /analyze- /errorReport:prompt "C:\Users\Florian\AppData\Local\Temp\.NETFramework,Version=v4.5.2.AssemblyAttributes.cpp"
+         .NETFramework,Version=v4.5.2.AssemblyAttributes.cpp
+       Link:
+         D:\Programme\Visual Studio 2015\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\Eigene Daten\Dokumente\Studium\MP2_A\MMP2a_Stadlberger_Schmidt_Friedle\bin\MMP2a-x86-Debug.exe" /INCREMENTAL /NOLOGO /LIBPATH:"D:\Eigene Daten\Dokumente\Studium\MP2_A\SFML-2.3.2/lib" "sfml-graphics-d.lib" "sfml-system-d.lib" "sfml-window-d.lib" "sfml-network-d.lib" "sfml-audio-d.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"D:\Eigene Daten\Dokumente\Studium\MP2_A\MMP2a_Stadlberger_Schmidt_Friedle\bin\MMP2a-x86-Debug.pdb" /ASSEMBLYDEBUG /TLBID:1 /DYNAMICBASE /FIXED:NO /NXCOMPAT /MACHINE:X86 "D:\Eigene Daten\Dokumente\Studium\MP2_A\MMP2a_Stadlberger_Schmidt_Friedle\tmp\Win32\Debug\EventManager.obj"
+         "D:\Eigene Daten\Dokumente\Studium\MP2_A\MMP2a_Stadlberger_Schmidt_Friedle\tmp\Win32\Debug\FrameManager.obj"
+         "D:\Eigene Daten\Dokumente\Studium\MP2_A\MMP2a_Stadlberger_Schmidt_Friedle\tmp\Win32\Debug\GameObject.obj"
+         "D:\Eigene Daten\Dokumente\Studium\MP2_A\MMP2a_Stadlberger_Schmidt_Friedle\tmp\Win32\Debug\LinearMovement.obj"
+         "D:\Eigene Daten\Dokumente\Studium\MP2_A\MMP2a_Stadlberger_Schmidt_Friedle\tmp\Win32\Debug\main.obj"
+         "D:\Eigene Daten\Dokumente\Studium\MP2_A\MMP2a_Stadlberger_Schmidt_Friedle\tmp\Win32\Debug\ObjectManager.obj"
+         "D:\Eigene Daten\Dokumente\Studium\MP2_A\MMP2a_Stadlberger_Schmidt_Friedle\tmp\Win32\Debug\PixelPosition.obj"
+         "D:\Eigene Daten\Dokumente\Studium\MP2_A\MMP2a_Stadlberger_Schmidt_Friedle\tmp\Win32\Debug\PlayerShip.obj"
+         "D:\Eigene Daten\Dokumente\Studium\MP2_A\MMP2a_Stadlberger_Schmidt_Friedle\tmp\Win32\Debug\SpriteDrawing.obj"
+         "D:\Eigene Daten\Dokumente\Studium\MP2_A\MMP2a_Stadlberger_Schmidt_Friedle\tmp\Win32\Debug\.NETFramework,Version=v4.5.2.AssemblyAttributes.obj"
+         MMP2a.vcxproj -> D:\Eigene Daten\Dokumente\Studium\MP2_A\MMP2a_Stadlberger_Schmidt_Friedle\bin\MMP2a-x86-Debug.exe
+     1>Done Building Project "D:\Eigene Daten\Dokumente\Studium\MP2_A\MMP2a_Stadlberger_Schmidt_Friedle\MMP2a.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:09.13
