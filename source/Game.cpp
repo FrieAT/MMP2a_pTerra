@@ -59,12 +59,14 @@ void Game::Start()
 		{
 			/////// TODO: Call InputManager !!! ///////////////
 			// Close window: exit
-			if (event.type == sf::Event::Closed) {
+			if (event.type == sf::Event::Closed)
+			{
 				window->close();
 			}
 
 			// Escape pressed: exit
-			if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape) {
+			if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)
+			{
 				window->close();
 			}
 			/////////////////////////////////////////////////////////////////////

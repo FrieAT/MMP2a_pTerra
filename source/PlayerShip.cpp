@@ -1,13 +1,4 @@
-//
-//  PlayerShip.cpp
-//  MMP2a_SpaceGame
-//
-//  Created by Friedrich Schmidt on 14.11.15.
-//  Copyright © 2015 Friedrich Schmidt. All rights reserved.
-//
-
 #include "PlayerShip.h"
-
 
 #include "LinearMovement.h"
 #include "PixelPosition.h"
@@ -21,7 +12,8 @@ PlayerShip::PlayerShip()
     LinearMovement* movement = new LinearMovement();
     
     sf::Texture* texture = new sf::Texture();
-    if(!texture->loadFromFile("assets/space_ship.png")) {
+    if(!texture->loadFromFile("assets/space_ship.png"))
+	{
         throw std::exception();
     }
     SpriteDrawing* sprite = new SpriteDrawing(*new sf::Sprite(*texture), *texture);

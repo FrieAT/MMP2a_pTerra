@@ -1,11 +1,3 @@
-//
-//  FrameManager.cpp
-//  MMP2a_SpaceGame
-//
-//  Created by Friedrich Schmidt on 16.11.15.
-//  Copyright © 2015 Friedrich Schmidt. All rights reserved.
-//
-
 #include "FrameManager.h"
 #include <memory>
 
@@ -14,28 +6,30 @@ sf::Clock FrameManager::clock_time;
 
 void FrameManager::Update(sf::RenderWindow &window)
 {
-    sf::Time dt = clock_time.restart();
-    UpdateEventObserver(dt);
+	sf::Time dt = clock_time.restart();
+	UpdateEventObserver(dt);
 }
 
 void FrameManager::UpdateEventObserver(sf::Time delta_time)
 {
-    for(unsigned int i = 0; i < Observers.size(); i++) {
-        Observers[i]->OnFrameUpdate(delta_time);
-    }
+	for (unsigned int i = 0; i < Observers.size(); i++)
+	{
+		Observers[i]->OnFrameUpdate(delta_time);
+	}
 }
 
 void FrameManager::RegisterEventObserver(IFrameObserver &observer)
 {
-    std::shared_ptr<IFrameObserver>* ref = new std::shared_ptr<IFrameObserver>(&observer);
-    Observers.push_back(*ref);
+	std::shared_ptr<IFrameObserver>* ref = new std::shared_ptr<IFrameObserver>(&observer);
+	Observers.push_back(*ref);
 }
 
 void FrameManager::UnregisterEventObserver(IFrameObserver &observer)
 {
-    for(unsigned int i = 0; i < Observers.size(); i++) {
-        if(Observers[i].get() != &observer) { continue; }
-        Observers.erase(Observers.begin() + i);
-        break;
-    }
+	for (unsigned int i = 0; i < Observers.size(); i++)
+	{
+		if (Observers[i].get() != &observer) continue;
+		Observers.erase(Observers.begin() + i);
+		break;
+	}
 }

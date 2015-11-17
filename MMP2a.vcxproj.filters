@@ -78,11 +78,11 @@
     <ClCompile Include="source\InputManager.cpp">
       <Filter>Source Files\Managers\InputManager</Filter>
     </ClCompile>
+    <ClCompile Include="source\Game.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\EComponentType.h">
-      <Filter>Source Files\Components</Filter>
-    </ClInclude>
     <ClInclude Include="include\IComponent.h">
       <Filter>Source Files\Components</Filter>
     </ClInclude>
@@ -130,6 +130,12 @@
     </ClInclude>
     <ClInclude Include="include\InputManager.h">
       <Filter>Source Files\Managers\InputManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Game.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\EComponentType.h">
+      <Filter>Source Files\Components</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

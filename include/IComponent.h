@@ -1,13 +1,4 @@
-//
-//  IComponent.h
-//  MMP2a_SpaceGame
-//
-//  Created by Friedrich Schmidt on 14.11.15.
-//  Copyright © 2015 Friedrich Schmidt. All rights reserved.
-//
-
-#ifndef IComponent_h
-#define IComponent_h
+#pragma once
 
 #include <memory>
 
@@ -20,15 +11,15 @@ class GameObject;
 class IComponent
 {
 public:
-    virtual EComponentType GetComponentType() = 0;
-    void SetAssignedGameObject(GameObject &obj) {
-        GameObj = &obj;
-    }
-    GameObject* GetAssignedGameObject() {
-        return GameObj;
-    }
+	virtual EComponentType GetComponentType() = 0;
+	void SetAssignedGameObject(GameObject &obj)
+	{
+		GameObj = &obj;
+	}
+	GameObject* GetAssignedGameObject()
+	{
+		return GameObj;
+	}
 private:
-    GameObject* GameObj;
+	GameObject* GameObj;
 };
-
-#endif /* IComponent_h */
