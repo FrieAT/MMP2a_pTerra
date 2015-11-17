@@ -49,6 +49,7 @@ int main(int argc, char const** argv)
 
     // Load a music to play
     sf::Music music;
+	music.setLoop(true);
     if (!music.openFromFile("assets/nice_music.ogg")) {
         return EXIT_FAILURE;
     }

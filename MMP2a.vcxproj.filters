@@ -98,9 +98,6 @@
     <ClInclude Include="include\SpriteDrawing.h">
       <Filter>Source Files\Components\IDrawing</Filter>
     </ClInclude>
-    <ClInclude Include="include\IFrameObserver.h">
-      <Filter>Source Files\Components\IDrawing</Filter>
-    </ClInclude>
     <ClInclude Include="include\EventManager.h">
       <Filter>Source Files\Managers\EventManager</Filter>
     </ClInclude>
@@ -121,6 +118,9 @@
     </ClInclude>
     <ClInclude Include="include\GameObject.h">
       <Filter>Source Files\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="include\IFrameObserver.h">
+      <Filter>Source Files\Managers\FrameManager</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
