@@ -37,26 +37,32 @@ void LinearMovement::OnInputUpdate(std::string event)
 	bool movementXChanged = false, movementYChanged = false;
 
 	std::string key_state = event.substr(event.length() - 1, 1);
-	std::cout << event << std::endl;
-	//   if(event.type == sf::Event::KeyReleased) {
-	//       if(!movementYChanged && (event.key.code == sf::Keyboard::W || event.key.code == sf::Keyboard::S)) {
-	//           this->MovementY = 0;
-	//       } else if(!movementXChanged && (event.key.code == sf::Keyboard::A || event.key.code == sf::Keyboard::D)) {
-	//           this->MovementX = 0;
-	//       }
-	//   }
-	//   
-	//   if(event.type == sf::Event::KeyPressed) {
-	//       if(event.key.code == sf::Keyboard::W || event.key.code == sf::Keyboard::S) {
-	//           movementYChanged = true;
-	//           if(event.key.code == sf::Keyboard::W) this->MovementY = -1;
-	//           else if(event.key.code == sf::Keyboard::S) this->MovementY = 1;
-	//       }
-	//       
-	//       if(event.key.code == sf::Keyboard::A || event.key.code == sf::Keyboard::D) {
-	//           movementXChanged = true;
-	//           if(event.key.code == sf::Keyboard::A) this->MovementX = -1;
-	//           else if(event.key.code == sf::Keyboard::D) this->MovementX = 1;
-	//       }
-	//   }
+	   if(key_state=="R")
+	   {
+	       if(!movementYChanged && (event == "UP_R" || event == "DOWN_R"))
+		   {
+	           this->MovementY = 0;
+	       }
+		   else if(!movementXChanged && (event == "LEFT_R" || event == "RIGHT_R"))
+		   {
+	           this->MovementX = 0;
+	       }
+	   }
+	   
+	   if(key_state == "P")
+	   {
+	       if(event == "UP_P" || event == "DOWN_P")
+		   {
+	           movementYChanged = true;
+	           if(event == "UP_P") this->MovementY = -1;
+	           else if(event == "DOWN_P") this->MovementY = 1;
+	       }
+	       
+	       if(event == "LEFT_P" || event == "RIGHT_P")
+		   {
+	           movementXChanged = true;
+	           if(event == "LEFT_P") this->MovementX = -1;
+	           else if(event == "RIGHT_P") this->MovementX = 1;
+	       }
+	   }
 }
