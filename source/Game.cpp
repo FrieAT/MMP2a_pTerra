@@ -29,14 +29,14 @@ void Game::Initialize()
 	// Set the Icon
 	if (!icon.loadFromFile("assets/icon.png"))
 	{
-		throw new std::exception("Unable to load assets/icon.png");
+		throw new std::runtime_error("Unable to load assets/icon.png");
 	}
 	window->setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
 
 	// Load a sprite to display
 	if (!texture.loadFromFile("assets/cute_image.jpg"))
 	{
-		throw new std::exception("Unable to load assets/image.jpg");
+		throw new std::runtime_error("Unable to load assets/image.jpg");
 	}
 	sprite = new sf::Sprite(texture);
 
@@ -44,7 +44,7 @@ void Game::Initialize()
 	music.setLoop(true);
 	if (!music.openFromFile("assets/nice_music.ogg"))
 	{
-		throw new std::exception("Unable to load assets/nice_music.ogg");
+		throw new std::runtime_error("Unable to load assets/nice_music.ogg");
 	}
 }
 
