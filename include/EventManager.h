@@ -10,12 +10,10 @@
 #define EventManager_h
 
 #include <SFML/Graphics.hpp>
-
-#include "IManager.h"
-
+#include <memory>
 #include "IEventObserver.h"
 
-class EventManager : public IManager
+class EventManager
 {
 public:
     static void Update(sf::RenderWindow &window);

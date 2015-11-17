@@ -5,6 +5,10 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
     <Filter Include="Resource Files">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
@@ -39,6 +43,9 @@
     <Filter Include="Source Files\GameObject\PlayerShip">
       <UniqueIdentifier>{40ad054b-15c8-451c-91f2-d5905e90fbe6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Managers\InputMangager">
+      <UniqueIdentifier>{dad23b8d-7774-4ffb-814e-578f6d5275f8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\main.cpp">
@@ -70,6 +77,8 @@
     </ClCompile>
     <ClCompile Include="Game.cpp">
       <Filter>Source Files</Filter>
+    <ClCompile Include="InputMangager.cpp">
+      <Filter>Source Files\Managers\InputMangager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -106,9 +115,6 @@
     <ClInclude Include="include\ObjectManager.h">
       <Filter>Source Files\Managers\ObjectManager</Filter>
     </ClInclude>
-    <ClInclude Include="include\IManager.h">
-      <Filter>Source Files\Managers</Filter>
-    </ClInclude>
     <ClInclude Include="include\IEventObserver.h">
       <Filter>Source Files\Managers\EventManager</Filter>
     </ClInclude>
@@ -123,6 +129,8 @@
     </ClInclude>
     <ClInclude Include="Game.h">
       <Filter>Source Files</Filter>
+    <ClInclude Include="InputMangager.h">
+      <Filter>Source Files\Managers\InputMangager</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -7,6 +7,7 @@
 //
 
 #include "FrameManager.h"
+#include <memory>
 
 std::vector<std::shared_ptr<IFrameObserver>> FrameManager::Observers = *new std::vector<std::shared_ptr<IFrameObserver>>();
 sf::Clock FrameManager::clock_time;
