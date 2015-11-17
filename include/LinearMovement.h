@@ -23,7 +23,7 @@ class LinearMovement : public IMovement, public IInputObserver, public IFrameObs
 public:
     LinearMovement();
     void MoveVector(sf::Vector2f &Vector);
-    void OnInputUpdate(sf::Event event);
+    void OnInputUpdate(std::string event);
     void OnFrameUpdate(sf::Time delta_time);
 private:
     float MovementX;

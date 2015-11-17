@@ -14,7 +14,7 @@
 class IInputObserver
 {
 public:
-	virtual void OnInputUpdate(sf::Event event) = 0;
+	virtual void OnInputUpdate(std::string event) = 0;
 };
 
 #endif /* IInputObserver */

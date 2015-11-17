@@ -9,6 +9,7 @@
 #include "EventManager.h"
 #include "FrameManager.h"
 #include "ObjectManager.h"
+#include "InputManager.h"
 #include "PlayerShip.h"
 
 // Temporary hardcoded loading:
@@ -54,21 +55,7 @@ void Game::Start()
 	// Start the game loop
 	while (window->isOpen())
 	{
-		sf::Event event;
-		while (window->pollEvent(event))
-		{
-			/////// TODO: Call InputManager !!! ///////////////
-			// Close window: exit
-			if (event.type == sf::Event::Closed) {
-				window->close();
-			}
 
-			// Escape pressed: exit
-			if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape) {
-				window->close();
-			}
-			/////////////////////////////////////////////////////////////////////
-		}
 		// Clear screen
 		window->clear();
 
@@ -78,6 +65,7 @@ void Game::Start()
 		// Manager updates...
 		EventManager::Update(*window);
 		FrameManager::Update(*window);
+		InputManager::Update(*window);
 		ObjectManager::Update(*window);
 
 		// Update the window
