@@ -1,0 +1,16 @@
+#pragma once
+
+#include <SFML/Graphics.hpp>
+
+class IInputObserver
+{
+public:
+<<<<<<< HEAD
+	virtual void OnInputUpdate(sf::Event event) = 0;
+};
+=======
+	virtual void OnInputUpdate(std::string event) = 0;
+};
+
+#endif /* IInputObserver */
+>>>>>>> bbad30110a0b120156a690ef5951399f371d0491

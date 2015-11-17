@@ -12,50 +12,65 @@ void InputManager::Update(sf::RenderWindow & window)
 	sf::Event event;
 	while (window.pollEvent(event))
 	{
+		std::string movement = "";
+
 		// Escape pressed: exit
-		if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)
+		if (event.key.code == sf::Keyboard::Escape)
 		{
 			window.close();//TODO call game exit
 		}
 		//Left
-		if (event.type == sf::Event::KeyPressed &&event.key.code == sf::Keyboard::Left)
+		if (event.key.code == sf::Keyboard::Left)
 		{
-
+			movement = "LEFT";
 		}
-		if (event.type == sf::Event::KeyPressed &&event.key.code == sf::Keyboard::A)
+		if (event.key.code == sf::Keyboard::A)
 		{
-
+			movement = "LEFT";
 		}
 		//Right
-		if (event.type == sf::Event::KeyPressed &&event.key.code == sf::Keyboard::Right)
+		if (event.key.code == sf::Keyboard::Right)
 		{
-
+			movement = "RIGHT";
 		}
-		if (event.type == sf::Event::KeyPressed &&event.key.code == sf::Keyboard::D)
+		if (event.key.code == sf::Keyboard::D)
 		{
-
+			movement = "RIGHT";
 		}
 		//Up
-		if (event.type == sf::Event::KeyPressed &&event.key.code == sf::Keyboard::Up)
+		if (event.key.code == sf::Keyboard::Up)
 		{
-
+			movement = "UP";
 		}
-		if (event.type == sf::Event::KeyPressed &&event.key.code == sf::Keyboard::W)
+		if (event.key.code == sf::Keyboard::W)
 		{
-
+			movement = "UP";
 		}
 		//Down
-		if (event.type == sf::Event::KeyPressed &&event.key.code == sf::Keyboard::Down)
+		if (event.key.code == sf::Keyboard::Down)
 		{
-
+			movement = "DOWN";
 		}
-		if (event.type == sf::Event::KeyPressed &&event.key.code == sf::Keyboard::S)
+		if (event.key.code == sf::Keyboard::S)
 		{
-
+			movement = "DOWN";
 		}
 
+		//pressed
+		if (event.type == sf::Event::KeyPressed)
+		{
+			movement.append("_P");
+		}
+		//released
+		if (event.type == sf::Event::KeyReleased)
+		{
+			movement.append("_R");
+		}
 
-		InputManager::UpdateEventObserver(event);
+		if (movement.size() > 1)
+		{
+			InputManager::UpdateEventObserver(movement);
+		}
 	}
 }
 
@@ -75,7 +90,7 @@ void InputManager::UnregisterEventObserver(IInputObserver &observer)
 	}
 }
 
-void InputManager::UpdateEventObserver(sf::Event event)
+void InputManager::UpdateEventObserver(std::string event)
 {
 	for (unsigned int i = 0; i < InputManager::Observers.size(); i++)
 	{

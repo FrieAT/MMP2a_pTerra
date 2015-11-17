@@ -31,33 +31,32 @@ void LinearMovement::OnFrameUpdate(sf::Time delta_time)
 }
 
 
-void LinearMovement::OnInputUpdate(sf::Event event)
+void LinearMovement::OnInputUpdate(std::string event)
 {
-	/*   bool movementXChanged = false, movementYChanged = false;
 
-	   if(event.type == sf::Event::KeyReleased) {
-		   if(!movementYChanged && (event.key.code == sf::Keyboard::W || event.key.code == sf::Keyboard::S))
-		   {
-			   this->MovementY = 0;
-		   } else if(!movementXChanged && (event.key.code == sf::Keyboard::A || event.key.code == sf::Keyboard::D))
-		   {
-			   this->MovementX = 0;
-		   }
-	   }
+	bool movementXChanged = false, movementYChanged = false;
 
-	   if(event.type == sf::Event::KeyPressed) {
-		   if(event.key.code == sf::Keyboard::W || event.key.code == sf::Keyboard::S)
-		   {
-			   movementYChanged = true;
-			   if(event.key.code == sf::Keyboard::W) this->MovementY = -1;
-			   else if(event.key.code == sf::Keyboard::S) this->MovementY = 1;
-		   }
-
-		   if(event.key.code == sf::Keyboard::A || event.key.code == sf::Keyboard::D)
-		   {
-			   movementXChanged = true;
-			   if(event.key.code == sf::Keyboard::A) this->MovementX = -1;
-			   else if(event.key.code == sf::Keyboard::D) this->MovementX = 1;
-		   }
-	   }*/
+	std::string key_state = event.substr(event.length() - 1, 1);
+	std::cout << event << std::endl;
+	//   if(event.type == sf::Event::KeyReleased) {
+	//       if(!movementYChanged && (event.key.code == sf::Keyboard::W || event.key.code == sf::Keyboard::S)) {
+	//           this->MovementY = 0;
+	//       } else if(!movementXChanged && (event.key.code == sf::Keyboard::A || event.key.code == sf::Keyboard::D)) {
+	//           this->MovementX = 0;
+	//       }
+	//   }
+	//   
+	//   if(event.type == sf::Event::KeyPressed) {
+	//       if(event.key.code == sf::Keyboard::W || event.key.code == sf::Keyboard::S) {
+	//           movementYChanged = true;
+	//           if(event.key.code == sf::Keyboard::W) this->MovementY = -1;
+	//           else if(event.key.code == sf::Keyboard::S) this->MovementY = 1;
+	//       }
+	//       
+	//       if(event.key.code == sf::Keyboard::A || event.key.code == sf::Keyboard::D) {
+	//           movementXChanged = true;
+	//           if(event.key.code == sf::Keyboard::A) this->MovementX = -1;
+	//           else if(event.key.code == sf::Keyboard::D) this->MovementX = 1;
+	//       }
+	//   }
 }

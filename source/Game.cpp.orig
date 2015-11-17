@@ -27,23 +27,20 @@ void Game::Initialize()
 	window = new sf::RenderWindow(sf::VideoMode(800, 600), "SFML window");
 
 	// Set the Icon
-	if (!icon.loadFromFile("assets/icon.png"))
-	{
+	if (!icon.loadFromFile("assets/icon.png")) {
 		throw new std::exception("Unable to load assets/icon.png");
 	}
 	window->setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
 
 	// Load a sprite to display
-	if (!texture.loadFromFile("assets/cute_image.jpg"))
-	{
+	if (!texture.loadFromFile("assets/cute_image.jpg")) {
 		throw new std::exception("Unable to load assets/image.jpg");
 	}
 	sprite = new sf::Sprite(texture);
 
 	// Load a music to play
 	music.setLoop(true);
-	if (!music.openFromFile("assets/nice_music.ogg"))
-	{
+	if (!music.openFromFile("assets/nice_music.ogg")) {
 		throw new std::exception("Unable to load assets/nice_music.ogg");
 	}
 }
@@ -58,7 +55,27 @@ void Game::Start()
 	// Start the game loop
 	while (window->isOpen())
 	{
+<<<<<<< HEAD
+		sf::Event event;
+		while (window->pollEvent(event))
+		{
+			/////// TODO: Call InputManager !!! ///////////////
+			// Close window: exit
+			if (event.type == sf::Event::Closed)
+			{
+				window->close();
+			}
 
+			// Escape pressed: exit
+			if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)
+			{
+				window->close();
+			}
+			/////////////////////////////////////////////////////////////////////
+		}
+=======
+
+>>>>>>> bbad30110a0b120156a690ef5951399f371d0491
 		// Clear screen
 		window->clear();
 

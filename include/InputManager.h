@@ -15,5 +15,5 @@ public:
 
 private:
 	static std::vector<std::shared_ptr<IInputObserver>> Observers;
-	static void UpdateEventObserver(sf::Event event);
+	static void UpdateEventObserver(std::string event);
 };
