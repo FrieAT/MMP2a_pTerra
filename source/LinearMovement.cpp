@@ -6,7 +6,7 @@ LinearMovement::LinearMovement()
 : MovementX(0.f)
 , MovementY(0.f)
 {
-    EventManager::RegisterEventObserver(*this);
+    InputManager::RegisterEventObserver(*this);
     FrameManager::RegisterEventObserver(*this);
 }
 
@@ -29,9 +29,10 @@ void LinearMovement::OnFrameUpdate(sf::Time delta_time)
     this->MoveVector(moveVector);
 }
 
-void LinearMovement::OnEventUpdate(sf::Event event)
+
+void LinearMovement::OnInputUpdate(sf::Event event)
 {
-    bool movementXChanged = false, movementYChanged = false;
+ /*   bool movementXChanged = false, movementYChanged = false;
     
     if(event.type == sf::Event::KeyReleased) {
         if(!movementYChanged && (event.key.code == sf::Keyboard::W || event.key.code == sf::Keyboard::S)) {
@@ -53,5 +54,5 @@ void LinearMovement::OnEventUpdate(sf::Event event)
             if(event.key.code == sf::Keyboard::A) this->MovementX = -1;
             else if(event.key.code == sf::Keyboard::D) this->MovementX = 1;
         }
-    }
+    }*/
 }

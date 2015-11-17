@@ -13,10 +13,7 @@ void EventManager::Update(sf::RenderWindow &window)
             window.close();
         }
         
-        // Escape pressed: exit
-        if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape) {
-            window.close();
-        }
+
         /////////////////////////////////////////////////////////////////////
         
         EventManager::UpdateEventObserver(event);

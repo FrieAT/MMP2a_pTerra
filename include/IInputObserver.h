@@ -1,23 +1,20 @@
 //
-//  EventManager.h
+//  IInputObserver.h
 //  MMP2a_SpaceGame
 //
 //  Created by Friedrich Schmidt on 16.11.15.
 //  Copyright © 2015 Friedrich Schmidt. All rights reserved.
 //
 
-#ifndef InputMangager_h
-#define InputMangager_h
+#ifndef IInputObserver_h
+#define IInputObserver_h
 
 #include <SFML/Graphics.hpp>
 
-#include "IEventObserver.h"
-
-
-class InputMangager
+class IInputObserver
 {
 public:
-	InputMangager();
+	virtual void OnInputUpdate(sf::Event event) = 0;
 };
 
-#endif/*InputMangager_h*/
+#endif /* IInputObserver */

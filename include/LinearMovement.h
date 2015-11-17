@@ -13,17 +13,17 @@
 #include <SFML/Graphics.hpp>
 
 #include "IMovement.h"
-#include "EventManager.h"
+#include "InputManager.h"
 #include "FrameManager.h"
-#include "IEventObserver.h"
+#include "IInputObserver.h"
 #include "IFrameObserver.h"
 
-class LinearMovement : public IMovement, public IEventObserver, public IFrameObserver
+class LinearMovement : public IMovement, public IInputObserver, public IFrameObserver
 {
 public:
     LinearMovement();
     void MoveVector(sf::Vector2f &Vector);
-    void OnEventUpdate(sf::Event event);
+    void OnInputUpdate(sf::Event event);
     void OnFrameUpdate(sf::Time delta_time);
 private:
     float MovementX;

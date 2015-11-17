@@ -143,10 +143,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="InputMangager.cpp" />
     <ClCompile Include="source\EventManager.cpp" />
     <ClCompile Include="source\FrameManager.cpp" />
     <ClCompile Include="source\GameObject.cpp" />
+    <ClCompile Include="source\InputManager.cpp" />
     <ClCompile Include="source\LinearMovement.cpp" />
     <ClCompile Include="source\main.cpp" />
     <ClCompile Include="source\ObjectManager.cpp" />
@@ -163,14 +163,15 @@
     <ClInclude Include="include\IDrawing.h" />
     <ClInclude Include="include\IEventObserver.h" />
     <ClInclude Include="include\IFrameObserver.h" />
+    <ClInclude Include="include\IInputObserver.h" />
     <ClInclude Include="include\IMovement.h" />
+    <ClInclude Include="include\InputManager.h" />
     <ClInclude Include="include\IPosition.h" />
     <ClInclude Include="include\LinearMovement.h" />
     <ClInclude Include="include\ObjectManager.h" />
     <ClInclude Include="include\PixelPosition.h" />
     <ClInclude Include="include\PlayerShip.h" />
     <ClInclude Include="include\SpriteDrawing.h" />
-    <ClInclude Include="InputMangager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
