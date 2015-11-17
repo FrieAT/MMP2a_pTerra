@@ -11,12 +11,11 @@
 
 #include <vector>
 
-#include "IManager.h"
 #include "IDrawing.h"
 
 #include "GameObject.h"
 
-class ObjectManager : public IManager
+class ObjectManager
 {
 public:
     static void AddGameObject(GameObject &obj);

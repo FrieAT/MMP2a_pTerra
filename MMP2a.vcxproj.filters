@@ -43,6 +43,9 @@
     <Filter Include="Source Files\GameObject\PlayerShip">
       <UniqueIdentifier>{40ad054b-15c8-451c-91f2-d5905e90fbe6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Managers\InputMangager">
+      <UniqueIdentifier>{dad23b8d-7774-4ffb-814e-578f6d5275f8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\main.cpp">
@@ -71,6 +74,9 @@
     </ClCompile>
     <ClCompile Include="source\GameObject.cpp">
       <Filter>Source Files\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="InputMangager.cpp">
+      <Filter>Source Files\Managers\InputMangager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -107,9 +113,6 @@
     <ClInclude Include="include\ObjectManager.h">
       <Filter>Source Files\Managers\ObjectManager</Filter>
     </ClInclude>
-    <ClInclude Include="include\IManager.h">
-      <Filter>Source Files\Managers</Filter>
-    </ClInclude>
     <ClInclude Include="include\IEventObserver.h">
       <Filter>Source Files\Managers\EventManager</Filter>
     </ClInclude>
@@ -121,6 +124,9 @@
     </ClInclude>
     <ClInclude Include="include\IFrameObserver.h">
       <Filter>Source Files\Managers\FrameManager</Filter>
+    </ClInclude>
+    <ClInclude Include="InputMangager.h">
+      <Filter>Source Files\Managers\InputMangager</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

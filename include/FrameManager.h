@@ -10,11 +10,10 @@
 #define FrameManager_h
 
 #include <SFML/Graphics.hpp>
-
-#include "IManager.h"
+#include <memory>
 #include "IFrameObserver.h"
 
-class FrameManager : public IManager
+class FrameManager 
 {
 public:
     static void Update(sf::RenderWindow &window);
