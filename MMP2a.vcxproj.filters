@@ -1,136 +1,35 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
-    </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
-    <Filter Include="Source Files\Components">
-      <UniqueIdentifier>{210d81e4-3b7b-48c5-adc1-9a94b73abaec}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Components\IDrawing">
-      <UniqueIdentifier>{30c104aa-8738-4f27-96a9-8598d15bd4b0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Components\IMovement">
-      <UniqueIdentifier>{8ef514b6-d092-49a7-872f-917a91e466db}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Components\IPosition">
-      <UniqueIdentifier>{2424a360-9fc8-402e-88d5-7e85cb95bb09}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Managers">
-      <UniqueIdentifier>{5e6a494d-04c0-43b0-97ce-7c29af2ca806}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Managers\FrameManager">
-      <UniqueIdentifier>{70486f01-7097-4f69-bef0-04deae621fce}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Managers\ObjectManager">
-      <UniqueIdentifier>{70f0477f-f729-4f42-bf33-d55954bb682e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Managers\EventManager">
-      <UniqueIdentifier>{848cde0d-769e-44c9-84ca-0c04d63078cf}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\GameObject">
-      <UniqueIdentifier>{d9e602e6-5d61-48ee-a6ea-0e59eb4fa340}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\GameObject\PlayerShip">
-      <UniqueIdentifier>{40ad054b-15c8-451c-91f2-d5905e90fbe6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Managers\InputMangager">
-      <UniqueIdentifier>{dad23b8d-7774-4ffb-814e-578f6d5275f8}</UniqueIdentifier>
-    </Filter>
+    <ClCompile Include="InputMangager.cpp" />
+    <ClCompile Include="source\EventManager.cpp" />
+    <ClCompile Include="source\FrameManager.cpp" />
+    <ClCompile Include="source\GameObject.cpp" />
+    <ClCompile Include="source\LinearMovement.cpp" />
+    <ClCompile Include="source\main.cpp" />
+    <ClCompile Include="source\ObjectManager.cpp" />
+    <ClCompile Include="source\PixelPosition.cpp" />
+    <ClCompile Include="source\PlayerShip.cpp" />
+    <ClCompile Include="source\SpriteDrawing.cpp" />
+    <ClCompile Include="source\Game.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="source\main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\LinearMovement.cpp">
-      <Filter>Source Files\Components\IMovement</Filter>
-    </ClCompile>
-    <ClCompile Include="source\PixelPosition.cpp">
-      <Filter>Source Files\Components\IPosition</Filter>
-    </ClCompile>
-    <ClCompile Include="source\SpriteDrawing.cpp">
-      <Filter>Source Files\Components\IDrawing</Filter>
-    </ClCompile>
-    <ClCompile Include="source\EventManager.cpp">
-      <Filter>Source Files\Managers\EventManager</Filter>
-    </ClCompile>
-    <ClCompile Include="source\FrameManager.cpp">
-      <Filter>Source Files\Managers\FrameManager</Filter>
-    </ClCompile>
-    <ClCompile Include="source\ObjectManager.cpp">
-      <Filter>Source Files\Managers\ObjectManager</Filter>
-    </ClCompile>
-    <ClCompile Include="source\PlayerShip.cpp">
-      <Filter>Source Files\GameObject\PlayerShip</Filter>
-    </ClCompile>
-    <ClCompile Include="source\GameObject.cpp">
-      <Filter>Source Files\GameObject</Filter>
-    </ClCompile>
-    <ClCompile Include="Game.cpp">
-      <Filter>Source Files</Filter>
-    <ClCompile Include="InputMangager.cpp">
-      <Filter>Source Files\Managers\InputMangager</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="include\EComponentType.h">
-      <Filter>Source Files\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="include\IComponent.h">
-      <Filter>Source Files\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="include\IDrawing.h">
-      <Filter>Source Files\Components\IDrawing</Filter>
-    </ClInclude>
-    <ClInclude Include="include\LinearMovement.h">
-      <Filter>Source Files\Components\IMovement</Filter>
-    </ClInclude>
-    <ClInclude Include="include\IMovement.h">
-      <Filter>Source Files\Components\IMovement</Filter>
-    </ClInclude>
-    <ClInclude Include="include\IPosition.h">
-      <Filter>Source Files\Components\IPosition</Filter>
-    </ClInclude>
-    <ClInclude Include="include\PixelPosition.h">
-      <Filter>Source Files\Components\IPosition</Filter>
-    </ClInclude>
-    <ClInclude Include="include\SpriteDrawing.h">
-      <Filter>Source Files\Components\IDrawing</Filter>
-    </ClInclude>
-    <ClInclude Include="include\EventManager.h">
-      <Filter>Source Files\Managers\EventManager</Filter>
-    </ClInclude>
-    <ClInclude Include="include\FrameManager.h">
-      <Filter>Source Files\Managers\FrameManager</Filter>
-    </ClInclude>
-    <ClInclude Include="include\ObjectManager.h">
-      <Filter>Source Files\Managers\ObjectManager</Filter>
-    </ClInclude>
-    <ClInclude Include="include\IEventObserver.h">
-      <Filter>Source Files\Managers\EventManager</Filter>
-    </ClInclude>
-    <ClInclude Include="include\PlayerShip.h">
-      <Filter>Source Files\GameObject\PlayerShip</Filter>
-    </ClInclude>
-    <ClInclude Include="include\GameObject.h">
-      <Filter>Source Files\GameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="include\IFrameObserver.h">
-      <Filter>Source Files\Managers\FrameManager</Filter>
-    </ClInclude>
-    <ClInclude Include="Game.h">
-      <Filter>Source Files</Filter>
-    <ClInclude Include="InputMangager.h">
-      <Filter>Source Files\Managers\InputMangager</Filter>
-    </ClInclude>
+    <ClInclude Include="include\EComponentType.h" />
+    <ClInclude Include="include\EventManager.h" />
+    <ClInclude Include="include\FrameManager.h" />
+    <ClInclude Include="include\GameObject.h" />
+    <ClInclude Include="include\IComponent.h" />
+    <ClInclude Include="include\IDrawing.h" />
+    <ClInclude Include="include\IEventObserver.h" />
+    <ClInclude Include="include\IFrameObserver.h" />
+    <ClInclude Include="include\IMovement.h" />
+    <ClInclude Include="include\IPosition.h" />
+    <ClInclude Include="include\LinearMovement.h" />
+    <ClInclude Include="include\ObjectManager.h" />
+    <ClInclude Include="include\PixelPosition.h" />
+    <ClInclude Include="include\PlayerShip.h" />
+    <ClInclude Include="include\SpriteDrawing.h" />
+    <ClInclude Include="InputMangager.h" />
+    <ClInclude Include="include\Game.h" />
   </ItemGroup>
 </Project>
