@@ -52,7 +52,7 @@ void Game::Start()
 {
 	// Play the music
 	music.play();
-
+	
 	ObjectManager::AddGameObject(*new PlayerShip());
 
 	// Start the game loop
