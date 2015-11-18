@@ -1,4 +1,5 @@
 #include "InputManager.h"
+#include <iostream>
 
 std::vector<std::shared_ptr<IInputObserver>> InputManager::Observers = *new std::vector<std::shared_ptr<IInputObserver>>();
 
@@ -19,6 +20,12 @@ void InputManager::Update(sf::RenderWindow & window)
 		{
 			window.close();//TODO call game exit
 		}
+		if (event.type == sf::Event::Closed)
+		{
+			window.close();//TODO call game exit
+		}
+
+
 		//Left
 		if (event.key.code == sf::Keyboard::Left)
 		{
