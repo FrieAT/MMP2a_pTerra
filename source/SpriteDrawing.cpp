@@ -14,11 +14,12 @@ void SpriteDrawing::Update()
 	if (PositionComponent != nullptr)
 	{
 		Sprite->setPosition((PositionComponent->GetPosition()));
+		Sprite->setRotation((PositionComponent->GetRotation()));
 	}
 }
 
-void SpriteDrawing::Draw(sf::RenderWindow &window)
+void SpriteDrawing::Draw(sf::RenderWindow* window)
 {
 	Update();
-	window.draw(*Sprite);
+	window->draw(*Sprite);
 }

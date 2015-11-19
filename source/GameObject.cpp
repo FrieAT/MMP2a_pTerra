@@ -25,7 +25,8 @@ void GameObject::SetComponent(std::shared_ptr<IComponent> component)
 		Components.erase(component_type); //< shared_ptr calles automatically destructor
 	}
 	Components[component_type] = component;
-	component->SetAssignedGameObject(*this);
+	component->SetAssignedGameObject(this);
+
 }
 
 void GameObject::RemoveComponent(EComponentType component_type)

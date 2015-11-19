@@ -53,7 +53,7 @@ void Game::Start()
 	// Play the music
 	music.play();
 	
-	ObjectManager::AddGameObject(*new PlayerShip());
+	ObjectManager::AddGameObject(new PlayerShip());
 
 	// Start the game loop
 	while (window->isOpen())
@@ -66,10 +66,10 @@ void Game::Start()
 		window->draw(*sprite);
 
 		// Manager updates...
-		EventManager::Update(*window);
-		FrameManager::Update(*window);
-		InputManager::Update(*window);
-		ObjectManager::Update(*window);
+		EventManager::Update(window);
+		FrameManager::Update(window);
+		InputManager::Update(window);
+		ObjectManager::Update(window);
 
 		// Update the window
 		window->display();
@@ -80,6 +80,6 @@ void Game::Start()
 
 void Game::Stop()
 {
-	delete window;
-	delete sprite;
+	//delete window;
+	//delete sprite;
 }

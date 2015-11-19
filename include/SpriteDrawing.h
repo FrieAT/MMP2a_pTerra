@@ -9,7 +9,7 @@ class SpriteDrawing : public IDrawing
 public:
 	SpriteDrawing(sf::Sprite &Sprite, sf::Texture &Texture);
 	void Update();
-	void Draw(sf::RenderWindow &window);
+	void Draw(sf::RenderWindow* window);
 protected:
 	sf::Sprite* Sprite;
 	sf::Texture* Texture;

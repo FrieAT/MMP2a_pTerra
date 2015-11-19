@@ -3,6 +3,8 @@
 #include "LinearMovement.h"
 #include "PixelPosition.h"
 #include "SpriteDrawing.h"
+#include "ShipMovement.h"
+#include "LinearMovement.h"
 
 PlayerShip::PlayerShip()
 {

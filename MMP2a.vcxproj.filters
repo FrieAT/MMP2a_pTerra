@@ -81,6 +81,9 @@
     <ClCompile Include="source\Game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="source\ShipMovement.cpp">
+      <Filter>Source Files\Components\IMovement</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\IComponent.h">
@@ -136,6 +139,9 @@
     </ClInclude>
     <ClInclude Include="include\EComponentType.h">
       <Filter>Source Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ShipMovement.h">
+      <Filter>Source Files\Components\IMovement</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

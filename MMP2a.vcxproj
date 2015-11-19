@@ -153,6 +153,7 @@
     <ClCompile Include="source\ObjectManager.cpp" />
     <ClCompile Include="source\PixelPosition.cpp" />
     <ClCompile Include="source\PlayerShip.cpp" />
+    <ClCompile Include="source\ShipMovement.cpp" />
     <ClCompile Include="source\SpriteDrawing.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -173,6 +174,7 @@
     <ClInclude Include="include\ObjectManager.h" />
     <ClInclude Include="include\PixelPosition.h" />
     <ClInclude Include="include\PlayerShip.h" />
+    <ClInclude Include="include\ShipMovement.h" />
     <ClInclude Include="include\SpriteDrawing.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

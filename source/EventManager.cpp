@@ -1,8 +1,8 @@
 #include "EventManager.h"
 
-std::vector<std::shared_ptr<IEventObserver>> EventManager::Observers = *new std::vector<std::shared_ptr<IEventObserver>>();
+std::vector<std::shared_ptr<IEventObserver>> EventManager::Observers = std::vector<std::shared_ptr<IEventObserver>>();
 
-void EventManager::Update(sf::RenderWindow &window)
+void EventManager::Update(sf::RenderWindow* window)
 {
 	//sf::Event event;
 	//while(window.pollEvent(event))
@@ -20,17 +20,17 @@ void EventManager::Update(sf::RenderWindow &window)
 	//}
 }
 
-void EventManager::RegisterEventObserver(IEventObserver &observer)
+void EventManager::RegisterEventObserver(IEventObserver* observer)
 {
-	std::shared_ptr<IEventObserver>* ref = new std::shared_ptr<IEventObserver>(&observer);
-	EventManager::Observers.push_back(*ref);
+	std::shared_ptr<IEventObserver> ref (observer);
+	EventManager::Observers.push_back(ref);
 }
 
-void EventManager::UnregisterEventObserver(IEventObserver &observer)
+void EventManager::UnregisterEventObserver(IEventObserver* observer)
 {
 	for (unsigned int i = 0; i < EventManager::Observers.size(); i++)
 	{
-		if (EventManager::Observers[i].get() != &observer) continue;
+		if (EventManager::Observers[i].get() != observer) continue;
 		EventManager::Observers.erase(EventManager::Observers.begin() + i);
 		break;
 	}

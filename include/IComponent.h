@@ -12,9 +12,9 @@ class IComponent
 {
 public:
 	virtual EComponentType GetComponentType() = 0;
-	void SetAssignedGameObject(GameObject &obj)
+	void SetAssignedGameObject(GameObject* obj)
 	{
-		GameObj = &obj;
+		GameObj = obj;
 	}
 	GameObject* GetAssignedGameObject()
 	{

@@ -7,10 +7,10 @@
 class EventManager
 {
 public:
-	static void Update(sf::RenderWindow &window);
+	static void Update(sf::RenderWindow* window);
 
-	static void RegisterEventObserver(IEventObserver &observer);
-	static void UnregisterEventObserver(IEventObserver &observer);
+	static void RegisterEventObserver(IEventObserver* observer);
+	static void UnregisterEventObserver(IEventObserver* observer);
 
 private:
 	static std::vector<std::shared_ptr<IEventObserver>> Observers;

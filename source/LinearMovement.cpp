@@ -6,8 +6,8 @@ LinearMovement::LinearMovement()
 	: MovementX(0.f)
 	, MovementY(0.f)
 {
-	InputManager::RegisterEventObserver(*this);
-	FrameManager::RegisterEventObserver(*this);
+	InputManager::RegisterEventObserver(this);
+	FrameManager::RegisterEventObserver(this);
 }
 
 void LinearMovement::MoveVector(sf::Vector2f &Vector)
@@ -35,6 +35,9 @@ void LinearMovement::OnInputUpdate(std::string event)
 {
 
 	bool movementXChanged = false, movementYChanged = false;
+	auto pos = std::static_pointer_cast<IPosition>(GetAssignedGameObject()->GetComponent(EComponentType::Position));
+	std::cout << "x: " <<pos->GetPosition().x << "   y: " << pos->GetPosition().y << std::endl;
+
 
 	std::string key_state = event.substr(event.length() - 1, 1);
 	   if(key_state=="R")
