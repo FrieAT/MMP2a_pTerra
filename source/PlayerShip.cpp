@@ -9,18 +9,18 @@
 PlayerShip::PlayerShip()
 {
     // PixelPosition pixelPos(sf::Vector2f(0.f,0.f));
-    PixelPosition* pixelPos = new PixelPosition(sf::Vector2f(20.f,20.f));
+    Position = std::shared_ptr<IPosition>(new PixelPosition(sf::Vector2f(20.f,20.f)));
+    Movement = std::shared_ptr<IMovement>(new LinearMovement());
+    Drawing = std::shared_ptr<IDrawing>(new SpriteDrawing("assets/space_ship.png"));
     
-    LinearMovement* movement = new LinearMovement();
-    
-    sf::Texture* texture = new sf::Texture();
-    if(!texture->loadFromFile("assets/space_ship.png"))
-	{
-        throw std::exception();
-    }
-    SpriteDrawing* sprite = new SpriteDrawing(*new sf::Sprite(*texture), *texture);
-    
-    SetComponent(std::shared_ptr<IComponent>(pixelPos));
-    SetComponent(std::shared_ptr<IComponent>(movement));
-    SetComponent(std::shared_ptr<IComponent>(sprite));
+    SetComponent(Position);
+    SetComponent(Movement);
+    SetComponent(Drawing);
+}
+
+PlayerShip::~PlayerShip()
+{
+    RemoveComponent(EComponentType::Position);
+    RemoveComponent(EComponentType::Movement);
+    RemoveComponent(EComponentType::Drawing);
 }

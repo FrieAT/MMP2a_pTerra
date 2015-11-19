@@ -1,12 +1,7 @@
 #include "InputManager.h"
 #include <iostream>
 
-std::vector<std::shared_ptr<IInputObserver>> InputManager::Observers = std::vector<std::shared_ptr<IInputObserver>>();
-
-
-InputManager::InputManager()
-{
-}
+std::vector<std::shared_ptr<IInputObserver>> InputManager::Observers;
 
 void InputManager::Update(sf::RenderWindow* window)
 {
@@ -84,17 +79,19 @@ void InputManager::Update(sf::RenderWindow* window)
 
 void InputManager::RegisterEventObserver(IInputObserver* observer)
 {
-	std::shared_ptr<IInputObserver> ref(observer);
-	InputManager::Observers.push_back(ref);
+	InputManager::Observers.push_back(std::shared_ptr<IInputObserver>(observer));
 }
 
 void InputManager::UnregisterEventObserver(IInputObserver *observer)
 {
-	for (unsigned int i = 0; i < InputManager::Observers.size(); i++)
+    auto it = InputManager::Observers.begin();
+    while (it != InputManager::Observers.end())
 	{
-		if (InputManager::Observers[i].get() != observer) continue;
-		InputManager::Observers.erase(InputManager::Observers.begin() + i);
-		break;
+        if (it->get() == observer)
+        {
+            InputManager::Observers.erase(it);
+        }
+        it++;
 	}
 }
 

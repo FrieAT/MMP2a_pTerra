@@ -22,7 +22,12 @@ Game::Game()
 
 Game::~Game()
 {
-    
+    while(!states.empty())
+    {
+        auto state = states.back();
+        delete state;
+        states.pop_back();
+    }
 }
 
 void Game::Start()

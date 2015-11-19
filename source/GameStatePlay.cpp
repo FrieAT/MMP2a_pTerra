@@ -32,7 +32,7 @@ GameStatePlay::GameStatePlay()
 
 GameStatePlay::~GameStatePlay()
 {
-    
+    ObjectManager::RemoveAllGameObjects();
 }
 
 void GameStatePlay::Update(sf::RenderWindow* window)

@@ -10,6 +10,12 @@ LinearMovement::LinearMovement()
 	FrameManager::RegisterEventObserver(this);
 }
 
+LinearMovement::~LinearMovement()
+{
+    InputManager::UnregisterEventObserver(this);
+    FrameManager::UnregisterEventObserver(this);
+}
+
 void LinearMovement::MoveVector(sf::Vector2f &Vector)
 {
 	auto PositionComponent = std::static_pointer_cast<IPosition>(GetAssignedGameObject()->GetComponent(EComponentType::Position));

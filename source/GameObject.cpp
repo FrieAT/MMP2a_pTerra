@@ -11,16 +11,18 @@ GameObject::GameObject()
 GameObject::~GameObject()
 {
 	// Remove all components from game object
-	for (int i = 1; i != (int)EComponentType::MaxItem; i++)
-	{
-		RemoveComponent((EComponentType)i);
-	}
+    auto it = Components.begin();
+    while(it != Components.end())
+    {
+        Components.erase(it);
+        it++;
+    }
 }
 
 void GameObject::SetComponent(std::shared_ptr<IComponent> component)
 {
 	EComponentType component_type = component->GetComponentType();
-	if (Components[component_type] != nullptr)
+	if (Components[component_type].get() != nullptr)
 	{
 		Components.erase(component_type); //< shared_ptr calles automatically destructor
 	}
@@ -31,9 +33,10 @@ void GameObject::SetComponent(std::shared_ptr<IComponent> component)
 
 void GameObject::RemoveComponent(EComponentType component_type)
 {
-	if (Components[component_type] != nullptr)
+    auto it = Components.find(component_type);
+	if (it != Components.end())
 	{
-		Components.erase(component_type); //< shared_ptr calles automatically destructor
+		Components.erase(it); //< shared_ptr calles automatically destructor
 	}
 }
 

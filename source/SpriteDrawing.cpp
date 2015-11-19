@@ -2,10 +2,14 @@
 #include "GameObject.h"
 #include "IPosition.h"
 
-SpriteDrawing::SpriteDrawing(sf::Sprite &Sprite, sf::Texture &Texture)
+SpriteDrawing::SpriteDrawing(std::string ressource_path)
 {
-	this->Sprite = &Sprite;
-	this->Texture = &Texture;
+    this->Texture = new sf::Texture();
+    if(!this->Texture->loadFromFile(ressource_path))
+    {
+        throw std::exception();
+    };
+	this->Sprite = new sf::Sprite(*this->Texture);
 }
 
 void SpriteDrawing::Update()

@@ -7,7 +7,7 @@
 class SpriteDrawing : public IDrawing
 {
 public:
-	SpriteDrawing(sf::Sprite &Sprite, sf::Texture &Texture);
+    SpriteDrawing(std::string ressource_path);
 	void Update();
 	void Draw(sf::RenderWindow* window);
 protected:

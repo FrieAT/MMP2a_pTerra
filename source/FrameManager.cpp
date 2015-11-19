@@ -26,10 +26,13 @@ void FrameManager::RegisterEventObserver(IFrameObserver* observer)
 
 void FrameManager::UnregisterEventObserver(IFrameObserver* observer)
 {
-	for (unsigned int i = 0; i < Observers.size(); i++)
+    auto it = FrameManager::Observers.begin();
+    while(it != FrameManager::Observers.end())
 	{
-		if (Observers[i].get() != observer) continue;
-		Observers.erase(Observers.begin() + i);
-		break;
+        if (it->get() == observer)
+        {
+            FrameManager::Observers.erase(it);
+        }
+        it++;
 	}
 }
