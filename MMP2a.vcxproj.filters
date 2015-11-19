@@ -46,6 +46,9 @@
     <Filter Include="Source Files\Managers\InputManager">
       <UniqueIdentifier>{dad23b8d-7774-4ffb-814e-578f6d5275f8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Managers\GameStateManager">
+      <UniqueIdentifier>{94c03c0c-6bac-4f3a-8611-bafcc5e8a153}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\main.cpp">
@@ -83,6 +86,9 @@
     </ClCompile>
     <ClCompile Include="source\ShipMovement.cpp">
       <Filter>Source Files\Components\IMovement</Filter>
+    </ClCompile>
+    <ClCompile Include="source\GameStatePlay.cpp">
+      <Filter>Source Files\Managers\GameStateManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -142,6 +148,12 @@
     </ClInclude>
     <ClInclude Include="include\ShipMovement.h">
       <Filter>Source Files\Components\IMovement</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GameStatePlay.h">
+      <Filter>Source Files\Managers\GameStateManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\IGameState.h">
+      <Filter>Source Files\Managers\GameStateManager</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
