@@ -13,6 +13,7 @@ public:
 		this->Rotation = 0.0;
 		this->Origin = Origin;
 	}
+    virtual ~IPosition() { }
 	virtual void SetPosition(sf::Vector2f Position) = 0;
 	virtual sf::Vector2f GetPosition() = 0;
 	virtual float GetRotation() = 0;

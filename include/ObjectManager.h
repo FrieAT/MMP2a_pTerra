@@ -14,5 +14,5 @@ public:
     static void RemoveAllGameObjects();
 	static void Update(sf::RenderWindow* window);
 private:
-	static std::vector<std::shared_ptr<GameObject>> Objects;
+	static std::vector<GameObject*> Objects;
 };

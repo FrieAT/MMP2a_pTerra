@@ -8,13 +8,13 @@
 class GameStatePlay : public IGameState
 {
 public:
-    GameStatePlay();
+    // GameStatePlay();
     ~GameStatePlay();
-    
+    void Init();
     void Update(sf::RenderWindow* window);
     
 protected:
-    sf::Texture* texture;
     sf::Music* music;
+    sf::Texture* texture;
     sf::Sprite* sprite;
 };

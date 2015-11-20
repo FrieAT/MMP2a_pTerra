@@ -1,6 +1,6 @@
 #include "EventManager.h"
 
-std::vector<std::shared_ptr<IEventObserver>> EventManager::Observers = std::vector<std::shared_ptr<IEventObserver>>();
+std::vector<IEventObserver*> EventManager::Observers;
 
 void EventManager::Update(sf::RenderWindow* window)
 {
@@ -22,24 +22,28 @@ void EventManager::Update(sf::RenderWindow* window)
 
 void EventManager::RegisterEventObserver(IEventObserver* observer)
 {
-	std::shared_ptr<IEventObserver> ref (observer);
-	EventManager::Observers.push_back(ref);
+	Observers.push_back(observer);
 }
 
 void EventManager::UnregisterEventObserver(IEventObserver* observer)
 {
-	for (unsigned int i = 0; i < EventManager::Observers.size(); i++)
+	for (unsigned int i = 0; i < Observers.size(); i++)
 	{
-		if (EventManager::Observers[i].get() != observer) continue;
-		EventManager::Observers.erase(EventManager::Observers.begin() + i);
+		if (Observers[i] != observer) continue;
+		Observers.erase(Observers.begin() + i);
 		break;
 	}
 }
 
+void EventManager::UnregisterAllEventObserver()
+{
+    Observers.clear();
+}
+
 void EventManager::UpdateEventObserver(sf::Event event)
 {
-	for (unsigned int i = 0; i < EventManager::Observers.size(); i++)
+	for (unsigned int i = 0; i < Observers.size(); i++)
 	{
-		EventManager::Observers[i]->OnEventUpdate(event);
+		Observers[i]->OnEventUpdate(event);
 	}
 }

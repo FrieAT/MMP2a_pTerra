@@ -1,7 +1,7 @@
 #include "InputManager.h"
 #include <iostream>
 
-std::vector<std::shared_ptr<IInputObserver>> InputManager::Observers;
+std::vector<IInputObserver*> InputManager::Observers;
 
 void InputManager::Update(sf::RenderWindow* window)
 {
@@ -72,34 +72,36 @@ void InputManager::Update(sf::RenderWindow* window)
 
 		if (movement.size() > 1)
 		{
-			InputManager::UpdateEventObserver(movement);
+			UpdateEventObserver(movement);
 		}
 	}
 }
 
 void InputManager::RegisterEventObserver(IInputObserver* observer)
 {
-	InputManager::Observers.push_back(std::shared_ptr<IInputObserver>(observer));
+	Observers.push_back(observer);
 }
 
-void InputManager::UnregisterEventObserver(IInputObserver *observer)
+void InputManager::UnregisterEventObserver(IInputObserver* observer)
 {
-    auto it = InputManager::Observers.begin();
-    while (it != InputManager::Observers.end())
-	{
-        if (it->get() == observer)
-        {
-            InputManager::Observers.erase(it);
-        }
-        it++;
-	}
+    for(int i = 0; i < Observers.size(); i++)
+    {
+        if(Observers[i] != observer) continue;
+        Observers.erase(Observers.begin() + i);
+        break;
+    }
+}
+
+void InputManager::UnregisterAllEventObserver()
+{
+    Observers.clear();
 }
 
 void InputManager::UpdateEventObserver(std::string event)
 {
-	for (unsigned int i = 0; i < InputManager::Observers.size(); i++)
+	for (unsigned int i = 0; i < Observers.size(); i++)
 	{
-		InputManager::Observers[i]->OnInputUpdate(event);
+        Observers[i]->OnInputUpdate(event);
 	}
 }
 

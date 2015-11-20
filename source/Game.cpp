@@ -12,19 +12,18 @@ Game::Game()
     window = new sf::RenderWindow(sf::VideoMode(800, 600), "SFML window");
     
     // Set the Icon
-    icon = new sf::Image();
-    if (!icon->loadFromFile("assets/icon.png"))
+    if (!icon.loadFromFile("assets/icon.png"))
     {
         throw new std::runtime_error("Unable to load assets/icon.png");
     }
-    window->setIcon(icon->getSize().x, icon->getSize().y, icon->getPixelsPtr());
+    window->setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
 }
 
 Game::~Game()
 {
     while(!states.empty())
     {
-        auto state = states.back();
+        IGameState* state = states.back();
         delete state;
         states.pop_back();
     }
@@ -59,7 +58,8 @@ void Game::ChangeState(IGameState* state)
         delete states.back();
         states.pop_back();
     }
-    
+    // Initiate all ressources for new game state
+    state->Init();
     // store and init the new state
     states.push_back(state);
 }
