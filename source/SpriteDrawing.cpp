@@ -19,6 +19,7 @@ void SpriteDrawing::Update()
 	{
 		Sprite->setPosition((PositionComponent->GetPosition()));
 		Sprite->setRotation((PositionComponent->GetRotation()));
+		Sprite->setOrigin(PositionComponent->GetOrigin());
 	}
 }
 

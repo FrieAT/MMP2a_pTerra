@@ -20,7 +20,8 @@ public:
 	void MoveVector(sf::Vector2f &Vector);
 	void OnInputUpdate(std::string event);
 	void OnFrameUpdate(sf::Time delta_time);
-
-	//std::shared_ptr<IPosition> pos;
+private:
+	sf::Vector2f direction;
+	float acceleration;
 };
 

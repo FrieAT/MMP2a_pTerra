@@ -9,8 +9,8 @@
 PlayerShip::PlayerShip()
 {
     // PixelPosition pixelPos(sf::Vector2f(0.f,0.f));
-    Position = std::shared_ptr<IPosition>(new PixelPosition(sf::Vector2f(20.f,20.f)));
-    Movement = std::shared_ptr<IMovement>(new LinearMovement());
+    Position = std::shared_ptr<IPosition>(new PixelPosition(sf::Vector2f(40.f,40.f), sf::Vector2f(32.f, 32.f)));
+    Movement = std::shared_ptr<IMovement>(new ShipMovement());
     Drawing = std::shared_ptr<IDrawing>(new SpriteDrawing("assets/space_ship.png"));
     
     SetComponent(Position);
