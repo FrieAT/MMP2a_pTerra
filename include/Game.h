@@ -15,5 +15,5 @@ public:
 protected:
     sf::RenderWindow* window;
     std::vector<IGameState*> states;
-    sf::Image* icon;
+    sf::Image icon;
 };

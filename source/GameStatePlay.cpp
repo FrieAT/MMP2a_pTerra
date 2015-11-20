@@ -7,7 +7,15 @@
 
 #include "PlayerShip.h"
 
-GameStatePlay::GameStatePlay()
+GameStatePlay::~GameStatePlay()
+{
+    ObjectManager::RemoveAllGameObjects();
+    delete texture;
+    delete sprite;
+    delete music;
+}
+
+void GameStatePlay::Init()
 {
     ObjectManager::AddGameObject(new PlayerShip());
     
@@ -28,11 +36,7 @@ GameStatePlay::GameStatePlay()
     {
         throw new std::runtime_error("Unable to load assets/nice_music.ogg");
     }
-}
-
-GameStatePlay::~GameStatePlay()
-{
-    ObjectManager::RemoveAllGameObjects();
+    music->play();
 }
 
 void GameStatePlay::Update(sf::RenderWindow* window)

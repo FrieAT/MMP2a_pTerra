@@ -2,6 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <memory>
+
 #include "IInputObserver.h"
 
 
@@ -11,8 +12,9 @@ public:
 	static void Update(sf::RenderWindow* window);
 	static void RegisterEventObserver(IInputObserver* observer);
 	static void UnregisterEventObserver(IInputObserver* observer);
-
+    static void UnregisterAllEventObserver();
+    static std::vector<IInputObserver*> Observers;
 private:
-	static std::vector<std::shared_ptr<IInputObserver>> Observers;
+	
 	static void UpdateEventObserver(std::string event);
 };

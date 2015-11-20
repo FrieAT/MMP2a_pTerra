@@ -16,10 +16,10 @@ public:
 	GameObject();
 	~GameObject();
 
-	void SetComponent(std::shared_ptr<IComponent> component);
-	void RemoveComponent(EComponentType component_type);
-	std::shared_ptr<IComponent> GetComponent(EComponentType component_type);
-
+	void SetComponent(IComponent* component);
+	void RemoveComponent(const EComponentType &component_type);
+	IComponent* GetComponent(const EComponentType &component_type);
+    std::map<EComponentType, IComponent*> Components;
 private:
-	std::map<EComponentType, std::shared_ptr<IComponent>> Components;
+	// std::map<EComponentType, std::shared_ptr<IComponent>> Components;
 };

@@ -8,7 +8,8 @@ class SpriteDrawing : public IDrawing
 {
 public:
     SpriteDrawing(std::string ressource_path);
-	void Update();
+    ~SpriteDrawing();
+    void Update();
 	void Draw(sf::RenderWindow* window);
 protected:
 	sf::Sprite* Sprite;

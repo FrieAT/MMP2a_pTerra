@@ -8,6 +8,7 @@
 class IDrawing : public IComponent
 {
 public:
+    virtual ~IDrawing() { }
 	virtual void Draw(sf::RenderWindow* window) = 0;
 	virtual void Update() = 0;
 	EComponentType GetComponentType()

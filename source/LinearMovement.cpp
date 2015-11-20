@@ -18,7 +18,7 @@ LinearMovement::~LinearMovement()
 
 void LinearMovement::MoveVector(sf::Vector2f &Vector)
 {
-	auto PositionComponent = std::static_pointer_cast<IPosition>(GetAssignedGameObject()->GetComponent(EComponentType::Position));
+    IPosition* PositionComponent = (IPosition*)(GetAssignedGameObject()->GetComponent(EComponentType::Position));
 	if (PositionComponent == NULL)
 	{
 		return; // TODO: NullReferenceException when Position Component is missing for GameObject
@@ -41,8 +41,8 @@ void LinearMovement::OnInputUpdate(std::string event)
 {
 
 	bool movementXChanged = false, movementYChanged = false;
-	auto pos = std::static_pointer_cast<IPosition>(GetAssignedGameObject()->GetComponent(EComponentType::Position));
-	std::cout << "x: " <<pos->GetPosition().x << "   y: " << pos->GetPosition().y << std::endl;
+	IPosition* pos = (IPosition*)(GetAssignedGameObject()->GetComponent(EComponentType::Position));
+    std::cout << "x: " <<pos->GetPosition().x << "   y: " << pos->GetPosition().y << std::endl;
 
 
 	std::string key_state = event.substr(event.length() - 1, 1);

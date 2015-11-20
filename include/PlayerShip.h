@@ -12,7 +12,7 @@ public:
 	PlayerShip();
 	~PlayerShip();
 private:
-    std::shared_ptr<IPosition> Position;
-    std::shared_ptr<IMovement> Movement;
-    std::shared_ptr<IDrawing> Drawing;
+    IPosition* Position;
+    IMovement* Movement;
+    IDrawing* Drawing;
 };
