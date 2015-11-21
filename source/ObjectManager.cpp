@@ -1,38 +1,56 @@
 #include "ObjectManager.h"
 
-std::vector<GameObject*> ObjectManager::Objects;
+std::map<std::string, std::vector<GameObject*>> ObjectManager::objects;
+std::vector<std::string> ObjectManager::drawOrder{ "asteroid", "ship" }; // change draw order here! first entry = first to draw
 
 void ObjectManager::AddGameObject(GameObject* obj)
 {
-	Objects.push_back(obj);
+	objects[obj->GetID()].push_back(obj);
 }
 
 void ObjectManager::RemoveGameObject(GameObject* obj)
 {
-    auto it = Objects.begin();
-    while(it != Objects.end())
+	std::string id = obj->GetID();
+    auto it = objects[id].begin();
+    while(it != objects[id].end())
 	{
         if(*it != obj) continue;
-		Objects.erase(it);
+		objects[id].erase(it);
 		break;
 	}
 }
 
 void ObjectManager::RemoveAllGameObjects()
 {
-	for (int i = 0; i < Objects.size(); i++)
+	for (unsigned int s = 0; s < ObjectManager::drawOrder.size(); s++)
 	{
-		delete Objects[i];
-		Objects.erase(Objects.begin() + i);
+		for (unsigned int i = 0; i < ObjectManager::objects[ObjectManager::drawOrder[s]].size(); i++)
+		{
+			delete ObjectManager::objects[ObjectManager::drawOrder[s]][i];
+			ObjectManager::objects[ObjectManager::drawOrder[s]].erase(objects[ObjectManager::drawOrder[s]].begin() + i);
+		}
 	}
+	/*for (int i = 0; i < objects.size(); i++)
+	{
+		delete objects[i];
+		objects.erase(objects.begin() + i);
+	}*/
 }
 
-void ObjectManager::Update(sf::RenderWindow* window)
+void ObjectManager::Update(sf::Time deltaTime)
 {
-	for (unsigned int i = 0; i < Objects.size(); i++)
+	// Update function for each object?
+	// Things like health, shield regenaration, ...
+}
+
+void ObjectManager::Draw(sf::RenderWindow* window)
+{
+	for (unsigned int s = 0; s < ObjectManager::drawOrder.size(); s++)
 	{
-		IDrawing* drawing = ((IDrawing*)Objects[i]->GetComponent(EComponentType::Drawing));
-		// drawing->Update();
-		drawing->Draw(window);
+		for (unsigned int i = 0; i < ObjectManager::objects[ObjectManager::drawOrder[s]].size(); i++)
+		{
+			IDrawing* drawing = ((IDrawing*)objects[ObjectManager::drawOrder[s]][i]->GetComponent(EComponentType::Drawing));
+			drawing->Draw(window);
+		}
 	}
 }

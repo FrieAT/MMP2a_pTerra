@@ -40,9 +40,6 @@
     <Filter Include="Source Files\GameObject">
       <UniqueIdentifier>{d9e602e6-5d61-48ee-a6ea-0e59eb4fa340}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\GameObject\PlayerShip">
-      <UniqueIdentifier>{40ad054b-15c8-451c-91f2-d5905e90fbe6}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Managers\InputManager">
       <UniqueIdentifier>{dad23b8d-7774-4ffb-814e-578f6d5275f8}</UniqueIdentifier>
     </Filter>
@@ -72,9 +69,6 @@
     <ClCompile Include="source\ObjectManager.cpp">
       <Filter>Source Files\Managers\ObjectManager</Filter>
     </ClCompile>
-    <ClCompile Include="source\PlayerShip.cpp">
-      <Filter>Source Files\GameObject\PlayerShip</Filter>
-    </ClCompile>
     <ClCompile Include="source\GameObject.cpp">
       <Filter>Source Files\GameObject</Filter>
     </ClCompile>
@@ -92,6 +86,9 @@
     </ClCompile>
     <ClCompile Include="source\GameStateIntro.cpp">
       <Filter>Source Files\Managers\GameStateManager</Filter>
+    </ClCompile>
+    <ClCompile Include="source\GameObjectFactory.cpp">
+      <Filter>Source Files\GameObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -128,9 +125,6 @@
     <ClInclude Include="include\IEventObserver.h">
       <Filter>Source Files\Managers\EventManager</Filter>
     </ClInclude>
-    <ClInclude Include="include\PlayerShip.h">
-      <Filter>Source Files\GameObject\PlayerShip</Filter>
-    </ClInclude>
     <ClInclude Include="include\GameObject.h">
       <Filter>Source Files\GameObject</Filter>
     </ClInclude>
@@ -160,6 +154,9 @@
     </ClInclude>
     <ClInclude Include="include\GameStateIntro.h">
       <Filter>Source Files\Managers\GameStateManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GameObjectFactory.h">
+      <Filter>Source Files\GameObject</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

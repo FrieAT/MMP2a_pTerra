@@ -12,7 +12,9 @@ public:
 	static void AddGameObject(GameObject* obj);
 	static void RemoveGameObject(GameObject* obj);
     static void RemoveAllGameObjects();
-	static void Update(sf::RenderWindow* window);
+	static void Update(sf::Time deltaTime);
+	static void Draw(sf::RenderWindow* window);
 private:
-	static std::vector<GameObject*> Objects;
+	static std::map<std::string, std::vector<GameObject*>> objects;
+	static std::vector<std::string> drawOrder;
 };

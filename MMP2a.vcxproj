@@ -147,6 +147,7 @@
     <ClCompile Include="source\FrameManager.cpp" />
     <ClCompile Include="source\Game.cpp" />
     <ClCompile Include="source\GameObject.cpp" />
+    <ClCompile Include="source\GameObjectFactory.cpp" />
     <ClCompile Include="source\GameStateIntro.cpp" />
     <ClCompile Include="source\GameStatePlay.cpp" />
     <ClCompile Include="source\InputManager.cpp" />
@@ -154,7 +155,6 @@
     <ClCompile Include="source\main.cpp" />
     <ClCompile Include="source\ObjectManager.cpp" />
     <ClCompile Include="source\PixelPosition.cpp" />
-    <ClCompile Include="source\PlayerShip.cpp" />
     <ClCompile Include="source\ShipMovement.cpp" />
     <ClCompile Include="source\SpriteDrawing.cpp" />
   </ItemGroup>
@@ -164,6 +164,7 @@
     <ClInclude Include="include\FrameManager.h" />
     <ClInclude Include="include\Game.h" />
     <ClInclude Include="include\GameObject.h" />
+    <ClInclude Include="include\GameObjectFactory.h" />
     <ClInclude Include="include\GameStateIntro.h" />
     <ClInclude Include="include\GameStatePlay.h" />
     <ClInclude Include="include\IComponent.h" />
@@ -178,7 +179,6 @@
     <ClInclude Include="include\LinearMovement.h" />
     <ClInclude Include="include\ObjectManager.h" />
     <ClInclude Include="include\PixelPosition.h" />
-    <ClInclude Include="include\PlayerShip.h" />
     <ClInclude Include="include\ShipMovement.h" />
     <ClInclude Include="include\SpriteDrawing.h" />
   </ItemGroup>

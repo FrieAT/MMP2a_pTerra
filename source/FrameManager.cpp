@@ -2,12 +2,10 @@
 #include <memory>
 
 std::vector<IFrameObserver*> FrameManager::Observers;
-sf::Clock FrameManager::clock_time;
 
-void FrameManager::Update(sf::RenderWindow* window)
+void FrameManager::Update(sf::Time deltaTime)
 {
-	sf::Time dt = clock_time.restart();
-	UpdateEventObserver(dt);
+	UpdateEventObserver(deltaTime);
 }
 
 void FrameManager::UpdateEventObserver(sf::Time delta_time)

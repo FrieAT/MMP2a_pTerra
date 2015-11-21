@@ -3,9 +3,9 @@
 #include "IComponent.h"
 
 // GameObject constructor
-GameObject::GameObject()
+GameObject::GameObject(std::string id)
 {
-
+	this->id = id;
 }
 
 GameObject::~GameObject()
@@ -15,6 +15,11 @@ GameObject::~GameObject()
     {
         RemoveComponent((EComponentType)i);
     }
+}
+
+std::string GameObject::GetID()
+{
+	return this->id;
 }
 
 void GameObject::SetComponent(IComponent* component)

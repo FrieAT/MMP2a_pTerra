@@ -45,10 +45,14 @@ Game::~Game()
 void Game::Start()
 {
     IGameState* gamestate;
+	sf::Clock deltaClock;
     
 	// Start the game loop
     while (window->isOpen())
 	{
+		// Get time since last loop
+		sf::Time deltaTime = deltaClock.restart();
+
 		// Clear screen
         window->clear();
         
@@ -63,15 +67,23 @@ void Game::Start()
         // Call Update in game state
         gamestate->Update(window);
         
-        // Manager updates...
-        EventManager::Update(window);
-        FrameManager::Update(window);
+        // Manager updates
+        EventManager::Update(deltaTime);
+        FrameManager::Update(deltaTime);
         InputManager::Update(window);
-        ObjectManager::Update(window);
+        ObjectManager::Update(deltaTime);
+
+		// Rendering
+		ObjectManager::Draw(window);
 
 		// Update the window
         window->display();
 	}
+
+	// Cleanup
+	ObjectManager::RemoveAllGameObjects();
+	InputManager::UnregisterAllEventObserver();
+	EventManager::UnregisterAllEventObserver();
 }
 
 void Game::ChangeState(IGameState* state)

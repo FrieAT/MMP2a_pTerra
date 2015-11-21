@@ -8,12 +8,11 @@
 class FrameManager
 {
 public:
-	static void Update(sf::RenderWindow* window);
+	static void Update(sf::Time deltaTime);
 	static void RegisterEventObserver(IFrameObserver* observer);
 	static void UnregisterEventObserver(IFrameObserver* observer);
     static void UnregisterAllEventObserver();
 private:
-	static sf::Clock clock_time;
 	static std::vector<IFrameObserver*> Observers;
-	static void UpdateEventObserver(sf::Time delta_time);
+	static void UpdateEventObserver(sf::Time deltaTime);
 };

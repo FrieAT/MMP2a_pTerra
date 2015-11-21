@@ -1,6 +1,6 @@
 #include "GameStatePlay.h"
 
-#include "PlayerShip.h"
+#include "GameObjectFactory.h"
 
 #include "ObjectManager.h"
 
@@ -14,7 +14,8 @@ GameStatePlay::~GameStatePlay()
 
 void GameStatePlay::Init()
 {
-    ObjectManager::AddGameObject(new PlayerShip());
+    //ObjectManager::AddGameObject(new PlayerShip());
+	ObjectManager::AddGameObject(GameObjectFactory::CreatePlayerShip());
     
     // ====== Below decprecated method to create things ======
     

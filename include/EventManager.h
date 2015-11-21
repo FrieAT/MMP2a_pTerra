@@ -8,7 +8,7 @@
 class EventManager
 {
 public:
-	static void Update(sf::RenderWindow* window);
+	static void Update(sf::Time deltaTime);
 	static void RegisterEventObserver(IEventObserver* observer);
 	static void UnregisterEventObserver(IEventObserver* observer);
     static void UnregisterAllEventObserver();
