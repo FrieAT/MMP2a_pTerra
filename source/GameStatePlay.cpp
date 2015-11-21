@@ -20,9 +20,9 @@ void GameStatePlay::Init()
     
     // Load a sprite to display
     texture = new sf::Texture();
-    if (!texture->loadFromFile("assets/cute_image.jpg"))
+    if (!texture->loadFromFile("assets/space-map.jpg"))
     {
-        throw new std::runtime_error("Unable to load assets/image.jpg");
+        throw new std::runtime_error("Unable to load assets/space-map.jpg");
     }
     sprite = new sf::Sprite(*texture);
     
