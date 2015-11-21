@@ -8,7 +8,6 @@
 class GameStatePlay : public IGameState
 {
 public:
-    // GameStatePlay();
     ~GameStatePlay();
     void Init();
     void Update(sf::RenderWindow* window);
