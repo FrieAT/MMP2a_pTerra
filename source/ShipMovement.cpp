@@ -12,6 +12,8 @@ ShipMovement::ShipMovement()
 
 ShipMovement::~ShipMovement()
 {
+    InputManager::UnregisterEventObserver(this);
+    FrameManager::UnregisterEventObserver(this);
 }
 
 void ShipMovement::MoveVector(sf::Vector2f Vector)
