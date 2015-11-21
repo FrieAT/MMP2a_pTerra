@@ -90,6 +90,9 @@
     <ClCompile Include="source\GameStatePlay.cpp">
       <Filter>Source Files\Managers\GameStateManager</Filter>
     </ClCompile>
+    <ClCompile Include="source\GameStateIntro.cpp">
+      <Filter>Source Files\Managers\GameStateManager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\IComponent.h">
@@ -153,6 +156,9 @@
       <Filter>Source Files\Managers\GameStateManager</Filter>
     </ClInclude>
     <ClInclude Include="include\IGameState.h">
+      <Filter>Source Files\Managers\GameStateManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GameStateIntro.h">
       <Filter>Source Files\Managers\GameStateManager</Filter>
     </ClInclude>
   </ItemGroup>

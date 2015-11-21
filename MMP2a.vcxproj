@@ -147,6 +147,7 @@
     <ClCompile Include="source\FrameManager.cpp" />
     <ClCompile Include="source\Game.cpp" />
     <ClCompile Include="source\GameObject.cpp" />
+    <ClCompile Include="source\GameStateIntro.cpp" />
     <ClCompile Include="source\GameStatePlay.cpp" />
     <ClCompile Include="source\InputManager.cpp" />
     <ClCompile Include="source\LinearMovement.cpp" />
@@ -163,6 +164,7 @@
     <ClInclude Include="include\FrameManager.h" />
     <ClInclude Include="include\Game.h" />
     <ClInclude Include="include\GameObject.h" />
+    <ClInclude Include="include\GameStateIntro.h" />
     <ClInclude Include="include\GameStatePlay.h" />
     <ClInclude Include="include\IComponent.h" />
     <ClInclude Include="include\IDrawing.h" />

@@ -20,12 +20,11 @@ void ObjectManager::RemoveGameObject(GameObject* obj)
 
 void ObjectManager::RemoveAllGameObjects()
 {
-    auto it = Objects.begin();
-    while(it != Objects.end())
-    {
-        delete (*it);
-        Objects.erase(it);
-    }
+	for (int i = 0; i < Objects.size(); i++)
+	{
+		delete Objects[i];
+		Objects.erase(Objects.begin() + i);
+	}
 }
 
 void ObjectManager::Update(sf::RenderWindow* window)
