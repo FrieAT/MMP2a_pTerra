@@ -44,24 +44,28 @@ void Game::Start()
 {
     IGameState* gamestate;
     
-    if(states.empty()) return;
-    
-    gamestate = states.back();
-    
 	// Start the game loop
     while (window->isOpen())
 	{
 		// Clear screen
         window->clear();
         
+        if(states.empty())
+        {
+            window->close();
+            break;
+        }
+        
+        gamestate = states.back();
+        
+        // Call Update in game state
+        gamestate->Update(window);
+        
         // Manager updates...
         EventManager::Update(window);
         FrameManager::Update(window);
         InputManager::Update(window);
         ObjectManager::Update(window);
-        
-        // Call Update in game state
-        gamestate->Update(window);
 
 		// Update the window
         window->display();
