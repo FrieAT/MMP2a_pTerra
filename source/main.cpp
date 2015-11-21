@@ -25,9 +25,6 @@ int main(int argc, char const** argv)
     game_engine->ChangeState(new GameStatePlay());
     game_engine->ChangeState(new GameStatePlay());
     
-    // Starte die Engine mit dem gesetzten State
-    game_engine->Start();
-    
     // Lösche alle verbundenen Ressourcen
     delete game_engine;
     
