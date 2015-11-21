@@ -9,6 +9,7 @@
 class InputManager
 {
 public:
+	InputManager() = delete;
 	static void Update(sf::RenderWindow* window);
 	static void RegisterEventObserver(IInputObserver* observer);
 	static void UnregisterEventObserver(IInputObserver* observer);

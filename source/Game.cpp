@@ -81,7 +81,6 @@ void Game::Start()
 	}
 
 	// Cleanup
-	ObjectManager::RemoveAllGameObjects();
 	InputManager::UnregisterAllEventObserver();
 	EventManager::UnregisterAllEventObserver();
 }

@@ -9,6 +9,7 @@
 class ObjectManager
 {
 public:
+	ObjectManager() = delete;
 	static void AddGameObject(GameObject* obj);
 	static void RemoveGameObject(GameObject* obj);
     static void RemoveAllGameObjects();

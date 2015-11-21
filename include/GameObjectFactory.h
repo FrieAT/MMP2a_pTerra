@@ -9,8 +9,8 @@
 class GameObjectFactory
 {
 public:
-	GameObjectFactory();
-	~GameObjectFactory();
+	GameObjectFactory() = delete;
+	~GameObjectFactory() = delete;
 	static GameObject* CreatePlayerShip();
 };
 

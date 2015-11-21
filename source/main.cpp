@@ -6,8 +6,6 @@
 #include "GameStateIntro.h"
 #include "GameStatePlay.h"
 
-#include "InputManager.h"
-
 int main(int argc, char const** argv)
 {
     // Initialisiere die "Game Engine"

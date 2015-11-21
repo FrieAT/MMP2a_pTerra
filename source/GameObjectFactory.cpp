@@ -5,15 +5,6 @@
 #include "SpriteDrawing.h"
 #include "ShipMovement.h"
 
-GameObjectFactory::GameObjectFactory()
-{
-}
-
-
-GameObjectFactory::~GameObjectFactory()
-{
-}
-
 GameObject* GameObjectFactory::CreatePlayerShip()
 {
 	// TODO: Make it possible to change component values / change the whole factory

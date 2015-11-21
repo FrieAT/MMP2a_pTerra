@@ -8,6 +8,7 @@
 class FrameManager
 {
 public:
+	FrameManager() = delete;
 	static void Update(sf::Time deltaTime);
 	static void RegisterEventObserver(IFrameObserver* observer);
 	static void UnregisterEventObserver(IFrameObserver* observer);
