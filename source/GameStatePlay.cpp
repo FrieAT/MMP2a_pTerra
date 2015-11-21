@@ -1,11 +1,8 @@
 #include "GameStatePlay.h"
 
-#include "EventManager.h"
-#include "FrameManager.h"
-#include "InputManager.h"
-#include "ObjectManager.h"
-
 #include "PlayerShip.h"
+
+#include "ObjectManager.h"
 
 GameStatePlay::~GameStatePlay()
 {
@@ -43,10 +40,4 @@ void GameStatePlay::Update(sf::RenderWindow* window)
 {
     // Draw the sprite
     window->draw(*sprite);
-    
-    // Manager updates...
-    EventManager::Update(window);
-    FrameManager::Update(window);
-    InputManager::Update(window);
-    ObjectManager::Update(window);
 }

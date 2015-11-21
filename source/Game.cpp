@@ -6,6 +6,11 @@
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
 
+#include "EventManager.h"
+#include "FrameManager.h"
+#include "InputManager.h"
+#include "ObjectManager.h"
+
 Game::Game()
 {
     // Create the main window
@@ -42,7 +47,13 @@ void Game::Start()
 	{
 		// Clear screen
         window->clear();
-
+        
+        // Manager updates...
+        EventManager::Update(window);
+        FrameManager::Update(window);
+        InputManager::Update(window);
+        ObjectManager::Update(window);
+        
         // Call Update in game state
         gamestate->Update(window);
 

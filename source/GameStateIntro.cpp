@@ -25,6 +25,4 @@ void GameStateIntro::Update(sf::RenderWindow* window)
 {
     // Draw the sprite
     window->draw(*sprite);
-    
-    InputManager::Update(window);
 }
