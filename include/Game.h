@@ -12,6 +12,8 @@ public:
     
     void Start();
     void ChangeState(IGameState* state);
+    
+    static Game* Engine;
 protected:
     sf::RenderWindow* window;
     std::vector<IGameState*> states;

@@ -11,6 +11,8 @@
 #include "InputManager.h"
 #include "ObjectManager.h"
 
+Game* Game::Engine = nullptr;
+
 Game::Game()
 {
     // Create the main window
@@ -22,6 +24,9 @@ Game::Game()
         throw new std::runtime_error("Unable to load assets/icon.png");
     }
     window->setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
+    
+    if(Engine != nullptr) delete Engine;
+    Engine = this;
 }
 
 Game::~Game()
@@ -32,6 +37,7 @@ Game::~Game()
         delete state;
         states.pop_back();
     }
+    Engine = nullptr;
 }
 
 void Game::Start()
