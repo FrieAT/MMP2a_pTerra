@@ -37,6 +37,8 @@ Game::~Game()
         delete state;
         states.pop_back();
     }
+
+	delete window;
     Engine = nullptr;
 }
 
