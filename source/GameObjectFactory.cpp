@@ -1,4 +1,4 @@
-#include "..\include\GameObjectFactory.h"
+#include "GameObjectFactory.h"
 
 #include "LinearMovement.h"
 #include "PixelPosition.h"
