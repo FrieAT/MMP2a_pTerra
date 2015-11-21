@@ -16,7 +16,7 @@ LinearMovement::~LinearMovement()
     FrameManager::UnregisterEventObserver(this);
 }
 
-void LinearMovement::MoveVector(sf::Vector2f &Vector)
+void LinearMovement::MoveVector(sf::Vector2f Vector)
 {
     IPosition* PositionComponent = (IPosition*)(GetAssignedGameObject()->GetComponent(EComponentType::Position));
 	if (PositionComponent == NULL)

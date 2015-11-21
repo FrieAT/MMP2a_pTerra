@@ -17,7 +17,7 @@ class ShipMovement : public IMovement, public IInputObserver, public IFrameObser
 public:
 	ShipMovement();
 	~ShipMovement();
-	void MoveVector(sf::Vector2f &Vector);
+	void MoveVector(sf::Vector2f Vector);
 	void OnInputUpdate(std::string event);
 	void OnFrameUpdate(sf::Time delta_time);
 private:

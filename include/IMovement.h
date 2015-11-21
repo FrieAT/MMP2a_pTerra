@@ -6,7 +6,7 @@ class IMovement : public IComponent
 {
 public:
     virtual ~IMovement() { }
-	virtual void MoveVector(sf::Vector2f &Vector) = 0;
+	virtual void MoveVector(sf::Vector2f Vector) = 0;
 
 	EComponentType GetComponentType()
 	{
