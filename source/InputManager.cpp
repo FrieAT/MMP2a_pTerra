@@ -58,6 +58,11 @@ void InputManager::Update(sf::RenderWindow* window)
 		{
 			movement = "DOWN";
 		}
+        //Fire
+        if (event.key.code == sf::Keyboard::Space)
+        {
+            movement = "FIRE";
+        }
 
 		//pressed
 		if (event.type == sf::Event::KeyPressed)
