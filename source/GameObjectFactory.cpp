@@ -21,10 +21,11 @@ GameObject* GameObjectFactory::CreatePlayerShip()
 GameObject* GameObjectFactory::CreateBackgroundSprite()
 {
     // TODO: Make it possible to change component values / change the whole factory
-    GameObject* background = new GameObject("bg");
+    GameObject* background = new GameObject("background");
     
+    background->SetComponent(new PixelPosition(sf::Vector2f(0.f, 0.f), sf::Vector2f(0.f, 0.f)));
     background->SetComponent(new SpriteDrawing("assets/space-map.jpg"));
-    background->SetComponent(new ScriptedView(sf::FloatRect(0, 0, 800, 600), sf::Vector2f(800, 0), 0.5f));
+    // background->SetComponent(new ScriptedView(sf::FloatRect(0, 0, 800, 600), sf::Vector2f(800, 0), 0.05f));
     
     return background;
 }
