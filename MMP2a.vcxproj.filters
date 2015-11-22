@@ -46,6 +46,12 @@
     <Filter Include="Source Files\Managers\GameStateManager">
       <UniqueIdentifier>{94c03c0c-6bac-4f3a-8611-bafcc5e8a153}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Managers\ViewManager">
+      <UniqueIdentifier>{78791d98-42c4-4658-b4a8-f913ba26619d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Components\IView">
+      <UniqueIdentifier>{6e3bc2e6-3c81-445e-a629-ba5adc015dc8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\main.cpp">
@@ -89,6 +95,12 @@
     </ClCompile>
     <ClCompile Include="source\GameObjectFactory.cpp">
       <Filter>Source Files\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="source\ViewManager.cpp">
+      <Filter>Source Files\Managers\ViewManager</Filter>
+    </ClCompile>
+    <ClCompile Include="source\ScriptedView.cpp">
+      <Filter>Source Files\Components\IView</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -157,6 +169,18 @@
     </ClInclude>
     <ClInclude Include="include\GameObjectFactory.h">
       <Filter>Source Files\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="include\IViewObserver.h">
+      <Filter>Source Files\Managers\ViewManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ViewManager.h">
+      <Filter>Source Files\Managers\ViewManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\IView.h">
+      <Filter>Source Files\Components\IView</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ScriptedView.h">
+      <Filter>Source Files\Components\IView</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
