@@ -5,8 +5,7 @@
 class IView : public IComponent
 {
 public:
-    virtual void Update() = 0;
-    virtual void Draw(sf::RenderWindow* window) = 0;
+    // STUB: Currently no information about what a IView should have.
     
     EComponentType GetComponentType()
     {
