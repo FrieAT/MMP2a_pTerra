@@ -8,6 +8,7 @@ ScriptedView::ScriptedView(sf::FloatRect fViewSize, sf::Vector2f fMoveVector, fl
 {
     float fStep = (fSpeed / sqrt(pow(fMoveVector.x,2.0) + pow(fMoveVector.y,2.0)));
     
+    m_CurrentMovePosition = sf::Vector2f(0.f, 0.f);
     m_MoveVector = fMoveVector;
     m_fSteps = fStep;
     m_fSpeed = fSpeed;
@@ -26,8 +27,14 @@ ScriptedView::~ScriptedView()
 
 void ScriptedView::OnEventUpdate(sf::Time delta_time)
 {
+    if(m_CurrentMovePosition.x >= m_MoveVector.x && m_CurrentMovePosition.y >= m_MoveVector.y) {
+        // TODO: Maybe repeating?
+        return;
+    }
     float fStepsWithDeltaTime = m_fSteps * delta_time.asMilliseconds();
-    m_pView->move(m_MoveVector * fStepsWithDeltaTime);
+    sf::Vector2f move = m_MoveVector * fStepsWithDeltaTime;
+    m_CurrentMovePosition += move;
+    m_pView->move(move);
 }
 
 void ScriptedView::OnEventDraw(sf::RenderWindow* window)

@@ -25,7 +25,7 @@ GameObject* GameObjectFactory::CreateBackgroundSprite()
     
     background->SetComponent(new PixelPosition(sf::Vector2f(0.f, 0.f), sf::Vector2f(0.f, 0.f)));
     background->SetComponent(new SpriteDrawing("assets/space-map.jpg"));
-    // background->SetComponent(new ScriptedView(sf::FloatRect(0, 0, 800, 600), sf::Vector2f(800, 0), 0.05f));
+    // background->SetComponent(new ScriptedView(sf::FloatRect(0, 0, 800, 600), sf::Vector2f(1120, 0), 0.025f));
     
     return background;
 }

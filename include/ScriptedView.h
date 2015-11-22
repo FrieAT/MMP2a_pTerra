@@ -13,6 +13,7 @@ public:
     void OnEventDraw(sf::RenderWindow* window);
 private:
     sf::Vector2f m_MoveVector;
+    sf::Vector2f m_CurrentMovePosition;
     float m_fSteps;
     float m_fSpeed;
     sf::View* m_pView;
