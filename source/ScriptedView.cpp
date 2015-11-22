@@ -2,6 +2,8 @@
 
 #include "ScriptedView.h"
 
+#include "ViewManager.h"
+
 ScriptedView::ScriptedView(sf::FloatRect fViewSize, sf::Vector2f fMoveVector, float fSpeed)
 {
     float fStep = (fSpeed / sqrt(pow(fMoveVector.x,2.0) + pow(fMoveVector.y,2.0)));
@@ -11,10 +13,14 @@ ScriptedView::ScriptedView(sf::FloatRect fViewSize, sf::Vector2f fMoveVector, fl
     m_fSpeed = fSpeed;
     
     m_pView = new sf::View(fViewSize);
+    
+    ViewManager::RegisterEventObserver(this);
 }
 
 ScriptedView::~ScriptedView()
 {
+    ViewManager::UnregisterEventObserver(this);
+    
     delete m_pView;
 }
 
