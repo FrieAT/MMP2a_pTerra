@@ -2,13 +2,15 @@
 
 #include "IView.h"
 
-class ScriptedView : public IView
+#include "IViewObserver.h"
+
+class ScriptedView : public IView, public IViewObserver
 {
 public:
     ScriptedView(sf::FloatRect fViewSize, sf::Vector2f fMoveVector, float fSpeed);
     ~ScriptedView();
-    void Update();
-    void Draw(sf::RenderWindow* window);
+    void OnEventUpdate(sf::Time delta_time);
+    void OnEventDraw(sf::RenderWindow* window);
 private:
     sf::Vector2f m_MoveVector;
     float m_fSteps;

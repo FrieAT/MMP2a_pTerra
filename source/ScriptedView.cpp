@@ -18,14 +18,13 @@ ScriptedView::~ScriptedView()
     delete m_pView;
 }
 
-void ScriptedView::Update()
+void ScriptedView::OnEventUpdate(sf::Time delta_time)
 {
-    sf::Time delta_time = clock.restart();
     float fStepsWithDeltaTime = m_fSteps * delta_time.asMilliseconds();
     m_pView->move(m_MoveVector * fStepsWithDeltaTime);
 }
 
-void ScriptedView::Draw(sf::RenderWindow *window)
+void ScriptedView::OnEventDraw(sf::RenderWindow* window)
 {
     window->setView(*m_pView);
 }
