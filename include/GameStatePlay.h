@@ -14,6 +14,4 @@ public:
     
 protected:
     sf::Music* music;
-    sf::Texture* texture;
-    sf::Sprite* sprite;
 };
