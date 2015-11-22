@@ -3,6 +3,7 @@
 #include "LinearMovement.h"
 #include "PixelPosition.h"
 #include "SpriteDrawing.h"
+#include "FontDrawing.h"
 #include "ShipMovement.h"
 #include "ScriptedView.h"
 
@@ -28,4 +29,14 @@ GameObject* GameObjectFactory::CreateBackgroundSprite(std::string background_pat
     // background->SetComponent(new ScriptedView(sf::FloatRect(0, 0, 800, 600), sf::Vector2f(1120, 0), 0.025f));
     
     return background;
+}
+
+GameObject* GameObjectFactory::CreateFontText(sf::Vector2f Position, std::string sFontPath, std::string sText, int iCharSize)
+{
+    GameObject* font_text = new GameObject("text");
+    
+    font_text->SetComponent(new PixelPosition(Position, sf::Vector2f(0.f, 0.f)));
+    font_text->SetComponent(new FontDrawing(sFontPath, sText, iCharSize));
+    
+    return font_text;
 }

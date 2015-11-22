@@ -13,10 +13,5 @@ public:
     void Update(sf::RenderWindow* window);
     void OnInputUpdate(std::string event);
 protected:
-    sf::Texture* texture;
-    sf::Sprite* sprite;
-    sf::Font* font;
-    sf::Text* heading;
-    sf::Text* information;
     bool KeyPressed;
 };

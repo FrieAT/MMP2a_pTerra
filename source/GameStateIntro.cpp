@@ -2,69 +2,30 @@
 
 #include "Game.h"
 #include "InputManager.h"
+#include "ObjectManager.h"
 #include "GameStatePlay.h"
+#include "GameObjectFactory.h"
 
 GameStateIntro::~GameStateIntro()
 {
     InputManager::UnregisterEventObserver(this);
-    
-    delete texture;
-    delete sprite;
-    delete font;
-    delete heading;
-    delete information;
+    ObjectManager::RemoveAllGameObjects();
 }
 
 void GameStateIntro::Init()
 {
     KeyPressed = false;
     
+    ObjectManager::AddGameObject(GameObjectFactory::CreateBackgroundSprite("assets/intro-bg.jpg"));
+    ObjectManager::AddGameObject(GameObjectFactory::CreateFontText(sf::Vector2f(280.f, 100.f), "assets/Starjedi.ttf", "The Space Game", 24));
+    ObjectManager::AddGameObject(GameObjectFactory::CreateFontText(sf::Vector2f(230.f, 500.f), "assets/Starjedi.ttf", "-- Press FIRE-Key to start game --", 16));
+    
     InputManager::RegisterEventObserver(this);
-    
-    // ====== Below decprecated method to create things ======
-    
-    // Load a sprite to display
-    texture = new sf::Texture();
-    if (!texture->loadFromFile("assets/intro-bg.jpg"))
-    {
-        throw new std::runtime_error("Unable to load assets/intro-bg.jpg");
-    }
-    sprite = new sf::Sprite(*texture);
-    
-    // Load a font to display
-    font = new sf::Font();
-    if (!font->loadFromFile("assets/Starjedi.ttf"))
-    {
-        throw new std::runtime_error("Unable to load assets/Starjedi.ttf");
-    }
-    
-    // Create Heading
-    std::string heading_text = "The Space Game";
-    heading = new sf::Text();
-    heading->setFont(*font);
-    heading->setString(heading_text);
-    heading->setCharacterSize(24);
-    heading->setPosition(280.f, 100.f);
-    heading->setColor(sf::Color::White);
-    
-    // Create Information
-    std::string information_text = "-- Press FIRE-Key to start game --";
-    information = new sf::Text();
-    information->setFont(*font);
-    information->setString(information_text);
-    information->setCharacterSize(16);
-    information->setPosition(230.f, 500.f);
-    information->setColor(sf::Color::White);
 }
 
 void GameStateIntro::Update(sf::RenderWindow* window)
 {
-    // Draw the sprite
-    window->draw(*sprite);
     
-    // Draw texts
-    window->draw(*heading);
-    window->draw(*information);
 }
 
 void GameStateIntro::OnInputUpdate(std::string event)
