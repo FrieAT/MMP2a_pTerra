@@ -6,6 +6,7 @@
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
 
+#include "ViewManager.h"
 #include "EventManager.h"
 #include "FrameManager.h"
 #include "InputManager.h"
@@ -68,12 +69,14 @@ void Game::Start()
         gamestate->Update(window);
         
         // Manager updates
+        ViewManager::Update(deltaTime);
         EventManager::Update(deltaTime);
         FrameManager::Update(deltaTime);
         InputManager::Update(window);
         ObjectManager::Update(deltaTime);
 
 		// Rendering
+        ViewManager::Draw(window);
 		ObjectManager::Draw(window);
 
 		// Update the window
