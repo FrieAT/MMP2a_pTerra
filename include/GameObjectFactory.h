@@ -12,5 +12,6 @@ public:
 	GameObjectFactory() = delete;
 	~GameObjectFactory() = delete;
 	static GameObject* CreatePlayerShip();
+    static GameObject* CreateBackgroundSprite();
 };
 

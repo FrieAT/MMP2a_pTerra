@@ -4,6 +4,7 @@
 #include "PixelPosition.h"
 #include "SpriteDrawing.h"
 #include "ShipMovement.h"
+#include "ScriptedView.h"
 
 GameObject* GameObjectFactory::CreatePlayerShip()
 {
@@ -15,4 +16,15 @@ GameObject* GameObjectFactory::CreatePlayerShip()
 	ship->SetComponent(new SpriteDrawing("assets/space_ship.png"));
 
 	return ship;
+}
+
+GameObject* GameObjectFactory::CreateBackgroundSprite()
+{
+    // TODO: Make it possible to change component values / change the whole factory
+    GameObject* background = new GameObject("bg");
+    
+    background->SetComponent(new SpriteDrawing("assets/space-map.jpg"));
+    background->SetComponent(new ScriptedView(sf::FloatRect(0, 0, 800, 600), sf::Vector2f(800, 0), 0.5f));
+    
+    return background;
 }
