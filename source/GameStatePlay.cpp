@@ -13,7 +13,7 @@ GameStatePlay::~GameStatePlay()
 void GameStatePlay::Init()
 {
     //ObjectManager::AddGameObject(new PlayerShip());
-    ObjectManager::AddGameObject(GameObjectFactory::CreateBackgroundSprite());
+    ObjectManager::AddGameObject(GameObjectFactory::CreateBackgroundSprite("assets/space-map.jpg"));
     ObjectManager::AddGameObject(GameObjectFactory::CreatePlayerShip());
     
     // ====== Below decprecated method to create things ======
