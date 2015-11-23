@@ -43,7 +43,7 @@ void ScriptedView::OnFrameUpdate(sf::Time delta_time)
     m_pView->move(move);
     
     // Check if position from current game object is within Boundary
-    IPosition* position = (IPosition*)GetAssignedGameObject()->GetComponentType(EComponentType::Position);
+    // IPosition* position = (IPosition*)GetAssignedGameObject()->GetComponentType(EComponentType::Position);
 }
 
 void ScriptedView::OnFrameDraw(sf::RenderWindow* window)
