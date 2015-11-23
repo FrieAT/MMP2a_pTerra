@@ -8,6 +8,7 @@ class SpriteDrawing : public IDrawing
 {
 public:
     SpriteDrawing(std::string ressource_path);
+    SpriteDrawing(std::string ressource_path, sf::Vector2f scaleFactor);
     ~SpriteDrawing();
     void Update();
 	void Draw(sf::RenderWindow* window);
