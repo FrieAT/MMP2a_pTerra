@@ -32,8 +32,7 @@ GameObject* GameObjectFactory::CreateMissile(IPosition* pPosition, sf::Vector2f 
 	pMissile->SetComponent(new PixelPosition(pPosition->GetPosition(), sf::Vector2f(160.f, 320.f)));
 	pMissile->SetComponent(new LinearMovement(pPosition->GetRotation(),ShipSpeed));
 	pMissile->SetComponent(new SpriteDrawing(std::string("assets/rocket.png"),sf::Vector2f(30,60)));
-
-	//ship->SetComponent(new ScriptedView(sf::FloatRect(0, 0, static_cast<float>(Game::m_iWindowWidth), static_cast<float>(Game::m_iWindowHeight)), sf::Vector2f(1920.f - static_cast<float>(Game::m_iWindowWidth), 0), 20.f));
+	
 	return pMissile;
 }
 
