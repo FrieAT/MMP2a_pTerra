@@ -24,10 +24,11 @@ void ObjectManager::RemoveAllGameObjects()
 {
 	for (unsigned int s = 0; s < ObjectManager::drawOrder.size(); s++)
 	{
-		for (unsigned int i = 0; i < ObjectManager::objects[ObjectManager::drawOrder[s]].size(); i++)
+		std::string* draw_order_type = &ObjectManager::drawOrder[s];
+		for (unsigned int i = 0; i < ObjectManager::objects[*draw_order_type].size(); i++)
 		{
-			delete ObjectManager::objects[ObjectManager::drawOrder[s]][i];
-			ObjectManager::objects[ObjectManager::drawOrder[s]].erase(objects[ObjectManager::drawOrder[s]].begin() + i);
+			delete ObjectManager::objects[*draw_order_type][i];
+			ObjectManager::objects[*draw_order_type].erase(objects[*draw_order_type].begin() + i);
 		}
 	}
 	/*for (int i = 0; i < objects.size(); i++)
@@ -47,9 +48,10 @@ void ObjectManager::Draw(sf::RenderWindow* window)
 {
 	for (unsigned int s = 0; s < ObjectManager::drawOrder.size(); s++)
 	{
-		for (unsigned int i = 0; i < ObjectManager::objects[ObjectManager::drawOrder[s]].size(); i++)
+		std::string* draw_order_type = &ObjectManager::drawOrder[s];
+		for (unsigned int i = 0; i < ObjectManager::objects[*draw_order_type].size(); i++)
 		{
-			IDrawing* drawing = ((IDrawing*)objects[ObjectManager::drawOrder[s]][i]->GetComponent(EComponentType::Drawing));
+			IDrawing* drawing = ((IDrawing*)objects[*draw_order_type][i]->GetComponent(EComponentType::Drawing));
             if(drawing == nullptr) continue;
 			drawing->Draw(window);
 		}

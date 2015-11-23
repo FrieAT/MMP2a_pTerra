@@ -3,7 +3,7 @@
 #include "IComponent.h"
 
 // GameObject constructor
-GameObject::GameObject(std::string id)
+GameObject::GameObject(std::string &id)
 {
 	this->id = id;
 }

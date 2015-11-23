@@ -13,7 +13,7 @@ class IComponent;
 class GameObject
 {
 public:
-	GameObject(std::string id);
+	GameObject(std::string &id);
 	~GameObject();
 
 	std::string GetID();
