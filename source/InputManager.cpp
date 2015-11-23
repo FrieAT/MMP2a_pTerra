@@ -61,11 +61,11 @@ void InputManager::Update(sf::RenderWindow* window)
         //Fire
         if (event.key.code == sf::Keyboard::Space)
         {
-            movement = "1FIRE";
+            movement = "2FIRE";
         }
 		if (event.key.code == sf::Keyboard::Numpad0)
 		{
-			movement = "2FIRE";
+			movement = "1FIRE";
 		}
 
 		//pressed
