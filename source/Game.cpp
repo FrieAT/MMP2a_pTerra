@@ -19,7 +19,7 @@ Game::Game()
     Engine = this;
     
     // Create the main window
-    window = new sf::RenderWindow(sf::VideoMode(800, 600), "SFML window");
+    window = new sf::RenderWindow(sf::VideoMode(Game::m_iWindowWidth, Game::m_iWindowHeight), "SFML window");
 
     // ====== Below decprecated method to create things ======
     // Set the Icon
