@@ -9,14 +9,21 @@
 class ObjectManager
 {
 public:
-	ObjectManager() = delete;
-	static void AddGameObject(GameObject* obj);
-	static void RemoveGameObject(GameObject* obj);
-    static void RemoveAllGameObjects();
-	static void Update(sf::Time deltaTime);
-	static void Draw(sf::RenderWindow* window);
-	static void Clear();
+	static ObjectManager& GetInstance()
+	{
+		static ObjectManager instance;
+		return instance;
+	}
+	void AddGameObject(GameObject* obj);
+	void RemoveGameObject(GameObject* obj);
+    void RemoveAllGameObjects();
+	void Update(sf::Time deltaTime);
+	void Draw(sf::RenderWindow* window);
+	void Clear();
 private:
-	static std::map<std::string, std::vector<GameObject*>> objects;
-	static std::vector<std::string> drawOrder;
+	ObjectManager();
+	ObjectManager(ObjectManager const&) = delete;
+	void operator= (ObjectManager const&) = delete;
+	std::map<std::string, std::vector<GameObject*>> objects;
+	std::vector<std::string> drawOrder;
 };

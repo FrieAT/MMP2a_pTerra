@@ -1,7 +1,9 @@
 #include "ObjectManager.h"
 
-std::map<std::string, std::vector<GameObject*>> ObjectManager::objects;
-std::vector<std::string> ObjectManager::drawOrder{ "background", "asteroid", "missile", "ship", "text" }; // change draw order here! first entry = first to draw
+ObjectManager::ObjectManager()
+{
+	drawOrder = std::vector<std::string> { "background", "asteroid", "missile", "ship", "text" };
+}
 
 void ObjectManager::AddGameObject(GameObject* obj)
 {

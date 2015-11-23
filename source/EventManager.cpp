@@ -1,7 +1,5 @@
 #include "EventManager.h"
 
-std::vector<IEventObserver*> EventManager::Observers;
-
 void EventManager::Update(sf::Time deltaTime)
 {
 	//sf::Event event;

@@ -6,16 +6,16 @@
 
 GameStatePlay::~GameStatePlay()
 {
-    ObjectManager::RemoveAllGameObjects();
+    ObjectManager::GetInstance().RemoveAllGameObjects();
     delete music;
 }
 
 void GameStatePlay::Init()
 {
     //ObjectManager::AddGameObject(new PlayerShip());
-    ObjectManager::AddGameObject(GameObjectFactory::CreateBackgroundSprite("assets/space-map.jpg", sf::Vector2f(0.f, Game::m_iWindowHeight)));
-    ObjectManager::AddGameObject(GameObjectFactory::CreatePlayerShip(sf::Vector2f(50,30),'1'));
-	ObjectManager::AddGameObject(GameObjectFactory::CreatePlayerShip(sf::Vector2f(50, Game::m_iWindowHeight-30), '2'));
+    ObjectManager::GetInstance().AddGameObject(GameObjectFactory::CreateBackgroundSprite("assets/space-map.jpg", sf::Vector2f(0.f, Game::m_iWindowHeight)));
+    ObjectManager::GetInstance().AddGameObject(GameObjectFactory::CreatePlayerShip(sf::Vector2f(50,30),'1'));
+	ObjectManager::GetInstance().AddGameObject(GameObjectFactory::CreatePlayerShip(sf::Vector2f(50, Game::m_iWindowHeight - 30), '2'));
 
     // ====== Below decprecated method to create things ======
     

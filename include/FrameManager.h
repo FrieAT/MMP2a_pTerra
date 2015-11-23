@@ -8,12 +8,19 @@
 class FrameManager
 {
 public:
-	FrameManager() = delete;
-	static void Update(sf::Time deltaTime);
-    static void Draw(sf::RenderWindow* window);
-	static void RegisterEventObserver(IFrameObserver* observer);
-	static void UnregisterEventObserver(IFrameObserver* observer);
-	static void Clear();
+	static FrameManager& GetInstance()
+	{
+		static FrameManager instance;
+		return instance;
+	}
+	void Update(sf::Time deltaTime);
+    void Draw(sf::RenderWindow* window);
+	void RegisterEventObserver(IFrameObserver* observer);
+	void UnregisterEventObserver(IFrameObserver* observer);
+	void Clear();
 private:
-	static std::vector<IFrameObserver*> Observers;
+	FrameManager() {}
+	FrameManager(FrameManager const&) = delete;
+	void operator= (FrameManager const&) = delete;
+	std::vector<IFrameObserver*> Observers;
 };

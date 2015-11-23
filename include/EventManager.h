@@ -8,12 +8,19 @@
 class EventManager
 {
 public:
-	EventManager() = delete;
-	static void Update(sf::Time deltaTime);
-	static void RegisterEventObserver(IEventObserver* observer);
-	static void UnregisterEventObserver(IEventObserver* observer);
-    static void UnregisterAllEventObserver();
+	static EventManager& GetInstance()
+	{
+		static EventManager instance;
+		return instance;
+	}
+	void Update(sf::Time deltaTime);
+	void RegisterEventObserver(IEventObserver* observer);
+	void UnregisterEventObserver(IEventObserver* observer);
+    void UnregisterAllEventObserver();
 private:
-	static std::vector<IEventObserver*> Observers;
-	static void UpdateEventObserver(sf::Event event);
+	EventManager() {}
+	EventManager(EventManager const&) = delete;
+	void operator= (EventManager const&) = delete;
+	std::vector<IEventObserver*> Observers;
+	void UpdateEventObserver(sf::Event event);
 };

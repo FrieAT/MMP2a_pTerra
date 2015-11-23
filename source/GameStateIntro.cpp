@@ -8,19 +8,19 @@
 
 GameStateIntro::~GameStateIntro()
 {
-    InputManager::UnregisterEventObserver(this);
-    ObjectManager::RemoveAllGameObjects();
+    InputManager::GetInstance().UnregisterEventObserver(this);
+    ObjectManager::GetInstance().RemoveAllGameObjects();
 }
 
 void GameStateIntro::Init()
 {
     KeyPressed = false;
     
-    ObjectManager::AddGameObject(GameObjectFactory::CreateBackgroundSprite("assets/intro-bg.jpg", sf::Vector2f(Game::m_iWindowWidth, Game::m_iWindowHeight)));
-    ObjectManager::AddGameObject(GameObjectFactory::CreateFontText(sf::Vector2f(280.f, 100.f), "assets/Starjedi.ttf", "The Space Game", 24));
-    ObjectManager::AddGameObject(GameObjectFactory::CreateFontText(sf::Vector2f(230.f, 500.f), "assets/Starjedi.ttf", "-- Press Space-Key to start game --", 16));
+    ObjectManager::GetInstance().AddGameObject(GameObjectFactory::CreateBackgroundSprite("assets/intro-bg.jpg", sf::Vector2f(Game::m_iWindowWidth, Game::m_iWindowHeight)));
+    ObjectManager::GetInstance().AddGameObject(GameObjectFactory::CreateFontText(sf::Vector2f(280.f, 100.f), "assets/Starjedi.ttf", "The Space Game", 24));
+    ObjectManager::GetInstance().AddGameObject(GameObjectFactory::CreateFontText(sf::Vector2f(230.f, 500.f), "assets/Starjedi.ttf", "-- Press Space-Key to start game --", 16));
     
-    InputManager::RegisterEventObserver(this);
+    InputManager::GetInstance().RegisterEventObserver(this);
 }
 
 void GameStateIntro::Update(sf::RenderWindow* window)

@@ -4,7 +4,7 @@
 
 LinearMovement::LinearMovement(float Rotation, sf::Vector2f Shipspeed)
 {
-	FrameManager::RegisterEventObserver(this);
+	FrameManager::GetInstance().RegisterEventObserver(this);
 	sf::Transform rotation_mat = sf::Transform::Identity;
 	rotation_mat.rotate(Rotation);
 	rotation = Rotation;
@@ -14,7 +14,7 @@ LinearMovement::LinearMovement(float Rotation, sf::Vector2f Shipspeed)
 
 LinearMovement::~LinearMovement()
 {
-    FrameManager::UnregisterEventObserver(this);
+    FrameManager::GetInstance().UnregisterEventObserver(this);
 }
 
 

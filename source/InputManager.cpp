@@ -1,7 +1,6 @@
 #include "InputManager.h"
 #include <iostream>
 
-std::vector<IInputObserver*> InputManager::Observers;
 
 void InputManager::Update(sf::RenderWindow* window)
 {

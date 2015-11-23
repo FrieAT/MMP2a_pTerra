@@ -6,8 +6,8 @@ ShipMovement::ShipMovement(char Player)
 {
 	//auto component = GetAssignedGameObject()->GetComponent(EComponentType::Position);
 	//pos = std::static_pointer_cast<IPosition>(component);
-	InputManager::RegisterEventObserver(this);
-	FrameManager::RegisterEventObserver(this);
+	InputManager::GetInstance().RegisterEventObserver(this);
+	FrameManager::GetInstance().RegisterEventObserver(this);
 	this->Player = Player;
 
 	Impulses.resize(5);
@@ -18,8 +18,8 @@ ShipMovement::ShipMovement(char Player)
 
 ShipMovement::~ShipMovement()
 {
-    InputManager::UnregisterEventObserver(this);
-    FrameManager::UnregisterEventObserver(this);
+    InputManager::GetInstance().UnregisterEventObserver(this);
+    FrameManager::GetInstance().UnregisterEventObserver(this);
 }
 
 
@@ -58,7 +58,7 @@ void ShipMovement::OnInputUpdate(std::string event)
 	//TODO make a own weapon component
 	if (event == "FIRE_P")
 	{
-  		ObjectManager::AddGameObject(GameObjectFactory::CreateMissile(pos,Impulses[0]));
+  		ObjectManager::GetInstance().AddGameObject(GameObjectFactory::CreateMissile(pos,Impulses[0]));
 	}
 }
 

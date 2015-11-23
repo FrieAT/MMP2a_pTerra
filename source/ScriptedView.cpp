@@ -16,12 +16,12 @@ ScriptedView::ScriptedView(sf::FloatRect fViewSize, sf::Vector2f fMoveVector, fl
     
     m_pView = new sf::View(fViewSize);
     
-    FrameManager::RegisterEventObserver(this);
+    FrameManager::GetInstance().RegisterEventObserver(this);
 }
 
 ScriptedView::~ScriptedView()
 {
-    FrameManager::UnregisterEventObserver(this);
+    FrameManager::GetInstance().UnregisterEventObserver(this);
     
     delete m_pView;
 }

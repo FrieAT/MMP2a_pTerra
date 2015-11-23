@@ -1,8 +1,6 @@
 #include "FrameManager.h"
 #include <memory>
 
-std::vector<IFrameObserver*> FrameManager::Observers;
-
 void FrameManager::Update(sf::Time deltaTime)
 {
     for (unsigned int i = 0; i < Observers.size(); i++)

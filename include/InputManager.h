@@ -9,12 +9,19 @@
 class InputManager
 {
 public:
-	InputManager() = delete;
-	static void Update(sf::RenderWindow* window);
-	static void RegisterEventObserver(IInputObserver* observer);
-	static void UnregisterEventObserver(IInputObserver* observer);
-	static void Clear();
+	static InputManager& GetInstance()
+	{
+		static InputManager instance;
+		return instance;
+	}
+	void Update(sf::RenderWindow* window);
+	void RegisterEventObserver(IInputObserver* observer);
+	void UnregisterEventObserver(IInputObserver* observer);
+	void Clear();
 private:
-	static std::vector<IInputObserver*> Observers;
-	static void UpdateEventObserver(std::string event);
+	InputManager() {}
+	InputManager(InputManager const&) = delete;
+	void operator= (InputManager const&) = delete;
+	std::vector<IInputObserver*> Observers;
+	void UpdateEventObserver(std::string event);
 };

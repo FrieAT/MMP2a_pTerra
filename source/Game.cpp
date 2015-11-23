@@ -41,9 +41,9 @@ Game::~Game()
         states.pop_back();
     }
 
-	FrameManager::Clear();
-	InputManager::Clear();
-	ObjectManager::Clear();
+	FrameManager::GetInstance().Clear();
+	InputManager::GetInstance().Clear();
+	ObjectManager::GetInstance().Clear();
 
 	delete window;
     Engine = nullptr;
@@ -75,14 +75,14 @@ void Game::Start()
         gamestate->Update(window);
         
         // Manager updates
-        EventManager::Update(deltaTime);
-        FrameManager::Update(deltaTime);
-        InputManager::Update(window);
-        ObjectManager::Update(deltaTime);
+        EventManager::GetInstance().Update(deltaTime);
+        FrameManager::GetInstance().Update(deltaTime);
+        InputManager::GetInstance().Update(window);
+        ObjectManager::GetInstance().Update(deltaTime);
 
 		// Rendering
-        FrameManager::Draw(window);
-		ObjectManager::Draw(window);
+        FrameManager::GetInstance().Draw(window);
+		ObjectManager::GetInstance().Draw(window);
 
 		// Update the window
         window->display();
