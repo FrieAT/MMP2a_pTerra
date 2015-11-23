@@ -33,15 +33,13 @@ sf::FloatRect ScriptedView::GetViewport()
 
 void ScriptedView::OnFrameUpdate(sf::Time delta_time)
 {
-	if (m_CurrentMovePosition.x >= m_MoveVector.x && m_CurrentMovePosition.y >= m_MoveVector.y) {
+	if (m_CurrentMovePosition.x < m_MoveVector.x || m_CurrentMovePosition.y < m_MoveVector.y) {
 		// TODO: Maybe repeating?
-		return;
+		float fStepsWithDeltaTime = m_fSteps * delta_time.asSeconds();
+		sf::Vector2f move = m_MoveVector * fStepsWithDeltaTime;
+		m_CurrentMovePosition += move;
+		m_pView->move(move);
 	}
-
-	float fStepsWithDeltaTime = m_fSteps * delta_time.asSeconds();
-	sf::Vector2f move = m_MoveVector * fStepsWithDeltaTime;
-	m_CurrentMovePosition += move;
-	m_pView->move(move);
 
 	// Check if position from current game object is within Boundary
 	IPosition* position_component = (IPosition*)GetAssignedGameObject()->GetComponent(EComponentType::Position);
