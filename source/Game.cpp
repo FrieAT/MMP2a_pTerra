@@ -15,18 +15,19 @@ Game* Game::Engine = nullptr;
 
 Game::Game()
 {
+    if(Engine != nullptr) delete Engine;
+    Engine = this;
+    
     // Create the main window
     window = new sf::RenderWindow(sf::VideoMode(800, 600), "SFML window");
 
+    // ====== Below decprecated method to create things ======
     // Set the Icon
     if (!icon.loadFromFile("assets/icon.png"))
     {
         throw new std::runtime_error("Unable to load assets/icon.png");
     }
     window->setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
-    
-    if(Engine != nullptr) delete Engine;
-    Engine = this;
 }
 
 Game::~Game()
