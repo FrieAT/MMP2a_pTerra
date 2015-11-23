@@ -11,6 +11,8 @@ public:
     ~ScriptedView();
     void OnFrameUpdate(sf::Time delta_time);
     void OnFrameDraw(sf::RenderWindow* window);
+    
+    sf::FloatRect GetViewport();
 private:
     sf::Vector2f m_MoveVector;
     sf::Vector2f m_CurrentMovePosition;

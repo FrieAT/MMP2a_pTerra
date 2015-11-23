@@ -25,6 +25,11 @@ ScriptedView::~ScriptedView()
     delete m_pView;
 }
 
+sf::FloatRect ScriptedView::GetViewport()
+{
+    return m_pView->getViewport();
+}
+
 void ScriptedView::OnFrameUpdate(sf::Time delta_time)
 {
     if(m_CurrentMovePosition.x >= m_MoveVector.x && m_CurrentMovePosition.y >= m_MoveVector.y) {

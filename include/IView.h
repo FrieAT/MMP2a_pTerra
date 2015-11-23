@@ -5,7 +5,7 @@
 class IView : public IComponent
 {
 public:
-    // STUB: Currently no information about what a IView should have.
+    virtual sf::FloatRect GetViewport() = 0;
     
     EComponentType GetComponentType()
     {
