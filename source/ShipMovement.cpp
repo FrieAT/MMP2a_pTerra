@@ -1,18 +1,20 @@
+/*=================================================================
+Copyright (c) MultiMediaTechnology, 2015
+=================================================================*/
+
 #include "ShipMovement.h"
 #include "GameObjectFactory.h"
 #include "ObjectManager.h"
 
-ShipMovement::ShipMovement(char Player)
+ShipMovement::ShipMovement(char cPlayer)
 {
-	//auto component = GetAssignedGameObject()->GetComponent(EComponentType::Position);
-	//pos = std::static_pointer_cast<IPosition>(component);
 	InputManager::GetInstance().RegisterEventObserver(this);
 	FrameManager::GetInstance().RegisterEventObserver(this);
-	this->Player = Player;
+	this->m_cPlayer = cPlayer;
 
-	Impulses.resize(5);
-	Acceleration = 1.f;
-	Max_Speed = 11000;
+	m_Impulses.resize(5);
+	m_fAcceleration = 1.f;
+	m_fMaxSpeed = 11000;
 }
 
 
@@ -23,60 +25,59 @@ ShipMovement::~ShipMovement()
 }
 
 
-void ShipMovement::OnInputUpdate(std::string event)
+void ShipMovement::OnInputUpdate(std::string strEvent)
 {
-	IPosition* pos = (IPosition*)(GetAssignedGameObject()->GetComponent(EComponentType::Position));
-	if (event[0] == Player)
+	IPosition* pPositionComponent = static_cast<IPosition*>(GetAssignedGameObject()->GetComponent(EComponentType::Position));
+	if (strEvent[0] != m_cPlayer)
 	{
-		event = event.substr(1);
+		return;
 	}
-	else return;
+	strEvent = strEvent.substr(1);
 
+	if(strEvent=="RIGHT_P")
+	{
+		pPositionComponent->SetRotation(pPositionComponent->GetRotation() + 5);
+	}
+	if (strEvent == "LEFT_P")
+	{
+		pPositionComponent->SetRotation(pPositionComponent->GetRotation() - 5);
+	}
+	if (strEvent == "UP_P")
+	{
+		m_Direction = sf::Vector2f(0.f, -0.8f);
+	}
+	if (strEvent == "DOWN_P")
+	{
+		m_Direction = sf::Vector2f(0.f, 0.6f);
+	}
 
-	if(event=="RIGHT_P")
+	if (strEvent == "UP_R" || strEvent == "DOWN_R")
 	{
-		pos->SetRotation(pos->GetRotation() + 5);
-	}
-	if (event == "LEFT_P")
-	{
-		pos->SetRotation(pos->GetRotation() - 5);
-	}
-	if (event == "UP_P")
-	{
-		direction = sf::Vector2f(0.f, -0.8f);
-	}
-	if (event == "DOWN_P")
-	{
-		direction = sf::Vector2f(0.f, 0.6f);
-	}
-
-	if (event == "UP_R" || event == "DOWN_R")
-	{
-		direction = sf::Vector2f(0.f, 0.f);
+		m_Direction = sf::Vector2f(0.f, 0.f);
 	}
 
 	//TODO make a own weapon component
-	if (event == "FIRE_P")
+	if (strEvent == "FIRE_P")
 	{
-  		ObjectManager::GetInstance().AddGameObject(GameObjectFactory::CreateMissile(pos,Impulses[0]));
+  		ObjectManager::GetInstance().AddGameObject(GameObjectFactory::CreateMissile(pPositionComponent,m_Impulses[0]));
 	}
 }
 
 
-void ShipMovement::update_movement()
+void ShipMovement::UpdateMovement()
 {
-	IPosition* pos = (IPosition*)(GetAssignedGameObject()->GetComponent(EComponentType::Position));
+	IPosition* pPositionComponent = static_cast<IPosition*>(GetAssignedGameObject()->GetComponent(EComponentType::Position));
 
-	sf::Transform rotation_mat = sf::Transform::Identity;
-	rotation_mat.rotate(pos->GetRotation());
+	sf::Transform RotationMatrice = sf::Transform::Identity;
+	RotationMatrice.rotate(pPositionComponent->GetRotation());
 
-	Impulses[0] = Impulses[0] + rotation_mat * direction * Acceleration;
+	m_Impulses[0] = m_Impulses[0] + RotationMatrice * m_Direction * m_fAcceleration;
 
-	float speed = Impulses[0].x*Impulses[0].x + Impulses[0].y * Impulses[0].y;
+	float fSpeed = m_Impulses[0].x*m_Impulses[0].x + m_Impulses[0].y * m_Impulses[0].y;
 
-	if (speed >= Max_Speed)
+	if (fSpeed >= m_fMaxSpeed)
 	{
-		Impulses[0] = Impulses[0] * 0.99f;
+		m_Impulses[0] = m_Impulses[0] * 0.99f;
 	}
 
 	//std::cout << speed << std::endl;
@@ -85,18 +86,18 @@ void ShipMovement::update_movement()
 
 
 
-void ShipMovement::OnFrameUpdate(sf::Time delta_time)
+void ShipMovement::OnFrameUpdate(sf::Time DeltaTime)
 {
-	IPosition* pos = (IPosition*)(GetAssignedGameObject()->GetComponent(EComponentType::Position));
-	sf::Vector2f movement;
+	IPosition* pPositionComponent = static_cast<IPosition*>(GetAssignedGameObject()->GetComponent(EComponentType::Position));
+	sf::Vector2f Movement;
 
-	update_movement();
+	UpdateMovement();
 
-	for (int i = 0; i < Impulses.size();i++)
+	for (unsigned int i = 0; i < m_Impulses.size();i++)
 	{
-		movement += Impulses[i];
+		Movement += m_Impulses[i];
 	}
 
-	pos->SetPosition(pos->GetPosition() + movement * delta_time.asSeconds());
+	pPositionComponent->SetPosition(pPositionComponent->GetPosition() + Movement * DeltaTime.asSeconds());
 
 }

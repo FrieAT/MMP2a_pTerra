@@ -1,3 +1,7 @@
+/*=================================================================
+Copyright (c) MultiMediaTechnology, 2015
+=================================================================*/
+
 #pragma once
 
 #include <SFML/Graphics.hpp>
@@ -10,8 +14,6 @@ class GameStatePlay : public IGameState
 public:
     ~GameStatePlay();
     void Init();
-    void Update(sf::RenderWindow* window);
-    
 protected:
-    sf::Music* music;
+    sf::Music* m_pMusic;
 };

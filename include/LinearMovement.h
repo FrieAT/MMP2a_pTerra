@@ -1,6 +1,5 @@
 #pragma once
 
-#include <memory>
 #include <SFML/Graphics.hpp>
 
 #include "IMovement.h"
@@ -12,14 +11,14 @@
 class LinearMovement : public IMovement, public IFrameObserver
 {
 public:
-    LinearMovement(float Rotation, sf::Vector2f Shipspeed);
+    LinearMovement(float fRotation, sf::Vector2f ShipSpeed);
     ~LinearMovement();
-    void OnFrameUpdate(sf::Time delta_time);
-	float speed;
+    void OnFrameUpdate(sf::Time DeltaTime);
+	float m_fSpeed;
 
 private:
-	sf::Vector2f direction;
-	sf::Vector2f movement;
+	sf::Vector2f m_Direction;
+	sf::Vector2f m_Movement;
 
-	float rotation;
+	float m_fRotation;
 };

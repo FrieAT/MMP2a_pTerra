@@ -1,3 +1,7 @@
+/*=================================================================
+Copyright (c) MultiMediaTechnology, 2015
+=================================================================*/
+
 #pragma once
 
 #include "IComponent.h"
@@ -12,5 +16,5 @@ public:
 		return EComponentType::Movement;
 	}
 protected:
-	sf::Clock deltaClock;
+	sf::Clock m_DeltaClock;
 };

@@ -1,3 +1,7 @@
+/*=================================================================
+Copyright (c) MultiMediaTechnology, 2015
+=================================================================*/
+
 #pragma once
 
 #include <SFML/Graphics.hpp>
@@ -9,9 +13,9 @@ class IPosition : public IComponent
 public:
 	IPosition(sf::Vector2f Position, sf::Vector2f Origin)
 	{
-		this->Position = Position;
-		this->Rotation = 0.0;
-		this->Origin = Origin;
+		this->m_Position = Position;
+		this->m_fRotation = 0.0;
+		this->m_Origin = Origin;
 	}
     virtual ~IPosition() { }
 	virtual void SetPosition(sf::Vector2f Position) = 0;
@@ -26,7 +30,7 @@ public:
 		return EComponentType::Position;
 	}
 protected:
-	sf::Vector2f Position;
-	sf::Vector2f Origin;
-	float Rotation;
+	sf::Vector2f m_Position;
+	sf::Vector2f m_Origin;
+	float m_fRotation;
 };

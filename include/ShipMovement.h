@@ -1,6 +1,5 @@
 #pragma once
 
-#include <memory>
 #include <SFML/Graphics.hpp>
 
 #include "IMovement.h"
@@ -8,26 +7,25 @@
 #include "FrameManager.h"
 #include "IInputObserver.h"
 #include "IFrameObserver.h"
-
 #include "IPosition.h"
 #include "GameObject.h"
 
 class ShipMovement : public IMovement, public IInputObserver, public IFrameObserver
 {
 public:
-	ShipMovement(char Player);
+	ShipMovement(char cPlayer);
 	~ShipMovement();
-	void OnInputUpdate(std::string event);
-	void OnFrameUpdate(sf::Time delta_time);
-	void update_movement();
+	void OnInputUpdate(std::string strEvent);
+	void OnFrameUpdate(sf::Time DeltaTime);
+	void UpdateMovement();
 
-	char Player;
+	char m_cPlayer;
 
-	std::vector<sf::Vector2f> Impulses;
-	float Acceleration;
-	float Max_Speed;	//speedlimit if movement_vec.lenght > Max_Speed -> Damp 
+	std::vector<sf::Vector2f> m_Impulses;
+	float m_fAcceleration;
+	float m_fMaxSpeed;	//speedlimit if movement_vec.lenght > Max_Speed -> Damp 
 
 private:
-	sf::Vector2f direction;
+	sf::Vector2f m_Direction;
 };
 

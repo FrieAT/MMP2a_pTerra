@@ -1,11 +1,14 @@
-#include "GameObject.h"
+/*=================================================================
+Copyright (c) MultiMediaTechnology, 2015
+=================================================================*/
 
+#include "GameObject.h"
 #include "IComponent.h"
 
 // GameObject constructor
-GameObject::GameObject(std::string id)
+GameObject::GameObject(std::string strID)
 {
-	this->id = id;
+	this->m_strID = strID;
 }
 
 GameObject::~GameObject()
@@ -19,32 +22,32 @@ GameObject::~GameObject()
 
 std::string GameObject::GetID()
 {
-	return this->id;
+	return this->m_strID;
 }
 
-void GameObject::SetComponent(IComponent* component)
+void GameObject::SetComponent(IComponent* pComponent)
 {
-	EComponentType component_type = component->GetComponentType();
-	if (Components[component_type] != nullptr)
+	EComponentType eComponentType = pComponent->GetComponentType();
+	if (m_Components[eComponentType] != nullptr)
 	{
-		delete Components[component_type];
-		Components.erase(component_type);
+		delete m_Components[eComponentType];
+		m_Components.erase(eComponentType);
 	}
-    Components[component_type] = component;
-	component->SetAssignedGameObject(this);
+    m_Components[eComponentType] = pComponent;
+	pComponent->SetAssignedGameObject(this);
 }
 
-void GameObject::RemoveComponent(const EComponentType &component_type)
+void GameObject::RemoveComponent(const EComponentType& eComponentType)
 {
-    auto it = Components.find(component_type);
-	if (it != Components.end())
+    auto i = m_Components.find(eComponentType);
+	if (i != m_Components.end())
 	{
-        delete it->second;
-		Components.erase(it);
+        delete i->second;
+		m_Components.erase(i);
 	}
 }
 
-IComponent* GameObject::GetComponent(const EComponentType &component_type)
+IComponent* GameObject::GetComponent(const EComponentType& eComponentType)
 {
-	return Components[component_type];
+	return m_Components[eComponentType];
 }

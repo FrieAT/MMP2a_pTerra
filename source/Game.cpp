@@ -1,103 +1,102 @@
+/*=================================================================
+Copyright (c) MultiMediaTechnology, 2015
+=================================================================*/
+
 #include "Game.h"
 
 #include <iostream>
-#include <memory>
 
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
 
-#include "EventManager.h"
 #include "FrameManager.h"
 #include "InputManager.h"
 #include "ObjectManager.h"
 
-Game* Game::Engine = nullptr;
+Game* Game::m_pEngine = nullptr;
 
 Game::Game()
 {
-    if(Engine != nullptr) delete Engine;
-    Engine = this;
+    if(m_pEngine != nullptr) delete m_pEngine;
+    m_pEngine = this;
     
     // Create the main window
-    window = new sf::RenderWindow(sf::VideoMode(Game::m_iWindowWidth, Game::m_iWindowHeight), "SFML window");
+    m_pWindow = new sf::RenderWindow(sf::VideoMode(Game::m_iWindowWidth, Game::m_iWindowHeight), "SFML window");
 
     // ====== Below decprecated method to create things ======
     // Set the Icon
-    if (!icon.loadFromFile("assets/icon.png"))
+    if (!m_Icon.loadFromFile("assets/icon.png"))
     {
-        throw new std::runtime_error("Unable to load assets/icon.png");
+        throw std::runtime_error("Unable to load assets/icon.png");
     }
-    window->setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
+    m_pWindow->setIcon(m_Icon.getSize().x, m_Icon.getSize().y, m_Icon.getPixelsPtr());
 	//set framerate to 60
-	window->setFramerateLimit(60);
+	m_pWindow->setFramerateLimit(60);
 }
 
 Game::~Game()
 {
-    while(!states.empty())
+    while(!m_States.empty())
     {
-        IGameState* state = states.back();
-        delete state;
-        states.pop_back();
+        IGameState* pState = m_States.back();
+        delete pState;
+        m_States.pop_back();
     }
 
 	FrameManager::GetInstance().Clear();
 	InputManager::GetInstance().Clear();
 	ObjectManager::GetInstance().Clear();
 
-	delete window;
-    Engine = nullptr;
+	delete m_pWindow;
+    m_pEngine = nullptr;
 }
 
 void Game::Start()
 {
-    IGameState* gamestate;
-	sf::Clock deltaClock;
+    IGameState* pGameState;
+	sf::Clock DeltaClock;
     
 	// Start the game loop
-    while (window->isOpen())
+    while (m_pWindow->isOpen())
 	{
 		// Get time since last loop
-		sf::Time deltaTime = deltaClock.restart();
+		sf::Time deltaTime = DeltaClock.restart();
 
 		// Clear screen
-        window->clear();
+        m_pWindow->clear();
         
-        if(states.empty())
+        if(m_States.empty())
         {
-            window->close();
+            m_pWindow->close();
             break;
         }
         
-        gamestate = states.back();
-        
-        // Call Update in game state
-        gamestate->Update(window);
+        pGameState = m_States.back();
         
         // Manager updates
-        EventManager::GetInstance().Update(deltaTime);
         FrameManager::GetInstance().Update(deltaTime);
-        InputManager::GetInstance().Update(window);
+        InputManager::GetInstance().Update(m_pWindow);
         ObjectManager::GetInstance().Update(deltaTime);
 
 		// Rendering
-        FrameManager::GetInstance().Draw(window);
-		ObjectManager::GetInstance().Draw(window);
+        FrameManager::GetInstance().Draw(m_pWindow);
+		ObjectManager::GetInstance().Draw(m_pWindow);
 
 		// Update the window
-        window->display();
+        m_pWindow->display();
 	}
 }
 
-void Game::ChangeState(IGameState* state)
+void Game::ChangeState(IGameState* pState)
 {
     // cleanup the current state
-    if ( !states.empty() ) {
-        delete states.back();
-        states.pop_back();
+    if ( !m_States.empty())
+	{
+        delete m_States.back();
+        m_States.pop_back();
     }
     // Initiate all ressources for new game state
-    state->Init();
+    pState->Init();
     // store and init the new state
-    states.push_back(state);
+    m_States.push_back(pState);
 }

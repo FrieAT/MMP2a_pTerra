@@ -1,16 +1,20 @@
+/*=================================================================
+Copyright (c) MultiMediaTechnology, 2015
+=================================================================*/
+
 #include "LinearMovement.h"
 #include "GameObject.h"
 #include "IPosition.h"
 
-LinearMovement::LinearMovement(float Rotation, sf::Vector2f Shipspeed)
+LinearMovement::LinearMovement(float fRotation, sf::Vector2f ShipSpeed)
 {
 	FrameManager::GetInstance().RegisterEventObserver(this);
-	sf::Transform rotation_mat = sf::Transform::Identity;
-	rotation_mat.rotate(Rotation);
-	rotation = Rotation;
-	speed = 200.f;
-	direction = rotation_mat*(sf::Vector2f(0, -1));
-	movement = Shipspeed;
+	sf::Transform RotationMatrice = sf::Transform::Identity;
+	RotationMatrice.rotate(fRotation);
+	m_fRotation = fRotation;
+	m_fSpeed = 200.f;
+	m_Direction = RotationMatrice*(sf::Vector2f(0, -1));
+	m_Movement = ShipSpeed;
 }
 
 LinearMovement::~LinearMovement()
@@ -19,12 +23,11 @@ LinearMovement::~LinearMovement()
 }
 
 
-void LinearMovement::OnFrameUpdate(sf::Time delta_time)
+void LinearMovement::OnFrameUpdate(sf::Time DeltaTime)
 {
-	IPosition* pos = (IPosition*)(GetAssignedGameObject()->GetComponent(EComponentType::Position));
-	pos->SetRotation(rotation);
-	movement = direction * speed* delta_time.asSeconds();
-	pos->SetPosition(pos->GetPosition()+ movement);
-
+	IPosition* pPositionComponent = static_cast<IPosition*>(GetAssignedGameObject()->GetComponent(EComponentType::Position));
+	pPositionComponent->SetRotation(m_fRotation);
+	m_Movement = m_Direction * m_fSpeed* DeltaTime.asSeconds();
+	pPositionComponent->SetPosition(pPositionComponent->GetPosition()+ m_Movement);
 }
 

@@ -1,3 +1,7 @@
+/*=================================================================
+Copyright (c) MultiMediaTechnology, 2015
+=================================================================*/
+
 #pragma once
 
 #include <SFML/Graphics.hpp>
@@ -10,8 +14,7 @@ class GameStateIntro : public IGameState, public IInputObserver
 public:
     ~GameStateIntro();
     void Init();
-    void Update(sf::RenderWindow* window);
-    void OnInputUpdate(std::string event);
+    void OnInputUpdate(std::string strEvent);
 protected:
-    bool KeyPressed;
+    bool m_bKeyPressed;
 };

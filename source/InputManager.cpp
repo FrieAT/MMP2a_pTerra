@@ -1,117 +1,122 @@
+/*=================================================================
+Copyright (c) MultiMediaTechnology, 2015
+=================================================================*/
+
 #include "InputManager.h"
 #include <iostream>
 
-
-void InputManager::Update(sf::RenderWindow* window)
+void InputManager::Update(sf::RenderWindow* pWindow)
 {
-	sf::Event event;
-	while (window->pollEvent(event))
+	sf::Event Event;
+	while (pWindow->pollEvent(Event))
 	{
-		std::string movement = "";
+		std::string strMovement = "";
 
 		// Escape pressed: exit
-		if (event.key.code == sf::Keyboard::Escape)
+		if (Event.key.code == sf::Keyboard::Escape)
 		{
-			
-			window->close();//TODO call game exit
+			pWindow->close();//TODO call game exit
 		}
-		if (event.type == sf::Event::Closed)
+		if (Event.type == sf::Event::Closed)
 		{
-			window->close();//TODO call game exit
+			pWindow->close();//TODO call game exit
 		}
-
 
 		//Left
-		if (event.key.code == sf::Keyboard::Left)
+		if (Event.key.code == sf::Keyboard::Left)
 		{
-			movement = "1LEFT";
+			strMovement = "1LEFT";
 		}
-		if (event.key.code == sf::Keyboard::A)
+		if (Event.key.code == sf::Keyboard::A)
 		{
-			movement = "2LEFT";
+			strMovement = "2LEFT";
 		}
+
 		//Right
-		if (event.key.code == sf::Keyboard::Right)
+		if (Event.key.code == sf::Keyboard::Right)
 		{
-			movement = "1RIGHT";
+			strMovement = "1RIGHT";
 		}
-		if (event.key.code == sf::Keyboard::D)
+		if (Event.key.code == sf::Keyboard::D)
 		{
-			movement = "2RIGHT";
+			strMovement = "2RIGHT";
 		}
+
 		//Up
-		if (event.key.code == sf::Keyboard::Up)
+		if (Event.key.code == sf::Keyboard::Up)
 		{
-			movement = "1UP";
+			strMovement = "1UP";
 		}
-		if (event.key.code == sf::Keyboard::W)
+		if (Event.key.code == sf::Keyboard::W)
 		{
-			movement = "2UP";
+			strMovement = "2UP";
 		}
+
 		//Down
-		if (event.key.code == sf::Keyboard::Down)
+		if (Event.key.code == sf::Keyboard::Down)
 		{
-			movement = "1DOWN";
+			strMovement = "1DOWN";
 		}
-		if (event.key.code == sf::Keyboard::S)
+		if (Event.key.code == sf::Keyboard::S)
 		{
-			movement = "2DOWN";
+			strMovement = "2DOWN";
 		}
+
         //Fire
-        if (event.key.code == sf::Keyboard::Space)
+        if (Event.key.code == sf::Keyboard::Space)
         {
-            movement = "2FIRE";
+            strMovement = "2FIRE";
         }
-		if (event.key.code == sf::Keyboard::Numpad0)
+		if (Event.key.code == sf::Keyboard::Numpad0)
 		{
-			movement = "1FIRE";
+			strMovement = "1FIRE";
 		}
 
 		//pressed
-		if (event.type == sf::Event::KeyPressed)
+		if (Event.type == sf::Event::KeyPressed)
 		{
-			movement.append("_P");
+			strMovement.append("_P");
 		}
 		//released
-		if (event.type == sf::Event::KeyReleased)
+		if (Event.type == sf::Event::KeyReleased)
 		{
-			movement.append("_R");
+			strMovement.append("_R");
 		}
 
-		if (movement.size() > 1)
+		if (strMovement.size() > 1)
 		{
-			UpdateEventObserver(movement);
+			UpdateEventObserver(strMovement);
 		}
 	}
 }
 
-void InputManager::RegisterEventObserver(IInputObserver* observer)
+void InputManager::RegisterEventObserver(IInputObserver* pObserver)
 {
-	Observers.push_back(observer);
+	m_Observers.push_back(pObserver);
 }
 
-void InputManager::UnregisterEventObserver(IInputObserver* observer)
+void InputManager::UnregisterEventObserver(IInputObserver* pObserver)
 {
-    for(int i = 0; i < Observers.size(); i++)
+    for(unsigned int i = 0; i < m_Observers.size(); i++)
     {
-        if(Observers[i] != observer) continue;
-        Observers.erase(Observers.begin() + i);
+        if(m_Observers[i] != pObserver) continue;
+        m_Observers.erase(m_Observers.begin() + i);
         break;
     }
 }
 
-void InputManager::UpdateEventObserver(std::string event)
+void InputManager::UpdateEventObserver(std::string strEvent)
 {
-	for (unsigned int i = 0; i < Observers.size(); i++)
+	for (unsigned int i = 0; i < m_Observers.size(); i++)
 	{
-        Observers[i]->OnInputUpdate(event);
+        m_Observers[i]->OnInputUpdate(strEvent);
 	}
 }
 
 void InputManager::Clear()
 {
-	Observers.clear();
-	Observers.shrink_to_fit();
+	m_Observers.clear();
+	m_Observers.shrink_to_fit();
 }
 
 

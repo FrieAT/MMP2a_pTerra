@@ -1,3 +1,7 @@
+/*=================================================================
+Copyright (c) MultiMediaTechnology, 2015
+=================================================================*/
+
 #pragma once
 
 #include <SFML/Graphics.hpp>
@@ -7,12 +11,12 @@
 class SpriteDrawing : public IDrawing
 {
 public:
-    SpriteDrawing(std::string ressource_path);
-    SpriteDrawing(std::string ressource_path, sf::Vector2f scaleFactor);
+    SpriteDrawing(std::string& strRessourcePath);
+    SpriteDrawing(std::string& strRessourcePath, sf::Vector2f& ScaleToSize);
     ~SpriteDrawing();
     void Update();
-	void Draw(sf::RenderWindow* window);
+	void Draw(sf::RenderWindow* pWindow);
 protected:
-	sf::Sprite* Sprite;
-	sf::Texture* Texture;
+	sf::Sprite* m_pSprite;
+	sf::Texture* m_pTexture;
 };

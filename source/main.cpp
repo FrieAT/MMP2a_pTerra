@@ -1,22 +1,24 @@
+/*=================================================================
+Copyright (c) MultiMediaTechnology, 2015
+=================================================================*/
+
 #include <iostream>
-#include <memory>
 
 #include "Game.h"
-
 #include "GameStateIntro.h"
 #include "GameStatePlay.h"
 
 int main(int argc, char const** argv)
 {
-    // Initialisiere die "Game Engine"
-    Game* game_engine = new Game();
+    // Initialize the "game engine"
+    Game* pGameEngine = new Game();
     
-    // Initialisiere Intro
-    game_engine->ChangeState(new GameStateIntro());
-    game_engine->Start();
+    // Initialize Intro-screen
+	pGameEngine->ChangeState(new GameStateIntro());
+	pGameEngine->Start();
     
-    // Lösche alle verbundenen Ressourcen
-    delete game_engine;
+    // Delete all connected ressources and the game engine itself.
+    delete pGameEngine;
     
     return EXIT_SUCCESS;
 }

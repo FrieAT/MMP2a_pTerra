@@ -1,28 +1,32 @@
+/*=================================================================
+Copyright (c) MultiMediaTechnology, 2015
+=================================================================*/
+
 #include "FontDrawing.h"
 #include "GameObject.h"
 #include "IPosition.h"
 
-FontDrawing::FontDrawing(std::string sFontPath, std::string sText, int iCharSize)
+FontDrawing::FontDrawing(std::string strFontPath, std::string strText, int iCharSize)
 {
     // Load a font to display
-    Font = new sf::Font();
-    if (!Font->loadFromFile(sFontPath))
+    m_pFont = new sf::Font();
+    if (!m_pFont->loadFromFile(strFontPath))
     {
-        throw new std::runtime_error("Unable to load " + sFontPath);
+        throw std::runtime_error("Unable to load " + strFontPath);
     }
     
     // Create Heading
-    Text = new sf::Text();
-    Text->setFont(*Font);
-    Text->setString(sText);
-    Text->setCharacterSize(iCharSize);
-    Text->setColor(sf::Color::White);
+    m_pText = new sf::Text();
+    m_pText->setFont(*m_pFont);
+    m_pText->setString(strText);
+    m_pText->setCharacterSize(iCharSize);
+    m_pText->setColor(sf::Color::White);
 }
 
 FontDrawing::~FontDrawing()
 {
-    delete Text;
-    delete Font;
+    delete m_pText;
+    delete m_pFont;
 }
 
 void FontDrawing::Update()
@@ -30,10 +34,10 @@ void FontDrawing::Update()
     
 }
 
-void FontDrawing::Draw(sf::RenderWindow* window)
+void FontDrawing::Draw(sf::RenderWindow* pWindow)
 {
-    IPosition* PositionComponent = (IPosition*)(GetAssignedGameObject()->GetComponent(EComponentType::Position));
-    sf::Vector2f position = PositionComponent->GetPosition();
-    Text->setPosition(position.x, position.y);
-    window->draw(*Text);
+    IPosition* pPositionComponent = static_cast<IPosition*>(GetAssignedGameObject()->GetComponent(EComponentType::Position));
+    sf::Vector2f Position = pPositionComponent->GetPosition();
+    m_pText->setPosition(Position.x, Position.y);
+    pWindow->draw(*m_pText);
 }

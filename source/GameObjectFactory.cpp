@@ -1,5 +1,8 @@
-#include "GameObjectFactory.h"
+/*=================================================================
+Copyright (c) MultiMediaTechnology, 2015
+=================================================================*/
 
+#include "GameObjectFactory.h"
 #include "Game.h"
 #include "LinearMovement.h"
 #include "SpriteDrawing.h"
@@ -8,58 +11,58 @@
 #include "ShipMovement.h"
 #include "ScriptedView.h"
 
-GameObject* GameObjectFactory::CreatePlayerShip(sf::Vector2f Position, char Player)
+GameObject* GameObjectFactory::CreatePlayerShip(sf::Vector2f Position, char cPlayer)
 {
 	// TODO: Make it possible to change component values / change the whole factory
-	GameObject* ship = new GameObject("ship");
+	GameObject* pShip = new GameObject(std::string("ship"));
 
-	ship->SetComponent(new PixelPosition(sf::Vector2f(Position), sf::Vector2f(32.f, 32.f)));
-	ship->SetComponent(new ShipMovement(Player));
-	ship->SetComponent(new SpriteDrawing("assets/space_ship.png"));
-    ship->SetComponent(new ScriptedView(sf::FloatRect(0, 0, static_cast<float>(Game::m_iWindowWidth), static_cast<float>(Game::m_iWindowHeight)), sf::Vector2f(1920.f - static_cast<float>(Game::m_iWindowWidth), 0), 20.f));
+	pShip->SetComponent(new PixelPosition(sf::Vector2f(Position), sf::Vector2f(32.f, 32.f)));
+	pShip->SetComponent(new ShipMovement(cPlayer));
+	pShip->SetComponent(new SpriteDrawing(std::string("assets/space_ship.png")));
+    pShip->SetComponent(new ScriptedView(sf::FloatRect(0, 0, static_cast<float>(Game::m_iWindowWidth), static_cast<float>(Game::m_iWindowHeight)), sf::Vector2f(1920.f - static_cast<float>(Game::m_iWindowWidth), 0), 20.f));
     
-	return ship;
+	return pShip;
 }
 
-GameObject* GameObjectFactory::CreateMissile(IPosition* Position, sf::Vector2f Shipspeed)
+GameObject* GameObjectFactory::CreateMissile(IPosition* pPosition, sf::Vector2f ShipSpeed)
 {
 	// TODO: Make it possible to change component values / change the whole factory
-	GameObject* missile = new GameObject("missile");
+	GameObject* pMissile = new GameObject(std::string("missile"));
 
-	missile->SetComponent(new PixelPosition(Position->GetPosition(), sf::Vector2f(160.f, 320.f)));
-	missile->SetComponent(new LinearMovement(Position->GetRotation(),Shipspeed));
-	missile->SetComponent(new SpriteDrawing("assets/rocket.png",sf::Vector2f(30,60)));
+	pMissile->SetComponent(new PixelPosition(pPosition->GetPosition(), sf::Vector2f(160.f, 320.f)));
+	pMissile->SetComponent(new LinearMovement(pPosition->GetRotation(),ShipSpeed));
+	pMissile->SetComponent(new SpriteDrawing(std::string("assets/rocket.png"),sf::Vector2f(30,60)));
 
 	//ship->SetComponent(new ScriptedView(sf::FloatRect(0, 0, static_cast<float>(Game::m_iWindowWidth), static_cast<float>(Game::m_iWindowHeight)), sf::Vector2f(1920.f - static_cast<float>(Game::m_iWindowWidth), 0), 20.f));
-	return missile;
+	return pMissile;
 }
 
-GameObject* GameObjectFactory::CreateBackgroundSprite(std::string background_path)
+GameObject* GameObjectFactory::CreateBackgroundSprite(std::string strBackgroundPath)
 {
     // TODO: Make it possible to change component values / change the whole factory
-    GameObject* background = new GameObject("background");
+    GameObject* pBackground = new GameObject(std::string("background"));
     
-    background->SetComponent(new PixelPosition(sf::Vector2f(0.f, 0.f), sf::Vector2f(0.f, 0.f)));
-    background->SetComponent(new SpriteDrawing(background_path));
+    pBackground->SetComponent(new PixelPosition(sf::Vector2f(0.f, 0.f), sf::Vector2f(0.f, 0.f)));
+    pBackground->SetComponent(new SpriteDrawing(strBackgroundPath));
     
-    return background;
+    return pBackground;
 }
-GameObject* GameObjectFactory::CreateBackgroundSprite(std::string background_path, sf::Vector2f scaleTo)
+GameObject* GameObjectFactory::CreateBackgroundSprite(std::string strBackgroundPath, sf::Vector2f ScaleTo)
 {
-	GameObject* background = new GameObject("background");
+	GameObject* pBackground = new GameObject(std::string("background"));
     
-	background->SetComponent(new PixelPosition(sf::Vector2f(0.f, 0.f), sf::Vector2f(0.f, 0.f)));
-    background->SetComponent(new SpriteDrawing(background_path, scaleTo));
+	pBackground->SetComponent(new PixelPosition(sf::Vector2f(0.f, 0.f), sf::Vector2f(0.f, 0.f)));
+    pBackground->SetComponent(new SpriteDrawing(strBackgroundPath, ScaleTo));
     
-    return background;
+    return pBackground;
 }
 
-GameObject* GameObjectFactory::CreateFontText(sf::Vector2f Position, std::string sFontPath, std::string sText, int iCharSize)
+GameObject* GameObjectFactory::CreateFontText(sf::Vector2f Position, std::string strFontPath, std::string strText, int iCharSize)
 {
-    GameObject* font_text = new GameObject("text");
+    GameObject* pFontText = new GameObject(std::string("text"));
     
-    font_text->SetComponent(new PixelPosition(Position, sf::Vector2f(0.f, 0.f)));
-    font_text->SetComponent(new FontDrawing(sFontPath, sText, iCharSize));
+    pFontText->SetComponent(new PixelPosition(Position, sf::Vector2f(0.f, 0.f)));
+    pFontText->SetComponent(new FontDrawing(strFontPath, strText, iCharSize));
     
-    return font_text;
+    return pFontText;
 }

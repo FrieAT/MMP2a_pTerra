@@ -1,39 +1,42 @@
+/*=================================================================
+Copyright (c) MultiMediaTechnology, 2015
+=================================================================*/
+
 #include "FrameManager.h"
-#include <memory>
 
-void FrameManager::Update(sf::Time deltaTime)
+void FrameManager::Update(sf::Time DeltaTime)
 {
-    for (unsigned int i = 0; i < Observers.size(); i++)
+    for (unsigned int i = 0; i < m_Observers.size(); i++)
     {
-        Observers[i]->OnFrameUpdate(deltaTime);
+        m_Observers[i]->OnFrameUpdate(DeltaTime);
     }
 }
 
-void FrameManager::Draw(sf::RenderWindow* window)
+void FrameManager::Draw(sf::RenderWindow* pWindow)
 {
-    for (unsigned int i = 0; i < Observers.size(); i++)
+    for (unsigned int i = 0; i < m_Observers.size(); i++)
     {
-        Observers[i]->OnFrameDraw(window);
+        m_Observers[i]->OnFrameDraw(pWindow);
     }
 }
 
-void FrameManager::RegisterEventObserver(IFrameObserver* observer)
+void FrameManager::RegisterEventObserver(IFrameObserver* pObserver)
 {
-	Observers.push_back(observer);
+	m_Observers.push_back(pObserver);
 }
 
-void FrameManager::UnregisterEventObserver(IFrameObserver* observer)
+void FrameManager::UnregisterEventObserver(IFrameObserver* pObserver)
 {
-    for(int i = 0; i < Observers.size(); i++)
+    for(unsigned int i = 0; i < m_Observers.size(); i++)
     {
-        if(Observers[i] != observer) continue;
-        Observers.erase(Observers.begin() + i);
+        if(m_Observers[i] != pObserver) continue;
+        m_Observers.erase(m_Observers.begin() + i);
         break;
     }
 }
 
 void FrameManager::Clear()
 {
-	Observers.clear();
-	Observers.shrink_to_fit();
+	m_Observers.clear();
+	m_Observers.shrink_to_fit();
 }

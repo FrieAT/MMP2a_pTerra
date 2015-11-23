@@ -1,67 +1,78 @@
+/*=================================================================
+Copyright (c) MultiMediaTechnology, 2015
+=================================================================*/
+
 #include "ObjectManager.h"
 
 ObjectManager::ObjectManager()
 {
-	drawOrder = std::vector<std::string> { "background", "asteroid", "missile", "ship", "text" };
+	m_DrawOrder = std::vector<std::string> { "background", "asteroid", "missile", "ship", "text" };
 }
 
-void ObjectManager::AddGameObject(GameObject* obj)
+void ObjectManager::AddGameObject(GameObject* pObject)
 {
-	objects[obj->GetID()].push_back(obj);
+	m_Objects[pObject->GetID()].push_back(pObject);
 }
 
-void ObjectManager::RemoveGameObject(GameObject* obj)
+void ObjectManager::RemoveGameObject(GameObject* pObject)
 {
-	std::string id = obj->GetID();
-    auto it = objects[id].begin();
-    while(it != objects[id].end())
+	std::string id = pObject->GetID();
+    auto i = m_Objects[id].begin();
+    while(i != m_Objects[id].end())
 	{
-        if(*it != obj) continue;
-		objects[id].erase(it);
+        if(*i != pObject) continue;
+		m_Objects[id].erase(i);
 		break;
 	}
 }
 
 void ObjectManager::RemoveAllGameObjects()
 {
-	for (unsigned int s = 0; s < ObjectManager::drawOrder.size(); s++)
+	for (unsigned int s = 0; s < ObjectManager::m_DrawOrder.size(); s++)
 	{
-		std::string* draw_order_type = &ObjectManager::drawOrder[s];
-		if (ObjectManager::objects[*draw_order_type].size() == 0) continue;
-
-		for (unsigned int i = 0; i < ObjectManager::objects[*draw_order_type].size(); ++i)
+		std::string* pDrawOrderType = &ObjectManager::m_DrawOrder[s];
+		
+		if (ObjectManager::m_Objects[*pDrawOrderType].size() == 0)
 		{
-			delete ObjectManager::objects[*draw_order_type][i];
+			continue;
 		}
-		ObjectManager::objects[*draw_order_type].clear();
+
+		for (unsigned int i = 0; i < ObjectManager::m_Objects[*pDrawOrderType].size(); ++i)
+		{
+			delete ObjectManager::m_Objects[*pDrawOrderType][i];
+		}
+		ObjectManager::m_Objects[*pDrawOrderType].clear();
 	}
-	ObjectManager::objects.clear();
+	ObjectManager::m_Objects.clear();
 }
 
-void ObjectManager::Update(sf::Time deltaTime)
+void ObjectManager::Update(sf::Time DeltaTime)
 {
 	// Update function for each object?
 	// Things like health, shield regenaration, ...
 }
 
-void ObjectManager::Draw(sf::RenderWindow* window)
+void ObjectManager::Draw(sf::RenderWindow* pWindow)
 {
-	for (unsigned int s = 0; s < ObjectManager::drawOrder.size(); s++)
+	for (unsigned int s = 0; s < ObjectManager::m_DrawOrder.size(); s++)
 	{
-		std::string* draw_order_type = &ObjectManager::drawOrder[s];
-		for (unsigned int i = 0; i < ObjectManager::objects[*draw_order_type].size(); i++)
+		std::string* pDrawOrderType = &ObjectManager::m_DrawOrder[s];
+		for (unsigned int i = 0; i < ObjectManager::m_Objects[*pDrawOrderType].size(); i++)
 		{
-			IDrawing* drawing = ((IDrawing*)objects[*draw_order_type][i]->GetComponent(EComponentType::Drawing));
-            if(drawing == nullptr) continue;
-			drawing->Draw(window);
+			IDrawing* pDrawing = static_cast<IDrawing*>(m_Objects[*pDrawOrderType][i]->GetComponent(EComponentType::Drawing));
+			if (pDrawing == nullptr)
+			{
+				continue;
+			}
+			pDrawing->Draw(pWindow);
 		}
 	}
 }
 
 void ObjectManager::Clear()
 {
-	objects.clear();
+	m_Objects.clear();
 
-	drawOrder.clear();
-	drawOrder.shrink_to_fit();
+	m_DrawOrder.clear();
+	m_DrawOrder.shrink_to_fit();
 }

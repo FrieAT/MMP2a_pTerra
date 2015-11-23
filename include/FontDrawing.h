@@ -1,3 +1,7 @@
+/*=================================================================
+Copyright (c) MultiMediaTechnology, 2015
+=================================================================*/
+
 #pragma once
 
 #include <SFML/Graphics.hpp>
@@ -7,11 +11,11 @@
 class FontDrawing : public IDrawing
 {
 public:
-    FontDrawing(std::string sFontPath, std::string sText, int iCharSize);
+    FontDrawing(std::string strFontPath, std::string strText, int iCharSize);
     ~FontDrawing();
     void Update();
-    void Draw(sf::RenderWindow* window);
+    void Draw(sf::RenderWindow* pWindow);
 protected:
-    sf::Font* Font; // TODO: Make of Font a flyweight pattern. Just do it.
-    sf::Text* Text;
+    sf::Font* m_pFont; // TODO: Make of Font a flyweight pattern. Just do it.
+    sf::Text* m_pText;
 };

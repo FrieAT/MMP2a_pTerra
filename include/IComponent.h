@@ -1,27 +1,28 @@
-#pragma once
+/*=================================================================
+Copyright (c) MultiMediaTechnology, 2015
+=================================================================*/
 
-#include <memory>
+#pragma once
 
 #include <SFML/Graphics.hpp>
 
 #include "EComponentType.h"
-
 #include "GameObject.h"
 
 class IComponent
 {
 public:
-    IComponent() : GameObj(nullptr) { }
+    IComponent() : m_pGameObject(nullptr) { }
     virtual ~IComponent() { }
 	virtual EComponentType GetComponentType() = 0;
-	void SetAssignedGameObject(GameObject* obj)
+	void SetAssignedGameObject(GameObject* pObject)
 	{
-        GameObj = obj;
+        m_pGameObject = pObject;
 	}
 	GameObject* GetAssignedGameObject()
 	{
-		return GameObj;
+		return m_pGameObject;
 	}
 private:
-    GameObject* GameObj;
+    GameObject* m_pGameObject;
 };

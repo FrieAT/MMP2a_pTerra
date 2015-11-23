@@ -143,7 +143,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="source\EventManager.cpp" />
     <ClCompile Include="source\FontDrawing.cpp" />
     <ClCompile Include="source\FrameManager.cpp" />
     <ClCompile Include="source\Game.cpp" />
@@ -162,7 +161,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\EComponentType.h" />
-    <ClInclude Include="include\EventManager.h" />
     <ClInclude Include="include\FontDrawing.h" />
     <ClInclude Include="include\FrameManager.h" />
     <ClInclude Include="include\Game.h" />
@@ -172,7 +170,6 @@
     <ClInclude Include="include\GameStatePlay.h" />
     <ClInclude Include="include\IComponent.h" />
     <ClInclude Include="include\IDrawing.h" />
-    <ClInclude Include="include\IEventObserver.h" />
     <ClInclude Include="include\IFrameObserver.h" />
     <ClInclude Include="include\IGameState.h" />
     <ClInclude Include="include\IInputObserver.h" />

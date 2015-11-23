@@ -1,3 +1,7 @@
+/*=================================================================
+Copyright (c) MultiMediaTechnology, 2015
+=================================================================*/
+
 #pragma once
 
 #include "GameObject.h"
@@ -11,11 +15,11 @@ class GameObjectFactory
 public:
 	GameObjectFactory() = delete;
 	~GameObjectFactory() = delete;
-	static GameObject* CreatePlayerShip(sf::Vector2f Position, char Player);
-	static GameObject* CreateMissile(IPosition* Postion, sf::Vector2f Shipspeed);
+	static GameObject* CreatePlayerShip(sf::Vector2f Position, char cPlayer);
+	static GameObject* CreateMissile(IPosition* pPosition, sf::Vector2f ShipSpeed);
 
-    static GameObject* CreateBackgroundSprite(std::string background_path);
-    static GameObject* CreateBackgroundSprite(std::string background_path, sf::Vector2f scaleTo);
-    static GameObject* CreateFontText(sf::Vector2f Position, std::string sFontPath, std::string sText, int iCharSize);
+    static GameObject* CreateBackgroundSprite(std::string strBackgroundPath);
+    static GameObject* CreateBackgroundSprite(std::string strBackgroundPath, sf::Vector2f ScaleTo);
+    static GameObject* CreateFontText(sf::Vector2f Position, std::string strFontPath, std::string strText, int iCharSize);
 };
 

@@ -34,9 +34,6 @@
     <Filter Include="Source Files\Managers\ObjectManager">
       <UniqueIdentifier>{70f0477f-f729-4f42-bf33-d55954bb682e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Managers\EventManager">
-      <UniqueIdentifier>{848cde0d-769e-44c9-84ca-0c04d63078cf}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\GameObject">
       <UniqueIdentifier>{d9e602e6-5d61-48ee-a6ea-0e59eb4fa340}</UniqueIdentifier>
     </Filter>
@@ -62,9 +59,6 @@
     </ClCompile>
     <ClCompile Include="source\SpriteDrawing.cpp">
       <Filter>Source Files\Components\IDrawing</Filter>
-    </ClCompile>
-    <ClCompile Include="source\EventManager.cpp">
-      <Filter>Source Files\Managers\EventManager</Filter>
     </ClCompile>
     <ClCompile Include="source\FrameManager.cpp">
       <Filter>Source Files\Managers\FrameManager</Filter>
@@ -122,17 +116,11 @@
     <ClInclude Include="include\SpriteDrawing.h">
       <Filter>Source Files\Components\IDrawing</Filter>
     </ClInclude>
-    <ClInclude Include="include\EventManager.h">
-      <Filter>Source Files\Managers\EventManager</Filter>
-    </ClInclude>
     <ClInclude Include="include\FrameManager.h">
       <Filter>Source Files\Managers\FrameManager</Filter>
     </ClInclude>
     <ClInclude Include="include\ObjectManager.h">
       <Filter>Source Files\Managers\ObjectManager</Filter>
-    </ClInclude>
-    <ClInclude Include="include\IEventObserver.h">
-      <Filter>Source Files\Managers\EventManager</Filter>
     </ClInclude>
     <ClInclude Include="include\GameObject.h">
       <Filter>Source Files\GameObject</Filter>

@@ -1,3 +1,7 @@
+/*=================================================================
+Copyright (c) MultiMediaTechnology, 2015
+=================================================================*/
+
 #pragma once
 
 #include "IView.h"
@@ -7,10 +11,10 @@
 class ScriptedView : public IView, public IFrameObserver
 {
 public:
-    ScriptedView(sf::FloatRect fViewSize, sf::Vector2f fMoveVector, float fSpeed);
+    ScriptedView(sf::FloatRect ViewSize, sf::Vector2f MoveVector, float fSpeed);
     ~ScriptedView();
-    void OnFrameUpdate(sf::Time delta_time);
-    void OnFrameDraw(sf::RenderWindow* window);
+    void OnFrameUpdate(sf::Time DeltaTime);
+    void OnFrameDraw(sf::RenderWindow* pWindow);
     
     sf::FloatRect GetViewport();
 private:
@@ -19,6 +23,5 @@ private:
     float m_fSteps;
     float m_fSpeed;
     sf::View* m_pView;
-    sf::Clock clock;
-    void Initialize();
+    sf::Clock m_Clock;
 };

@@ -1,3 +1,7 @@
+/*=================================================================
+Copyright (c) MultiMediaTechnology, 2015
+=================================================================*/
+
 #include <math.h>
 
 #include "Game.h"
@@ -5,16 +9,16 @@
 #include "ScriptedView.h"
 #include "FrameManager.h"
 
-ScriptedView::ScriptedView(sf::FloatRect fViewSize, sf::Vector2f fMoveVector, float fSpeed)
+ScriptedView::ScriptedView(sf::FloatRect ViewSize, sf::Vector2f MoveVector, float fSpeed)
 {
-    float fStep = (fSpeed / sqrt(pow(fMoveVector.x,2.0) + pow(fMoveVector.y,2.0)));
+    float fStep = (fSpeed / sqrt(pow(MoveVector.x,2.0f) + pow(MoveVector.y,2.0f)));
     
     m_CurrentMovePosition = sf::Vector2f(0.f, 0.f);
-    m_MoveVector = fMoveVector;
+    m_MoveVector = MoveVector;
     m_fSteps = fStep;
     m_fSpeed = fSpeed;
     
-    m_pView = new sf::View(fViewSize);
+    m_pView = new sf::View(ViewSize);
     
     FrameManager::GetInstance().RegisterEventObserver(this);
 }
@@ -31,36 +35,49 @@ sf::FloatRect ScriptedView::GetViewport()
     return m_pView->getViewport();
 }
 
-void ScriptedView::OnFrameUpdate(sf::Time delta_time)
+void ScriptedView::OnFrameUpdate(sf::Time DeltaTime)
 {
-	if (m_CurrentMovePosition.x < m_MoveVector.x || m_CurrentMovePosition.y < m_MoveVector.y) {
+	if (m_CurrentMovePosition.x < m_MoveVector.x || m_CurrentMovePosition.y < m_MoveVector.y)
+	{
 		// TODO: Maybe repeating?
-		float fStepsWithDeltaTime = m_fSteps * delta_time.asSeconds();
+		float fStepsWithDeltaTime = m_fSteps * DeltaTime.asSeconds();
 		sf::Vector2f move = m_MoveVector * fStepsWithDeltaTime;
 		m_CurrentMovePosition += move;
 		m_pView->move(move);
 	}
 
 	// Check if position from current game object is within Boundary
-	IPosition* position_component = (IPosition*)GetAssignedGameObject()->GetComponent(EComponentType::Position);
-	sf::Vector2f position = position_component->GetPosition();
-	sf::Vector2f view_center = m_pView->getCenter();
-	sf::Vector2f topleft_boundary(view_center.x - Game::m_iWindowWidth * 0.5f, view_center.y - Game::m_iWindowHeight * 0.5f);
+	IPosition* pPositionComponent = static_cast<IPosition*>(GetAssignedGameObject()->GetComponent(EComponentType::Position));
+	sf::Vector2f Position = pPositionComponent->GetPosition();
+	sf::Vector2f ViewCenter = m_pView->getCenter();
+	sf::Vector2f TopLeftBoundary(ViewCenter.x - Game::m_iWindowWidth * 0.5f, ViewCenter.y - Game::m_iWindowHeight * 0.5f);
 	bool bPositionChanged = false;
 
 	// Boundary correction in x-axis
-	if (position.x < topleft_boundary.x) position.x = topleft_boundary.x;
-	else if (position.x > topleft_boundary.x + Game::m_iWindowWidth) position.x = topleft_boundary.x + Game::m_iWindowWidth;
+	if (Position.x < TopLeftBoundary.x)
+	{
+		Position.x = TopLeftBoundary.x;
+	}
+	else if (Position.x > TopLeftBoundary.x + Game::m_iWindowWidth)
+	{
+		Position.x = TopLeftBoundary.x + Game::m_iWindowWidth;
+	}
 
 	// Boundary correction in y-axis
-	if (position.y < topleft_boundary.y) position.y = topleft_boundary.y;
-	else if (position.y > topleft_boundary.y + Game::m_iWindowHeight) position.y = topleft_boundary.y + Game::m_iWindowHeight;
-	
+	if (Position.y < TopLeftBoundary.y)
+	{
+		Position.y = TopLeftBoundary.y;
+	}
+	else if (Position.y > TopLeftBoundary.y + Game::m_iWindowHeight)
+	{
+		Position.y = TopLeftBoundary.y + Game::m_iWindowHeight;
+	}
+
 	// Set new position
-	position_component->SetPosition(position);
+	pPositionComponent->SetPosition(Position);
 }
 
-void ScriptedView::OnFrameDraw(sf::RenderWindow* window)
+void ScriptedView::OnFrameDraw(sf::RenderWindow* pWindow)
 {
-    window->setView(*m_pView);
+    pWindow->setView(*m_pView);
 }

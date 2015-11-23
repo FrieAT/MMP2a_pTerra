@@ -1,3 +1,7 @@
+/*=================================================================
+Copyright (c) MultiMediaTechnology, 2015
+=================================================================*/
+
 #pragma once
 
 #include <vector>
@@ -11,19 +15,19 @@ class ObjectManager
 public:
 	static ObjectManager& GetInstance()
 	{
-		static ObjectManager instance;
-		return instance;
+		static ObjectManager g_Instance;
+		return g_Instance;
 	}
-	void AddGameObject(GameObject* obj);
-	void RemoveGameObject(GameObject* obj);
+	void AddGameObject(GameObject* pObject);
+	void RemoveGameObject(GameObject* pObject);
     void RemoveAllGameObjects();
-	void Update(sf::Time deltaTime);
-	void Draw(sf::RenderWindow* window);
+	void Update(sf::Time DeltaTime);
+	void Draw(sf::RenderWindow* pWindow);
 	void Clear();
 private:
 	ObjectManager();
-	ObjectManager(ObjectManager const&) = delete;
-	void operator= (ObjectManager const&) = delete;
-	std::map<std::string, std::vector<GameObject*>> objects;
-	std::vector<std::string> drawOrder;
+	ObjectManager(const ObjectManager&) = delete;
+	void operator= (const ObjectManager&) = delete;
+	std::map<std::string, std::vector<GameObject*>> m_Objects;
+	std::vector<std::string> m_DrawOrder;
 };

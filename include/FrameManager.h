@@ -1,7 +1,10 @@
+/*=================================================================
+Copyright (c) MultiMediaTechnology, 2015
+=================================================================*/
+
 #pragma once
 
 #include <SFML/Graphics.hpp>
-#include <memory>
 
 #include "IFrameObserver.h"
 
@@ -10,17 +13,17 @@ class FrameManager
 public:
 	static FrameManager& GetInstance()
 	{
-		static FrameManager instance;
-		return instance;
+		static FrameManager g_Instance;
+		return g_Instance;
 	}
-	void Update(sf::Time deltaTime);
-    void Draw(sf::RenderWindow* window);
-	void RegisterEventObserver(IFrameObserver* observer);
-	void UnregisterEventObserver(IFrameObserver* observer);
+	void Update(sf::Time DeltaTime);
+    void Draw(sf::RenderWindow* pWindow);
+	void RegisterEventObserver(IFrameObserver* pObserver);
+	void UnregisterEventObserver(IFrameObserver* pObserver);
 	void Clear();
 private:
-	FrameManager() {}
-	FrameManager(FrameManager const&) = delete;
-	void operator= (FrameManager const&) = delete;
-	std::vector<IFrameObserver*> Observers;
+	FrameManager() { }
+	FrameManager(const FrameManager&) = delete;
+	void operator= (const FrameManager&) = delete;
+	std::vector<IFrameObserver*> m_Observers;
 };

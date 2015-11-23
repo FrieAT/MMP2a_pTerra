@@ -1,27 +1,29 @@
+/*=================================================================
+Copyright (c) MultiMediaTechnology, 2015
+=================================================================*/
+
 #pragma once
 
 #include <SFML/Graphics.hpp>
-#include <memory>
 
 #include "IInputObserver.h"
-
 
 class InputManager
 {
 public:
 	static InputManager& GetInstance()
 	{
-		static InputManager instance;
-		return instance;
+		static InputManager g_Instance;
+		return g_Instance;
 	}
-	void Update(sf::RenderWindow* window);
-	void RegisterEventObserver(IInputObserver* observer);
-	void UnregisterEventObserver(IInputObserver* observer);
+	void Update(sf::RenderWindow* pWindow);
+	void RegisterEventObserver(IInputObserver* pObserver);
+	void UnregisterEventObserver(IInputObserver* pObserver);
 	void Clear();
 private:
-	InputManager() {}
-	InputManager(InputManager const&) = delete;
-	void operator= (InputManager const&) = delete;
-	std::vector<IInputObserver*> Observers;
-	void UpdateEventObserver(std::string event);
+	InputManager() { }
+	InputManager(const InputManager&) = delete;
+	void operator= (const InputManager&) = delete;
+	std::vector<IInputObserver*> m_Observers;
+	void UpdateEventObserver(std::string strEvent);
 };
