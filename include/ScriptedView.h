@@ -2,15 +2,15 @@
 
 #include "IView.h"
 
-#include "IViewObserver.h"
+#include "IFrameObserver.h"
 
-class ScriptedView : public IView, public IViewObserver
+class ScriptedView : public IView, public IFrameObserver
 {
 public:
     ScriptedView(sf::FloatRect fViewSize, sf::Vector2f fMoveVector, float fSpeed);
     ~ScriptedView();
-    void OnEventUpdate(sf::Time delta_time);
-    void OnEventDraw(sf::RenderWindow* window);
+    void OnFrameUpdate(sf::Time delta_time);
+    void OnFrameDraw(sf::RenderWindow* window);
 private:
     sf::Vector2f m_MoveVector;
     sf::Vector2f m_CurrentMovePosition;

@@ -2,7 +2,7 @@
 
 #include "ScriptedView.h"
 
-#include "ViewManager.h"
+#include "FrameManager.h"
 
 ScriptedView::ScriptedView(sf::FloatRect fViewSize, sf::Vector2f fMoveVector, float fSpeed)
 {
@@ -15,17 +15,17 @@ ScriptedView::ScriptedView(sf::FloatRect fViewSize, sf::Vector2f fMoveVector, fl
     
     m_pView = new sf::View(fViewSize);
     
-    ViewManager::RegisterEventObserver(this);
+    FrameManager::RegisterEventObserver(this);
 }
 
 ScriptedView::~ScriptedView()
 {
-    ViewManager::UnregisterEventObserver(this);
+    FrameManager::UnregisterEventObserver(this);
     
     delete m_pView;
 }
 
-void ScriptedView::OnEventUpdate(sf::Time delta_time)
+void ScriptedView::OnFrameUpdate(sf::Time delta_time)
 {
     if(m_CurrentMovePosition.x >= m_MoveVector.x && m_CurrentMovePosition.y >= m_MoveVector.y) {
         // TODO: Maybe repeating?
@@ -37,7 +37,7 @@ void ScriptedView::OnEventUpdate(sf::Time delta_time)
     m_pView->move(move);
 }
 
-void ScriptedView::OnEventDraw(sf::RenderWindow* window)
+void ScriptedView::OnFrameDraw(sf::RenderWindow* window)
 {
     window->setView(*m_pView);
 }
