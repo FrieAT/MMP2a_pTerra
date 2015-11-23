@@ -8,12 +8,12 @@
 #include "ShipMovement.h"
 #include "ScriptedView.h"
 
-GameObject* GameObjectFactory::CreatePlayerShip()
+GameObject* GameObjectFactory::CreatePlayerShip(sf::Vector2f Position)
 {
 	// TODO: Make it possible to change component values / change the whole factory
 	GameObject* ship = new GameObject("ship");
 
-	ship->SetComponent(new PixelPosition(sf::Vector2f(Game::m_iWindowWidth * 0.3f, Game::m_iWindowHeight * 0.5f), sf::Vector2f(32.f, 32.f)));
+	ship->SetComponent(new PixelPosition(sf::Vector2f(Position), sf::Vector2f(32.f, 32.f)));
 	ship->SetComponent(new ShipMovement());
 	ship->SetComponent(new SpriteDrawing("assets/space_ship.png"));
     ship->SetComponent(new ScriptedView(sf::FloatRect(0, 0, static_cast<float>(Game::m_iWindowWidth), static_cast<float>(Game::m_iWindowHeight)), sf::Vector2f(1920.f - static_cast<float>(Game::m_iWindowWidth), 0), 20.f));

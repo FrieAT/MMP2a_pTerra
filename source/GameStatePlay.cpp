@@ -13,8 +13,9 @@ void GameStatePlay::Init()
 {
     //ObjectManager::AddGameObject(new PlayerShip());
     ObjectManager::AddGameObject(GameObjectFactory::CreateBackgroundSprite("assets/space-map.jpg", sf::Vector2f(0.f, Game::m_iWindowHeight)));
-    ObjectManager::AddGameObject(GameObjectFactory::CreatePlayerShip());
-    
+    ObjectManager::AddGameObject(GameObjectFactory::CreatePlayerShip(sf::Vector2f(50,30)));
+	ObjectManager::AddGameObject(GameObjectFactory::CreatePlayerShip(sf::Vector2f(Game::m_iWindowWidth-50, 30)));
+
     // ====== Below decprecated method to create things ======
     
     // Load a music to play
