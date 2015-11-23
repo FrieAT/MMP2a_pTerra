@@ -1,7 +1,7 @@
 #include <math.h>
 
+#include "IPosition.h"
 #include "ScriptedView.h"
-
 #include "FrameManager.h"
 
 ScriptedView::ScriptedView(sf::FloatRect fViewSize, sf::Vector2f fMoveVector, float fSpeed)
@@ -36,10 +36,14 @@ void ScriptedView::OnFrameUpdate(sf::Time delta_time)
         // TODO: Maybe repeating?
         return;
     }
+    
     float fStepsWithDeltaTime = m_fSteps * delta_time.asSeconds();
     sf::Vector2f move = m_MoveVector * fStepsWithDeltaTime;
     m_CurrentMovePosition += move;
     m_pView->move(move);
+    
+    // Check if position from current game object is within Boundary
+    IPosition* position = (IPosition*)GetAssignedGameObject()->GetComponentType(EComponentType::Position);
 }
 
 void ScriptedView::OnFrameDraw(sf::RenderWindow* window)
