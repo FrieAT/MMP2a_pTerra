@@ -16,7 +16,8 @@ GameObject* GameObjectFactory::CreatePlayerShip()
 	ship->SetComponent(new PixelPosition(sf::Vector2f(40.f, 40.f), sf::Vector2f(32.f, 32.f)));
 	ship->SetComponent(new ShipMovement());
 	ship->SetComponent(new SpriteDrawing("assets/space_ship.png"));
-
+    ship->SetComponent(new ScriptedView(sf::FloatRect(0, 0, static_cast<float>(Game::m_iWindowWidth), static_cast<float>(Game::m_iWindowHeight)), sf::Vector2f(1920.f - static_cast<float>(Game::m_iWindowWidth), 0), 20.f));
+    
 	return ship;
 }
 
@@ -37,15 +38,6 @@ GameObject* GameObjectFactory::CreateBackgroundSprite(std::string background_pat
     background->SetComponent(new SpriteDrawing(background_path, scaleTo));
     
     return background;
-}
-
-GameObject* GameObjectFactory::CreateScriptedView()
-{
-    GameObject* view = new GameObject("background");
-    
-    view->SetComponent(new ScriptedView(sf::FloatRect(0, 0, static_cast<float>(Game::m_iWindowWidth), static_cast<float>(Game::m_iWindowHeight)), sf::Vector2f(1920.f - static_cast<float>(Game::m_iWindowWidth), 0), 20.f));
-    
-    return view;
 }
 
 GameObject* GameObjectFactory::CreateFontText(sf::Vector2f Position, std::string sFontPath, std::string sText, int iCharSize)

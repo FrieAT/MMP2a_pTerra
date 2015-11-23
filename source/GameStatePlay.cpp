@@ -14,7 +14,6 @@ void GameStatePlay::Init()
     //ObjectManager::AddGameObject(new PlayerShip());
     ObjectManager::AddGameObject(GameObjectFactory::CreateBackgroundSprite("assets/space-map.jpg", sf::Vector2f(0.f, Game::m_iWindowHeight)));
     ObjectManager::AddGameObject(GameObjectFactory::CreatePlayerShip());
-    ObjectManager::AddGameObject(GameObjectFactory::CreateScriptedView());
     
     // ====== Below decprecated method to create things ======
     
