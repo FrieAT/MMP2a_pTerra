@@ -50,6 +50,7 @@ void ObjectManager::Draw(sf::RenderWindow* window)
 		for (unsigned int i = 0; i < ObjectManager::objects[ObjectManager::drawOrder[s]].size(); i++)
 		{
 			IDrawing* drawing = ((IDrawing*)objects[ObjectManager::drawOrder[s]][i]->GetComponent(EComponentType::Drawing));
+            if(drawing == nullptr) continue;
 			drawing->Draw(window);
 		}
 	}
