@@ -13,7 +13,7 @@ public:
     static void Draw(sf::RenderWindow* window);
 	static void RegisterEventObserver(IFrameObserver* observer);
 	static void UnregisterEventObserver(IFrameObserver* observer);
-    static void UnregisterAllEventObserver();
+	static void Clear();
 private:
 	static std::vector<IFrameObserver*> Observers;
 };

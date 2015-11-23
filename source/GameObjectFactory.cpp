@@ -46,8 +46,9 @@ GameObject* GameObjectFactory::CreateBackgroundSprite(std::string background_pat
 }
 GameObject* GameObjectFactory::CreateBackgroundSprite(std::string background_path, sf::Vector2f scaleTo)
 {
-    GameObject* background = CreateBackgroundSprite(background_path);
+	GameObject* background = new GameObject("background");
     
+	background->SetComponent(new PixelPosition(sf::Vector2f(0.f, 0.f), sf::Vector2f(0.f, 0.f)));
     background->SetComponent(new SpriteDrawing(background_path, scaleTo));
     
     return background;

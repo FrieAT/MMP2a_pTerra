@@ -13,10 +13,8 @@ public:
 	static void Update(sf::RenderWindow* window);
 	static void RegisterEventObserver(IInputObserver* observer);
 	static void UnregisterEventObserver(IInputObserver* observer);
-    static void UnregisterAllEventObserver();
-    static std::vector<IInputObserver*> Observers;
-
+	static void Clear();
 private:
-	
+	static std::vector<IInputObserver*> Observers;
 	static void UpdateEventObserver(std::string event);
 };

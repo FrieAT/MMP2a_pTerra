@@ -15,6 +15,7 @@ public:
     static void RemoveAllGameObjects();
 	static void Update(sf::Time deltaTime);
 	static void Draw(sf::RenderWindow* window);
+	static void Clear();
 private:
 	static std::map<std::string, std::vector<GameObject*>> objects;
 	static std::vector<std::string> drawOrder;

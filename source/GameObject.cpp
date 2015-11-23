@@ -27,6 +27,7 @@ void GameObject::SetComponent(IComponent* component)
 	EComponentType component_type = component->GetComponentType();
 	if (Components[component_type] != nullptr)
 	{
+		delete Components[component_type];
 		Components.erase(component_type);
 	}
     Components[component_type] = component;

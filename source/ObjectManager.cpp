@@ -25,17 +25,15 @@ void ObjectManager::RemoveAllGameObjects()
 	for (unsigned int s = 0; s < ObjectManager::drawOrder.size(); s++)
 	{
 		std::string* draw_order_type = &ObjectManager::drawOrder[s];
-		for (unsigned int i = 0; i < ObjectManager::objects[*draw_order_type].size(); i++)
+		if (ObjectManager::objects[*draw_order_type].size() == 0) continue;
+
+		for (unsigned int i = 0; i < ObjectManager::objects[*draw_order_type].size(); ++i)
 		{
 			delete ObjectManager::objects[*draw_order_type][i];
-			ObjectManager::objects[*draw_order_type].erase(objects[*draw_order_type].begin() + i);
 		}
+		ObjectManager::objects[*draw_order_type].clear();
 	}
-	/*for (int i = 0; i < objects.size(); i++)
-	{
-		delete objects[i];
-		objects.erase(objects.begin() + i);
-	}*/
+	ObjectManager::objects.clear();
 }
 
 void ObjectManager::Update(sf::Time deltaTime)
@@ -56,4 +54,12 @@ void ObjectManager::Draw(sf::RenderWindow* window)
 			drawing->Draw(window);
 		}
 	}
+}
+
+void ObjectManager::Clear()
+{
+	objects.clear();
+
+	drawOrder.clear();
+	drawOrder.shrink_to_fit();
 }
