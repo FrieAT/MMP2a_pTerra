@@ -97,17 +97,17 @@ void InputManager::UnregisterEventObserver(IInputObserver* observer)
     }
 }
 
-void InputManager::UnregisterAllEventObserver()
-{
-    Observers.clear();
-}
-
 void InputManager::UpdateEventObserver(std::string event)
 {
 	for (unsigned int i = 0; i < Observers.size(); i++)
 	{
         Observers[i]->OnInputUpdate(event);
 	}
+}
+
+void InputManager::Clear()
+{
+	Observers.clear();
 }
 
 

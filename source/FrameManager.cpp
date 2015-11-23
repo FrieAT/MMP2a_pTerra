@@ -34,7 +34,7 @@ void FrameManager::UnregisterEventObserver(IFrameObserver* observer)
     }
 }
 
-void FrameManager::UnregisterAllEventObserver()
+void FrameManager::Clear()
 {
-    Observers.clear();
+	Observers.clear();
 }

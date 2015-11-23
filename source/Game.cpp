@@ -39,6 +39,9 @@ Game::~Game()
         states.pop_back();
     }
 
+	FrameManager::Clear();
+	InputManager::Clear();
+
 	delete window;
     Engine = nullptr;
 }
@@ -81,10 +84,6 @@ void Game::Start()
 		// Update the window
         window->display();
 	}
-
-	// Cleanup
-	InputManager::UnregisterAllEventObserver();
-	EventManager::UnregisterAllEventObserver();
 }
 
 void Game::ChangeState(IGameState* state)
