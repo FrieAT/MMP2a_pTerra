@@ -16,7 +16,7 @@ void GameStateIntro::Init()
 {
     KeyPressed = false;
     
-    ObjectManager::AddGameObject(GameObjectFactory::CreateBackgroundSprite("assets/intro-bg.jpg"));
+    ObjectManager::AddGameObject(GameObjectFactory::CreateBackgroundSprite("assets/intro-bg.jpg", sf::Vector2f(Game::m_iWindowWidth, Game::m_iWindowHeight)));
     ObjectManager::AddGameObject(GameObjectFactory::CreateFontText(sf::Vector2f(280.f, 100.f), "assets/Starjedi.ttf", "The Space Game", 24));
     ObjectManager::AddGameObject(GameObjectFactory::CreateFontText(sf::Vector2f(230.f, 500.f), "assets/Starjedi.ttf", "-- Press FIRE-Key to start game --", 16));
     

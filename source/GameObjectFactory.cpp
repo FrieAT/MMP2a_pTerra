@@ -30,6 +30,14 @@ GameObject* GameObjectFactory::CreateBackgroundSprite(std::string background_pat
     
     return background;
 }
+GameObject* GameObjectFactory::CreateBackgroundSprite(std::string background_path, sf::Vector2f scaleTo)
+{
+    GameObject* background = CreateBackgroundSprite(background_path);
+    
+    background->SetComponent(new SpriteDrawing(background_path, scaleTo));
+    
+    return background;
+}
 
 GameObject* GameObjectFactory::CreateScriptedView()
 {
