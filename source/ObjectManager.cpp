@@ -33,6 +33,7 @@ void ObjectManager::RemoveAllGameObjects()
 		}
 		ObjectManager::objects[*draw_order_type].clear();
 	}
+	ObjectManager::objects.clear();
 }
 
 void ObjectManager::Update(sf::Time deltaTime)

@@ -11,10 +11,10 @@ SpriteDrawing::SpriteDrawing(std::string ressource_path)
     };
 	Sprite = new sf::Sprite(*Texture);
 }
-SpriteDrawing::SpriteDrawing(std::string ressource_path, sf::Vector2f scaleTo)
-: SpriteDrawing(ressource_path)
+
+SpriteDrawing::SpriteDrawing(std::string ressource_path, sf::Vector2f scaleTo) : SpriteDrawing(ressource_path)
 {
-    // Get Texture Size
+	// Get Texture Size
     sf::Vector2f texture_size = static_cast<sf::Vector2f>(Texture->getSize());
     
     // If given scaleTo-size is zero, then dont scale!
