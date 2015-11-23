@@ -102,6 +102,9 @@
     <ClCompile Include="source\ScriptedView.cpp">
       <Filter>Source Files\Components\IView</Filter>
     </ClCompile>
+    <ClCompile Include="source\FontDrawing.cpp">
+      <Filter>Source Files\Components\IDrawing</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\IComponent.h">
@@ -181,6 +184,9 @@
     </ClInclude>
     <ClInclude Include="include\ScriptedView.h">
       <Filter>Source Files\Components\IView</Filter>
+    </ClInclude>
+    <ClInclude Include="include\FontDrawing.h">
+      <Filter>Source Files\Components\IDrawing</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

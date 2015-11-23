@@ -7,6 +7,10 @@ ShipMovement::ShipMovement()
 	//pos = std::static_pointer_cast<IPosition>(component);
 	InputManager::RegisterEventObserver(this);
 	FrameManager::RegisterEventObserver(this);
+	Impulses.resize(5);
+
+	Acceleration = 0.03f;
+	Max_Speed = 11000;
 }
 
 
@@ -16,38 +20,69 @@ ShipMovement::~ShipMovement()
     FrameManager::UnregisterEventObserver(this);
 }
 
-void ShipMovement::MoveVector(sf::Vector2f Vector)
+
+void ShipMovement::OnInputUpdate(std::string event)
+{
+	IPosition* pos = (IPosition*)(GetAssignedGameObject()->GetComponent(EComponentType::Position));
+
+	if(event=="RIGHT_P")
+	{
+		pos->SetRotation(pos->GetRotation() + 5);
+	}
+	if (event == "LEFT_P")
+	{
+		pos->SetRotation(pos->GetRotation() - 5);
+	}
+	if (event == "UP_P")
+	{
+		direction = sf::Vector2f(0.f, -0.8f);
+	}
+	if (event == "DOWN_P")
+	{
+		direction = sf::Vector2f(0.f, 0.6f);
+	}
+
+	if (event == "UP_R" || event == "DOWN_R")
+	{
+		direction = sf::Vector2f(0.f, 0.f);
+	}
+}
+
+
+void ShipMovement::update_movement()
 {
 	IPosition* pos = (IPosition*)(GetAssignedGameObject()->GetComponent(EComponentType::Position));
 
 	sf::Transform rotation_mat = sf::Transform::Identity;
 	rotation_mat.rotate(pos->GetRotation());
 
+	Impulses[0] = Impulses[0] + rotation_mat * direction * Acceleration;
+
+	float speed = Impulses[0].x*Impulses[0].x + Impulses[0].y * Impulses[0].y;
+
+	if (speed >= Max_Speed)
+	{
+		Impulses[0] = Impulses[0] * 0.99f;
+	}
+
+	std::cout << speed << std::endl;
 
 }
 
-void ShipMovement::OnInputUpdate(std::string event)
-{
-	IPosition* pos = (IPosition*)(GetAssignedGameObject()->GetComponent(EComponentType::Position));
 
-	std::string key_state = event.substr(event.length() - 1, 1);
-	if(event=="RIGHT_P")
-	{
-		pos->SetRotation(pos->GetRotation() + 1);
-	}
-	if (event == "LEFT_P")
-	{
-		pos->SetRotation(pos->GetRotation() - 1);
-	}
-	if (event == "UP_P")
-	{
-		MoveVector(sf::Vector2f(1.f, 1.f));
-	}
-}
 
 void ShipMovement::OnFrameUpdate(sf::Time delta_time)
 {
 	IPosition* pos = (IPosition*)(GetAssignedGameObject()->GetComponent(EComponentType::Position));
+	sf::Vector2f movement;
 
-	pos->SetPosition(pos->GetPosition() + direction);
+	update_movement();
+
+	for (int i = 0; i < Impulses.size();i++)
+	{
+		movement += Impulses[i];
+	}
+
+	pos->SetPosition(pos->GetPosition() + movement * delta_time.asSeconds());
+
 }

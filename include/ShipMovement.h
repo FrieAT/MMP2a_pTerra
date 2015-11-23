@@ -17,11 +17,15 @@ class ShipMovement : public IMovement, public IInputObserver, public IFrameObser
 public:
 	ShipMovement();
 	~ShipMovement();
-	void MoveVector(sf::Vector2f Vector);
 	void OnInputUpdate(std::string event);
 	void OnFrameUpdate(sf::Time delta_time);
+	void update_movement();
+
+	std::vector<sf::Vector2f> Impulses;
+	float Acceleration;
+	float Max_Speed;	//speedlimit if movement_vec.lenght > Max_Speed -> Damp 
+
 private:
 	sf::Vector2f direction;
-	float acceleration;
 };
 

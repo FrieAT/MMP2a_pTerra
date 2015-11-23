@@ -144,6 +144,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="source\EventManager.cpp" />
+    <ClCompile Include="source\FontDrawing.cpp" />
     <ClCompile Include="source\FrameManager.cpp" />
     <ClCompile Include="source\Game.cpp" />
     <ClCompile Include="source\GameObject.cpp" />
@@ -163,6 +164,7 @@
   <ItemGroup>
     <ClInclude Include="include\EComponentType.h" />
     <ClInclude Include="include\EventManager.h" />
+    <ClInclude Include="include\FontDrawing.h" />
     <ClInclude Include="include\FrameManager.h" />
     <ClInclude Include="include\Game.h" />
     <ClInclude Include="include\GameObject.h" />

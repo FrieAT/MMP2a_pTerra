@@ -18,7 +18,7 @@ Game::Game()
 {
     // Create the main window
     window = new sf::RenderWindow(sf::VideoMode(800, 600), "SFML window");
-    
+
     // Set the Icon
     if (!icon.loadFromFile("assets/icon.png"))
     {
