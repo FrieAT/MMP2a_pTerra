@@ -10,10 +10,10 @@ class FrameManager
 public:
 	FrameManager() = delete;
 	static void Update(sf::Time deltaTime);
+    static void Draw(sf::RenderWindow* window);
 	static void RegisterEventObserver(IFrameObserver* observer);
 	static void UnregisterEventObserver(IFrameObserver* observer);
     static void UnregisterAllEventObserver();
 private:
 	static std::vector<IFrameObserver*> Observers;
-	static void UpdateEventObserver(sf::Time deltaTime);
 };

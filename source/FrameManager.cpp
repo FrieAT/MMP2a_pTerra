@@ -5,15 +5,18 @@ std::vector<IFrameObserver*> FrameManager::Observers;
 
 void FrameManager::Update(sf::Time deltaTime)
 {
-	UpdateEventObserver(deltaTime);
+    for (unsigned int i = 0; i < Observers.size(); i++)
+    {
+        Observers[i]->OnFrameUpdate(deltaTime);
+    }
 }
 
-void FrameManager::UpdateEventObserver(sf::Time delta_time)
+void FrameManager::Draw(sf::RenderWindow* window)
 {
-	for (unsigned int i = 0; i < Observers.size(); i++)
-	{
-        Observers[i]->OnFrameUpdate(delta_time);
-	}
+    for (unsigned int i = 0; i < Observers.size(); i++)
+    {
+        Observers[i]->OnFrameDraw(window);
+    }
 }
 
 void FrameManager::RegisterEventObserver(IFrameObserver* observer)
