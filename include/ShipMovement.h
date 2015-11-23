@@ -15,11 +15,13 @@
 class ShipMovement : public IMovement, public IInputObserver, public IFrameObserver
 {
 public:
-	ShipMovement();
+	ShipMovement(char Player);
 	~ShipMovement();
 	void OnInputUpdate(std::string event);
 	void OnFrameUpdate(sf::Time delta_time);
 	void update_movement();
+
+	char Player;
 
 	std::vector<sf::Vector2f> Impulses;
 	float Acceleration;

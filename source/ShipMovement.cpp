@@ -1,14 +1,16 @@
 #include "ShipMovement.h"
+#include "GameObjectFactory.h"
+#include "ObjectManager.h"
 
-
-ShipMovement::ShipMovement()
+ShipMovement::ShipMovement(char Player)
 {
 	//auto component = GetAssignedGameObject()->GetComponent(EComponentType::Position);
 	//pos = std::static_pointer_cast<IPosition>(component);
 	InputManager::RegisterEventObserver(this);
 	FrameManager::RegisterEventObserver(this);
-	Impulses.resize(5);
+	this->Player = Player;
 
+	Impulses.resize(5);
 	Acceleration = 1.f;
 	Max_Speed = 11000;
 }
@@ -24,6 +26,12 @@ ShipMovement::~ShipMovement()
 void ShipMovement::OnInputUpdate(std::string event)
 {
 	IPosition* pos = (IPosition*)(GetAssignedGameObject()->GetComponent(EComponentType::Position));
+	if (event[0] == Player)
+	{
+		event = event.substr(1);
+	}
+	else return;
+
 
 	if(event=="RIGHT_P")
 	{
@@ -46,6 +54,12 @@ void ShipMovement::OnInputUpdate(std::string event)
 	{
 		direction = sf::Vector2f(0.f, 0.f);
 	}
+
+	//TODO make a own weapon component
+	if (event == "FIRE_P")
+	{
+  		ObjectManager::AddGameObject(GameObjectFactory::CreateMissile(pos,Impulses[0]));
+	}
 }
 
 
@@ -65,7 +79,7 @@ void ShipMovement::update_movement()
 		Impulses[0] = Impulses[0] * 0.99f;
 	}
 
-	std::cout << speed << std::endl;
+	//std::cout << speed << std::endl;
 
 }
 

@@ -25,44 +25,48 @@ void InputManager::Update(sf::RenderWindow* window)
 		//Left
 		if (event.key.code == sf::Keyboard::Left)
 		{
-			movement = "LEFT";
+			movement = "1LEFT";
 		}
 		if (event.key.code == sf::Keyboard::A)
 		{
-			movement = "LEFT";
+			movement = "2LEFT";
 		}
 		//Right
 		if (event.key.code == sf::Keyboard::Right)
 		{
-			movement = "RIGHT";
+			movement = "1RIGHT";
 		}
 		if (event.key.code == sf::Keyboard::D)
 		{
-			movement = "RIGHT";
+			movement = "2RIGHT";
 		}
 		//Up
 		if (event.key.code == sf::Keyboard::Up)
 		{
-			movement = "UP";
+			movement = "1UP";
 		}
 		if (event.key.code == sf::Keyboard::W)
 		{
-			movement = "UP";
+			movement = "2UP";
 		}
 		//Down
 		if (event.key.code == sf::Keyboard::Down)
 		{
-			movement = "DOWN";
+			movement = "1DOWN";
 		}
 		if (event.key.code == sf::Keyboard::S)
 		{
-			movement = "DOWN";
+			movement = "2DOWN";
 		}
         //Fire
         if (event.key.code == sf::Keyboard::Space)
         {
-            movement = "FIRE";
+            movement = "1FIRE";
         }
+		if (event.key.code == sf::Keyboard::Numpad0)
+		{
+			movement = "2FIRE";
+		}
 
 		//pressed
 		if (event.type == sf::Event::KeyPressed)

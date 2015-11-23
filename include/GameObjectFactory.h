@@ -11,7 +11,9 @@ class GameObjectFactory
 public:
 	GameObjectFactory() = delete;
 	~GameObjectFactory() = delete;
-	static GameObject* CreatePlayerShip(sf::Vector2f Position);
+	static GameObject* CreatePlayerShip(sf::Vector2f Position, char Player);
+	static GameObject* CreateMissile(IPosition* Postion, sf::Vector2f Shipspeed);
+
     static GameObject* CreateBackgroundSprite(std::string background_path);
     static GameObject* CreateBackgroundSprite(std::string background_path, sf::Vector2f scaleTo);
     static GameObject* CreateFontText(sf::Vector2f Position, std::string sFontPath, std::string sText, int iCharSize);

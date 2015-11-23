@@ -9,15 +9,15 @@
 #include "IInputObserver.h"
 #include "IFrameObserver.h"
 
-class LinearMovement : public IMovement, public IInputObserver, public IFrameObserver
+class LinearMovement : public IMovement, public IFrameObserver
 {
 public:
-    LinearMovement();
+    LinearMovement(float Rotation, sf::Vector2f Shipspeed);
     ~LinearMovement();
-    void MoveVector(sf::Vector2f Vector);
-    void OnInputUpdate(std::string event);
     void OnFrameUpdate(sf::Time delta_time);
+	float speed;
+
 private:
-	float MovementX;
-	float MovementY;
+	sf::Vector2f direction;
+	float rotation;
 };

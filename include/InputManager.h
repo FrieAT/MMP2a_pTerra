@@ -15,6 +15,7 @@ public:
 	static void UnregisterEventObserver(IInputObserver* observer);
     static void UnregisterAllEventObserver();
     static std::vector<IInputObserver*> Observers;
+
 private:
 	
 	static void UpdateEventObserver(std::string event);
