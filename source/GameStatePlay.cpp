@@ -1,7 +1,6 @@
+#include "Game.h"
 #include "GameStatePlay.h"
-
 #include "GameObjectFactory.h"
-
 #include "ObjectManager.h"
 
 GameStatePlay::~GameStatePlay()
@@ -13,7 +12,7 @@ GameStatePlay::~GameStatePlay()
 void GameStatePlay::Init()
 {
     //ObjectManager::AddGameObject(new PlayerShip());
-    ObjectManager::AddGameObject(GameObjectFactory::CreateBackgroundSprite("assets/space-map.jpg"));
+    ObjectManager::AddGameObject(GameObjectFactory::CreateBackgroundSprite("assets/space-map.jpg", sf::Vector2f(0.f, Game::m_iWindowHeight)));
     ObjectManager::AddGameObject(GameObjectFactory::CreatePlayerShip());
     ObjectManager::AddGameObject(GameObjectFactory::CreateScriptedView());
     
