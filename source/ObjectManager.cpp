@@ -55,3 +55,11 @@ void ObjectManager::Draw(sf::RenderWindow* window)
 		}
 	}
 }
+
+void ObjectManager::Clear()
+{
+	objects.clear();
+
+	drawOrder.clear();
+	drawOrder.shrink_to_fit();
+}

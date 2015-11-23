@@ -108,6 +108,7 @@ void InputManager::UpdateEventObserver(std::string event)
 void InputManager::Clear()
 {
 	Observers.clear();
+	Observers.shrink_to_fit();
 }
 
 

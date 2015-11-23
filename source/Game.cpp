@@ -43,6 +43,7 @@ Game::~Game()
 
 	FrameManager::Clear();
 	InputManager::Clear();
+	ObjectManager::Clear();
 
 	delete window;
     Engine = nullptr;
