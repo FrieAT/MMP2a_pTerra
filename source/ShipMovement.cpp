@@ -9,7 +9,7 @@ ShipMovement::ShipMovement()
 	FrameManager::RegisterEventObserver(this);
 	Impulses.resize(5);
 
-	Acceleration = 0.03f;
+	Acceleration = 1.f;
 	Max_Speed = 11000;
 }
 
