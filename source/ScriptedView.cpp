@@ -31,7 +31,7 @@ void ScriptedView::OnEventUpdate(sf::Time delta_time)
         // TODO: Maybe repeating?
         return;
     }
-    float fStepsWithDeltaTime = m_fSteps * delta_time.asMilliseconds();
+    float fStepsWithDeltaTime = m_fSteps * delta_time.asSeconds();
     sf::Vector2f move = m_MoveVector * fStepsWithDeltaTime;
     m_CurrentMovePosition += move;
     m_pView->move(move);
