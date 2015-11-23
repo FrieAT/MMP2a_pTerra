@@ -1,5 +1,6 @@
 #include "GameObjectFactory.h"
 
+#include "Game.h"
 #include "LinearMovement.h"
 #include "PixelPosition.h"
 #include "SpriteDrawing.h"
@@ -34,7 +35,7 @@ GameObject* GameObjectFactory::CreateScriptedView()
 {
     GameObject* view = new GameObject("background");
     
-    view->SetComponent(new ScriptedView(sf::FloatRect(0, 0, 800, 600), sf::Vector2f(1120, 0), 20.f));
+    view->SetComponent(new ScriptedView(sf::FloatRect(0, 0, Game::m_iWindowWidth, Game::m_iWindowHeight), sf::Vector2f(1920 - Game::m_iWindowWidth, 0), 20.f));
     
     return view;
 }
