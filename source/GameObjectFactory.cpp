@@ -26,9 +26,17 @@ GameObject* GameObjectFactory::CreateBackgroundSprite(std::string background_pat
     
     background->SetComponent(new PixelPosition(sf::Vector2f(0.f, 0.f), sf::Vector2f(0.f, 0.f)));
     background->SetComponent(new SpriteDrawing(background_path));
-    // background->SetComponent(new ScriptedView(sf::FloatRect(0, 0, 800, 600), sf::Vector2f(1120, 0), 0.025f));
     
     return background;
+}
+
+GameObject* GameObjectFactory::CreateScriptedView()
+{
+    GameObject* view = new GameObject("background");
+    
+    view->SetComponent(new ScriptedView(sf::FloatRect(0, 0, 800, 600), sf::Vector2f(1120, 0), 20.f));
+    
+    return view;
 }
 
 GameObject* GameObjectFactory::CreateFontText(sf::Vector2f Position, std::string sFontPath, std::string sText, int iCharSize)
