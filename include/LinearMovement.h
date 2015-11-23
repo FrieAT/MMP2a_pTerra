@@ -19,5 +19,7 @@ public:
 
 private:
 	sf::Vector2f direction;
+	sf::Vector2f movement;
+
 	float rotation;
 };
