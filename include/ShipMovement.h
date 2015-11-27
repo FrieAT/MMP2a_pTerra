@@ -23,9 +23,12 @@ public:
 
 	std::vector<sf::Vector2f> m_Impulses;
 	float m_fAcceleration;
-	float m_fMaxSpeed;	//speedlimit if movement_vec.lenght > Max_Speed -> Damp 
+	float m_fMaxSpeed;	//speedlimit if movement_vec.lenght > Max_Speed -> Damp
+	float m_fFirerate;
 
 private:
 	sf::Vector2f m_Direction;
+	std::vector<bool> m_shipstates;
+	float m_fWeaponcoolDown;
 };
 
