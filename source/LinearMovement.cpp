@@ -17,6 +17,16 @@ LinearMovement::LinearMovement(float fRotation, sf::Vector2f ShipSpeed)
 	m_Movement = ShipSpeed;
 }
 
+LinearMovement::LinearMovement(float fRotation, float fSpeed)
+{
+	FrameManager::GetInstance().RegisterEventObserver(this);
+	sf::Transform RotationMatrice = sf::Transform::Identity;
+	RotationMatrice.rotate(fRotation);
+	m_fRotation = fRotation;
+	m_fSpeed = fSpeed;
+	m_Direction = RotationMatrice*(sf::Vector2f(0, -1));
+}
+
 LinearMovement::~LinearMovement()
 {
     FrameManager::GetInstance().UnregisterEventObserver(this);

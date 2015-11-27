@@ -36,6 +36,18 @@ GameObject* GameObjectFactory::CreateMissile(IPosition* pPosition, sf::Vector2f 
 	return pMissile;
 }
 
+GameObject* GameObjectFactory::CreateAsteroid(sf::Vector2f vPosition, float fRotation, float fSpeed)
+{
+	// TODO: Make it possible to change component values / change the whole factory
+	GameObject* pAsteroid = new GameObject(std::string("asteroid"));
+
+	pAsteroid->SetComponent(new PixelPosition(vPosition, sf::Vector2f(83.f, 66.5f)));
+	pAsteroid->SetComponent(new LinearMovement(fRotation, fSpeed));
+	pAsteroid->SetComponent(new SpriteDrawing(std::string("assets/asteroid.png"),sf::Vector2f(83.f, 66.5f)));
+
+	return pAsteroid;
+}
+
 GameObject* GameObjectFactory::CreateBackgroundSprite(std::string strBackgroundPath)
 {
     // TODO: Make it possible to change component values / change the whole factory
