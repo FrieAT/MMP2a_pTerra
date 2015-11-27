@@ -46,6 +46,9 @@
     <Filter Include="Source Files\Components\IView">
       <UniqueIdentifier>{6e3bc2e6-3c81-445e-a629-ba5adc015dc8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Components\IHealth">
+      <UniqueIdentifier>{15ea29d9-83b6-4d91-8292-a286bd2eb85e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\main.cpp">
@@ -92,6 +95,9 @@
     </ClCompile>
     <ClCompile Include="source\FontDrawing.cpp">
       <Filter>Source Files\Components\IDrawing</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Shiphealth.cpp">
+      <Filter>Source Files\Components\IHealth</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -163,6 +169,12 @@
     </ClInclude>
     <ClInclude Include="include\FontDrawing.h">
       <Filter>Source Files\Components\IDrawing</Filter>
+    </ClInclude>
+    <ClInclude Include="include\IHealth.h">
+      <Filter>Source Files\Components\IHealth</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Shiphealth.h">
+      <Filter>Source Files\Components\IHealth</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

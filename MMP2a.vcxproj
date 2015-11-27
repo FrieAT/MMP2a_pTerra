@@ -156,6 +156,7 @@
     <ClCompile Include="source\ObjectManager.cpp" />
     <ClCompile Include="source\PixelPosition.cpp" />
     <ClCompile Include="source\ScriptedView.cpp" />
+    <ClCompile Include="source\Shiphealth.cpp" />
     <ClCompile Include="source\ShipMovement.cpp" />
     <ClCompile Include="source\SpriteDrawing.cpp" />
   </ItemGroup>
@@ -172,6 +173,7 @@
     <ClInclude Include="include\IDrawing.h" />
     <ClInclude Include="include\IFrameObserver.h" />
     <ClInclude Include="include\IGameState.h" />
+    <ClInclude Include="include\IHealth.h" />
     <ClInclude Include="include\IInputObserver.h" />
     <ClInclude Include="include\IMovement.h" />
     <ClInclude Include="include\InputManager.h" />
@@ -181,6 +183,7 @@
     <ClInclude Include="include\ObjectManager.h" />
     <ClInclude Include="include\PixelPosition.h" />
     <ClInclude Include="include\ScriptedView.h" />
+    <ClInclude Include="include\Shiphealth.h" />
     <ClInclude Include="include\ShipMovement.h" />
     <ClInclude Include="include\SpriteDrawing.h" />
   </ItemGroup>
