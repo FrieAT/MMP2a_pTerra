@@ -21,6 +21,8 @@ void GameStatePlay::Init()
     ObjectManager::GetInstance().AddGameObject(GameObjectFactory::CreatePlayerShip(sf::Vector2f(50,30),'1'));
 	ObjectManager::GetInstance().AddGameObject(GameObjectFactory::CreatePlayerShip(sf::Vector2f(50, Game::m_iWindowHeight - 30), '2'));
 
+	ObjectManager::GetInstance().AddGameObject(GameObjectFactory::CreateAsteroid(sf::Vector2f(50,150),120,50));
+
     // ====== Below decprecated method to create things ======
     
     // Load a music to play
