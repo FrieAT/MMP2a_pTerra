@@ -29,5 +29,6 @@ private:
 	ObjectManager(const ObjectManager&) = delete;
 	void operator= (const ObjectManager&) = delete;
 	std::map<std::string, std::vector<GameObject*>> m_Objects;
+	std::vector<GameObject*> m_CleanUp;
 	std::vector<std::string> m_DrawOrder;
 };

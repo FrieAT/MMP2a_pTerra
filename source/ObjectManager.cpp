@@ -20,9 +20,17 @@ void ObjectManager::RemoveGameObject(GameObject* pObject)
     auto i = m_Objects[id].begin();
     while(i != m_Objects[id].end())
 	{
-        if(*i != pObject) continue;
-		m_Objects[id].erase(i);
-		break;
+		if (*i != pObject)
+		{
+			i++;
+			continue;
+		}
+		else
+		{
+			m_CleanUp.push_back(*i);
+			m_Objects[id].erase(i);
+			break;
+		}
 	}
 }
 
@@ -48,6 +56,13 @@ void ObjectManager::RemoveAllGameObjects()
 
 void ObjectManager::Update(sf::Time DeltaTime)
 {
+	// Get rid of obsolete Gameobjects
+	for (int i = 0; i < m_CleanUp.size(); i++)
+	{
+		delete m_CleanUp[i];
+	}
+	m_CleanUp.clear();
+
 	// Update function for each object?
 	// Things like health, shield regenaration, ...
 }
