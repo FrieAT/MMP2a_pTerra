@@ -153,6 +153,7 @@
     <ClCompile Include="source\InputManager.cpp" />
     <ClCompile Include="source\LinearMovement.cpp" />
     <ClCompile Include="source\main.cpp" />
+    <ClCompile Include="source\Missilehealth.cpp" />
     <ClCompile Include="source\ObjectManager.cpp" />
     <ClCompile Include="source\PixelPosition.cpp" />
     <ClCompile Include="source\ScriptedView.cpp" />
@@ -180,6 +181,7 @@
     <ClInclude Include="include\IPosition.h" />
     <ClInclude Include="include\IView.h" />
     <ClInclude Include="include\LinearMovement.h" />
+    <ClInclude Include="include\Missilehealth.h" />
     <ClInclude Include="include\ObjectManager.h" />
     <ClInclude Include="include\PixelPosition.h" />
     <ClInclude Include="include\ScriptedView.h" />

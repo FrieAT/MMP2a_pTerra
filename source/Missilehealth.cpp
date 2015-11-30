@@ -3,34 +3,34 @@ Copyright (c) MultiMediaTechnology, 2015
 =================================================================*/
 #pragma once
 
-#include "Shiphealth.h"
+#include "Missilehealth.h"
 #include "ObjectManager.h"
 
-Shiphealth::Shiphealth(float fHealth)
+Missilehealth::Missilehealth(float fHealth)
 {
 	this->m_fHealth = fHealth;
 	FrameManager::GetInstance().RegisterEventObserver(this);
 
 }
 
-Shiphealth::~Shiphealth()
+Missilehealth::~Missilehealth()
 {
 	FrameManager::GetInstance().UnregisterEventObserver(this);
 }
 
 
 
-void Shiphealth:: damage(float fDamage)
+void Missilehealth::damage(float fDamage)
 {
 	m_fHealth -= fDamage;
 	if (m_fHealth < 0)
 	{
-		//TODO destroy Ship and remove end game
+		//TODO add destruction effect
 		ObjectManager::GetInstance().RemoveGameObject(GetAssignedGameObject());
 	}
 }
 
-void Shiphealth::OnFrameUpdate(sf::Time DeltaTime)
+void Missilehealth::OnFrameUpdate(sf::Time DeltaTime)
 {
-	//this->damage(1);
+	this->damage(1);
 }

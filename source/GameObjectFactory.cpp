@@ -10,6 +10,7 @@ Copyright (c) MultiMediaTechnology, 2015
 #include "FontDrawing.h"
 #include "ShipMovement.h"
 #include "ScriptedView.h"
+#include "Missilehealth.h"
 
 GameObject* GameObjectFactory::CreatePlayerShip(sf::Vector2f Position, char cPlayer)
 {
@@ -28,7 +29,7 @@ GameObject* GameObjectFactory::CreateMissile(IPosition* pPosition, sf::Vector2f 
 {
 	// TODO: Make it possible to change component values / change the whole factory
 	GameObject* pMissile = new GameObject(std::string("missile"));
-
+	pMissile->SetComponent(new Missilehealth(500));
 	pMissile->SetComponent(new PixelPosition(pPosition->GetPosition(), sf::Vector2f(160.f, 320.f)));
 	pMissile->SetComponent(new LinearMovement(pPosition->GetRotation(),ShipSpeed));
 	pMissile->SetComponent(new SpriteDrawing(std::string("assets/rocket.png"),sf::Vector2f(30,60)));

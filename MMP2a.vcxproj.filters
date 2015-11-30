@@ -99,6 +99,9 @@
     <ClCompile Include="source\Shiphealth.cpp">
       <Filter>Source Files\Components\IHealth</Filter>
     </ClCompile>
+    <ClCompile Include="source\Missilehealth.cpp">
+      <Filter>Source Files\Components\IHealth</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\IComponent.h">
@@ -174,6 +177,9 @@
       <Filter>Source Files\Components\IHealth</Filter>
     </ClInclude>
     <ClInclude Include="include\Shiphealth.h">
+      <Filter>Source Files\Components\IHealth</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Missilehealth.h">
       <Filter>Source Files\Components\IHealth</Filter>
     </ClInclude>
   </ItemGroup>

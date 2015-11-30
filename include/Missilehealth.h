@@ -7,11 +7,11 @@ Copyright (c) MultiMediaTechnology, 2015
 #include "IFrameObserver.h"
 #include "FrameManager.h"
 
-class Shiphealth : public IHealth , public IFrameObserver
+class Missilehealth : public IHealth, public IFrameObserver
 {
 public:
-	Shiphealth(float fHealth);
-	~Shiphealth();
+	Missilehealth(float fHealth);
+	~Missilehealth();
 	void damage(float fDamage);
 	void OnFrameUpdate(sf::Time DeltaTime);
 };
