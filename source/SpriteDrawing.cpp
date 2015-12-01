@@ -6,7 +6,7 @@ Copyright (c) MultiMediaTechnology, 2015
 #include "GameObject.h"
 #include "IPosition.h"
 
-SpriteDrawing::SpriteDrawing(std::string& strRessourcePath)
+SpriteDrawing::SpriteDrawing(std::string strRessourcePath)
 {
     m_pTexture = new sf::Texture();
     if(!m_pTexture->loadFromFile(strRessourcePath))
@@ -16,7 +16,7 @@ SpriteDrawing::SpriteDrawing(std::string& strRessourcePath)
 	m_pSprite = new sf::Sprite(*m_pTexture);
 }
 
-SpriteDrawing::SpriteDrawing(std::string& strRessourcePath, sf::Vector2f& ScaleToSize) : SpriteDrawing(strRessourcePath)
+SpriteDrawing::SpriteDrawing(std::string strRessourcePath, sf::Vector2f ScaleToSize) : SpriteDrawing(strRessourcePath)
 {
 	// Get Texture Size
     sf::Vector2f TextureSize = static_cast<sf::Vector2f>(m_pTexture->getSize());

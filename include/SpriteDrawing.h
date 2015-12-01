@@ -11,8 +11,8 @@ Copyright (c) MultiMediaTechnology, 2015
 class SpriteDrawing : public IDrawing
 {
 public:
-    SpriteDrawing(std::string& strRessourcePath);
-    SpriteDrawing(std::string& strRessourcePath, sf::Vector2f& ScaleToSize);
+    SpriteDrawing(std::string strRessourcePath);
+    SpriteDrawing(std::string strRessourcePath, sf::Vector2f ScaleToSize);
     ~SpriteDrawing();
     void Update();
 	void Draw(sf::RenderWindow* pWindow);
