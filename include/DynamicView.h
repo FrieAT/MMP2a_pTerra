@@ -8,11 +8,11 @@ Copyright (c) MultiMediaTechnology, 2015
 
 #include "IFrameObserver.h"
 
-class ScriptedView : public IView, public IFrameObserver
+class DynamicView : public IView, public IFrameObserver
 {
 public:
-    ScriptedView(sf::FloatRect ViewSize, sf::Vector2f MoveVector, float fSpeed);
-    ~ScriptedView();
+    DynamicView(sf::FloatRect ViewSize, sf::Vector2f MoveVector, float fSpeed);
+    ~DynamicView();
     void OnFrameUpdate(sf::Time DeltaTime);
     void OnFrameDraw(sf::RenderWindow* pWindow);
     

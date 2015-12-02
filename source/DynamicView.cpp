@@ -6,10 +6,10 @@ Copyright (c) MultiMediaTechnology, 2015
 
 #include "Game.h"
 #include "IPosition.h"
-#include "ScriptedView.h"
+#include "DynamicView.h"
 #include "FrameManager.h"
 
-ScriptedView::ScriptedView(sf::FloatRect ViewSize, sf::Vector2f MoveVector, float fSpeed)
+DynamicView::DynamicView(sf::FloatRect ViewSize, sf::Vector2f MoveVector, float fSpeed)
 {
     float fStep = (fSpeed / sqrt(pow(MoveVector.x,2.0f) + pow(MoveVector.y,2.0f)));
     
@@ -23,19 +23,19 @@ ScriptedView::ScriptedView(sf::FloatRect ViewSize, sf::Vector2f MoveVector, floa
     FrameManager::GetInstance().RegisterEventObserver(this);
 }
 
-ScriptedView::~ScriptedView()
+DynamicView::~DynamicView()
 {
     FrameManager::GetInstance().UnregisterEventObserver(this);
     
     delete m_pView;
 }
 
-sf::FloatRect ScriptedView::GetViewport()
+sf::FloatRect DynamicView::GetViewport()
 {
     return m_pView->getViewport();
 }
 
-void ScriptedView::OnFrameUpdate(sf::Time DeltaTime)
+void DynamicView::OnFrameUpdate(sf::Time DeltaTime)
 {
 	if (m_CurrentMovePosition.x < m_MoveVector.x || m_CurrentMovePosition.y < m_MoveVector.y)
 	{
@@ -77,7 +77,7 @@ void ScriptedView::OnFrameUpdate(sf::Time DeltaTime)
 	pPositionComponent->SetPosition(Position);
 }
 
-void ScriptedView::OnFrameDraw(sf::RenderWindow* pWindow)
+void DynamicView::OnFrameDraw(sf::RenderWindow* pWindow)
 {
     pWindow->setView(*m_pView);
 }
