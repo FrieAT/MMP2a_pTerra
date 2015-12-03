@@ -55,6 +55,9 @@
     <Filter Include="Source Files\Managers\CollisionManager">
       <UniqueIdentifier>{b60cb567-e7c9-4977-837b-1a3356ab7003}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Managers\WorldManager">
+      <UniqueIdentifier>{c4c6b681-1d07-400b-9fe2-66556a543077}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\main.cpp">
@@ -113,6 +116,15 @@
     </ClCompile>
     <ClCompile Include="source\CollisionManager.cpp">
       <Filter>Source Files\Managers\CollisionManager</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Quadrant.cpp">
+      <Filter>Source Files\Managers\WorldManager</Filter>
+    </ClCompile>
+    <ClCompile Include="source\WorldManager.cpp">
+      <Filter>Source Files\Managers\WorldManager</Filter>
+    </ClCompile>
+    <ClCompile Include="source\QuadrantPosition.cpp">
+      <Filter>Source Files\Components\IPosition</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -202,6 +214,21 @@
     </ClInclude>
     <ClInclude Include="include\CollisionManager.h">
       <Filter>Source Files\Managers\CollisionManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\WorldManager.h">
+      <Filter>Source Files\Managers\WorldManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\EQuadrantPos.h">
+      <Filter>Source Files\Managers\WorldManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\IQuadrantObserver.h">
+      <Filter>Source Files\Managers\WorldManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Quadrant.h">
+      <Filter>Source Files\Managers\WorldManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\QuadrantPosition.h">
+      <Filter>Source Files\Components\IPosition</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

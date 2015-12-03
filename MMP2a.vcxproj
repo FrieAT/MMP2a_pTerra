@@ -159,14 +159,18 @@
     <ClCompile Include="source\ObjectManager.cpp" />
     <ClCompile Include="source\PixelPosition.cpp" />
     <ClCompile Include="source\DynamicView.cpp" />
+    <ClCompile Include="source\Quadrant.cpp" />
+    <ClCompile Include="source\QuadrantPosition.cpp" />
     <ClCompile Include="source\Shiphealth.cpp" />
     <ClCompile Include="source\ShipMovement.cpp" />
     <ClCompile Include="source\SpriteDrawing.cpp" />
+    <ClCompile Include="source\WorldManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\CircleCollision.h" />
     <ClInclude Include="include\CollisionManager.h" />
     <ClInclude Include="include\EComponentType.h" />
+    <ClInclude Include="include\EQuadrantPos.h" />
     <ClInclude Include="include\FontDrawing.h" />
     <ClInclude Include="include\FrameManager.h" />
     <ClInclude Include="include\Game.h" />
@@ -183,16 +187,20 @@
     <ClInclude Include="include\IMovement.h" />
     <ClInclude Include="include\InputManager.h" />
     <ClInclude Include="include\IPosition.h" />
+    <ClInclude Include="include\IQuadrantObserver.h" />
     <ClInclude Include="include\IView.h" />
     <ClInclude Include="include\LinearMovement.h" />
     <ClInclude Include="include\Missilehealth.h" />
     <ClInclude Include="include\ObjectManager.h" />
     <ClInclude Include="include\PixelPosition.h" />
     <ClInclude Include="include\DynamicView.h" />
+    <ClInclude Include="include\Quadrant.h" />
+    <ClInclude Include="include\QuadrantPosition.h" />
     <ClInclude Include="include\Shiphealth.h" />
     <ClInclude Include="include\ShipMovement.h" />
     <ClInclude Include="include\SpriteDrawing.h" />
     <ClInclude Include="include\ICollision.h" />
+    <ClInclude Include="include\WorldManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
