@@ -13,7 +13,7 @@ class LinearMovement : public IMovement, public IFrameObserver
 public:
     LinearMovement(float fRotation, sf::Vector2f ShipSpeed);
 	LinearMovement(float fRotation, float fSpeed);
-
+    sf::Vector2f GetImpulseDirection();
     ~LinearMovement();
     void OnFrameUpdate(sf::Time DeltaTime);
 	float m_fSpeed;

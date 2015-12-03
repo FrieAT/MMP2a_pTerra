@@ -18,7 +18,8 @@ public:
 	void OnInputUpdate(std::string strEvent);
 	void OnFrameUpdate(sf::Time DeltaTime);
 	void UpdateMovement();
-
+    sf::Vector2f GetImpulseDirection();
+    
 	char m_cPlayer;
 
 	std::vector<sf::Vector2f> m_Impulses;

@@ -10,7 +10,7 @@ class IMovement : public IComponent
 {
 public:
     virtual ~IMovement() { }
-
+    virtual sf::Vector2f GetImpulseDirection() = 0;
 	EComponentType GetComponentType()
 	{
 		return EComponentType::Movement;
