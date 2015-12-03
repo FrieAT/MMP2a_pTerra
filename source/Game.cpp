@@ -11,6 +11,7 @@ Copyright (c) MultiMediaTechnology, 2015
 #include "FrameManager.h"
 #include "InputManager.h"
 #include "ObjectManager.h"
+#include "WorldManager.h"
 
 Game* Game::m_pEngine = nullptr;
 
@@ -80,6 +81,7 @@ void Game::Start()
 		// Rendering
         FrameManager::GetInstance().Draw(m_pWindow);
 		ObjectManager::GetInstance().Draw(m_pWindow);
+        WorldManager::GetInstance().Update(m_pWindow);
 
 		// Update the window
         m_pWindow->display();
