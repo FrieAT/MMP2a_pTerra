@@ -14,7 +14,7 @@ ShipMovement::ShipMovement(char cPlayer)
 
 	m_Impulses.resize(5);
 	m_shipstates = std::vector<bool>(5, false);
-	m_fAcceleration = 2.f;
+	m_fAcceleration = 7.f;
 	m_fMaxSpeed = 200000;
 	m_fFirerate = 60;
 }
