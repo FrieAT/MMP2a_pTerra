@@ -13,6 +13,11 @@ sf::Vector2f PixelPosition::GetPosition()
 	return (this->m_Position);
 }
 
+sf::Vector2f PixelPosition::GetCenter()
+{
+	return (this->m_Position + this->GetOrigin());
+}
+
 float PixelPosition::GetRotation()
 {
 	return m_fRotation;

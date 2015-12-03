@@ -20,6 +20,7 @@ public:
     virtual ~IPosition() { }
 	virtual void SetPosition(sf::Vector2f Position) = 0;
 	virtual sf::Vector2f GetPosition() = 0;
+	virtual sf::Vector2f GetCenter() = 0;
 	virtual float GetRotation() = 0;
 	virtual void SetRotation(float rotation) = 0;
 	virtual void SetOrigin(sf::Vector2f Origin) = 0;

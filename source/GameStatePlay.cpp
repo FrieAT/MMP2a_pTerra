@@ -19,7 +19,7 @@ void GameStatePlay::Init()
     //ObjectManager::AddGameObject(new PlayerShip());
     ObjectManager::GetInstance().AddGameObject(GameObjectFactory::CreateBackgroundSprite("assets/space-map.jpg", sf::Vector2f(0.f, static_cast<float>(Game::m_iWindowHeight))));
     ObjectManager::GetInstance().AddGameObject(GameObjectFactory::CreatePlayerShip(sf::Vector2f(50,30),'1'));
-	ObjectManager::GetInstance().AddGameObject(GameObjectFactory::CreatePlayerShip(sf::Vector2f(50, Game::m_iWindowHeight - 30), '2'));
+	//ObjectManager::GetInstance().AddGameObject(GameObjectFactory::CreatePlayerShip(sf::Vector2f(50, Game::m_iWindowHeight - 30), '2'));
 
 	ObjectManager::GetInstance().AddGameObject(GameObjectFactory::CreateAsteroid(sf::Vector2f(50,150),120,50));
 

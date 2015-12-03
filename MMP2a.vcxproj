@@ -158,7 +158,7 @@
     <ClCompile Include="source\Missilehealth.cpp" />
     <ClCompile Include="source\ObjectManager.cpp" />
     <ClCompile Include="source\PixelPosition.cpp" />
-    <ClCompile Include="source\ScriptedView.cpp" />
+    <ClCompile Include="source\DynamicView.cpp" />
     <ClCompile Include="source\Shiphealth.cpp" />
     <ClCompile Include="source\ShipMovement.cpp" />
     <ClCompile Include="source\SpriteDrawing.cpp" />
@@ -188,7 +188,7 @@
     <ClInclude Include="include\Missilehealth.h" />
     <ClInclude Include="include\ObjectManager.h" />
     <ClInclude Include="include\PixelPosition.h" />
-    <ClInclude Include="include\ScriptedView.h" />
+    <ClInclude Include="include\DynamicView.h" />
     <ClInclude Include="include\Shiphealth.h" />
     <ClInclude Include="include\ShipMovement.h" />
     <ClInclude Include="include\SpriteDrawing.h" />

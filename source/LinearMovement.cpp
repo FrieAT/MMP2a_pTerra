@@ -32,12 +32,16 @@ LinearMovement::~LinearMovement()
     FrameManager::GetInstance().UnregisterEventObserver(this);
 }
 
+sf::Vector2f LinearMovement::GetMovementVector()
+{
+	return m_Movement;
+}
 
 void LinearMovement::OnFrameUpdate(sf::Time DeltaTime)
 {
 	IPosition* pPositionComponent = static_cast<IPosition*>(GetAssignedGameObject()->GetComponent(EComponentType::Position));
 	pPositionComponent->SetRotation(m_fRotation);
-	m_Movement = m_Direction * m_fSpeed* DeltaTime.asSeconds();
+	m_Movement = m_Direction * m_fSpeed * DeltaTime.asSeconds();
 	pPositionComponent->SetPosition(pPositionComponent->GetPosition()+ m_Movement);
 }
 

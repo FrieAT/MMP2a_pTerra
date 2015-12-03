@@ -12,6 +12,7 @@ public:
 	PixelPosition(sf::Vector2f Position, sf::Vector2f Origin) : IPosition(Position,Origin) { }
 	void SetPosition(sf::Vector2f Position);
 	sf::Vector2f GetPosition();
+	sf::Vector2f GetCenter();
 	void SetRotation(float rotation);
 	float GetRotation();
 	void SetOrigin(sf::Vector2f Origin);

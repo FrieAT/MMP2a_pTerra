@@ -96,9 +96,6 @@
     <ClCompile Include="source\GameObjectFactory.cpp">
       <Filter>Source Files\GameObject</Filter>
     </ClCompile>
-    <ClCompile Include="source\ScriptedView.cpp">
-      <Filter>Source Files\Components\IView</Filter>
-    </ClCompile>
     <ClCompile Include="source\FontDrawing.cpp">
       <Filter>Source Files\Components\IDrawing</Filter>
     </ClCompile>
@@ -108,6 +105,8 @@
     <ClCompile Include="source\Missilehealth.cpp">
       <Filter>Source Files\Components\IHealth</Filter>
     </ClCompile>
+    <ClCompile Include="source\DynamicView.cpp">
+      <Filter>Source Files\Components\IView</Filter>
     <ClCompile Include="source\CollisionManager.cpp">
       <Filter>Source Files\Managers\CollisionManager</Filter>
     </ClCompile>
@@ -202,6 +201,8 @@
     </ClInclude>
     <ClInclude Include="include\CircleCollision.h">
       <Filter>Source Files\Components\ICollision</Filter>
+    <ClInclude Include="include\DynamicView.h">
+      <Filter>Source Files\Components\IView</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
