@@ -10,6 +10,8 @@ class IMovement : public IComponent
 {
 public:
     virtual ~IMovement() { }
+	
+	virtual sf::Vector2f GetMovementVector() = 0;
 
 	EComponentType GetComponentType()
 	{

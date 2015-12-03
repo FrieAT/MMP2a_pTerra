@@ -14,8 +14,8 @@ ShipMovement::ShipMovement(char cPlayer)
 
 	m_Impulses.resize(5);
 	m_shipstates = std::vector<bool>(5, false);
-	m_fAcceleration = 1.f;
-	m_fMaxSpeed = 11000;
+	m_fAcceleration = 2.f;
+	m_fMaxSpeed = 200000;
 	m_fFirerate = 60;
 }
 
@@ -121,6 +121,10 @@ void ShipMovement::UpdateMovement()
 
 }
 
+sf::Vector2f ShipMovement::GetMovementVector()
+{
+	return m_Impulses[0]; // Change to proper m_variable
+}
 
 
 void ShipMovement::OnFrameUpdate(sf::Time DeltaTime)
