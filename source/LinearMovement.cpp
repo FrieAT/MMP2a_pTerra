@@ -12,9 +12,15 @@ LinearMovement::LinearMovement(float fRotation, sf::Vector2f ShipSpeed)
 	sf::Transform RotationMatrice = sf::Transform::Identity;
 	RotationMatrice.rotate(fRotation);
 	m_fRotation = fRotation;
-	m_fSpeed = std::sqrt(ShipSpeed.x * ShipSpeed.x + ShipSpeed.y * ShipSpeed.y) + 200.f;
+	
+	// Calculate adjusted movement vector
+	m_fSpeed = 200.f;
 	m_Direction = RotationMatrice*(sf::Vector2f(0, -1));
-	m_Movement = m_Direction * m_fSpeed;
+	m_Movement = ShipSpeed + (m_Direction * m_fSpeed);
+
+	// Set fSpeed and Direction to adjusted value
+	m_fSpeed = std::sqrt(m_Movement.x * m_Movement.x + m_Movement.y * m_Movement.y);
+	m_Direction = m_Movement / m_fSpeed;
 }
 
 LinearMovement::LinearMovement(float fRotation, float fSpeed)
