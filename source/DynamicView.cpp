@@ -6,19 +6,17 @@ Copyright (c) MultiMediaTechnology, 2015
 
 #include "Game.h"
 #include "IPosition.h"
+#include "IMovement.h"
 #include "DynamicView.h"
 #include "FrameManager.h"
 
 DynamicView::DynamicView(sf::FloatRect ViewSize, sf::Vector2f MoveVector, float fSpeed)
-{
-    float fStep = (fSpeed / sqrt(pow(MoveVector.x,2.0f) + pow(MoveVector.y,2.0f)));
-    
+{    
     m_CurrentMovePosition = sf::Vector2f(0.f, 0.f);
     m_MoveVector = MoveVector;
-    m_fSteps = fStep;
-    m_fSpeed = fSpeed;
-    
-    m_pView = new sf::View(ViewSize);
+	m_fSpeed = fSpeed;
+	m_zoom = 1.f;
+	m_pView = new sf::View(ViewSize);
     
     FrameManager::GetInstance().RegisterEventObserver(this);
 }
@@ -37,47 +35,27 @@ sf::FloatRect DynamicView::GetViewport()
 
 void DynamicView::OnFrameUpdate(sf::Time DeltaTime)
 {
-	if (m_CurrentMovePosition.x < m_MoveVector.x || m_CurrentMovePosition.y < m_MoveVector.y)
-	{
-		// TODO: Maybe repeating?
-		float fStepsWithDeltaTime = m_fSteps * DeltaTime.asSeconds();
-		sf::Vector2f move = m_MoveVector * fStepsWithDeltaTime;
-		m_CurrentMovePosition += move;
-		m_pView->move(move);
-	}
-
-	// Check if position from current game object is within Boundary
+	// Set camera to center of screen
 	IPosition* pPositionComponent = static_cast<IPosition*>(GetAssignedGameObject()->GetComponent(EComponentType::Position));
-	sf::Vector2f Position = pPositionComponent->GetPosition();
-	sf::Vector2f ViewCenter = m_pView->getCenter();
-	sf::Vector2f TopLeftBoundary(ViewCenter.x - Game::m_iWindowWidth * 0.5f, ViewCenter.y - Game::m_iWindowHeight * 0.5f);
-	bool bPositionChanged = false;
-
-	// Boundary correction in x-axis
-	if (Position.x < TopLeftBoundary.x)
+	if (pPositionComponent != nullptr)
 	{
-		Position.x = TopLeftBoundary.x;
-	}
-	else if (Position.x > TopLeftBoundary.x + Game::m_iWindowWidth)
-	{
-		Position.x = TopLeftBoundary.x + Game::m_iWindowWidth;
+		m_pView->setCenter(pPositionComponent->GetCenter());
 	}
 
-	// Boundary correction in y-axis
-	if (Position.y < TopLeftBoundary.y)
-	{
-		Position.y = TopLeftBoundary.y;
-	}
-	else if (Position.y > TopLeftBoundary.y + Game::m_iWindowHeight)
-	{
-		Position.y = TopLeftBoundary.y + Game::m_iWindowHeight;
-	}
+	// Set zoom based on player ship speed
+	IMovement* pMovementComponent = static_cast<IMovement*>(GetAssignedGameObject()->GetComponent(EComponentType::Movement));
+	sf::Vector2f moveVector = pMovementComponent->GetMovementVector();
 
-	// Set new position
-	pPositionComponent->SetPosition(Position);
+	m_zoom = 1.0f / (std::sqrt(moveVector.x * moveVector.x + moveVector.y * moveVector.y) / 200);
+
+	// Clamp value
+	m_zoom = m_zoom >= 1.0f ? 1.0f
+		: m_zoom <= 0.5f ? 0.5f
+		: m_zoom;
 }
 
 void DynamicView::OnFrameDraw(sf::RenderWindow* pWindow)
 {
+	m_pView->setSize(sf::Vector2f(pWindow->getSize()) / m_zoom);
     pWindow->setView(*m_pView);
 }
