@@ -6,8 +6,8 @@
 #include "ObjectManager.h"
 #include "GameObjectFactory.h"
 
-WorldManager::WorldManager()
-: m_ChunkSize(sf::Vector2f(1000.f, 1000.f))
+WorldManager::WorldManager(sf::Vector2f ChunkSize)
+: m_ChunkSize(ChunkSize)
 {
 }
 
@@ -18,11 +18,17 @@ void WorldManager::AddQuadrant(Quadrant *Quadrant)
         throw std::runtime_error(std::string("A null-reference exception happend by Adding a Quadrant (AddQuadrant)"));
     }
     
-    m_Quadrants.push_back(Quadrant);
+    // Ermitlle Index von neuem Quadranten und überprüfe, ob Index nicht bereits benutzt. Sollten alle Unique sein!
+    std::pair<int,int> QuadrantIndex = Quadrant->GetIndex();
+    if(m_Quadrants[QuadrantIndex] != nullptr)
+    {
+        throw std::runtime_error(std::string("Unique Index already used, maybe wrong Index set for Quadrant?"));
+    }
+    m_Quadrants[QuadrantIndex] = Quadrant;
     
     sf::Vector2f ChunkSize = WorldManager::GetInstance().m_ChunkSize;
     sf::Vector2f TopLeftPosition = Quadrant->GetTopLeftPosition();
-    const int MaxRandItems = 1 + rand() % 8;
+    const int MaxRandItems = 1 + rand() % 100;
     for(int i = 0; i < MaxRandItems; i++)
     {
         float x = TopLeftPosition.x + rand() % static_cast<int>(ChunkSize.x);
@@ -33,19 +39,32 @@ void WorldManager::AddQuadrant(Quadrant *Quadrant)
     }
 }
 
+Quadrant* WorldManager::GetQuadrant(std::pair<int,int> QuadrantIndex)
+{
+    auto it = m_Quadrants.find(QuadrantIndex);
+    if(it == m_Quadrants.end()) return nullptr;
+    return it->second;
+}
+
 void WorldManager::Update(sf::RenderWindow *pWindow)
 {
     // DEBUG Purpose: Zeige die Quadranten.
-    for(int i = 0; i < m_Quadrants.size(); i++)
+    /*
+    auto it = m_Quadrants.begin();
+    while(it != m_Quadrants.end())
     {
-        if(m_Quadrants[i] == nullptr) continue;
-        sf::RectangleShape shape;
-        sf::Color color(255.f, 128.f, 0.f, 128.f);
-        shape.setSize(WorldManager::GetInstance().m_ChunkSize);
-        shape.setPosition(m_Quadrants[i]->GetTopLeftPosition());
-        shape.setFillColor(color);
-        pWindow->draw(shape);
+        if(it->second != nullptr)
+        {
+            sf::RectangleShape shape;
+            sf::Color color(255.f, 128.f, 0.f, 128.f);
+            shape.setSize(WorldManager::GetInstance().m_ChunkSize);
+            shape.setPosition(it->second->GetTopLeftPosition());
+            shape.setFillColor(color);
+            pWindow->draw(shape);
+        }
+        ++it;
     }
+     */
 }
 
 void WorldManager::RegisterEventObserver(IQuadrantObserver* pObserver)
