@@ -16,6 +16,7 @@ public:
     sf::Vector2f GetPosition();
     void SetRotation(float rotation);
     float GetRotation();
+    sf::Vector2f GetCenter();
     void SetOrigin(sf::Vector2f Origin);
     sf::Vector2f GetOrigin();
     

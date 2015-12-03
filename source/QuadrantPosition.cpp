@@ -57,6 +57,11 @@ sf::Vector2f QuadrantPosition::GetOrigin()
     return m_Origin;
 }
 
+sf::Vector2f QuadrantPosition::GetCenter()
+{
+    return (this->m_Position + this->GetOrigin());
+}
+
 void QuadrantPosition::SetRotation(float rotation)
 {
     m_fRotation = rotation;
