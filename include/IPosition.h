@@ -7,6 +7,7 @@ Copyright (c) MultiMediaTechnology, 2015
 #include <SFML/Graphics.hpp>
 
 #include "IComponent.h"
+#include "Quadrant.h"
 
 class IPosition : public IComponent
 {
@@ -24,6 +25,7 @@ public:
 	virtual void SetRotation(float rotation) = 0;
 	virtual void SetOrigin(sf::Vector2f Origin) = 0;
 	virtual sf::Vector2f GetOrigin() = 0;
+    virtual Quadrant* GetQuadrant() { return nullptr; }
 
 	EComponentType GetComponentType()
 	{
