@@ -49,6 +49,12 @@
     <Filter Include="Source Files\Components\IHealth">
       <UniqueIdentifier>{15ea29d9-83b6-4d91-8292-a286bd2eb85e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Managers\CollisionManager">
+      <UniqueIdentifier>{a32cbe22-1db8-4c59-9689-a24d95d48073}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Components\ICollision">
+      <UniqueIdentifier>{4be37fd3-6317-4904-951a-d48e4539f88a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\main.cpp">
@@ -101,6 +107,12 @@
     </ClCompile>
     <ClCompile Include="source\Missilehealth.cpp">
       <Filter>Source Files\Components\IHealth</Filter>
+    </ClCompile>
+    <ClCompile Include="source\CollisionManager.cpp">
+      <Filter>Source Files\Managers\CollisionManager</Filter>
+    </ClCompile>
+    <ClCompile Include="source\CircleCollision.cpp">
+      <Filter>Source Files\Components\ICollision</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -181,6 +193,15 @@
     </ClInclude>
     <ClInclude Include="include\Missilehealth.h">
       <Filter>Source Files\Components\IHealth</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CollisionManager.h">
+      <Filter>Source Files\Managers\CollisionManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ICollision.h">
+      <Filter>Source Files\Components\ICollision</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CircleCollision.h">
+      <Filter>Source Files\Components\ICollision</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
