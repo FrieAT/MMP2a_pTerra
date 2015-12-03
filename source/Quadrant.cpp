@@ -2,17 +2,20 @@
  Copyright (c) MultiMediaTechnology, 2015
  =================================================================*/
 
+#include <math.h>
+
 #include "Quadrant.h"
 #include "WorldManager.h"
 
 Quadrant::Quadrant(sf::Vector2f TopLeftPosition)
 {
     sf::Vector2f ChunkSize = WorldManager::GetInstance().m_ChunkSize;
-    int dYIndex = static_cast<int>(TopLeftPosition.y / ChunkSize.y);
-    int dXIndex = static_cast<int>(TopLeftPosition.x / ChunkSize.x);
-    m_lIndex = (dYIndex + 1) * dXIndex;
+    int dYIndex = static_cast<int>(floor(TopLeftPosition.y / ChunkSize.y));
+    int dXIndex = static_cast<int>(floor(TopLeftPosition.x / ChunkSize.x));
+    
     m_bFreezed = false;
     m_TopLeftPosition = sf::Vector2f(dXIndex * ChunkSize.x, dYIndex * ChunkSize.y);
+    
     std::cout << "Given Position (" << TopLeftPosition.x << " / " << TopLeftPosition.y << ") | Changed: (" << m_TopLeftPosition.x << " / " << m_TopLeftPosition.y << ")" << std::endl;
     m_NearQuadrants = std::map<EQuadrantPos, Quadrant*>();
     for(int i = 0; i < (int)EQuadrantPos::MaxDirections; i++) {
@@ -30,11 +33,6 @@ bool Quadrant::GetFreezedState()
     return m_bFreezed;
 }
 
-long Quadrant::GetIndex()
-{
-    return m_lIndex;
-}
-
 unsigned Quadrant::RegisterGameObject(GameObject *pObject)
 {
     if(pObject == nullptr) return 0;
@@ -42,7 +40,7 @@ unsigned Quadrant::RegisterGameObject(GameObject *pObject)
     return m_GameObjects.size();
 }
 
-void Quadrant::UnregisterGameObject(unsigned iIndex)
+void Quadrant::UnregisterGameObject(int iIndex)
 {
     if((iIndex--) == 0) return;
     m_GameObjects.erase(m_GameObjects.begin() + iIndex);
@@ -63,6 +61,7 @@ sf::Vector2f Quadrant::CalculatePositionForNeighbour(EQuadrantPos eChunkPosition
 {
     sf::Vector2f ChunkPosition = m_TopLeftPosition;
     sf::Vector2f ChunkSize = WorldManager::GetInstance().m_ChunkSize;
+    
     if(eChunkPosition == EQuadrantPos::TopLeft)
     {
         ChunkPosition.x -= ChunkSize.x;

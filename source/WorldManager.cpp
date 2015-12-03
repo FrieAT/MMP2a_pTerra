@@ -6,19 +6,20 @@
 #include "ObjectManager.h"
 #include "GameObjectFactory.h"
 
+WorldManager::WorldManager()
+: m_ChunkSize(sf::Vector2f(1000.f, 1000.f))
+{
+}
+
 void WorldManager::AddQuadrant(Quadrant *Quadrant)
 {
     if(Quadrant == nullptr)
     {
         throw std::runtime_error(std::string("A null-reference exception happend by Adding a Quadrant (AddQuadrant)"));
     }
-    long lIndex = Quadrant->GetIndex();
-    if (m_Quadrants[lIndex] != nullptr)
-    {
-        return;
-    }
-    m_Quadrants[lIndex] = Quadrant;
-
+    
+    m_Quadrants.push_back(Quadrant);
+    
     sf::Vector2f ChunkSize = WorldManager::GetInstance().m_ChunkSize;
     sf::Vector2f TopLeftPosition = Quadrant->GetTopLeftPosition();
     const int MaxRandItems = 1 + rand() % 8;
@@ -35,6 +36,7 @@ void WorldManager::AddQuadrant(Quadrant *Quadrant)
 void WorldManager::Update(sf::RenderWindow *pWindow)
 {
     // DEBUG Purpose: Zeige die Quadranten.
+    /*
     for(int i = 0; i < m_Quadrants.size(); i++)
     {
         if(m_Quadrants[i] == nullptr) continue;
@@ -45,6 +47,7 @@ void WorldManager::Update(sf::RenderWindow *pWindow)
         shape.setFillColor(color);
         pWindow->draw(shape);
     }
+    */
 }
 
 void WorldManager::RegisterEventObserver(IQuadrantObserver* pObserver)

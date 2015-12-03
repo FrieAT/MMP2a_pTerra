@@ -31,10 +31,10 @@ public:
     void UnregisterEventObserver(IQuadrantObserver* pObserver);
     void Clear();
 private:
-    WorldManager() : m_ChunkSize(sf::Vector2f(200.f, 200.f)) { }
+    WorldManager();
     WorldManager(const WorldManager&) = delete;
     void operator= (const WorldManager&) = delete;
     std::vector<IQuadrantObserver*> m_Observers;
-    std::map<long, Quadrant*> m_Quadrants;
+    std::vector<Quadrant*> m_Quadrants;
     void UpdateEventObserver(std::string strEvent);
 };
