@@ -32,6 +32,10 @@ LinearMovement::~LinearMovement()
     FrameManager::GetInstance().UnregisterEventObserver(this);
 }
 
+sf::Vector2f LinearMovement::GetImpulseDirection()
+{
+    return m_Movement;
+}
 
 void LinearMovement::OnFrameUpdate(sf::Time DeltaTime)
 {

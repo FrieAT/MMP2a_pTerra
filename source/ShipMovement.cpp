@@ -121,7 +121,15 @@ void ShipMovement::UpdateMovement()
 
 }
 
-
+sf::Vector2f ShipMovement::GetImpulseDirection()
+{
+    sf::Vector2f Impulse(0.f, 0.f);
+    for (unsigned int i = 0; i < m_Impulses.size();i++)
+    {
+        Impulse += m_Impulses[i];
+    }
+    return;
+}
 
 void ShipMovement::OnFrameUpdate(sf::Time DeltaTime)
 {
