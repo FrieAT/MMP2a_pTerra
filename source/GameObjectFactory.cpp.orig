@@ -21,8 +21,13 @@ GameObject* GameObjectFactory::CreatePlayerShip(sf::Vector2f Position, char cPla
 	pShip->SetComponent(pos);
 	pShip->SetComponent(new ShipMovement(cPlayer));
 	pShip->SetComponent(new SpriteDrawing(std::string("assets/space_ship.png")));
+<<<<<<< HEAD
+    pShip->SetComponent(new ScriptedView(sf::FloatRect(0, 0, static_cast<float>(Game::m_iWindowWidth), static_cast<float>(Game::m_iWindowHeight)), sf::Vector2f(1920.f - static_cast<float>(Game::m_iWindowWidth), 0), 20.f));
+	pShip->SetComponent(new CircleCollision(50.f,pos));
+=======
     pShip->SetComponent(new DynamicView(sf::FloatRect(0, 0, static_cast<float>(Game::m_iWindowWidth), static_cast<float>(Game::m_iWindowHeight)), sf::Vector2f(1920.f - static_cast<float>(Game::m_iWindowWidth), 0), 20.f));
-    pShip->SetComponent(new CircleCollision(30.f,pos));
+    
+>>>>>>> 6d0762fc4d24d3c3b857a1f5715e39293221020a
 	return pShip;
 }
 
@@ -42,11 +47,10 @@ GameObject* GameObjectFactory::CreateAsteroid(sf::Vector2f vPosition, float fRot
 {
 	// TODO: Make it possible to change component values / change the whole factory
 	GameObject* pAsteroid = new GameObject(std::string("asteroid"));
-	PixelPosition* pos = new PixelPosition(vPosition, sf::Vector2f(83.f, 66.5f));
-	pAsteroid->SetComponent(pos);
+
+	pAsteroid->SetComponent(new PixelPosition(vPosition, sf::Vector2f(83.f, 66.5f)));
 	pAsteroid->SetComponent(new LinearMovement(fRotation, fSpeed));
 	pAsteroid->SetComponent(new SpriteDrawing(std::string("assets/asteroid.png"),sf::Vector2f(83.f, 66.5f)));
-	pAsteroid->SetComponent(new CircleCollision(40.f, pos));
 
 	return pAsteroid;
 }

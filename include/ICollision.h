@@ -8,6 +8,7 @@ Copyright (c) MultiMediaTechnology, 2015
 
 #include "IComponent.h"
 
+
 class ICollision : public IComponent
 {
 public:
