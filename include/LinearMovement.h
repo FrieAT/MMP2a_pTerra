@@ -15,6 +15,7 @@ public:
 	LinearMovement(float fRotation, float fSpeed);
     sf::Vector2f GetImpulseDirection();
     ~LinearMovement();
+	sf::Vector2f GetMovementVector();
     void OnFrameUpdate(sf::Time DeltaTime);
 	float m_fSpeed;
 

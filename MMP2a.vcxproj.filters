@@ -90,9 +90,6 @@
     <ClCompile Include="source\GameObjectFactory.cpp">
       <Filter>Source Files\GameObject</Filter>
     </ClCompile>
-    <ClCompile Include="source\ScriptedView.cpp">
-      <Filter>Source Files\Components\IView</Filter>
-    </ClCompile>
     <ClCompile Include="source\FontDrawing.cpp">
       <Filter>Source Files\Components\IDrawing</Filter>
     </ClCompile>
@@ -101,6 +98,9 @@
     </ClCompile>
     <ClCompile Include="source\Missilehealth.cpp">
       <Filter>Source Files\Components\IHealth</Filter>
+    </ClCompile>
+    <ClCompile Include="source\DynamicView.cpp">
+      <Filter>Source Files\Components\IView</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -167,9 +167,6 @@
     <ClInclude Include="include\IView.h">
       <Filter>Source Files\Components\IView</Filter>
     </ClInclude>
-    <ClInclude Include="include\ScriptedView.h">
-      <Filter>Source Files\Components\IView</Filter>
-    </ClInclude>
     <ClInclude Include="include\FontDrawing.h">
       <Filter>Source Files\Components\IDrawing</Filter>
     </ClInclude>
@@ -181,6 +178,9 @@
     </ClInclude>
     <ClInclude Include="include\Missilehealth.h">
       <Filter>Source Files\Components\IHealth</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DynamicView.h">
+      <Filter>Source Files\Components\IView</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

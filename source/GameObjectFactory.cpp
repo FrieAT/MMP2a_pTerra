@@ -9,7 +9,7 @@ Copyright (c) MultiMediaTechnology, 2015
 #include "PixelPosition.h"
 #include "FontDrawing.h"
 #include "ShipMovement.h"
-#include "ScriptedView.h"
+#include "DynamicView.h"
 #include "Missilehealth.h"
 
 GameObject* GameObjectFactory::CreatePlayerShip(sf::Vector2f Position, char cPlayer)
@@ -20,7 +20,7 @@ GameObject* GameObjectFactory::CreatePlayerShip(sf::Vector2f Position, char cPla
 	pShip->SetComponent(new PixelPosition(sf::Vector2f(Position), sf::Vector2f(32.f, 32.f)));
 	pShip->SetComponent(new ShipMovement(cPlayer));
 	pShip->SetComponent(new SpriteDrawing(std::string("assets/space_ship.png")));
-    pShip->SetComponent(new ScriptedView(sf::FloatRect(0, 0, static_cast<float>(Game::m_iWindowWidth), static_cast<float>(Game::m_iWindowHeight)), sf::Vector2f(1920.f - static_cast<float>(Game::m_iWindowWidth), 0), 20.f));
+    pShip->SetComponent(new DynamicView(sf::FloatRect(0, 0, static_cast<float>(Game::m_iWindowWidth), static_cast<float>(Game::m_iWindowHeight)), sf::Vector2f(1920.f - static_cast<float>(Game::m_iWindowWidth), 0), 20.f));
     
 	return pShip;
 }
