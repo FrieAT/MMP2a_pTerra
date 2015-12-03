@@ -2,6 +2,8 @@
 Copyright (c) MultiMediaTechnology, 2015
 =================================================================*/
 
+#include <math.h>
+
 #include "LinearMovement.h"
 #include "GameObject.h"
 #include "IPosition.h"
@@ -19,7 +21,7 @@ LinearMovement::LinearMovement(float fRotation, sf::Vector2f ShipSpeed)
 	m_Movement = ShipSpeed + (m_Direction * m_fSpeed);
 
 	// Set fSpeed and Direction to adjusted value
-	m_fSpeed = std::sqrt(m_Movement.x * m_Movement.x + m_Movement.y * m_Movement.y);
+	m_fSpeed = sqrt(m_Movement.x * m_Movement.x + m_Movement.y * m_Movement.y);
 	m_Direction = m_Movement / m_fSpeed;
 }
 

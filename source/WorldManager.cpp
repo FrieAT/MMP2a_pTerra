@@ -36,7 +36,6 @@ void WorldManager::AddQuadrant(Quadrant *Quadrant)
 void WorldManager::Update(sf::RenderWindow *pWindow)
 {
     // DEBUG Purpose: Zeige die Quadranten.
-    /*
     for(int i = 0; i < m_Quadrants.size(); i++)
     {
         if(m_Quadrants[i] == nullptr) continue;
@@ -47,7 +46,6 @@ void WorldManager::Update(sf::RenderWindow *pWindow)
         shape.setFillColor(color);
         pWindow->draw(shape);
     }
-    */
 }
 
 void WorldManager::RegisterEventObserver(IQuadrantObserver* pObserver)
