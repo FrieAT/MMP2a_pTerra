@@ -11,17 +11,18 @@ Copyright (c) MultiMediaTechnology, 2015
 #include "ShipMovement.h"
 #include "ScriptedView.h"
 #include "Missilehealth.h"
+#include "CircleCollision.h"
 
 GameObject* GameObjectFactory::CreatePlayerShip(sf::Vector2f Position, char cPlayer)
 {
 	// TODO: Make it possible to change component values / change the whole factory
 	GameObject* pShip = new GameObject(std::string("ship"));
-
-	pShip->SetComponent(new PixelPosition(sf::Vector2f(Position), sf::Vector2f(32.f, 32.f)));
+	PixelPosition* pos = new PixelPosition(sf::Vector2f(Position), sf::Vector2f(32.f, 32.f));
+	pShip->SetComponent(pos);
 	pShip->SetComponent(new ShipMovement(cPlayer));
 	pShip->SetComponent(new SpriteDrawing(std::string("assets/space_ship.png")));
     pShip->SetComponent(new ScriptedView(sf::FloatRect(0, 0, static_cast<float>(Game::m_iWindowWidth), static_cast<float>(Game::m_iWindowHeight)), sf::Vector2f(1920.f - static_cast<float>(Game::m_iWindowWidth), 0), 20.f));
-    
+	pShip->SetComponent(new CircleCollision(50.f,pos));
 	return pShip;
 }
 

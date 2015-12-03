@@ -12,6 +12,7 @@ Copyright (c) MultiMediaTechnology, 2015
 #include "FrameManager.h"
 #include "InputManager.h"
 #include "ObjectManager.h"
+#include "CollisionManager.h"
 
 Game* Game::m_pEngine = nullptr;
 
@@ -46,6 +47,7 @@ Game::~Game()
 	FrameManager::GetInstance().Clear();
 	InputManager::GetInstance().Clear();
 	ObjectManager::GetInstance().Clear();
+	CollisionManager::GetInstance().Clear();
 
 	delete m_pWindow;
     m_pEngine = nullptr;
@@ -77,6 +79,7 @@ void Game::Start()
         FrameManager::GetInstance().Update(deltaTime);
         InputManager::GetInstance().Update(m_pWindow);
         ObjectManager::GetInstance().Update(deltaTime);
+		CollisionManager::GetInstance().Update(deltaTime);
 
 		// Rendering
         FrameManager::GetInstance().Draw(m_pWindow);

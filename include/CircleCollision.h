@@ -10,9 +10,9 @@ Copyright (c) MultiMediaTechnology, 2015
 class CircleCollision : public ICollision
 {
 public:
-	CircleCollision(float radius, PixelPosition pos);
+	CircleCollision(float radius, PixelPosition* pos);
 	~CircleCollision();
 	bool colliding(ICollision* Collidingbody);
 	float radius;
-	PixelPosition pos;
+	PixelPosition* pos;
 };

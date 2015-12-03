@@ -18,7 +18,7 @@ public:
 	void Update(sf::Time DeltaTime);
 	void RegisterCollisionbody(ICollision* Collisionbody);
 	void UnregisterCollisionbody(ICollision* Collisionbody);
-	void clear();
+	void Clear();
 private:
 	CollisionManager() { }
 	CollisionManager(const CollisionManager&) = delete;

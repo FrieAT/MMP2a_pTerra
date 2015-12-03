@@ -1,20 +1,24 @@
 #include "CircleCollision.h"
 #include "CollisionManager.h"
 
-CircleCollision::CircleCollision(float radius,PixelPosition pos)
+#include <iostream>
+
+CircleCollision::CircleCollision(float radius_,PixelPosition* pos_)
+	:pos(pos_)
+	,radius(radius_)
 {
 	CollisionManager::GetInstance().RegisterCollisionbody(this);
-	this->radius = radius;
-	this->pos = pos;
 }
 
 CircleCollision::~CircleCollision()
 {
 	CollisionManager::GetInstance().UnregisterCollisionbody(this);
+		
 }
 
 bool CircleCollision::colliding(ICollision* Collidingbody)
 {
 	CircleCollision* other = static_cast<CircleCollision*> (Collidingbody);
-
+	std::cout << "called" << std::endl;
+	return true;
 }

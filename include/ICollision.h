@@ -11,14 +11,14 @@ Copyright (c) MultiMediaTechnology, 2015
 class ICollision : public IComponent
 {
 public:
-
+	ICollision() { }
 	virtual ~ICollision() { }
-	virtual bool colliding(GameObject* Collisionbody) = 0;
+	virtual bool colliding(ICollision* Collisionbody) = 0;
 	sf::Vector2f restitution;
 
 	EComponentType GetComponentType()
 	{
-		return EComponentType::Position;
+		return EComponentType::Collision;
 	}
 
 };
