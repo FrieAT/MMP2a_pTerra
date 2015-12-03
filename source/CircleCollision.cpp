@@ -48,6 +48,6 @@ void CircleCollision::OnFrameDraw(sf::RenderWindow * pWindow)
 	else test.setFillColor(sf::Color::Blue);
 	test.setPosition(pos->GetPosition()- sf::Vector2f(radius, radius));
 	
-	pWindow->draw(test);
+	// pWindow->draw(test);
 
 }
