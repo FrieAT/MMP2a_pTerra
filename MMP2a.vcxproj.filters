@@ -49,6 +49,12 @@
     <Filter Include="Source Files\Components\IHealth">
       <UniqueIdentifier>{15ea29d9-83b6-4d91-8292-a286bd2eb85e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Components\ICollision">
+      <UniqueIdentifier>{8e9fbf21-bca6-41e3-93aa-449982165899}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Managers\CollisionManager">
+      <UniqueIdentifier>{b60cb567-e7c9-4977-837b-1a3356ab7003}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\main.cpp">
@@ -101,6 +107,12 @@
     </ClCompile>
     <ClCompile Include="source\DynamicView.cpp">
       <Filter>Source Files\Components\IView</Filter>
+    </ClCompile>
+    <ClCompile Include="source\CircleCollision.cpp">
+      <Filter>Source Files\Components\ICollision</Filter>
+    </ClCompile>
+    <ClCompile Include="source\CollisionManager.cpp">
+      <Filter>Source Files\Managers\CollisionManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -181,6 +193,15 @@
     </ClInclude>
     <ClInclude Include="include\DynamicView.h">
       <Filter>Source Files\Components\IView</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ICollision.h">
+      <Filter>Source Files\Components\ICollision</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CircleCollision.h">
+      <Filter>Source Files\Components\ICollision</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CollisionManager.h">
+      <Filter>Source Files\Managers\CollisionManager</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

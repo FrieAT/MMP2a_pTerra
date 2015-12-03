@@ -18,8 +18,8 @@ public:
     void ChangeState(IGameState* pState);
     
     static Game* m_pEngine;
-    static const int m_iWindowWidth = 1920;
-    static const int m_iWindowHeight = 1080;
+    static const int m_iWindowWidth = 800;
+    static const int m_iWindowHeight = 600;
 protected:
     sf::RenderWindow* m_pWindow;
     std::vector<IGameState*> m_States;

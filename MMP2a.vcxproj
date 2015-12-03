@@ -143,6 +143,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="source\CircleCollision.cpp" />
+    <ClCompile Include="source\CollisionManager.cpp" />
     <ClCompile Include="source\FontDrawing.cpp" />
     <ClCompile Include="source\FrameManager.cpp" />
     <ClCompile Include="source\Game.cpp" />
@@ -162,6 +164,8 @@
     <ClCompile Include="source\SpriteDrawing.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\CircleCollision.h" />
+    <ClInclude Include="include\CollisionManager.h" />
     <ClInclude Include="include\EComponentType.h" />
     <ClInclude Include="include\FontDrawing.h" />
     <ClInclude Include="include\FrameManager.h" />
@@ -188,6 +192,7 @@
     <ClInclude Include="include\Shiphealth.h" />
     <ClInclude Include="include\ShipMovement.h" />
     <ClInclude Include="include\SpriteDrawing.h" />
+    <ClInclude Include="include\ICollision.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
