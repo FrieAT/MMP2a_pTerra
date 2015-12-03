@@ -79,14 +79,14 @@ EQuadrantPos QuadrantPosition::GetDirectionKeyFromPos(sf::Vector2f Position)
     sf::Vector2f BottomRightPosition((TopLeftPosition.x + ChunkSize.x), (TopLeftPosition.y + ChunkSize.y));
     
     // Prediction Position
-    const float predictionFactor = 2.f;
+    const float predictionFactor = 1.f;
     sf::Vector2f PredictedPosition = Position;
     IMovement* MovementComponent = static_cast<IMovement*>(GetAssignedGameObject()->GetComponent(EComponentType::Movement));
     if(MovementComponent != nullptr)
     {
         sf::Vector2f ImpulseDirection = MovementComponent->GetMovementVector();
         std::cout << "Movement Direction: " << ImpulseDirection.x << " / " << ImpulseDirection.y << std::endl;
-        // PredictedPosition += ImpulseDirection * predictionFactor;
+        PredictedPosition += ImpulseDirection * predictionFactor;
     }
     
     if(PredictedPosition.x < TopLeftPosition.x && PredictedPosition.y < TopLeftPosition.y)
