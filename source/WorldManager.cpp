@@ -28,13 +28,13 @@ void WorldManager::AddQuadrant(Quadrant *Quadrant)
     
     sf::Vector2f ChunkSize = WorldManager::GetInstance().m_ChunkSize;
     sf::Vector2f TopLeftPosition = Quadrant->GetTopLeftPosition();
-    const int MaxRandItems = 1 + rand() % 100;
-    for(int i = 0; i < MaxRandItems; i++)
+    const int MaxAsteroidRandItems = 1 + rand() % 10;
+    for(int i = 0; i < MaxAsteroidRandItems; i++)
     {
         float x = TopLeftPosition.x + rand() % static_cast<int>(ChunkSize.x);
         float y = TopLeftPosition.y + rand() % static_cast<int>(ChunkSize.y);
         
-        GameObject* asteroid = GameObjectFactory::CreateAsteroid(sf::Vector2f(x, y), rand() % 360, 50 + rand() % 150);
+        GameObject* asteroid = GameObjectFactory::CreateAsteroid(sf::Vector2f(x, y), rand() % 360, 50 + rand() % 10);
         ObjectManager::GetInstance().AddGameObject(asteroid);
     }
 }
