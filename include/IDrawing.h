@@ -14,8 +14,11 @@ class IDrawing : public IComponent
 public:
     virtual ~IDrawing() { }
 	virtual void Draw(sf::RenderWindow* pWindow) = 0;
-	virtual void Update() = 0;
-	EComponentType GetComponentType()
+    virtual void Update() = 0;
+    virtual void SetTextureArea(sf::FloatRect Area) = 0;
+    virtual const sf::FloatRect& GetTextureArea() = 0;
+	
+    EComponentType GetComponentType()
 	{
 		return EComponentType::Drawing;
 	}

@@ -41,3 +41,13 @@ void FontDrawing::Draw(sf::RenderWindow* pWindow)
     m_pText->setPosition(Position.x, Position.y);
     pWindow->draw(*m_pText);
 }
+
+sf::FloatRect FontDrawing::GetTextureArea()
+{
+    throw std::runtime_error(std::string("NotImplemented: Texture-Area doesn´t exist in sf::Text."));
+}
+
+void FontDrawing::SetTextureArea(sf::FloatRect Area)
+{
+    throw std::runtime_error(std::string("NotImplemented: Texture-Area doesn´t exist in sf::Text."));
+}

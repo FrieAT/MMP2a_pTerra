@@ -16,6 +16,8 @@ public:
     ~SpriteDrawing();
     void Update();
 	void Draw(sf::RenderWindow* pWindow);
+    void SetTextureArea(sf::FloatRect Area);
+    sf::FloatRect GetTextureArea();
 protected:
 	sf::Sprite* m_pSprite;
 	sf::Texture* m_pTexture;

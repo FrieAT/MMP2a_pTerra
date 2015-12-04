@@ -56,3 +56,13 @@ void SpriteDrawing::Draw(sf::RenderWindow* pWindow)
 	Update();
 	pWindow->draw(*m_pSprite);
 }
+
+sf::FloatRect SpriteDrawing::GetTextureArea()
+{
+    return sf::FloatRect(m_pSprite->getTextureRect());
+}
+
+void SpriteDrawing::SetTextureArea(sf::FloatRect Area)
+{
+    m_pSprite->setTextureRect(sf::IntRect(Area));
+}
