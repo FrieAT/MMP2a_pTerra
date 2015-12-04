@@ -50,7 +50,7 @@ void WorldManager::AddQuadrant(Quadrant *Quadrant)
     sf::Vector2f TopLeftPosition = Quadrant->GetTopLeftPosition();
     
     const int MaxAsteroidRandItems = 5;
-    const int MaxStarsRandItems = 50;
+    const int MaxStarsRandItems = 10;
     
     for(int i = 0; i < MaxAsteroidRandItems; i++)
     {

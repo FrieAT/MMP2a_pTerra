@@ -87,7 +87,7 @@ EQuadrantPos QuadrantPosition::GetDirectionKeyFromPos(sf::Vector2f Position)
     IMovement* MovementComponent = static_cast<IMovement*>(GetAssignedGameObject()->GetComponent(EComponentType::Movement));
     if(MovementComponent != nullptr)
     {
-        sf::Vector2f ImpulseDirection = MovementComponent->GetMovementVector() * 10.f;
+        sf::Vector2f ImpulseDirection = MovementComponent->GetMovementVector();
         // std::cout << "Movement Direction: " << ImpulseDirection.x << " / " << ImpulseDirection.y << std::endl;
         PredictedPosition += ImpulseDirection;
     }
