@@ -72,6 +72,27 @@ GameObject* GameObjectFactory::CreateBackgroundSprite(std::string strBackgroundP
     return pBackground;
 }
 
+GameObject* GameObjectFactory::CreateBackgroundStar(sf::Vector2f Position)
+{
+    int TextureWidth = 100;
+    int TextureHeight = 100;
+    int TextureAmountX = 6;
+    int TextureAmountY = 3;
+    
+    int TextureX = (rand() % TextureAmountX) * TextureWidth;
+    int TextureY = (rand() % TextureAmountY) * TextureHeight;
+    
+    GameObject* pStarBackground = new GameObject(std::string("background"));
+    SpriteDrawing* pSprite = new SpriteDrawing("assets/Star-Sprites.png", sf::Vector2f(0.f,0.f));
+    
+    pSprite->SetTextureArea(sf::FloatRect(TextureX, TextureY, TextureWidth, TextureHeight));
+    
+    pStarBackground->SetComponent(new PixelPosition(Position, sf::Vector2f(0.f, 0.f)));
+    pStarBackground->SetComponent(pSprite);
+    
+    return pStarBackground;
+}
+
 GameObject* GameObjectFactory::CreateFontText(sf::Vector2f Position, std::string strFontPath, std::string strText, int iCharSize)
 {
     GameObject* pFontText = new GameObject(std::string("text"));

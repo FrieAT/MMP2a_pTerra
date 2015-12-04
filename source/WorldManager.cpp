@@ -28,7 +28,10 @@ void WorldManager::AddQuadrant(Quadrant *Quadrant)
     
     sf::Vector2f ChunkSize = WorldManager::GetInstance().m_ChunkSize;
     sf::Vector2f TopLeftPosition = Quadrant->GetTopLeftPosition();
-    const int MaxAsteroidRandItems = 1 + rand() % 10;
+    
+    const int MaxAsteroidRandItems = 5;
+    const int MaxStarsRandItems = 30;
+    
     for(int i = 0; i < MaxAsteroidRandItems; i++)
     {
         float x = TopLeftPosition.x + rand() % static_cast<int>(ChunkSize.x);
@@ -36,6 +39,15 @@ void WorldManager::AddQuadrant(Quadrant *Quadrant)
         
         GameObject* asteroid = GameObjectFactory::CreateAsteroid(sf::Vector2f(x, y), rand() % 360, 50 + rand() % 10);
         ObjectManager::GetInstance().AddGameObject(asteroid);
+    }
+    
+    for(int i = 0; i < MaxStarsRandItems; i++)
+    {
+        float x = TopLeftPosition.x + rand() % static_cast<int>(ChunkSize.x);
+        float y = TopLeftPosition.y + rand() % static_cast<int>(ChunkSize.y);
+        
+        GameObject* star_background = GameObjectFactory::CreateBackgroundStar(sf::Vector2f(x, y));
+        ObjectManager::GetInstance().AddGameObject(star_background);
     }
 }
 
