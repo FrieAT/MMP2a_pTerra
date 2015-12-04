@@ -6,9 +6,29 @@
 #include "ObjectManager.h"
 #include "GameObjectFactory.h"
 
-WorldManager::WorldManager(sf::Vector2f ChunkSize)
+WorldManager::WorldManager(sf::Vector2f ChunkSize, unsigned long MaxRandomCoordinates)
 : m_ChunkSize(ChunkSize)
+, m_MaxRandomCoordinates(MaxRandomCoordinates)
 {
+    for(unsigned long i = 0; i < m_MaxRandomCoordinates; i++)
+    {
+        float x = rand() % static_cast<int>(ChunkSize.x);
+        float y = rand() % static_cast<int>(ChunkSize.y);
+        m_RandomCoordinates.push_back(sf::Vector2f(x, y));
+    }
+}
+
+sf::Vector2f WorldManager::GetRandomChunkPositionFromChunk(Quadrant *pChunk)
+{
+    if(pChunk == nullptr)
+    {
+        throw std::runtime_error(std::string("Null-reference-expeption in pChunk Object."));
+    }
+    if(m_IndexRandomCoordinates >= m_RandomCoordinates.size())
+    {
+        m_IndexRandomCoordinates = 0;
+    }
+    return (pChunk->GetTopLeftPosition() + m_RandomCoordinates[m_IndexRandomCoordinates++]);
 }
 
 void WorldManager::AddQuadrant(Quadrant *Quadrant)
@@ -34,19 +54,13 @@ void WorldManager::AddQuadrant(Quadrant *Quadrant)
     
     for(int i = 0; i < MaxAsteroidRandItems; i++)
     {
-        float x = TopLeftPosition.x + rand() % static_cast<int>(ChunkSize.x);
-        float y = TopLeftPosition.y + rand() % static_cast<int>(ChunkSize.y);
-        
-        GameObject* asteroid = GameObjectFactory::CreateAsteroid(sf::Vector2f(x, y), rand() % 360, 50 + rand() % 10);
+        GameObject* asteroid = GameObjectFactory::CreateAsteroid(GetRandomChunkPositionFromChunk(Quadrant), rand() % 360, 50 + rand() % 10);
         ObjectManager::GetInstance().AddGameObject(asteroid);
     }
     
     for(int i = 0; i < MaxStarsRandItems; i++)
     {
-        float x = TopLeftPosition.x + rand() % static_cast<int>(ChunkSize.x);
-        float y = TopLeftPosition.y + rand() % static_cast<int>(ChunkSize.y);
-        
-        GameObject* star_background = GameObjectFactory::CreateBackgroundStar(sf::Vector2f(x, y));
+        GameObject* star_background = GameObjectFactory::CreateBackgroundStar(GetRandomChunkPositionFromChunk(Quadrant));
         ObjectManager::GetInstance().AddGameObject(star_background);
     }
 }
