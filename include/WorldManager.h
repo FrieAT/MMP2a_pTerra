@@ -23,7 +23,7 @@ public:
     
     static WorldManager& GetInstance()
     {
-        static WorldManager g_Instance(sf::Vector2f(3000.f, 3000.f), 10000);
+        static WorldManager g_Instance(sf::Vector2f(10000.f, 10000.f), 100000);
         return g_Instance;
     }
     void AddQuadrant(Quadrant* Quadrant);

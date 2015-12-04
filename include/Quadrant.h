@@ -18,7 +18,7 @@ public:
     std::pair<int,int> GetIndex();
     unsigned RegisterGameObject(GameObject* pObject); // TODO: Not used, but should be.
     void UnregisterGameObject(int iIndex); // TODO: Not used, but should be.
-    Quadrant* GetNeighbour(EQuadrantPos eChunkPosition, char uChunkDepth = 2);
+    Quadrant* GetNeighbour(EQuadrantPos eChunkPosition, char uChunkDepth = 0);
 private:
     std::pair<int,int> m_Index;
     sf::Vector2f m_TopLeftPosition;

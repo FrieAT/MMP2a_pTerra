@@ -13,6 +13,10 @@ QuadrantPosition::QuadrantPosition(sf::Vector2f Position, sf::Vector2f Origin)
 {
     UpdateQuadrantPosition();
     m_Quadrant = new Quadrant(Position);
+    m_Quadrant->GetNeighbour(EQuadrantPos::Top);
+    m_Quadrant->GetNeighbour(EQuadrantPos::Bottom);
+    m_Quadrant->GetNeighbour(EQuadrantPos::Left);
+    m_Quadrant->GetNeighbour(EQuadrantPos::Right);
     WorldManager::GetInstance().AddQuadrant(m_Quadrant);
 }
 
@@ -83,7 +87,7 @@ EQuadrantPos QuadrantPosition::GetDirectionKeyFromPos(sf::Vector2f Position)
     IMovement* MovementComponent = static_cast<IMovement*>(GetAssignedGameObject()->GetComponent(EComponentType::Movement));
     if(MovementComponent != nullptr)
     {
-        sf::Vector2f ImpulseDirection = MovementComponent->GetMovementVector();
+        sf::Vector2f ImpulseDirection = MovementComponent->GetMovementVector() * 10.f;
         // std::cout << "Movement Direction: " << ImpulseDirection.x << " / " << ImpulseDirection.y << std::endl;
         PredictedPosition += ImpulseDirection;
     }
