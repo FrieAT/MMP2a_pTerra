@@ -13,6 +13,7 @@ Copyright (c) MultiMediaTechnology, 2015
 #include "ObjectManager.h"
 #include "WorldManager.h"
 #include "CollisionManager.h"
+#include "GameStateIntro.h"
 
 Game* Game::m_pEngine = nullptr;
 
@@ -23,6 +24,10 @@ Game::Game()
     
     // Create the main window
     m_pWindow = new sf::RenderWindow(sf::VideoMode(Game::m_iWindowWidth, Game::m_iWindowHeight), "SFML window");
+
+	// Initialize Intro-screen
+	m_pEngine->ChangeState(new GameStateIntro());
+	m_pEngine->Start();
 
     // ====== Below decprecated method to create things ======
     // Set the Icon
