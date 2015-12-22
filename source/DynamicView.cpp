@@ -44,7 +44,7 @@ void DynamicView::OnFrameUpdate(sf::Time DeltaTime)
 
 	// Set zoom based on player ship speed
 	IMovement* pMovementComponent = static_cast<IMovement*>(GetAssignedGameObject()->GetComponent(EComponentType::Movement));
-	sf::Vector2f moveVector = pMovementComponent->GetMovementVector();
+	sf::Vector2f moveVector = pMovementComponent->GetVelocity();
 
 	m_zoom = 1.0f / (std::sqrt(moveVector.x * moveVector.x + moveVector.y * moveVector.y) / 200);
 

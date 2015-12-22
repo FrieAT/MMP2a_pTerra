@@ -15,8 +15,7 @@ ShipMovement::ShipMovement(char cPlayer)
 	mass = 5;
 	invMass = 1 / mass;
 
-	m_Impulses.resize(5);
-	m_shipstates = std::vector<bool>(5, false);
+	m_ShipState = std::vector<bool>(5, false);
 	m_fSpeed = 500.f;
 	m_fMaxSpeed = 2000;
 	m_fFirerate = 60;
@@ -40,52 +39,52 @@ void ShipMovement::OnInputUpdate(std::string strEvent)
 
 	if (strEvent == "RIGHT_P")
 	{
-		m_shipstates[0] = true;
+		m_ShipState[0] = true;
 	}
 	if (strEvent == "RIGHT_R")
 	{
-		m_shipstates[0] = false;
+		m_ShipState[0] = false;
 	}
 
 
 	if (strEvent == "LEFT_P")
 	{
-		m_shipstates[1] = true;
+		m_ShipState[1] = true;
 	}
 	if (strEvent == "LEFT_R")
 	{
-		m_shipstates[1] = false;
+		m_ShipState[1] = false;
 	}
 
 
 	if (strEvent == "UP_P")
 	{
-		m_shipstates[2] = true;
+		m_ShipState[2] = true;
 	}
 	if (strEvent == "UP_R")
 	{
-		m_shipstates[2] = false;
+		m_ShipState[2] = false;
 	}
 
 
 	if (strEvent == "DOWN_P")
 	{
-		m_shipstates[3] = true;
+		m_ShipState[3] = true;
 	}
 	if (strEvent == "DOWN_R")
 	{
-		m_shipstates[3] = false;
+		m_ShipState[3] = false;
 	}
 
 
 	//TODO make a own weapon component
 	if (strEvent == "FIRE_P")
 	{
-		m_shipstates[4] = true;
+		m_ShipState[4] = true;
 	}
 	if (strEvent == "FIRE_R")
 	{
-		m_shipstates[4] = false;
+		m_ShipState[4] = false;
 	}
 }
 
@@ -95,15 +94,16 @@ void ShipMovement::UpdateMovement()
 	IPosition* pPositionComponent = static_cast<IPosition*>(GetAssignedGameObject()->GetComponent(EComponentType::Position));
 
 
-	if(m_shipstates[0]) pPositionComponent->SetRotation(pPositionComponent->GetRotation() + 5);	//rotate right
-	if (m_shipstates[1]) pPositionComponent->SetRotation(pPositionComponent->GetRotation() - 5); //rotate left
-	if (m_shipstates[2]) m_Direction = sf::Vector2f(0.f, -0.8f); //move forward
-	if (m_shipstates[3]) m_Direction = sf::Vector2f(0.f, 0.6f); //move forward
-	if (!m_shipstates[2]&& !m_shipstates[3]) m_Direction = sf::Vector2f(0.f, 0.f); //turn off thruster
-	if (m_shipstates[4] && m_fWeaponcoolDown<1)
+	if(m_ShipState[0]) pPositionComponent->SetRotation(pPositionComponent->GetRotation() + 5);	//rotate right
+	if (m_ShipState[1]) pPositionComponent->SetRotation(pPositionComponent->GetRotation() - 5); //rotate left
+	if (m_ShipState[2]) m_Direction = sf::Vector2f(0.f, -0.8f); //move forward
+	if (m_ShipState[3]) m_Direction = sf::Vector2f(0.f, 0.6f); //move forward
+	if (!m_ShipState[2]&& !m_ShipState[3]) m_Direction = sf::Vector2f(0.f, 0.f); //turn off thruster
+	if (m_ShipState[4] && m_fWeaponcoolDown<1)
 	{
 		m_fWeaponcoolDown = m_fFirerate;
-		ObjectManager::GetInstance().AddGameObject(GameObjectFactory::CreateMissile(pPositionComponent, m_Impulses[0])); //shoot rockets
+		ObjectManager::GetInstance().AddGameObject(GameObjectFactory::CreateMissile(pPositionComponent, velocity)); //shoot rockets
+		std::cout << velocity.x << " "<<velocity.y << std::endl;
 	}
 	if (m_fWeaponcoolDown > 0)m_fWeaponcoolDown--;
 
@@ -118,10 +118,6 @@ void ShipMovement::UpdateMovement()
 
 }
 
-sf::Vector2f ShipMovement::GetMovementVector()
-{
-	return m_Impulses[0]; // Change to proper m_variable
-}
 
 
 void ShipMovement::OnFrameUpdate(sf::Time DeltaTime)
@@ -134,10 +130,8 @@ void ShipMovement::OnFrameUpdate(sf::Time DeltaTime)
 	sf::Transform RotationMatrix = sf::Transform::Identity;
 	RotationMatrix.rotate(pPositionComponent->GetRotation());
 
-	//m_Impulses[0] = m_Impulses[0] + RotationMatrice * m_Direction * m_fAcceleration;
 	sf::Vector2f accVec = RotationMatrix * m_Direction *m_fSpeed;
 
-	//float fSpeed = m_Impulses[0].x*m_Impulses[0].x + m_Impulses[0].y * m_Impulses[0].y/*;*/
 	auto length2 = [](const sf::Vector2f &vec) -> float { return vec.x * vec.x + vec.y * vec.y; };	//calculate vectorlenght squared
 
 	float squaredSpeedLimit = m_fMaxSpeed * m_fMaxSpeed;

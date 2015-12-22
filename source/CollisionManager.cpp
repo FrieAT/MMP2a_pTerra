@@ -28,9 +28,9 @@ void CollisionManager::HandleCollisions()
 		CollisionEvent col_ev = m_CollisonEvents.top();
 		
 		IMovement* body1= static_cast<IMovement*>(col_ev.Body1.GetComponent(EComponentType::Movement));
-		body1->GetMovementVector();
+		body1->GetVelocity();
 		IMovement* body2 = static_cast<IMovement*>(col_ev.Body2.GetComponent(EComponentType::Movement));
-		body2->GetMovementVector();
+		body2->GetVelocity();
 		
 		m_CollisonEvents.pop();
 	}
