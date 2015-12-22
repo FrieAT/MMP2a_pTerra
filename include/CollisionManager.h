@@ -6,6 +6,8 @@ Copyright (c) MultiMediaTechnology, 2015
 
 #include <SFML/Graphics.hpp>
 #include "ICollision.h"
+#include <stack>
+
 
 class CollisionManager
 {
@@ -16,6 +18,7 @@ public:
 		return g_Instance;
 	}
 	void Update(sf::Time DeltaTime);
+	void HandleCollisions();
 	void RegisterCollisionbody(ICollision* Collisionbody);
 	void UnregisterCollisionbody(ICollision* Collisionbody);
 	void Clear();
@@ -24,5 +27,5 @@ private:
 	CollisionManager(const CollisionManager&) = delete;
 	void operator= (const CollisionManager&) = delete;
 	std::vector<ICollision*> m_Colliders;
-
+	std::stack<CollisionEvent> m_CollisonEvents;
 };

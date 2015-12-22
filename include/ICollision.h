@@ -8,6 +8,10 @@ Copyright (c) MultiMediaTechnology, 2015
 
 #include "IComponent.h"
 
+struct CollisionEvent {
+	GameObject Body1, Body2;
+	sf::Vector2f normal;
+};
 
 class ICollision : public IComponent
 {

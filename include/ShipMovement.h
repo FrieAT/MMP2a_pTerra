@@ -23,7 +23,7 @@ public:
 	char m_cPlayer;
 
 	std::vector<sf::Vector2f> m_Impulses; // SET PRIVATE!
-	float m_fAcceleration;
+	float m_fSpeed;
 	float m_fMaxSpeed;	//speedlimit if movement_vec.lenght > Max_Speed -> Damp
 	float m_fFirerate;
 

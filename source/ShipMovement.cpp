@@ -12,10 +12,13 @@ ShipMovement::ShipMovement(char cPlayer)
 	FrameManager::GetInstance().RegisterEventObserver(this);
 	this->m_cPlayer = cPlayer;
 
+	mass = 5;
+	invMass = 1 / mass;
+
 	m_Impulses.resize(5);
 	m_shipstates = std::vector<bool>(5, false);
-	m_fAcceleration = 2.f;
-	m_fMaxSpeed = 200000;
+	m_fSpeed = 500.f;
+	m_fMaxSpeed = 2000;
 	m_fFirerate = 60;
 }
 
@@ -105,17 +108,11 @@ void ShipMovement::UpdateMovement()
 	if (m_fWeaponcoolDown > 0)m_fWeaponcoolDown--;
 
 
-	sf::Transform RotationMatrice = sf::Transform::Identity;
-	RotationMatrice.rotate(pPositionComponent->GetRotation());
 
-	m_Impulses[0] = m_Impulses[0] + RotationMatrice * m_Direction * m_fAcceleration;
-
-	float fSpeed = m_Impulses[0].x*m_Impulses[0].x + m_Impulses[0].y * m_Impulses[0].y;
-
-	if (fSpeed >= m_fMaxSpeed)
-	{
-		m_Impulses[0] = m_Impulses[0] * 0.99f;
-	}
+	//if (fSpeed >= m_fMaxSpeed)
+	//{
+	//	m_Impulses[0] = m_Impulses[0] * 0.99f;
+	//}
 
 	//std::cout << speed << std::endl;
 
@@ -129,16 +126,32 @@ sf::Vector2f ShipMovement::GetMovementVector()
 
 void ShipMovement::OnFrameUpdate(sf::Time DeltaTime)
 {
-	IPosition* pPositionComponent = static_cast<IPosition*>(GetAssignedGameObject()->GetComponent(EComponentType::Position));
-	sf::Vector2f Movement;
-
 	UpdateMovement();
 
-	for (unsigned int i = 0; i < m_Impulses.size();i++)
-	{
-		Movement += m_Impulses[i];
-	}
+	IPosition* pPositionComponent = static_cast<IPosition*>(GetAssignedGameObject()->GetComponent(EComponentType::Position));
+	sf::Vector2f forces;
 
-	pPositionComponent->SetPosition(pPositionComponent->GetPosition() + Movement * DeltaTime.asSeconds());
+	sf::Transform RotationMatrix = sf::Transform::Identity;
+	RotationMatrix.rotate(pPositionComponent->GetRotation());
+
+	//m_Impulses[0] = m_Impulses[0] + RotationMatrice * m_Direction * m_fAcceleration;
+	sf::Vector2f accVec = RotationMatrix * m_Direction *m_fSpeed;
+
+	//float fSpeed = m_Impulses[0].x*m_Impulses[0].x + m_Impulses[0].y * m_Impulses[0].y/*;*/
+	auto length2 = [](const sf::Vector2f &vec) -> float { return vec.x * vec.x + vec.y * vec.y; };	//calculate vectorlenght squared
+
+	float squaredSpeedLimit = m_fMaxSpeed * m_fMaxSpeed;
+	if (length2(velocity + accVec * DeltaTime.asSeconds()) < squaredSpeedLimit)
+		impulses.push_back(accVec);
+
+	for (const auto& f : impulses)
+		forces += f;
+	impulses.clear();
+
+	acceleration = forces * invMass;
+	velocity += acceleration * DeltaTime.asSeconds();
+	//body.velocity = body.velocity * 0.99f; //< simple "friction"
+
+	pPositionComponent->SetPosition(pPositionComponent->GetPosition() + velocity * DeltaTime.asSeconds());
 
 }
