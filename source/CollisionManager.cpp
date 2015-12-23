@@ -33,9 +33,7 @@ void CollisionManager::HandleCollisions()
 		IMovement* body1= static_cast<IMovement*>(col_ev.Body1->GetComponent(EComponentType::Movement));
 		IMovement* body2 = static_cast<IMovement*>(col_ev.Body2->GetComponent(EComponentType::Movement));
 		
-		
-		std::cout << "blub" << std::endl;
-
+	
 
 		// Calculate relative velocity
 		sf::Vector2f rv = body1->GetVelocity() - body2->GetVelocity();

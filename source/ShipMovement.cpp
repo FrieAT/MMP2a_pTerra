@@ -88,13 +88,13 @@ void ShipMovement::OnInputUpdate(std::string strEvent)
 }
 
 
-void ShipMovement::UpdateMovement()
+void ShipMovement::UpdateMovement(sf::Time DeltaTime)
 {
 	IPosition* pPositionComponent = static_cast<IPosition*>(GetAssignedGameObject()->GetComponent(EComponentType::Position));
 
 
-	if(m_ShipState[0]) pPositionComponent->SetRotation(pPositionComponent->GetRotation() + 5);	//rotate right
-	if (m_ShipState[1]) pPositionComponent->SetRotation(pPositionComponent->GetRotation() - 5); //rotate left
+	if(m_ShipState[0]) pPositionComponent->SetRotation(pPositionComponent->GetRotation() + 60*DeltaTime.asSeconds());	//rotate right
+	if (m_ShipState[1]) pPositionComponent->SetRotation(pPositionComponent->GetRotation() - 60*DeltaTime.asSeconds()); //rotate left
 	if (m_ShipState[2]) m_Direction = sf::Vector2f(0.f, -0.8f); //move forward
 	if (m_ShipState[3]) m_Direction = sf::Vector2f(0.f, 0.6f); //move forward
 	if (!m_ShipState[2]&& !m_ShipState[3]) m_Direction = sf::Vector2f(0.f, 0.f); //turn off thruster
@@ -120,8 +120,7 @@ void ShipMovement::UpdateMovement()
 
 void ShipMovement::OnFrameUpdate(sf::Time DeltaTime)
 {
-	UpdateMovement();
-
+	UpdateMovement(DeltaTime);
 	IPosition* pPositionComponent = static_cast<IPosition*>(GetAssignedGameObject()->GetComponent(EComponentType::Position));
 	sf::Vector2f forces;
 

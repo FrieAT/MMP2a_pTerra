@@ -17,7 +17,7 @@ public:
 	~ShipMovement();
 	void OnInputUpdate(std::string strEvent);
 	void OnFrameUpdate(sf::Time DeltaTime);
-	void UpdateMovement();
+	void UpdateMovement(sf::Time DeltaTime);
 
 	char m_cPlayer;	//player id for multiple playercontrolled ships
 
