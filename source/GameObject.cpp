@@ -35,6 +35,7 @@ void GameObject::SetComponent(IComponent* pComponent)
 	}
     m_Components[eComponentType] = pComponent;
 	pComponent->SetAssignedGameObject(this);
+    pComponent->Init();
 }
 
 void GameObject::RemoveComponent(const EComponentType& eComponentType)
