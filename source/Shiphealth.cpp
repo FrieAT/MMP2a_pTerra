@@ -64,13 +64,7 @@ void Shiphealth::OnFrameUpdate(sf::Time DeltaTime)
 void Shiphealth::OnCollisionEvent(GameObject* pOther, sf::Vector2f ImpulseImpact)
 {
     float impulse_length = sqrt(ImpulseImpact.x * ImpulseImpact.x + ImpulseImpact.y * ImpulseImpact.y);
-   
-    // Ignore invalid Impulse Length´s
-    if(impulse_length >= 500.f)
-    {
-        return;
-    }
     
     std::cout << "Detected Collision with a " << pOther->GetID() << " (Impulse: " << impulse_length << ")" << std::endl;
-    damage(impulse_length / 1000 );
+    damage(impulse_length / 10000 );
 }
