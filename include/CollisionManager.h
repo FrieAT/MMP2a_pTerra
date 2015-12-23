@@ -22,10 +22,11 @@ public:
 	void RegisterCollisionbody(ICollision* Collisionbody);
 	void UnregisterCollisionbody(ICollision* Collisionbody);
 	void Clear();
+	std::stack<CollisionEvent> m_CollisonEvents;
+
 private:
 	CollisionManager() { }
 	CollisionManager(const CollisionManager&) = delete;
 	void operator= (const CollisionManager&) = delete;
 	std::vector<ICollision*> m_Colliders;
-	std::stack<CollisionEvent> m_CollisonEvents;
 };
