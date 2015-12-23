@@ -51,6 +51,18 @@ void CollisionManager::HandleCollisions()
 		body1->AddForce(body1->GetVelocity() - 0.5f * impulse);
 		body2->AddForce(body2->GetVelocity() + 0.5f * impulse);
 		
+        // Call EventObservers for Collision.
+        auto* pCollisionBody1 = &m_CollisionEventObservers[body1->GetAssignedGameObject()];
+        for(int i = 0; i < pCollisionBody1->size(); i++)
+        {
+            (*pCollisionBody1)[i]->OnCollisionEvent(body2->GetAssignedGameObject(), impulse);
+        }
+        
+        auto* pCollisionBody2 = &m_CollisionEventObservers[body2->GetAssignedGameObject()];
+        for(int i = 0; i < pCollisionBody2->size(); i++)
+        {
+            (*pCollisionBody2)[i]->OnCollisionEvent(body1->GetAssignedGameObject(), impulse);
+        }
 
 		m_CollisonEvents.pop();
 	}
@@ -78,3 +90,32 @@ void CollisionManager::Clear()
 	m_Colliders.shrink_to_fit();
 }
 
+void CollisionManager::RegisterCollisionEvent(ICollisionEventObserver* pThisComponent, GameObject* pGameObject)
+{
+    if(pThisComponent == nullptr || pGameObject == nullptr)
+    {
+        throw std::runtime_error("Null-pointer reference for pThisComponent or pGameObject.");
+    }
+    m_CollisionEventObservers[pGameObject].push_back(pThisComponent);
+}
+
+void CollisionManager::UnregisterCollisionEvent(ICollisionEventObserver* pThisComponent, GameObject* pGameObject)
+{
+    if(pThisComponent == nullptr || pGameObject == nullptr)
+    {
+        throw std::runtime_error("Null-pointer reference for pThisComponent or pGameObject.");
+    }
+    unsigned int size = m_CollisionEventObservers[pGameObject].size();
+    if(size < 1)
+    {
+        throw std::runtime_error("No components for pGameObject found.");
+    }
+    for(int i = 0; i < size; i++)
+    {
+        if(m_CollisionEventObservers[pGameObject][i] == pThisComponent)
+        {
+            m_CollisionEventObservers[pGameObject].erase(m_CollisionEventObservers[pGameObject].begin() + i);
+            break;
+        }
+    }
+}
