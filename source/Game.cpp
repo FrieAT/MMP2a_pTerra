@@ -79,17 +79,17 @@ void Game::Start()
         }
         
         pGameState = m_States.back();
-        
+
         // Manager updates
         FrameManager::GetInstance().Update(deltaTime);
         InputManager::GetInstance().Update(m_pWindow);
         ObjectManager::GetInstance().Update(deltaTime);
-		CollisionManager::GetInstance().Update(deltaTime);
-
+        CollisionManager::GetInstance().Update(deltaTime);
+        
 		// Rendering
         FrameManager::GetInstance().Draw(m_pWindow);
-		ObjectManager::GetInstance().Draw(m_pWindow);
         WorldManager::GetInstance().Update(m_pWindow);
+        ObjectManager::GetInstance().Draw(m_pWindow);
 
 		// Update the window
         m_pWindow->display();
