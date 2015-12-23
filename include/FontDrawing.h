@@ -17,6 +17,7 @@ public:
     void Draw(sf::RenderWindow* pWindow);
     void SetTextureArea(sf::FloatRect Area);
     sf::FloatRect GetTextureArea();
+    void SetText(std::string strText);
 protected:
     sf::Font* m_pFont; // TODO: Make of Font a flyweight pattern. Just do it.
     sf::Text* m_pText;
