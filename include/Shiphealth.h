@@ -15,6 +15,9 @@ public:
 	~Shiphealth();
     void Init();
 	void damage(float fDamage);
+    void OnFrameDraw(sf::RenderWindow* pWindow);
 	void OnFrameUpdate(sf::Time DeltaTime);
     void OnCollisionEvent(GameObject* pOther, sf::Vector2f ImpulseImpact);
+private:
+    GameObject* m_pHealthDebug;
 };
