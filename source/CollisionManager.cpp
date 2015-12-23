@@ -30,10 +30,15 @@ void CollisionManager::HandleCollisions()
 	{
 		CollisionEvent col_ev = m_CollisonEvents.top();
 		
+        // Check if game object is not deleted.
+        if(m_CollisionEventObservers[col_ev.Body1].size() < 1 || m_CollisionEventObservers[col_ev.Body2].size() < 1)
+        {
+            m_CollisonEvents.pop();
+            continue;
+        }
+        
 		IMovement* body1= static_cast<IMovement*>(col_ev.Body1->GetComponent(EComponentType::Movement));
 		IMovement* body2 = static_cast<IMovement*>(col_ev.Body2->GetComponent(EComponentType::Movement));
-		
-	
 
 		// Calculate relative velocity
 		sf::Vector2f rv = body1->GetVelocity() - body2->GetVelocity();
