@@ -11,11 +11,11 @@ ShipMovement::ShipMovement(char cPlayer)
 	InputManager::GetInstance().RegisterEventObserver(this);
 	FrameManager::GetInstance().RegisterEventObserver(this);
 	this->m_cPlayer = cPlayer;
-	mass = 5;
+	mass = 3;
 	invMass = 1 / mass;
 
 	m_ShipState = std::vector<bool>(5, false);
-	m_fSpeed = 500.f;
+	m_fSpeed = 1000.f;
 	m_fMaxSpeed = 2000;
 	m_fFirerate = 60;
 }
@@ -93,8 +93,8 @@ void ShipMovement::UpdateMovement(sf::Time DeltaTime)
 	IPosition* pPositionComponent = static_cast<IPosition*>(GetAssignedGameObject()->GetComponent(EComponentType::Position));
 
 
-	if(m_ShipState[0]) pPositionComponent->SetRotation(pPositionComponent->GetRotation() + 60*DeltaTime.asSeconds());	//rotate right
-	if (m_ShipState[1]) pPositionComponent->SetRotation(pPositionComponent->GetRotation() - 60*DeltaTime.asSeconds()); //rotate left
+	if(m_ShipState[0]) pPositionComponent->SetRotation(pPositionComponent->GetRotation() + 120*DeltaTime.asSeconds());	//rotate right
+	if (m_ShipState[1]) pPositionComponent->SetRotation(pPositionComponent->GetRotation() - 120*DeltaTime.asSeconds()); //rotate left
 	if (m_ShipState[2]) m_Direction = sf::Vector2f(0.f, -0.8f); //move forward
 	if (m_ShipState[3]) m_Direction = sf::Vector2f(0.f, 0.6f); //move forward
 	if (!m_ShipState[2]&& !m_ShipState[3]) m_Direction = sf::Vector2f(0.f, 0.f); //turn off thruster
