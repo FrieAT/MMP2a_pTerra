@@ -11,6 +11,7 @@ Copyright (c) MultiMediaTechnology, 2015
 #include "FontDrawing.h"
 #include "ShipMovement.h"
 #include "DynamicView.h"
+#include "Shiphealth.h"
 #include "Missilehealth.h"
 #include "CircleCollision.h"
 
@@ -24,6 +25,7 @@ GameObject* GameObjectFactory::CreatePlayerShip(sf::Vector2f Position, char cPla
 	pShip->SetComponent(new SpriteDrawing(std::string("assets/space_ship.png")));
     pShip->SetComponent(new DynamicView(sf::FloatRect(0, 0, static_cast<float>(Game::m_iWindowWidth), static_cast<float>(Game::m_iWindowHeight)), sf::Vector2f(1920.f - static_cast<float>(Game::m_iWindowWidth), 0), 20.f));
     pShip->SetComponent(new CircleCollision(30.f,pos));
+    pShip->SetComponent(new Shiphealth(100.f));
 	return pShip;
 }
 
