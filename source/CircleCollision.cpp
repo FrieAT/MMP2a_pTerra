@@ -30,8 +30,12 @@ bool CircleCollision::colliding(ICollision* Collidingbody)
 
 	if (lenght < dis)
 	{
-		restitution = lenght_vec;
 		hit = true;
+		CollisionEvent col_ev;
+		col_ev.Body1 = this->GetAssignedGameObject();
+		col_ev.Body2 = other->GetAssignedGameObject();
+		col_ev.normal =  -(lenght_vec/4.f); 
+		CollisionManager::GetInstance().m_CollisonEvents.push(col_ev);
 		return true;
 	}
 	else

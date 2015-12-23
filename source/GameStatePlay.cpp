@@ -31,5 +31,5 @@ void GameStatePlay::Init()
     {
         throw std::runtime_error("Unable to load assets/nice_music.ogg");
     }
-    m_pMusic->play();
+    // m_pMusic->play();
 }

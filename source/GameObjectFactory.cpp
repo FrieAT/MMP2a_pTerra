@@ -33,7 +33,7 @@ GameObject* GameObjectFactory::CreateMissile(IPosition* pPosition, sf::Vector2f 
 	GameObject* pMissile = new GameObject(std::string("missile"));
 	pMissile->SetComponent(new Missilehealth(500));
 	pMissile->SetComponent(new PixelPosition(pPosition->GetPosition(), sf::Vector2f(160.f, 320.f)));
-	pMissile->SetComponent(new LinearMovement(pPosition->GetRotation(),ShipSpeed));
+	pMissile->SetComponent(new LinearMovement(pPosition->GetRotation(),300.f,1,ShipSpeed,true));
 	pMissile->SetComponent(new SpriteDrawing(std::string("assets/rocket.png"),sf::Vector2f(30,60)));
 	
 	return pMissile;
@@ -45,7 +45,7 @@ GameObject* GameObjectFactory::CreateAsteroid(sf::Vector2f vPosition, float fRot
 	GameObject* pAsteroid = new GameObject(std::string("asteroid"));
 	PixelPosition* pos = new PixelPosition(vPosition, sf::Vector2f(83.f, 66.5f));
 	pAsteroid->SetComponent(pos);
-	pAsteroid->SetComponent(new LinearMovement(fRotation, fSpeed));
+	pAsteroid->SetComponent(new LinearMovement(fRotation, fSpeed,15));
 	pAsteroid->SetComponent(new SpriteDrawing(std::string("assets/asteroid.png"),sf::Vector2f(83.f, 66.5f)));
 	pAsteroid->SetComponent(new CircleCollision(40.f, pos));
 

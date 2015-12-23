@@ -8,6 +8,11 @@ Copyright (c) MultiMediaTechnology, 2015
 
 #include "IComponent.h"
 
+struct CollisionEvent {
+	GameObject* Body1;
+	GameObject* Body2;
+	sf::Vector2f normal;
+};
 
 class ICollision : public IComponent
 {
@@ -15,7 +20,6 @@ public:
 	ICollision() { }
 	virtual ~ICollision() { }
 	virtual bool colliding(ICollision* Collisionbody) = 0;
-	sf::Vector2f restitution;
 
 	EComponentType GetComponentType()
 	{

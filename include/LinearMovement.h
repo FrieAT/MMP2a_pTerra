@@ -11,17 +11,17 @@
 class LinearMovement : public IMovement, public IFrameObserver
 {
 public:
-    LinearMovement(float fRotation, sf::Vector2f ShipSpeed);
-	LinearMovement(float fRotation, float fSpeed);
-    sf::Vector2f GetImpulseDirection();
+ //   LinearMovement(float fRotation, sf::Vector2f ShipSpeed);
+	//LinearMovement(float fRotation, float fSpeed);
+	LinearMovement(float fRotation, float fSpeed, float fmass, sf::Vector2f fStartSpeed = sf::Vector2f(0,0), bool bAccelerating = false);
+
     ~LinearMovement();
-	sf::Vector2f GetMovementVector();
     void OnFrameUpdate(sf::Time DeltaTime);
 	float m_fSpeed;
+	float m_fMaxSpeed;
 
 private:
 	sf::Vector2f m_Direction;
-	sf::Vector2f m_Movement;
-
 	float m_fRotation;
+	bool m_bAccelerating;
 };

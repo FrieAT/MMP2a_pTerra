@@ -18,17 +18,16 @@ public:
 	void OnInputUpdate(std::string strEvent);
 	void OnFrameUpdate(sf::Time DeltaTime);
 	void UpdateMovement();
-	sf::Vector2f GetMovementVector();
-	char m_cPlayer;
 
-	std::vector<sf::Vector2f> m_Impulses; // SET PRIVATE!
-	float m_fAcceleration;
-	float m_fMaxSpeed;	//speedlimit if movement_vec.lenght > Max_Speed -> Damp
+	char m_cPlayer;	//player id for multiple playercontrolled ships
+
+	float m_fSpeed;
+	float m_fMaxSpeed;
 	float m_fFirerate;
+	float m_fWeaponcoolDown;
 
 private:
 	sf::Vector2f m_Direction;
-	std::vector<bool> m_shipstates;
-	float m_fWeaponcoolDown;
+	std::vector<bool> m_ShipState;
 };
 
