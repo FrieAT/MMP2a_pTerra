@@ -147,6 +147,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="source\BoxCollision.cpp" />
     <ClCompile Include="source\CircleCollision.cpp" />
     <ClCompile Include="source\CollisionManager.cpp" />
     <ClCompile Include="source\FontDrawing.cpp" />
@@ -171,6 +172,7 @@
     <ClCompile Include="source\WorldManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\BoxCollision.h" />
     <ClInclude Include="include\CircleCollision.h" />
     <ClInclude Include="include\CollisionManager.h" />
     <ClInclude Include="include\EComponentType.h" />

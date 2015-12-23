@@ -46,7 +46,7 @@ void CollisionManager::HandleCollisions()
 			return;
 
 		// Apply impulse
-		sf::Vector2f impulse = velAlongNormal * col_ev.normal;
+		sf::Vector2f impulse = velAlongNormal * col_ev.normal*100.f;
 
 		body1->AddForce(body1->GetVelocity() - 0.5f * impulse);
 		body2->AddForce(body2->GetVelocity() + 0.5f * impulse);

@@ -13,6 +13,7 @@ Copyright (c) MultiMediaTechnology, 2015
 #include "DynamicView.h"
 #include "Missilehealth.h"
 #include "CircleCollision.h"
+#include "BoxCollision.h"
 
 GameObject* GameObjectFactory::CreatePlayerShip(sf::Vector2f Position, char cPlayer)
 {
@@ -23,7 +24,8 @@ GameObject* GameObjectFactory::CreatePlayerShip(sf::Vector2f Position, char cPla
 	pShip->SetComponent(new ShipMovement(cPlayer));
 	pShip->SetComponent(new SpriteDrawing(std::string("assets/space_ship.png")));
     pShip->SetComponent(new DynamicView(sf::FloatRect(0, 0, static_cast<float>(Game::m_iWindowWidth), static_cast<float>(Game::m_iWindowHeight)), sf::Vector2f(1920.f - static_cast<float>(Game::m_iWindowWidth), 0), 20.f));
-    pShip->SetComponent(new CircleCollision(30.f,pos));
+    //pShip->SetComponent(new CircleCollision(30.f,pos));
+	pShip->SetComponent(new BoxCollision(50, 50, pos));
 	return pShip;
 }
 
@@ -47,7 +49,8 @@ GameObject* GameObjectFactory::CreateAsteroid(sf::Vector2f vPosition, float fRot
 	pAsteroid->SetComponent(pos);
 	pAsteroid->SetComponent(new LinearMovement(fRotation, fSpeed,15));
 	pAsteroid->SetComponent(new SpriteDrawing(std::string("assets/asteroid.png"),sf::Vector2f(83.f, 66.5f)));
-	pAsteroid->SetComponent(new CircleCollision(40.f, pos));
+	//pAsteroid->SetComponent(new CircleCollision(40.f, pos));
+	pAsteroid->SetComponent(new BoxCollision(80, 80, pos));
 
 	return pAsteroid;
 }

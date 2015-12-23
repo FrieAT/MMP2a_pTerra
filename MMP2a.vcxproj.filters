@@ -126,6 +126,9 @@
     <ClCompile Include="source\QuadrantPosition.cpp">
       <Filter>Source Files\Components\IPosition</Filter>
     </ClCompile>
+    <ClCompile Include="source\BoxCollision.cpp">
+      <Filter>Source Files\Components\ICollision</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\IComponent.h">
@@ -229,6 +232,9 @@
     </ClInclude>
     <ClInclude Include="include\QuadrantPosition.h">
       <Filter>Source Files\Components\IPosition</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BoxCollision.h">
+      <Filter>Source Files\Components\ICollision</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
