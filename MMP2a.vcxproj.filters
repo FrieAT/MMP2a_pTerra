@@ -102,12 +102,6 @@
     <ClCompile Include="source\FontDrawing.cpp">
       <Filter>Source Files\Components\IDrawing</Filter>
     </ClCompile>
-    <ClCompile Include="source\Shiphealth.cpp">
-      <Filter>Source Files\Components\IHealth</Filter>
-    </ClCompile>
-    <ClCompile Include="source\Missilehealth.cpp">
-      <Filter>Source Files\Components\IHealth</Filter>
-    </ClCompile>
     <ClCompile Include="source\DynamicView.cpp">
       <Filter>Source Files\Components\IView</Filter>
     </ClCompile>
@@ -128,6 +122,21 @@
     </ClCompile>
     <ClCompile Include="source\BoxCollision.cpp">
       <Filter>Source Files\Components\ICollision</Filter>
+    </ClCompile>
+    <ClCompile Include="source\HealthAsteroid.cpp">
+      <Filter>Source Files\Components\IHealth</Filter>
+    </ClCompile>
+    <ClCompile Include="source\HealthMissile.cpp">
+      <Filter>Source Files\Components\IHealth</Filter>
+    </ClCompile>
+    <ClCompile Include="source\HealthShip.cpp">
+      <Filter>Source Files\Components\IHealth</Filter>
+    </ClCompile>
+    <ClCompile Include="source\GameStateGameOver.cpp">
+      <Filter>Source Files\Managers\GameStateManager</Filter>
+    </ClCompile>
+    <ClCompile Include="source\StaticView.cpp">
+      <Filter>Source Files\Components\IView</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -200,12 +209,6 @@
     <ClInclude Include="include\IHealth.h">
       <Filter>Source Files\Components\IHealth</Filter>
     </ClInclude>
-    <ClInclude Include="include\Shiphealth.h">
-      <Filter>Source Files\Components\IHealth</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Missilehealth.h">
-      <Filter>Source Files\Components\IHealth</Filter>
-    </ClInclude>
     <ClInclude Include="include\DynamicView.h">
       <Filter>Source Files\Components\IView</Filter>
     </ClInclude>
@@ -235,6 +238,24 @@
     </ClInclude>
     <ClInclude Include="include\BoxCollision.h">
       <Filter>Source Files\Components\ICollision</Filter>
+    </ClInclude>
+    <ClInclude Include="include\HealthAsteroid.h">
+      <Filter>Source Files\Components\IHealth</Filter>
+    </ClInclude>
+    <ClInclude Include="include\HealthMissile.h">
+      <Filter>Source Files\Components\IHealth</Filter>
+    </ClInclude>
+    <ClInclude Include="include\HealthShip.h">
+      <Filter>Source Files\Components\IHealth</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ICollisionEventObserver.h">
+      <Filter>Source Files\Managers\CollisionManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GameStateGameOver.h">
+      <Filter>Source Files\Managers\GameStateManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\StaticView.h">
+      <Filter>Source Files\Components\IView</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

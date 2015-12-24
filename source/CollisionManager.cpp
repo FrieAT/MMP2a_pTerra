@@ -12,10 +12,10 @@ void CollisionManager::Update(sf::Time DeltaTime)
 {
 	if (m_Colliders.size() > 0)
 	{
-		for (int ship = 0; ship < m_Colliders.size(); ship++)
+		for (unsigned int ship = 0; ship < m_Colliders.size(); ship++)
 		{
 			ICollision* current_col = m_Colliders[ship];
-			for (int i = 0; i < m_Colliders.size(); i++)
+			for (unsigned int i = 0; i < m_Colliders.size(); i++)
 			{
 				if (m_Colliders[i] == current_col) continue;	//don't check the object with it self
 				current_col->colliding(m_Colliders[i]);
@@ -93,7 +93,7 @@ void CollisionManager::HandleCollisions()
         if(PhysicsApplyable || (!PhysicsApplyable && !pCollisionComponentA->m_bPhysicsApplyable))
         {
             auto* pCollisionBody1 = &m_CollisionEventObservers[col_ev.Body1];
-            for(int i = 0; i < pCollisionBody1->size(); i++)
+            for(unsigned int i = 0; i < pCollisionBody1->size(); i++)
             {
                 (*pCollisionBody1)[i]->OnCollisionEvent(col_ev.Body2, Impulse);
             }
@@ -101,7 +101,7 @@ void CollisionManager::HandleCollisions()
         if(PhysicsApplyable || (!PhysicsApplyable && !pCollisionComponentB->m_bPhysicsApplyable))
         {
             auto* pCollisionBody2 = &m_CollisionEventObservers[col_ev.Body2];
-            for(int i = 0; i < pCollisionBody2->size(); i++)
+            for(unsigned int i = 0; i < pCollisionBody2->size(); i++)
             {
                 (*pCollisionBody2)[i]->OnCollisionEvent(col_ev.Body1, Impulse);
             }
@@ -163,7 +163,7 @@ void CollisionManager::UnregisterCollisionEvent(ICollisionEventObserver* pThisCo
     {
         throw std::runtime_error("No components for pGameObject found.");
     }
-    for(int i = 0; i < size; i++)
+    for(unsigned int i = 0; i < size; i++)
     {
         if(m_CollisionEventObservers[pGameObject][i] == pThisComponent)
         {

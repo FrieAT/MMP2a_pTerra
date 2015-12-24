@@ -155,20 +155,23 @@
     <ClCompile Include="source\Game.cpp" />
     <ClCompile Include="source\GameObject.cpp" />
     <ClCompile Include="source\GameObjectFactory.cpp" />
+    <ClCompile Include="source\GameStateGameOver.cpp" />
     <ClCompile Include="source\GameStateIntro.cpp" />
     <ClCompile Include="source\GameStatePlay.cpp" />
+    <ClCompile Include="source\HealthAsteroid.cpp" />
+    <ClCompile Include="source\HealthMissile.cpp" />
+    <ClCompile Include="source\HealthShip.cpp" />
     <ClCompile Include="source\InputManager.cpp" />
     <ClCompile Include="source\LinearMovement.cpp" />
     <ClCompile Include="source\main.cpp" />
-    <ClCompile Include="source\Missilehealth.cpp" />
     <ClCompile Include="source\ObjectManager.cpp" />
     <ClCompile Include="source\PixelPosition.cpp" />
     <ClCompile Include="source\DynamicView.cpp" />
     <ClCompile Include="source\Quadrant.cpp" />
     <ClCompile Include="source\QuadrantPosition.cpp" />
-    <ClCompile Include="source\Shiphealth.cpp" />
     <ClCompile Include="source\ShipMovement.cpp" />
     <ClCompile Include="source\SpriteDrawing.cpp" />
+    <ClCompile Include="source\StaticView.cpp" />
     <ClCompile Include="source\WorldManager.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -182,8 +185,13 @@
     <ClInclude Include="include\Game.h" />
     <ClInclude Include="include\GameObject.h" />
     <ClInclude Include="include\GameObjectFactory.h" />
+    <ClInclude Include="include\GameStateGameOver.h" />
     <ClInclude Include="include\GameStateIntro.h" />
     <ClInclude Include="include\GameStatePlay.h" />
+    <ClInclude Include="include\HealthAsteroid.h" />
+    <ClInclude Include="include\HealthMissile.h" />
+    <ClInclude Include="include\HealthShip.h" />
+    <ClInclude Include="include\ICollisionEventObserver.h" />
     <ClInclude Include="include\IComponent.h" />
     <ClInclude Include="include\IDrawing.h" />
     <ClInclude Include="include\IFrameObserver.h" />
@@ -196,16 +204,15 @@
     <ClInclude Include="include\IQuadrantObserver.h" />
     <ClInclude Include="include\IView.h" />
     <ClInclude Include="include\LinearMovement.h" />
-    <ClInclude Include="include\Missilehealth.h" />
     <ClInclude Include="include\ObjectManager.h" />
     <ClInclude Include="include\PixelPosition.h" />
     <ClInclude Include="include\DynamicView.h" />
     <ClInclude Include="include\Quadrant.h" />
     <ClInclude Include="include\QuadrantPosition.h" />
-    <ClInclude Include="include\Shiphealth.h" />
     <ClInclude Include="include\ShipMovement.h" />
     <ClInclude Include="include\SpriteDrawing.h" />
     <ClInclude Include="include\ICollision.h" />
+    <ClInclude Include="include\StaticView.h" />
     <ClInclude Include="include\WorldManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

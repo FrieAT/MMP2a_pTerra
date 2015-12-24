@@ -12,8 +12,8 @@ WorldManager::WorldManager(sf::Vector2f ChunkSize, unsigned long MaxRandomCoordi
 {
     for(unsigned long i = 0; i < m_MaxRandomCoordinates; i++)
     {
-        float x = rand() % static_cast<int>(ChunkSize.x);
-        float y = rand() % static_cast<int>(ChunkSize.y);
+        float x = static_cast<float>(rand() % static_cast<int>(ChunkSize.x));
+        float y = static_cast<float>(rand() % static_cast<int>(ChunkSize.y));
         m_RandomCoordinates.push_back(sf::Vector2f(x, y));
     }
 }
@@ -54,7 +54,7 @@ void WorldManager::AddQuadrant(Quadrant *Quadrant)
     
     for(int i = 0; i < MaxAsteroidRandItems; i++)
     {
-        GameObject* asteroid = GameObjectFactory::CreateAsteroid(GetRandomChunkPositionFromChunk(Quadrant), rand() % 360, rand() % 10);
+        GameObject* asteroid = GameObjectFactory::CreateAsteroid(GetRandomChunkPositionFromChunk(Quadrant), static_cast<float>(rand() % 360), static_cast<float>(rand() % 10));
         ObjectManager::GetInstance().AddGameObject(asteroid);
     }
     

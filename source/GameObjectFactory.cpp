@@ -88,13 +88,13 @@ GameObject* GameObjectFactory::CreateBackgroundSprite(std::string strBackgroundP
 
 GameObject* GameObjectFactory::CreateBackgroundStar(sf::Vector2f Position)
 {
-    int TextureWidth = 100;
-    int TextureHeight = 100;
+    float TextureWidth = 100.f;
+    float TextureHeight = 100.f;
     int TextureAmountX = 6;
     int TextureAmountY = 3;
     
-    int TextureX = (rand() % TextureAmountX) * TextureWidth;
-    int TextureY = (rand() % TextureAmountY) * TextureHeight;
+    float TextureX = static_cast<float>((rand() % TextureAmountX) * TextureWidth);
+	float TextureY = static_cast<float>((rand() % TextureAmountY) * TextureHeight);
     
     GameObject* pStarBackground = new GameObject(std::string("background"));
     SpriteDrawing* pSprite = new SpriteDrawing("assets/Star-Sprites.png", sf::Vector2f(0.f,0.f));
