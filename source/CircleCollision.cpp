@@ -1,14 +1,17 @@
+/*=================================================================
+Copyright (c) MultiMediaTechnology, 2015
+=================================================================*/
+
 #include "CircleCollision.h"
 #include "CollisionManager.h"
 
 #include <iostream>
 
-CircleCollision::CircleCollision(float radius_,IPosition* pos_)
-	:pos(pos_)
-	,radius(radius_)
+CircleCollision::CircleCollision(float fRadius,IPosition* pPosition)
+	:m_pPosition(pPosition)
+	,m_fRadius(fRadius)
 {
-	CollisionManager::GetInstance().RegisterCollisionbody(this);
-	FrameManager::GetInstance().RegisterEventObserver(this);
+
 }
 
 CircleCollision::~CircleCollision()
@@ -18,40 +21,47 @@ CircleCollision::~CircleCollision()
 
 }
 
-bool CircleCollision::colliding(ICollision* Collidingbody)
+void CircleCollision::Init()
 {
-	CircleCollision* other = static_cast<CircleCollision*> (Collidingbody);
+    CollisionManager::GetInstance().RegisterCollisionbody(this);
+    FrameManager::GetInstance().RegisterEventObserver(this);
+}
 
-	sf::Vector2f lenght_vec = other->pos->GetPosition() - pos->GetPosition();
+bool CircleCollision::colliding(ICollision* pCollisionBody)
+{
+	CircleCollision* pOther = static_cast<CircleCollision*> (pCollisionBody);
+
+	sf::Vector2f lenght_vec = pOther->m_pPosition->GetPosition() - m_pPosition->GetPosition();
 	
-	float lenght = lenght_vec.x*lenght_vec.x + lenght_vec.y*lenght_vec.y;
-	float dis = radius + other->radius;
-	dis = dis*dis;
+	float fLength = lenght_vec.x*lenght_vec.x + lenght_vec.y*lenght_vec.y;
+	float fDistance = m_fRadius + pOther->m_fRadius;
+	fDistance = fDistance*fDistance;
 
-	if (lenght < dis)
+	if (fLength < fDistance)
 	{
-		hit = true;
+		m_bHit = true;
 		CollisionEvent col_ev;
 		col_ev.Body1 = this->GetAssignedGameObject();
-		col_ev.Body2 = other->GetAssignedGameObject();
+		col_ev.Body2 = pOther->GetAssignedGameObject();
 		col_ev.normal =  -(lenght_vec/4.f); 
 		CollisionManager::GetInstance().m_CollisonEvents.push(col_ev);
 		return true;
 	}
 	else
 	{
-		hit = false;
+		m_bHit = false;
 		return false;
 	}
 }
 
-void CircleCollision::OnFrameDraw(sf::RenderWindow * pWindow)
+void CircleCollision::OnFrameDraw(sf::RenderWindow* pWindow)
 {
+    /*
 	sf::CircleShape test(radius);
 	if(hit) test.setFillColor(sf::Color::Magenta);
 	else test.setFillColor(sf::Color::Blue);
 	test.setPosition(pos->GetPosition()- sf::Vector2f(radius, radius));
 	
 	//pWindow->draw(test);
-
+     */
 }

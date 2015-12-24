@@ -12,12 +12,13 @@ Copyright (c) MultiMediaTechnology, 2015
 class CircleCollision : public ICollision, public IFrameObserver
 {
 public:
-	CircleCollision(float radius, IPosition* pos);
+	CircleCollision(float radius, IPosition* pPosition);
 	~CircleCollision();
-	bool colliding(ICollision* Collidingbody);
-	float radius;
-	IPosition* pos;
-	bool hit;
+    void Init();
+	bool colliding(ICollision* pCollisionBody);
+	float m_fRadius;
+	IPosition* m_pPosition;
+	bool m_bHit;
 	void OnFrameDraw(sf::RenderWindow* pWindow);
 
 };

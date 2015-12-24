@@ -17,13 +17,13 @@ struct CollisionEvent {
 class ICollision : public IComponent
 {
 public:
-	ICollision() { }
+    ICollision()
+    : m_bPhysicsApplyable(true) { }
 	virtual ~ICollision() { }
-	virtual bool colliding(ICollision* Collisionbody) = 0;
-
+	virtual bool colliding(ICollision* pCollisionBody) = 0;
+    bool m_bPhysicsApplyable;
 	EComponentType GetComponentType()
 	{
 		return EComponentType::Collision;
 	}
-
 };
