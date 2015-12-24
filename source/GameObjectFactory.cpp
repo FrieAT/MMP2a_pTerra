@@ -10,6 +10,7 @@ Copyright (c) MultiMediaTechnology, 2015
 #include "QuadrantPosition.h"
 #include "FontDrawing.h"
 #include "ShipMovement.h"
+#include "StaticView.h"
 #include "DynamicView.h"
 #include "HealthShip.h"
 #include "HealthMissile.h"
@@ -65,6 +66,7 @@ GameObject* GameObjectFactory::CreateBackgroundSprite(std::string strBackgroundP
     
     pBackground->SetComponent(new PixelPosition(sf::Vector2f(0.f, 0.f), sf::Vector2f(0.f, 0.f)));
     pBackground->SetComponent(new SpriteDrawing(strBackgroundPath));
+    pBackground->SetComponent(new StaticView(sf::FloatRect(0, 0, static_cast<float>(Game::m_iWindowWidth), static_cast<float>(Game::m_iWindowHeight))));
     
     return pBackground;
 }
@@ -74,6 +76,7 @@ GameObject* GameObjectFactory::CreateBackgroundSprite(std::string strBackgroundP
     
 	pBackground->SetComponent(new PixelPosition(sf::Vector2f(0.f, 0.f), sf::Vector2f(0.f, 0.f)));
     pBackground->SetComponent(new SpriteDrawing(strBackgroundPath, ScaleTo));
+    pBackground->SetComponent(new StaticView(sf::FloatRect(0, 0, static_cast<float>(Game::m_iWindowWidth), static_cast<float>(Game::m_iWindowHeight))));
     
     return pBackground;
 }
