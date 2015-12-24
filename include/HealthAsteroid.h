@@ -1,6 +1,6 @@
 /*=================================================================
-Copyright (c) MultiMediaTechnology, 2015
-=================================================================*/
+ Copyright (c) MultiMediaTechnology, 2015
+ =================================================================*/
 #pragma once
 
 #include "IHealth.h"
@@ -8,15 +8,15 @@ Copyright (c) MultiMediaTechnology, 2015
 #include "FrameManager.h"
 #include "ICollisionEventObserver.h"
 
-class Shiphealth : public IHealth , public IFrameObserver, public ICollisionEventObserver
+class HealthAsteroid : public IHealth , public IFrameObserver, public ICollisionEventObserver
 {
 public:
-	Shiphealth(float fHealth);
-	~Shiphealth();
+    HealthAsteroid(float fHealth);
+    ~HealthAsteroid();
     void Init();
-	void damage(float fDamage);
+    void Damage(float fDamage);
     void OnFrameDraw(sf::RenderWindow* pWindow);
-	void OnFrameUpdate(sf::Time DeltaTime);
+    void OnFrameUpdate(sf::Time DeltaTime);
     void OnCollisionEvent(GameObject* pOther, sf::Vector2f ImpulseImpact);
 private:
     GameObject* m_pHealthDebug;

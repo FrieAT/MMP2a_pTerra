@@ -8,13 +8,16 @@ Copyright (c) MultiMediaTechnology, 2015
 #include "FrameManager.h"
 #include "ICollisionEventObserver.h"
 
-class Missilehealth : public IHealth, public IFrameObserver, public ICollisionEventObserver
+class HealthShip : public IHealth , public IFrameObserver, public ICollisionEventObserver
 {
 public:
-	Missilehealth(float fHealth);
-	~Missilehealth();
+	HealthShip(float fHealth);
+	~HealthShip();
     void Init();
-	void damage(float fDamage);
+	void Damage(float fDamage);
+    void OnFrameDraw(sf::RenderWindow* pWindow);
 	void OnFrameUpdate(sf::Time DeltaTime);
     void OnCollisionEvent(GameObject* pOther, sf::Vector2f ImpulseImpact);
+private:
+    GameObject* m_pHealthDebug;
 };

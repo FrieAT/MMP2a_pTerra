@@ -2,6 +2,8 @@
 Copyright (c) MultiMediaTechnology, 2015
 =================================================================*/
 
+#include <math.h>
+
 #include "CollisionManager.h"
 #include "IMovement.h"
 #include "ICollision.h"
@@ -30,63 +32,109 @@ void CollisionManager::HandleCollisions()
 	{
 		CollisionEvent col_ev = m_CollisonEvents.top();
 		
-        // Check if game object is not deleted.
-        if(m_CollisionEventObservers[col_ev.Body1].size() < 1 || m_CollisionEventObservers[col_ev.Body2].size() < 1)
+        // Check if game object is registered with as a collision object.
+        if(!m_ActiveGameObjects[col_ev.Body1] || !m_ActiveGameObjects[col_ev.Body2])
         {
             m_CollisonEvents.pop();
             continue;
+        }
+        
+        // Get Collision Models
+        ICollision* pCollisionComponentA = static_cast<ICollision*>(col_ev.Body1->GetComponent(EComponentType::Collision));
+        ICollision* pCollisionComponentB = static_cast<ICollision*>(col_ev.Body2->GetComponent(EComponentType::Collision));
+        
+        // Check if Physics are applyable.
+        bool PhysicsApplyable = true;
+        if(pCollisionComponentA != nullptr && !pCollisionComponentA->m_bPhysicsApplyable)
+        {
+            PhysicsApplyable = false;
+        }
+        if(pCollisionComponentB != nullptr && !pCollisionComponentB->m_bPhysicsApplyable)
+        {
+            PhysicsApplyable = false;
         }
         
 		IMovement* body1= static_cast<IMovement*>(col_ev.Body1->GetComponent(EComponentType::Movement));
 		IMovement* body2 = static_cast<IMovement*>(col_ev.Body2->GetComponent(EComponentType::Movement));
 
 		// Calculate relative velocity
-		sf::Vector2f rv = body1->GetVelocity() - body2->GetVelocity();
+		sf::Vector2f rv;
+        if(body1 != nullptr)
+        {
+            rv = rv - body1->GetVelocity();
+        }
+        if(body2 != nullptr)
+        {
+            rv = rv - body2->GetVelocity();
+        }
 
 		// Calculate relative velocity in terms of the normal direction (length through vector projection)
-		float velAlongNormal = rv.x * col_ev.normal.x + rv.y * col_ev.normal.y;
+		float fVelAlongNormal = rv.x * col_ev.normal.x + rv.y * col_ev.normal.y;
 
 		// Do not resolve if velocities are separating
-		if (velAlongNormal > 0)
+		if (fVelAlongNormal > 0)
+        {
 			return;
-
-		// Apply impulse
-		sf::Vector2f impulse = velAlongNormal * col_ev.normal*100.f;
-
-		body1->AddForce(body1->GetVelocity() - 0.5f * impulse);
-		body2->AddForce(body2->GetVelocity() + 0.5f * impulse);
+        }
+		
+		sf::Vector2f Impulse = fVelAlongNormal * col_ev.normal*100.f;
+        if(body1 != nullptr && PhysicsApplyable)
+        {
+            // Apply impulse
+            body1->AddForce(body1->GetVelocity() - 0.5f * Impulse);
+        }
+        if(body2 != nullptr && PhysicsApplyable)
+        {
+            // Apply impulse
+            body2->AddForce(body2->GetVelocity() + 0.5f * Impulse);
+        }
 		
         // Call EventObservers for Collision.
-        auto* pCollisionBody1 = &m_CollisionEventObservers[body1->GetAssignedGameObject()];
-        for(int i = 0; i < pCollisionBody1->size(); i++)
+        if(PhysicsApplyable || (!PhysicsApplyable && !pCollisionComponentA->m_bPhysicsApplyable))
         {
-            (*pCollisionBody1)[i]->OnCollisionEvent(body2->GetAssignedGameObject(), impulse);
+            auto* pCollisionBody1 = &m_CollisionEventObservers[col_ev.Body1];
+            for(int i = 0; i < pCollisionBody1->size(); i++)
+            {
+                (*pCollisionBody1)[i]->OnCollisionEvent(col_ev.Body2, Impulse);
+            }
+        }
+        if(PhysicsApplyable || (!PhysicsApplyable && !pCollisionComponentB->m_bPhysicsApplyable))
+        {
+            auto* pCollisionBody2 = &m_CollisionEventObservers[col_ev.Body2];
+            for(int i = 0; i < pCollisionBody2->size(); i++)
+            {
+                (*pCollisionBody2)[i]->OnCollisionEvent(col_ev.Body1, Impulse);
+            }
         }
         
-        auto* pCollisionBody2 = &m_CollisionEventObservers[body2->GetAssignedGameObject()];
-        for(int i = 0; i < pCollisionBody2->size(); i++)
-        {
-            (*pCollisionBody2)[i]->OnCollisionEvent(body1->GetAssignedGameObject(), impulse);
-        }
-
 		m_CollisonEvents.pop();
 	}
 
 }
 
-void CollisionManager::RegisterCollisionbody(ICollision * Collisionbody)
+void CollisionManager::RegisterCollisionbody(ICollision* pCollisionBody)
 {
-	m_Colliders.push_back(Collisionbody);
+    if(pCollisionBody->GetAssignedGameObject() == nullptr)
+    {
+        throw std::runtime_error("This component references to a null-pointer game-object. Maybe register in Init()?");
+    }
+	m_Colliders.push_back(pCollisionBody);
+    m_ActiveGameObjects[pCollisionBody->GetAssignedGameObject()] = true;
 }
 
-void CollisionManager::UnregisterCollisionbody(ICollision * Collisionbody)
+void CollisionManager::UnregisterCollisionbody(ICollision* pCollisionBody)
 {
+    if(pCollisionBody->GetAssignedGameObject() == nullptr)
+    {
+        throw std::runtime_error("This component references to a null-pointer game-object. Maybe unregister after or in Init()?");
+    }
 	for (unsigned int i = 0; i < m_Colliders.size(); i++)
 	{
-		if (m_Colliders[i] != Collisionbody) continue;
+		if (m_Colliders[i] != pCollisionBody) continue;
 		m_Colliders.erase(m_Colliders.begin() + i);
 		break;
 	}
+    m_ActiveGameObjects.erase(pCollisionBody->GetAssignedGameObject());
 }
 
 void CollisionManager::Clear()
@@ -120,6 +168,10 @@ void CollisionManager::UnregisterCollisionEvent(ICollisionEventObserver* pThisCo
         if(m_CollisionEventObservers[pGameObject][i] == pThisComponent)
         {
             m_CollisionEventObservers[pGameObject].erase(m_CollisionEventObservers[pGameObject].begin() + i);
+            if(size == 1)
+            {
+                m_CollisionEventObservers.erase(pGameObject);
+            }
             break;
         }
     }

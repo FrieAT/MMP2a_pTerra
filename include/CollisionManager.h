@@ -19,8 +19,8 @@ public:
 	}
 	void Update(sf::Time DeltaTime);
 	void HandleCollisions();
-	void RegisterCollisionbody(ICollision* Collisionbody);
-	void UnregisterCollisionbody(ICollision* Collisionbody);
+	void RegisterCollisionbody(ICollision* pCollisionBody);
+	void UnregisterCollisionbody(ICollision* pCollisionBody);
     void RegisterCollisionEvent(ICollisionEventObserver* pThisComponent, GameObject* pGameObject);
     void UnregisterCollisionEvent(ICollisionEventObserver* pThisComponent, GameObject* pGameObject);
 	void Clear();
@@ -31,5 +31,6 @@ private:
 	CollisionManager(const CollisionManager&) = delete;
 	void operator= (const CollisionManager&) = delete;
 	std::vector<ICollision*> m_Colliders;
+    std::map<GameObject*, bool> m_ActiveGameObjects;
     std::map<GameObject*, std::vector<ICollisionEventObserver*>> m_CollisionEventObservers;
 };

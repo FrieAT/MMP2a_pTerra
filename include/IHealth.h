@@ -14,5 +14,5 @@ public:
 		return EComponentType::Health;
 	}
 	float m_fHealth;
-	virtual void damage(float fDamage) = 0;
+	virtual void Damage(float fDamage) = 0;
 };

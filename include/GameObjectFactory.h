@@ -16,7 +16,7 @@ public:
 	GameObjectFactory() = delete;
 	~GameObjectFactory() = delete;
 	static GameObject* CreatePlayerShip(sf::Vector2f Position, char cPlayer);
-	static GameObject* CreateMissile(IPosition* pPosition, sf::Vector2f ShipSpeed);
+	static GameObject* CreateMissile(GameObject* pOwner, IPosition* pPosition, sf::Vector2f ShipSpeed);
 	static GameObject* CreateAsteroid(sf::Vector2f vPosition, float fRotation, float fSpeed);
     static GameObject* CreateBackgroundStar(sf::Vector2f Position);
 

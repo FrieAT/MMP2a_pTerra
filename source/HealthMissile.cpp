@@ -1,31 +1,31 @@
 /*=================================================================
 Copyright (c) MultiMediaTechnology, 2015
 =================================================================*/
-#pragma once
 
-#include "Missilehealth.h"
+#include "HealthMissile.h"
 #include "ObjectManager.h"
 #include "CollisionManager.h"
 
-Missilehealth::Missilehealth(float fHealth)
+HealthMissile::HealthMissile(float fHealth, GameObject* pOwner)
 {
 	this->m_fHealth = fHealth;
+    this->m_pOwner = pOwner;
 	FrameManager::GetInstance().RegisterEventObserver(this);
 
 }
 
-Missilehealth::~Missilehealth()
+HealthMissile::~HealthMissile()
 {
 	FrameManager::GetInstance().UnregisterEventObserver(this);
     CollisionManager::GetInstance().UnregisterCollisionEvent(this, GetAssignedGameObject());
 }
 
-void Missilehealth::Init()
+void HealthMissile::Init()
 {
     CollisionManager::GetInstance().RegisterCollisionEvent(this, GetAssignedGameObject());
 }
 
-void Missilehealth::damage(float fDamage)
+void HealthMissile::Damage(float fDamage)
 {
 	m_fHealth -= fDamage;
 	if (m_fHealth < 0)
@@ -35,20 +35,24 @@ void Missilehealth::damage(float fDamage)
 	}
 }
 
-void Missilehealth::OnFrameUpdate(sf::Time DeltaTime)
+void HealthMissile::OnFrameUpdate(sf::Time DeltaTime)
 {
-	this->damage(1);
+	this->Damage(1);
 }
 
-void Missilehealth::OnCollisionEvent(GameObject *pOther, sf::Vector2f ImpulseImpact)
+void HealthMissile::OnCollisionEvent(GameObject* pOther, sf::Vector2f ImpulseImpact)
 {
-    // Destroy missile itself
-    this->damage(m_fHealth);
+    // Ignore Collision with Owner-Ship.
+    if(pOther == m_pOwner)
+    {
+        return;
+    }
     
-    // Check for a Health-Component for pOther-GameObject
+    this->Damage(m_fHealth);
+    
     IHealth* pOtherHealth = static_cast<IHealth*>(pOther->GetComponent(EComponentType::Health));
     if(pOtherHealth != nullptr)
     {
-        pOtherHealth->damage(90001.f); // What does the scouter say to his power level?
+        pOtherHealth->Damage(90001.f); // What does the scouter say to his power level?
     }
 }

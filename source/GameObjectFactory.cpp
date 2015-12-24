@@ -11,8 +11,9 @@ Copyright (c) MultiMediaTechnology, 2015
 #include "FontDrawing.h"
 #include "ShipMovement.h"
 #include "DynamicView.h"
-#include "Shiphealth.h"
-#include "Missilehealth.h"
+#include "HealthShip.h"
+#include "HealthMissile.h"
+#include "HealthAsteroid.h"
 #include "CircleCollision.h"
 #include "BoxCollision.h"
 
@@ -27,16 +28,16 @@ GameObject* GameObjectFactory::CreatePlayerShip(sf::Vector2f Position, char cPla
 
     //pShip->SetComponent(new CircleCollision(30.f,pos));
 	pShip->SetComponent(new BoxCollision(50, 50));
-    pShip->SetComponent(new Shiphealth(100.f));
+    pShip->SetComponent(new HealthShip(100.f));
 
 	return pShip;
 }
 
-GameObject* GameObjectFactory::CreateMissile(IPosition* pPosition, sf::Vector2f ShipSpeed)
+GameObject* GameObjectFactory::CreateMissile(GameObject* pOwner, IPosition* pPosition, sf::Vector2f ShipSpeed)
 {
 	// TODO: Make it possible to change component values / change the whole factory
 	GameObject* pMissile = new GameObject(std::string("missile"));
-	pMissile->SetComponent(new Missilehealth(500));
+	pMissile->SetComponent(new HealthMissile(500, pOwner));
 	pMissile->SetComponent(new PixelPosition(pPosition->GetPosition(), sf::Vector2f(160.f, 320.f)));
 	pMissile->SetComponent(new LinearMovement(pPosition->GetRotation(),300.f,1,ShipSpeed,true));
 	pMissile->SetComponent(new SpriteDrawing(std::string("assets/rocket.png"),sf::Vector2f(30,60)));
@@ -53,7 +54,7 @@ GameObject* GameObjectFactory::CreateAsteroid(sf::Vector2f vPosition, float fRot
 	pAsteroid->SetComponent(new SpriteDrawing(std::string("assets/asteroid.png"),sf::Vector2f(83.f, 66.5f)));
 	//pAsteroid->SetComponent(new CircleCollision(40.f, pos));
 	pAsteroid->SetComponent(new BoxCollision(80, 80));
-    pAsteroid->SetComponent(new Shiphealth(10000.f));
+    pAsteroid->SetComponent(new HealthAsteroid(10000.f));
 	return pAsteroid;
 }
 
