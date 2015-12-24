@@ -7,9 +7,8 @@ Copyright (c) MultiMediaTechnology, 2015
 
 #include <iostream>
 
-CircleCollision::CircleCollision(float fRadius,IPosition* pPosition)
-	:m_pPosition(pPosition)
-	,m_fRadius(fRadius)
+CircleCollision::CircleCollision(float fRadius)
+: m_fRadius(fRadius)
 {
 
 }
@@ -30,8 +29,16 @@ void CircleCollision::Init()
 bool CircleCollision::colliding(ICollision* pCollisionBody)
 {
 	CircleCollision* pOther = static_cast<CircleCollision*> (pCollisionBody);
-
-	sf::Vector2f lenght_vec = pOther->m_pPosition->GetPosition() - m_pPosition->GetPosition();
+    IPosition* pPositionComponent = static_cast<IPosition*>(GetAssignedGameObject()->GetComponent(EComponentType::Position));
+    IPosition* pPositionOtherComponent = static_cast<IPosition*>(pCollisionBody->GetAssignedGameObject()->GetComponent(EComponentType::Position));
+    
+    if(pPositionComponent == nullptr || pPositionOtherComponent == nullptr)
+    {
+        m_bHit = false;
+        return false;
+    }
+    
+	sf::Vector2f lenght_vec = pPositionOtherComponent->GetPosition() - pPositionComponent->GetPosition();
 	
 	float fLength = lenght_vec.x*lenght_vec.x + lenght_vec.y*lenght_vec.y;
 	float fDistance = m_fRadius + pOther->m_fRadius;

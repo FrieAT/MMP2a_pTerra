@@ -20,15 +20,14 @@ GameObject* GameObjectFactory::CreatePlayerShip(sf::Vector2f Position, char cPla
 {
 	// TODO: Make it possible to change component values / change the whole factory
 	GameObject* pShip = new GameObject(std::string("ship"));
-	QuadrantPosition* pos = new QuadrantPosition(sf::Vector2f(Position), sf::Vector2f(32.f, 32.f));
-	pShip->SetComponent(pos);
+	pShip->SetComponent(new QuadrantPosition(sf::Vector2f(Position), sf::Vector2f(32.f, 32.f)));
 	pShip->SetComponent(new ShipMovement(cPlayer));
 	pShip->SetComponent(new SpriteDrawing(std::string("assets/space_ship.png")));
-    	pShip->SetComponent(new DynamicView(sf::FloatRect(0, 0, static_cast<float>(Game::m_iWindowWidth), static_cast<float>(Game::m_iWindowHeight)), sf::Vector2f(1920.f - static_cast<float>(Game::m_iWindowWidth), 0), 20.f));
+    pShip->SetComponent(new DynamicView(sf::FloatRect(0, 0, static_cast<float>(Game::m_iWindowWidth), static_cast<float>(Game::m_iWindowHeight)), sf::Vector2f(1920.f - static_cast<float>(Game::m_iWindowWidth), 0), 20.f));
 
-    	//pShip->SetComponent(new CircleCollision(30.f,pos));
-	pShip->SetComponent(new BoxCollision(50, 50, pos));
-    	pShip->SetComponent(new Shiphealth(100.f));
+    //pShip->SetComponent(new CircleCollision(30.f,pos));
+	pShip->SetComponent(new BoxCollision(50, 50));
+    pShip->SetComponent(new Shiphealth(100.f));
 
 	return pShip;
 }
@@ -49,12 +48,11 @@ GameObject* GameObjectFactory::CreateAsteroid(sf::Vector2f vPosition, float fRot
 {
 	// TODO: Make it possible to change component values / change the whole factory
 	GameObject* pAsteroid = new GameObject(std::string("asteroid"));
-	PixelPosition* pos = new PixelPosition(vPosition, sf::Vector2f(83.f, 66.5f));
-	pAsteroid->SetComponent(pos);
+	pAsteroid->SetComponent(new PixelPosition(vPosition, sf::Vector2f(83.f, 66.5f)));
 	pAsteroid->SetComponent(new LinearMovement(fRotation, fSpeed,15));
 	pAsteroid->SetComponent(new SpriteDrawing(std::string("assets/asteroid.png"),sf::Vector2f(83.f, 66.5f)));
 	//pAsteroid->SetComponent(new CircleCollision(40.f, pos));
-	pAsteroid->SetComponent(new BoxCollision(80, 80, pos));
+	pAsteroid->SetComponent(new BoxCollision(80, 80));
     pAsteroid->SetComponent(new Shiphealth(10000.f));
 	return pAsteroid;
 }
