@@ -10,11 +10,13 @@
 #include "GameStatePlay.h"
 #include "GameObjectFactory.h"
 #include "SpriteDrawing.h"
+#include "WorldManager.h"
 
 GameStateGameOver::~GameStateGameOver()
 {
     InputManager::GetInstance().UnregisterEventObserver(this);
     ObjectManager::GetInstance().RemoveAllGameObjects();
+    WorldManager::GetInstance().Clear();
 }
 
 void GameStateGameOver::Init()

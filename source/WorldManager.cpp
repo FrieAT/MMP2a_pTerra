@@ -110,6 +110,13 @@ void WorldManager::UnregisterEventObserver(IQuadrantObserver* pObserver)
 
 void WorldManager::Clear()
 {
+    auto it = m_Quadrants.begin();
+    while(it != m_Quadrants.end())
+    {
+        delete(it->second);
+        it++;
+    }
+    m_Quadrants.clear();
     m_Observers.clear();
     m_Observers.shrink_to_fit();
 }

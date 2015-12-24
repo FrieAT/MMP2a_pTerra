@@ -7,10 +7,12 @@ Copyright (c) MultiMediaTechnology, 2015
 #include "GameObjectFactory.h"
 #include "ObjectManager.h"
 #include "InputManager.h"
+#include "WorldManager.h"
 
 GameStatePlay::~GameStatePlay()
 {
     ObjectManager::GetInstance().RemoveAllGameObjects();
+    WorldManager::GetInstance().Clear();
     delete m_pMusic;
 }
 

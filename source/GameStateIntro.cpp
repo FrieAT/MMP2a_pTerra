@@ -9,11 +9,13 @@ Copyright (c) MultiMediaTechnology, 2015
 #include "ObjectManager.h"
 #include "GameStatePlay.h"
 #include "GameObjectFactory.h"
+#include "WorldManager.h"
 
 GameStateIntro::~GameStateIntro()
 {
     InputManager::GetInstance().UnregisterEventObserver(this);
     ObjectManager::GetInstance().RemoveAllGameObjects();
+    WorldManager::GetInstance().Clear();
 }
 
 void GameStateIntro::Init()
