@@ -38,11 +38,16 @@ GameObject* GameObjectFactory::CreateMissile(GameObject* pOwner, IPosition* pPos
 {
 	// TODO: Make it possible to change component values / change the whole factory
 	GameObject* pMissile = new GameObject(std::string("missile"));
-	pMissile->SetComponent(new HealthMissile(500, pOwner));
+    BoxCollision* pCollisision = new BoxCollision(50, 50);
+    
+    pCollisision->m_bPhysicsApplyable = false;
+    
+	pMissile->SetComponent(new HealthMissile(1000, pOwner));
 	pMissile->SetComponent(new PixelPosition(pPosition->GetPosition(), sf::Vector2f(160.f, 320.f)));
 	pMissile->SetComponent(new LinearMovement(pPosition->GetRotation(),300.f,1,ShipSpeed,true));
 	pMissile->SetComponent(new SpriteDrawing(std::string("assets/rocket.png"),sf::Vector2f(30,60)));
-	
+    pMissile->SetComponent(pCollisision);
+    
 	return pMissile;
 }
 
@@ -55,7 +60,7 @@ GameObject* GameObjectFactory::CreateAsteroid(sf::Vector2f vPosition, float fRot
 	pAsteroid->SetComponent(new SpriteDrawing(std::string("assets/asteroid.png"),sf::Vector2f(83.f, 66.5f)));
 	//pAsteroid->SetComponent(new CircleCollision(40.f, pos));
 	pAsteroid->SetComponent(new BoxCollision(80, 80));
-    pAsteroid->SetComponent(new HealthAsteroid(10000.f));
+    pAsteroid->SetComponent(new HealthAsteroid(50.f));
 	return pAsteroid;
 }
 
