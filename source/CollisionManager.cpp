@@ -14,10 +14,28 @@ void CollisionManager::Update(sf::Time DeltaTime)
 	{
 		for (int ship = 0; ship < m_Colliders.size(); ship++)
 		{
+            // Check if Observer is a IComponent and check from GameObject within, if it is in a Freezed-State.
+            IComponent* pComponent = dynamic_cast<IComponent*>(m_Colliders[ship]);
+            if(pComponent->GetAssignedGameObject()->IsInFreezedState())
+            {
+                continue;
+            }
+            
 			ICollision* current_col = m_Colliders[ship];
 			for (int i = 0; i < m_Colliders.size(); i++)
 			{
-				if (m_Colliders[i] == current_col) continue;	//don't check the object with it self
+				if (m_Colliders[i] == current_col)
+                {
+                    continue;	//don't check the object with it self
+                }
+                
+                // Check if Observer is a IComponent and check from GameObject within, if it is in a Freezed-State.
+                IComponent* pComponent = dynamic_cast<IComponent*>(m_Colliders[i]);
+                if(pComponent->GetAssignedGameObject()->IsInFreezedState())
+                {
+                    continue;
+                }
+                
 				current_col->colliding(m_Colliders[i]);
 				
 			}

@@ -23,6 +23,7 @@ public:
 	void SetComponent(IComponent* pComponent);
 	void RemoveComponent(const EComponentType& eComponentType);
 	IComponent* GetComponent(const EComponentType& eComponentType);
+    bool IsInFreezedState();
 private:
 	std::string m_strID;
 	std::map<EComponentType, IComponent*> m_Components;

@@ -4,6 +4,8 @@ Copyright (c) MultiMediaTechnology, 2015
 
 #include "GameObject.h"
 #include "IComponent.h"
+#include "IPosition.h"
+#include "Quadrant.h"
 
 // GameObject constructor
 GameObject::GameObject(std::string strID)
@@ -51,4 +53,22 @@ void GameObject::RemoveComponent(const EComponentType& eComponentType)
 IComponent* GameObject::GetComponent(const EComponentType& eComponentType)
 {
 	return m_Components[eComponentType];
+}
+
+bool GameObject::IsInFreezedState()
+{
+    IPosition* pPositionComponent = static_cast<IPosition*>(this->GetComponent(EComponentType::Position));
+    // If component has a IPosition (which is maybe always)
+    if(pPositionComponent != nullptr)
+    {
+        // Check if current Quadrant is freezed or not.
+        // if so, don´t perform OnFrameUpdate on Observer.
+        Quadrant* pQuadrant = pPositionComponent->GetQuadrant();
+        if(pQuadrant != nullptr && pQuadrant->GetFreezedState())
+        {
+            // Skip observer call for this GameObject.
+            return true;
+        }
+    }
+    return false;
 }

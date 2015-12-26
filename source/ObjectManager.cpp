@@ -74,6 +74,13 @@ void ObjectManager::Draw(sf::RenderWindow* pWindow)
 		std::string* pDrawOrderType = &ObjectManager::m_DrawOrder[s];
 		for (unsigned int i = 0; i < ObjectManager::m_Objects[*pDrawOrderType].size(); i++)
 		{
+            // Check from GameObject within, if it is in a Freezed-State.
+            if(m_Objects[*pDrawOrderType][i]->IsInFreezedState())
+            {
+                continue;
+            }
+            
+            // Check if GameObject has a IDrawing-Component.
 			IDrawing* pDrawing = static_cast<IDrawing*>(m_Objects[*pDrawOrderType][i]->GetComponent(EComponentType::Drawing));
 			if (pDrawing == nullptr)
 			{
