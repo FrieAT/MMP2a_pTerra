@@ -5,14 +5,11 @@ Copyright (c) MultiMediaTechnology, 2015
 #include "SpriteDrawing.h"
 #include "GameObject.h"
 #include "IPosition.h"
+#include "TextureFactory.h"
 
 SpriteDrawing::SpriteDrawing(std::string strRessourcePath)
 {
-    m_pTexture = new sf::Texture();
-    if(!m_pTexture->loadFromFile(strRessourcePath))
-    {
-        throw std::exception();
-    }
+    m_pTexture = TextureFactory::GetInstance().GetTexture(strRessourcePath);
 	m_pSprite = new sf::Sprite(*m_pTexture);
 }
 
@@ -37,7 +34,6 @@ SpriteDrawing::SpriteDrawing(std::string strRessourcePath, sf::Vector2f ScaleToS
 SpriteDrawing::~SpriteDrawing()
 {
     delete m_pSprite;
-    delete m_pTexture;
 }
 
 void SpriteDrawing::Update()

@@ -49,13 +49,11 @@ void WorldManager::AddQuadrant(Quadrant *Quadrant)
     }
     m_Quadrants[QuadrantIndex] = Quadrant;
     
-    
-    /*
     sf::Vector2f ChunkSize = WorldManager::GetInstance().m_ChunkSize;
     sf::Vector2f TopLeftPosition = Quadrant->GetTopLeftPosition();
     
-    const int MaxAsteroidRandItems = 5;
-    const int MaxStarsRandItems = 10;
+    const int MaxAsteroidRandItems = 10;
+    const int MaxStarsRandItems = 100;
     
     for(int i = 0; i < MaxAsteroidRandItems; i++)
     {
@@ -68,7 +66,6 @@ void WorldManager::AddQuadrant(Quadrant *Quadrant)
         GameObject* star_background = GameObjectFactory::CreateBackgroundStar(GetRandomChunkPositionFromChunk(Quadrant));
         ObjectManager::GetInstance().AddGameObject(star_background);
     }
-     */
 }
 
 Quadrant* WorldManager::GetQuadrant(std::pair<int,int> QuadrantIndex)
