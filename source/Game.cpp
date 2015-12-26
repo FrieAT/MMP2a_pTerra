@@ -14,6 +14,7 @@ Copyright (c) MultiMediaTechnology, 2015
 #include "WorldManager.h"
 #include "CollisionManager.h"
 #include "GameStateIntro.h"
+#include "TextureFactory.h"
 
 Game* Game::m_pEngine = nullptr;
 
@@ -53,6 +54,7 @@ Game::~Game()
 	InputManager::GetInstance().Clear();
 	ObjectManager::GetInstance().Clear();
 	CollisionManager::GetInstance().Clear();
+    TextureFactory::GetInstance().Clear();
 
 	delete m_pWindow;
     m_pEngine = nullptr;
