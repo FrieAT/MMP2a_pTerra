@@ -23,6 +23,7 @@ FontDrawing::FontDrawing(std::string strFontPath, std::string strText, int iChar
 FontDrawing::~FontDrawing()
 {
     delete m_pText;
+    m_pText = nullptr;
 }
 
 void FontDrawing::Update()
@@ -33,8 +34,11 @@ void FontDrawing::Update()
 void FontDrawing::Draw(sf::RenderWindow* pWindow)
 {
     IPosition* pPositionComponent = static_cast<IPosition*>(GetAssignedGameObject()->GetComponent(EComponentType::Position));
-    sf::Vector2f Position = pPositionComponent->GetPosition();
-    m_pText->setPosition(Position.x, Position.y);
+    if(pPositionComponent != nullptr && m_pText != nullptr)
+    {
+        sf::Vector2f Position = pPositionComponent->GetPosition();
+        m_pText->setPosition(Position.x, Position.y);
+    }
     pWindow->draw(*m_pText);
 }
 
