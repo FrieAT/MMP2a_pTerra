@@ -13,14 +13,14 @@ QuadrantPosition::QuadrantPosition(sf::Vector2f Position, sf::Vector2f Origin)
 , m_ELastDirection(EQuadrantPos::Null)
 {
     UpdateQuadrantPosition();
-    m_Quadrant = new Quadrant(Position);
-    WorldManager::GetInstance().AddQuadrant(m_Quadrant);
-    m_Quadrant->GetNeighbour(EQuadrantPos::Null, true);
+    m_pQuadrant = new Quadrant(Position);
+    WorldManager::GetInstance().AddQuadrant(m_pQuadrant);
+    m_pQuadrant->GetNeighbour(EQuadrantPos::Null, true);
 }
 
 Quadrant* QuadrantPosition::GetQuadrant()
 {
-    return m_Quadrant;
+    return m_pQuadrant;
 }
 
 void QuadrantPosition::UpdateQuadrantPosition()
@@ -51,7 +51,7 @@ void QuadrantPosition::SetPosition(sf::Vector2f Position)
         if(m_ELastDirection != EQuadrantPos::Null)
         {
             EQuadrantPos eReverseChunkPosition = (EQuadrantPos)((int)m_ELastDirection - 4 < 0 ? (int)EQuadrantPos::MaxDirections + ((int)m_ELastDirection - 4) : (int)m_ELastDirection - 4);
-            Quadrant* pPreNeighbour = m_Quadrant;
+            Quadrant* pPreNeighbour = m_pQuadrant;
             int iDepth = static_cast<int>(WorldManager::GetInstance().GetChunkDepth());
             while((iDepth--) > 0)
             {
@@ -59,8 +59,8 @@ void QuadrantPosition::SetPosition(sf::Vector2f Position)
             }
             pPreNeighbour->GetNeighbour(eReverseChunkPosition, false, static_cast<int>(WorldManager::GetInstance().GetChunkDepth()) + 1);
         }
-        m_Quadrant = m_Quadrant->GetNeighbour(eNextChunkPosition, true);
-        m_Quadrant->m_bCurrentlyVisited = 1;
+        m_pQuadrant = m_pQuadrant->GetNeighbour(eNextChunkPosition, true);
+        m_pQuadrant->m_bCurrentlyVisited = 1;
         m_ELastDirection = eNextChunkPosition;
         
     }
@@ -98,13 +98,13 @@ void QuadrantPosition::SetRotation(float rotation)
 
 EQuadrantPos QuadrantPosition::GetDirectionKeyFromPos(sf::Vector2f Position)
 {
-    if(m_Quadrant == nullptr)
+    if(m_pQuadrant == nullptr)
     {
         return EQuadrantPos::Null;
     }
     
     sf::Vector2f ChunkSize = WorldManager::GetInstance().m_ChunkSize;
-    sf::Vector2f TopLeftPosition = m_Quadrant->GetTopLeftPosition();
+    sf::Vector2f TopLeftPosition = m_pQuadrant->GetTopLeftPosition();
     sf::Vector2f BottomRightPosition((TopLeftPosition.x + ChunkSize.x), (TopLeftPosition.y + ChunkSize.y));
     
     if(Position.x < TopLeftPosition.x && Position.y < TopLeftPosition.y)

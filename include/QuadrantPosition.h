@@ -23,7 +23,7 @@ public:
     Quadrant* GetQuadrant();
     EQuadrantPos GetDirectionKeyFromPos(sf::Vector2f Position);
 private:
-    Quadrant* m_Quadrant;
+    Quadrant* m_pQuadrant;
     EQuadrantPos m_ELastDirection;
     void UpdateQuadrantPosition();
 };
