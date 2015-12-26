@@ -34,7 +34,7 @@ void FontDrawing::Update()
 void FontDrawing::Draw(sf::RenderWindow* pWindow)
 {
     IPosition* pPositionComponent = static_cast<IPosition*>(GetAssignedGameObject()->GetComponent(EComponentType::Position));
-    if(pPositionComponent != nullptr && m_pText != nullptr)
+    if(pPositionComponent != nullptr)
     {
         sf::Vector2f Position = pPositionComponent->GetPosition();
         m_pText->setPosition(Position.x, Position.y);
