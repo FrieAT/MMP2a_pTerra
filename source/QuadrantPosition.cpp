@@ -10,14 +10,12 @@
 
 QuadrantPosition::QuadrantPosition(sf::Vector2f Position, sf::Vector2f Origin)
 : IPosition(Position, Origin)
+, m_ELastDirection(EQuadrantPos::Null)
 {
     UpdateQuadrantPosition();
     m_Quadrant = new Quadrant(Position);
-    m_Quadrant->GetNeighbour(EQuadrantPos::Top);
-    m_Quadrant->GetNeighbour(EQuadrantPos::Bottom);
-    m_Quadrant->GetNeighbour(EQuadrantPos::Left);
-    m_Quadrant->GetNeighbour(EQuadrantPos::Right);
     WorldManager::GetInstance().AddQuadrant(m_Quadrant);
+    m_Quadrant->GetNeighbour(EQuadrantPos::Null, true);
 }
 
 Quadrant* QuadrantPosition::GetQuadrant()
@@ -34,10 +32,37 @@ void QuadrantPosition::SetPosition(sf::Vector2f Position)
 {
     this->m_Position = Position;
     
-    EQuadrantPos eChunkPosition = GetDirectionKeyFromPos(Position);
-    if(eChunkPosition != EQuadrantPos::Null) {
-        std::cout << "Search for Neighbour in " << (int)eChunkPosition << std::endl;
-        m_Quadrant = m_Quadrant->GetNeighbour(eChunkPosition);
+    // Prediction Position
+    /*
+    IMovement* MovementComponent = static_cast<IMovement*>(GetAssignedGameObject()->GetComponent(EComponentType::Movement));
+    if(MovementComponent != nullptr)
+    {
+        sf::Vector2f ImpulseDirection = MovementComponent->GetVelocity();
+        // std::cout << "Movement Direction: " << ImpulseDirection.x << " / " << ImpulseDirection.y << std::endl;
+        Position += ImpulseDirection;
+    }
+    */
+    
+    // WorldManager* WorldMgrInstance = &WorldManager::GetInstance();
+    // m_Quadrant = WorldMgrInstance->GetQuadrant(WorldMgrInstance->GetQuadrantIndexAtPos(WorldMgrInstance->GetQuadrantCorrectedPos(this->m_Position)));
+    
+    EQuadrantPos eNextChunkPosition = GetDirectionKeyFromPos(Position);
+    if(eNextChunkPosition != EQuadrantPos::Null) {
+        if(m_ELastDirection != EQuadrantPos::Null)
+        {
+            EQuadrantPos eReverseChunkPosition = (EQuadrantPos)((int)m_ELastDirection - 4 < 0 ? (int)EQuadrantPos::MaxDirections + ((int)m_ELastDirection - 4) : (int)m_ELastDirection - 4);
+            Quadrant* pPreNeighbour = m_Quadrant;
+            int iDepth = static_cast<int>(WorldManager::GetInstance().GetChunkDepth());
+            while((iDepth--) > 0)
+            {
+                pPreNeighbour = pPreNeighbour->GetNeighbour(eReverseChunkPosition, false, 0);
+            }
+            pPreNeighbour->GetNeighbour(eReverseChunkPosition, false, static_cast<int>(WorldManager::GetInstance().GetChunkDepth()) + 1);
+        }
+        m_Quadrant = m_Quadrant->GetNeighbour(eNextChunkPosition, true);
+        m_Quadrant->m_bCurrentlyVisited = 1;
+        m_ELastDirection = eNextChunkPosition;
+        
     }
 }
 
@@ -82,45 +107,35 @@ EQuadrantPos QuadrantPosition::GetDirectionKeyFromPos(sf::Vector2f Position)
     sf::Vector2f TopLeftPosition = m_Quadrant->GetTopLeftPosition();
     sf::Vector2f BottomRightPosition((TopLeftPosition.x + ChunkSize.x), (TopLeftPosition.y + ChunkSize.y));
     
-    // Prediction Position
-    sf::Vector2f PredictedPosition = Position;
-    IMovement* MovementComponent = static_cast<IMovement*>(GetAssignedGameObject()->GetComponent(EComponentType::Movement));
-    if(MovementComponent != nullptr)
-    {
-        sf::Vector2f ImpulseDirection = MovementComponent->GetVelocity();
-        // std::cout << "Movement Direction: " << ImpulseDirection.x << " / " << ImpulseDirection.y << std::endl;
-        PredictedPosition += ImpulseDirection;
-    }
-    
-    if(PredictedPosition.x < TopLeftPosition.x && PredictedPosition.y < TopLeftPosition.y)
+    if(Position.x < TopLeftPosition.x && Position.y < TopLeftPosition.y)
     {
         return EQuadrantPos::TopLeft;
     }
-    else if(PredictedPosition.x > BottomRightPosition.x && PredictedPosition.y < TopLeftPosition.y)
+    else if(Position.x > BottomRightPosition.x && Position.y < TopLeftPosition.y)
     {
         return EQuadrantPos::TopRight;
     }
-    else if(PredictedPosition.x < TopLeftPosition.x && PredictedPosition.y > BottomRightPosition.y)
+    else if(Position.x < TopLeftPosition.x && Position.y > BottomRightPosition.y)
     {
         return EQuadrantPos::BottomLeft;
     }
-    else if(PredictedPosition.x > BottomRightPosition.x && PredictedPosition.y > BottomRightPosition.y)
+    else if(Position.x > BottomRightPosition.x && Position.y > BottomRightPosition.y)
     {
         return EQuadrantPos::BottomRight;
     }
-    else if(PredictedPosition.x < TopLeftPosition.x)
+    else if(Position.x < TopLeftPosition.x)
     {
         return EQuadrantPos::Left;
     }
-    else if(PredictedPosition.y < TopLeftPosition.y)
+    else if(Position.y < TopLeftPosition.y)
     {
         return EQuadrantPos::Top;
     }
-    else if(PredictedPosition.x > BottomRightPosition.x)
+    else if(Position.x > BottomRightPosition.x)
     {
         return EQuadrantPos::Right;
     }
-    else if(PredictedPosition.y > BottomRightPosition.y)
+    else if(Position.y > BottomRightPosition.y)
     {
         return EQuadrantPos::Bottom;
     }

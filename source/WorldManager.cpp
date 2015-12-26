@@ -2,13 +2,16 @@
  Copyright (c) MultiMediaTechnology, 2015
  =================================================================*/
 
+#include <math.h>
+
 #include "WorldManager.h"
 #include "ObjectManager.h"
 #include "GameObjectFactory.h"
 
-WorldManager::WorldManager(sf::Vector2f ChunkSize, unsigned long MaxRandomCoordinates)
+WorldManager::WorldManager(sf::Vector2f ChunkSize, unsigned long MaxRandomCoordinates, char iChunkDepth)
 : m_ChunkSize(ChunkSize)
 , m_MaxRandomCoordinates(MaxRandomCoordinates)
+, m_iChunkDepth(iChunkDepth)
 {
     for(unsigned long i = 0; i < m_MaxRandomCoordinates; i++)
     {
@@ -46,6 +49,8 @@ void WorldManager::AddQuadrant(Quadrant *Quadrant)
     }
     m_Quadrants[QuadrantIndex] = Quadrant;
     
+    
+    /*
     sf::Vector2f ChunkSize = WorldManager::GetInstance().m_ChunkSize;
     sf::Vector2f TopLeftPosition = Quadrant->GetTopLeftPosition();
     
@@ -63,6 +68,7 @@ void WorldManager::AddQuadrant(Quadrant *Quadrant)
         GameObject* star_background = GameObjectFactory::CreateBackgroundStar(GetRandomChunkPositionFromChunk(Quadrant));
         ObjectManager::GetInstance().AddGameObject(star_background);
     }
+     */
 }
 
 Quadrant* WorldManager::GetQuadrant(std::pair<int,int> QuadrantIndex)
@@ -70,6 +76,22 @@ Quadrant* WorldManager::GetQuadrant(std::pair<int,int> QuadrantIndex)
     auto it = m_Quadrants.find(QuadrantIndex);
     if(it == m_Quadrants.end()) return nullptr;
     return it->second;
+}
+
+std::pair<int,int> WorldManager::GetQuadrantIndexAtPos(sf::Vector2f TopLeftPosition)
+{
+    sf::Vector2f ChunkSize = WorldManager::GetInstance().m_ChunkSize;
+    int dYIndex = static_cast<int>(floor(TopLeftPosition.y / ChunkSize.y));
+    int dXIndex = static_cast<int>(floor(TopLeftPosition.x / ChunkSize.x));
+    return std::pair<int,int>(dXIndex, dYIndex);
+}
+
+sf::Vector2f WorldManager::GetQuadrantCorrectedPos(sf::Vector2f Position)
+{
+    sf::Vector2f ChunkSize = WorldManager::GetInstance().m_ChunkSize;
+    int dYIndex = static_cast<int>(floor(Position.y / ChunkSize.y));
+    int dXIndex = static_cast<int>(floor(Position.x / ChunkSize.x));
+    return sf::Vector2f(dXIndex * ChunkSize.x, dYIndex * ChunkSize.y);
 }
 
 void WorldManager::Update(sf::RenderWindow *pWindow)
@@ -81,16 +103,35 @@ void WorldManager::Update(sf::RenderWindow *pWindow)
     {
         if(it->second != nullptr)
         {
+            if(it->second->GetFreezedState())
+            {
+                ++it;
+                continue;
+            }
             sf::RectangleShape shape;
             sf::Color color(255.f, 128.f, 0.f, 128.f);
+            sf::Color color_visit(0.f, 0.f, 255, 128.f);
+            sf::Color color_look_back(0.f, 255.f, 0.f, 128.f);
             shape.setSize(WorldManager::GetInstance().m_ChunkSize);
             shape.setPosition(it->second->GetTopLeftPosition());
-            shape.setFillColor(color);
+            switch(it->second->m_bCurrentlyVisited)
+            {
+                case 0:
+                    shape.setFillColor(color);
+                    break;
+                case 1:
+                    shape.setFillColor(color_visit);
+                    break;
+                case 2:
+                    shape.setFillColor(color_look_back);
+                    break;
+            }
+            shape.setFillColor((it->second->m_bCurrentlyVisited ? color_visit : color));
             pWindow->draw(shape);
         }
         ++it;
     }
-    */
+     */
 }
 
 void WorldManager::RegisterEventObserver(IQuadrantObserver* pObserver)
@@ -119,4 +160,9 @@ void WorldManager::Clear()
     m_Quadrants.clear();
     m_Observers.clear();
     m_Observers.shrink_to_fit();
+}
+
+char WorldManager::GetChunkDepth()
+{
+    return m_iChunkDepth;
 }

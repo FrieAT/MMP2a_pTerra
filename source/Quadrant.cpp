@@ -10,8 +10,9 @@
 Quadrant::Quadrant(sf::Vector2f TopLeftPosition)
 {
     m_bFreezed = false;
+    m_bCurrentlyVisited = 0;
     m_TopLeftPosition = TopLeftPosition;
-    m_Index = GetQuadrantIndexAtPos(TopLeftPosition);
+    m_Index = WorldManager::GetInstance().GetQuadrantIndexAtPos(TopLeftPosition);
     std::cout << "Draw Quadrant at Position: (" << TopLeftPosition.x << " / " << TopLeftPosition.y << ")" << std::endl;
 }
 
@@ -43,35 +44,41 @@ void Quadrant::UnregisterGameObject(int iIndex)
     m_GameObjects.erase(m_GameObjects.begin() + iIndex);
 }
 
-Quadrant* Quadrant::GetNeighbour(EQuadrantPos eChunkPosition, char uChunkDepth)
+Quadrant* Quadrant::GetNeighbour(EQuadrantPos eChunkPosition, bool bActive, int uChunkDepth)
 {
-    sf::Vector2f ChunkPosition = CalculatePositionForNeighbour(eChunkPosition);
-    Quadrant* FoundQuadrant = WorldManager::GetInstance().GetQuadrant(GetQuadrantIndexAtPos(ChunkPosition));
-    if(FoundQuadrant == nullptr) {
-        FoundQuadrant = new Quadrant(ChunkPosition);
-        WorldManager::GetInstance().AddQuadrant(FoundQuadrant);
-        for(int i = 0; uChunkDepth > 0 && i < (int)EQuadrantPos::MaxDirections; i++)
+    Quadrant* FoundQuadrant = &(*this);
+    if(eChunkPosition != EQuadrantPos::Null)
+    {
+        sf::Vector2f ChunkPosition = CalculatePositionForNeighbour(eChunkPosition);
+        FoundQuadrant = WorldManager::GetInstance().GetQuadrant(WorldManager::GetInstance().GetQuadrantIndexAtPos(ChunkPosition));
+        if(FoundQuadrant == nullptr)
         {
-            GetNeighbour((EQuadrantPos)i, --uChunkDepth);
+            FoundQuadrant = new Quadrant(ChunkPosition);
+            WorldManager::GetInstance().AddQuadrant(FoundQuadrant);
+        }
+    }
+    if(uChunkDepth < 0)
+    {
+        uChunkDepth = static_cast<int>(WorldManager::GetInstance().GetChunkDepth());
+    }
+    FoundQuadrant->m_bFreezed = !bActive;
+    if(!bActive)
+    {
+        FoundQuadrant->m_bCurrentlyVisited = 2;
+    }
+    else
+    {
+        FoundQuadrant->m_bCurrentlyVisited = 0;
+    }
+    while((uChunkDepth--) > 0)
+    {
+        std::cout << "Search in Chunk Depth: " << uChunkDepth << std::endl;
+        for(int i = 0; i < (int)EQuadrantPos::MaxDirections; i++)
+        {
+            FoundQuadrant->GetNeighbour((EQuadrantPos)i, bActive, uChunkDepth);
         }
     }
     return FoundQuadrant;
-}
-
-std::pair<int,int> Quadrant::GetQuadrantIndexAtPos(sf::Vector2f TopLeftPosition)
-{
-    sf::Vector2f ChunkSize = WorldManager::GetInstance().m_ChunkSize;
-    int dYIndex = static_cast<int>(floor(TopLeftPosition.y / ChunkSize.y));
-    int dXIndex = static_cast<int>(floor(TopLeftPosition.x / ChunkSize.x));
-    return std::pair<int,int>(dXIndex, dYIndex);
-}
-
-sf::Vector2f Quadrant::GetQuadrantCorrectedPos(sf::Vector2f Position)
-{
-    sf::Vector2f ChunkSize = WorldManager::GetInstance().m_ChunkSize;
-    int dYIndex = static_cast<int>(floor(Position.y / ChunkSize.y));
-    int dXIndex = static_cast<int>(floor(Position.x / ChunkSize.x));
-    return sf::Vector2f(dXIndex * ChunkSize.x, dYIndex * ChunkSize.y);
 }
 
 sf::Vector2f Quadrant::CalculatePositionForNeighbour(EQuadrantPos eChunkPosition)
