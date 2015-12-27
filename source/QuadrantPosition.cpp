@@ -6,6 +6,7 @@
 
 #include "QuadrantPosition.h"
 #include "WorldManager.h"
+#include "ObjectManager.h"
 #include "IMovement.h"
 
 QuadrantPosition::QuadrantPosition(sf::Vector2f Position, sf::Vector2f Origin)
@@ -62,7 +63,7 @@ void QuadrantPosition::SetPosition(sf::Vector2f Position)
         m_pQuadrant = m_pQuadrant->GetNeighbour(eNextChunkPosition, true);
         m_pQuadrant->m_bCurrentlyVisited = 1;
         m_ELastDirection = eNextChunkPosition;
-        
+        ObjectManager::GetInstance().AddGameObject(GetAssignedGameObject());
     }
 }
 

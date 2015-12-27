@@ -10,6 +10,7 @@ class PixelPosition : public IPosition
 {
 public:
     PixelPosition(sf::Vector2f Position, sf::Vector2f Origin);
+    void Init();
 	void SetPosition(sf::Vector2f Position);
 	sf::Vector2f GetPosition();
 	sf::Vector2f GetCenter();

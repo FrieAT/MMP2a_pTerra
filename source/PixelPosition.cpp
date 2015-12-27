@@ -4,10 +4,16 @@ Copyright (c) MultiMediaTechnology, 2015
 
 #include "PixelPosition.h"
 #include "WorldManager.h"
+#include "ObjectManager.h"
 
 PixelPosition::PixelPosition(sf::Vector2f Position, sf::Vector2f Origin)
 : IPosition(Position,Origin)
 , m_pQuadrant(nullptr)
+{
+    
+}
+
+void PixelPosition::Init()
 {
     UpdateQuadrantPosition();
 }
@@ -56,5 +62,10 @@ void PixelPosition::UpdateQuadrantPosition()
 {
     sf::Vector2f ChunkPosition = WorldManager::GetInstance().GetQuadrantCorrectedPos(m_Position);
     std::pair<int, int> ChunkIndex = WorldManager::GetInstance().GetQuadrantIndexAtPos(ChunkPosition);
-    m_pQuadrant = WorldManager::GetInstance().GetQuadrant(ChunkIndex);
+    Quadrant* pNewQuadrant = WorldManager::GetInstance().GetQuadrant(ChunkIndex);
+    if(m_pQuadrant != pNewQuadrant)
+    {
+        m_pQuadrant = pNewQuadrant;
+        ObjectManager::GetInstance().AddGameObject(GetAssignedGameObject());
+    }
 }

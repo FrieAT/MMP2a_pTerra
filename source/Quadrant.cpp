@@ -6,6 +6,7 @@
 
 #include "Quadrant.h"
 #include "WorldManager.h"
+#include "ObjectManager.h"
 
 Quadrant::Quadrant(sf::Vector2f TopLeftPosition)
 {
@@ -65,10 +66,12 @@ Quadrant* Quadrant::GetNeighbour(EQuadrantPos eChunkPosition, bool bActive, int 
     if(!bActive)
     {
         FoundQuadrant->m_bCurrentlyVisited = 2;
+        ObjectManager::GetInstance().RemoveQuadrant(FoundQuadrant);
     }
     else
     {
         FoundQuadrant->m_bCurrentlyVisited = 0;
+        ObjectManager::GetInstance().AddQuadrant(FoundQuadrant);
     }
     while((uChunkDepth--) > 0)
     {
