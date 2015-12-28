@@ -172,6 +172,7 @@
     <ClCompile Include="source\ShipMovement.cpp" />
     <ClCompile Include="source\SpriteDrawing.cpp" />
     <ClCompile Include="source\StaticView.cpp" />
+    <ClCompile Include="source\TextureFactory.cpp" />
     <ClCompile Include="source\WorldManager.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -213,6 +214,7 @@
     <ClInclude Include="include\SpriteDrawing.h" />
     <ClInclude Include="include\ICollision.h" />
     <ClInclude Include="include\StaticView.h" />
+    <ClInclude Include="include\TextureFactory.h" />
     <ClInclude Include="include\WorldManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

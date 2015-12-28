@@ -138,6 +138,9 @@
     <ClCompile Include="source\StaticView.cpp">
       <Filter>Source Files\Components\IView</Filter>
     </ClCompile>
+    <ClCompile Include="source\TextureFactory.cpp">
+      <Filter>Source Files\Components\IDrawing</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\IComponent.h">
@@ -256,6 +259,9 @@
     </ClInclude>
     <ClInclude Include="include\StaticView.h">
       <Filter>Source Files\Components\IView</Filter>
+    </ClInclude>
+    <ClInclude Include="include\TextureFactory.h">
+      <Filter>Source Files\Components\IDrawing</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
