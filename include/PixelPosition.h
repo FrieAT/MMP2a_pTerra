@@ -9,7 +9,8 @@ Copyright (c) MultiMediaTechnology, 2015
 class PixelPosition : public IPosition
 {
 public:
-	PixelPosition(sf::Vector2f Position, sf::Vector2f Origin) : IPosition(Position,Origin) { }
+    PixelPosition(sf::Vector2f Position, sf::Vector2f Origin);
+    void Init();
 	void SetPosition(sf::Vector2f Position);
 	sf::Vector2f GetPosition();
 	sf::Vector2f GetCenter();
@@ -17,6 +18,8 @@ public:
 	float GetRotation();
 	void SetOrigin(sf::Vector2f Origin);
 	sf::Vector2f GetOrigin();
+    Quadrant* GetQuadrant();
 private:
-
+    Quadrant* m_pQuadrant;
+    void UpdateQuadrantPosition();
 };

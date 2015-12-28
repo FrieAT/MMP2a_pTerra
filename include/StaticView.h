@@ -13,6 +13,7 @@ class StaticView : public IView, public IFrameObserver
 public:
     StaticView(sf::FloatRect ViewSize);
     ~StaticView();
+    void Init();
     void OnFrameUpdate(sf::Time DeltaTime);
     void OnFrameDraw(sf::RenderWindow* pWindow);
     

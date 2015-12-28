@@ -15,17 +15,15 @@
 GameStateGameOver::~GameStateGameOver()
 {
     InputManager::GetInstance().UnregisterEventObserver(this);
-    ObjectManager::GetInstance().RemoveAllGameObjects();
-    WorldManager::GetInstance().Clear();
 }
 
 void GameStateGameOver::Init()
 {
     m_bKeyPressed = false;
     
-    ObjectManager::GetInstance().AddGameObject(GameObjectFactory::CreateBackgroundSprite("assets/intro-bg.jpg", sf::Vector2f(static_cast<float>(Game::m_iWindowWidth), static_cast<float>(Game::m_iWindowHeight))));
-    ObjectManager::GetInstance().AddGameObject(GameObjectFactory::CreateFontText(sf::Vector2f(280.f, 100.f), "assets/Starjedi.ttf", "game over", 24));
-    ObjectManager::GetInstance().AddGameObject(GameObjectFactory::CreateFontText(sf::Vector2f(230.f, 500.f), "assets/Starjedi.ttf", "-- Press Space-Key to restart game --", 16));
+    GameObjectFactory::CreateBackgroundSprite("assets/intro-bg.jpg", sf::Vector2f(static_cast<float>(Game::m_iWindowWidth), static_cast<float>(Game::m_iWindowHeight)));
+    GameObjectFactory::CreateFontText(sf::Vector2f(280.f, 100.f), "assets/Starjedi.ttf", "game over", 24);
+    GameObjectFactory::CreateFontText(sf::Vector2f(230.f, 500.f), "assets/Starjedi.ttf", "-- Press Space-Key to restart game --", 16);
     
     InputManager::GetInstance().RegisterEventObserver(this);
 }

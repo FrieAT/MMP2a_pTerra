@@ -15,7 +15,6 @@
 HealthAsteroid::HealthAsteroid(float fHealth)
 {
     this->m_fHealth = fHealth;
-    FrameManager::GetInstance().RegisterEventObserver(this);
     m_pHealthDebug = GameObjectFactory::CreateFontText(sf::Vector2f(0.f,0.f), "assets/Starjedi.ttf", "", 8);
 }
 
@@ -23,12 +22,13 @@ HealthAsteroid::~HealthAsteroid()
 {
     FrameManager::GetInstance().UnregisterEventObserver(this);
     CollisionManager::GetInstance().UnregisterCollisionEvent(this, GetAssignedGameObject());
-    delete(m_pHealthDebug);
+    ObjectManager::GetInstance().RemoveGameObject(m_pHealthDebug);
     m_pHealthDebug = nullptr;
 }
 
 void HealthAsteroid::Init()
 {
+    FrameManager::GetInstance().RegisterEventObserver(this);
     CollisionManager::GetInstance().RegisterCollisionEvent(this, GetAssignedGameObject());
 }
 

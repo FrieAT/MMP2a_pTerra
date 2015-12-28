@@ -8,8 +8,6 @@ Copyright (c) MultiMediaTechnology, 2015
 
 ShipMovement::ShipMovement(char cPlayer)
 {
-	InputManager::GetInstance().RegisterEventObserver(this);
-	FrameManager::GetInstance().RegisterEventObserver(this);
 	this->m_cPlayer = cPlayer;
 	mass = 3;
 	invMass = 1 / mass;
@@ -17,7 +15,7 @@ ShipMovement::ShipMovement(char cPlayer)
 	m_ShipState = std::vector<bool>(5, false);
 	m_fSpeed = 1000.f;
 	m_fMaxSpeed = 2000;
-	m_fFirerate = 60;
+	m_fFirerate = 0.5f;
 }
 
 
@@ -25,6 +23,12 @@ ShipMovement::~ShipMovement()
 {
     InputManager::GetInstance().UnregisterEventObserver(this);
     FrameManager::GetInstance().UnregisterEventObserver(this);
+}
+
+void ShipMovement::Init()
+{
+    InputManager::GetInstance().RegisterEventObserver(this);
+    FrameManager::GetInstance().RegisterEventObserver(this);
 }
 
 
@@ -98,13 +102,16 @@ void ShipMovement::UpdateMovement(sf::Time DeltaTime)
 	if (m_ShipState[2]) m_Direction = sf::Vector2f(0.f, -0.8f); //move forward
 	if (m_ShipState[3]) m_Direction = sf::Vector2f(0.f, 0.6f); //move forward
 	if (!m_ShipState[2]&& !m_ShipState[3]) m_Direction = sf::Vector2f(0.f, 0.f); //turn off thruster
-	if (m_ShipState[4] && m_fWeaponcoolDown<1)
+	if (m_ShipState[4] && m_fWeaponcoolDown <= 0.f)
 	{
 		m_fWeaponcoolDown = m_fFirerate;
-		ObjectManager::GetInstance().AddGameObject(GameObjectFactory::CreateMissile(GetAssignedGameObject(), pPositionComponent, velocity)); //shoot rockets
+		GameObjectFactory::CreateMissile(GetAssignedGameObject(), pPositionComponent, velocity); //shoot rockets
 		std::cout << velocity.x << " "<<velocity.y << std::endl;
 	}
-	if (m_fWeaponcoolDown > 0)m_fWeaponcoolDown--;
+	if (m_fWeaponcoolDown > 0.f)
+    {
+        m_fWeaponcoolDown -= 1.f * DeltaTime.asSeconds();
+    }
 
 
 

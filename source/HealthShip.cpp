@@ -15,12 +15,12 @@ Copyright (c) MultiMediaTechnology, 2015
 HealthShip::HealthShip(float fHealth)
 {
 	this->m_fHealth = fHealth;
-	FrameManager::GetInstance().RegisterEventObserver(this);
     m_pHealthDebug = GameObjectFactory::CreateFontText(sf::Vector2f(0.f,0.f), "assets/Starjedi.ttf", "", 8);
 }
 
 void HealthShip::Init()
 {
+    FrameManager::GetInstance().RegisterEventObserver(this);
     CollisionManager::GetInstance().RegisterCollisionEvent(this, GetAssignedGameObject());
 }
 
@@ -28,8 +28,7 @@ HealthShip::~HealthShip()
 {
 	FrameManager::GetInstance().UnregisterEventObserver(this);
     CollisionManager::GetInstance().UnregisterCollisionEvent(this, GetAssignedGameObject());
-    delete(m_pHealthDebug);
-    m_pHealthDebug = nullptr;
+    ObjectManager::GetInstance().RemoveGameObject(m_pHealthDebug);
 }
 
 
@@ -39,8 +38,8 @@ void HealthShip::Damage(float fDamage)
 	m_fHealth -= fDamage;
 	if (m_fHealth < 0)
 	{
-		//TODO destroy Ship and remove end game
-		ObjectManager::GetInstance().RemoveGameObject(GetAssignedGameObject());
+		// Hier wird das Schiff nicht zerstört, weil es sowieso einen GameState-Switch auslöst.
+		// ObjectManager::GetInstance().RemoveGameObject(GetAssignedGameObject());
         
         Game::m_pEngine->ChangeState(new GameStateGameOver());
 	}
@@ -49,7 +48,10 @@ void HealthShip::Damage(float fDamage)
 void HealthShip::OnFrameDraw(sf::RenderWindow* pWindow)
 {
     IDrawing* pHealthDebugDrawing = static_cast<IDrawing*>(m_pHealthDebug->GetComponent(EComponentType::Drawing));
-    pHealthDebugDrawing->Draw(pWindow);
+    if(pHealthDebugDrawing != nullptr)
+    {
+        pHealthDebugDrawing->Draw(pWindow);
+    }
 }
 
 void HealthShip::OnFrameUpdate(sf::Time DeltaTime)

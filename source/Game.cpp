@@ -14,6 +14,7 @@ Copyright (c) MultiMediaTechnology, 2015
 #include "WorldManager.h"
 #include "CollisionManager.h"
 #include "GameStateIntro.h"
+#include "TextureFactory.h"
 
 Game* Game::m_pEngine = nullptr;
 
@@ -21,6 +22,7 @@ Game::Game()
 {
     if(m_pEngine != nullptr) delete m_pEngine;
     m_pEngine = this;
+    m_pCurrentState = nullptr;
     
     // Create the main window
     m_pWindow = new sf::RenderWindow(sf::VideoMode(Game::m_iWindowWidth, Game::m_iWindowHeight), "SFML window");
@@ -53,6 +55,7 @@ Game::~Game()
 	InputManager::GetInstance().Clear();
 	ObjectManager::GetInstance().Clear();
 	CollisionManager::GetInstance().Clear();
+    TextureFactory::GetInstance().Clear();
 
 	delete m_pWindow;
     m_pEngine = nullptr;
@@ -79,6 +82,24 @@ void Game::Start()
         }
         
         pGameState = m_States.back();
+        
+        if(pGameState != m_pCurrentState)
+        {
+            if(m_pCurrentState != nullptr)
+            {
+                delete m_pCurrentState;
+                
+                ObjectManager::GetInstance().Clear();
+                WorldManager::GetInstance().Clear();
+                FrameManager::GetInstance().Clear();
+                InputManager::GetInstance().Clear();
+                ObjectManager::GetInstance().Clear();
+                CollisionManager::GetInstance().Clear();
+            }
+            
+            m_pCurrentState = pGameState;
+            m_pCurrentState->Init();
+        }
 
         // Manager updates
         FrameManager::GetInstance().Update(deltaTime);
@@ -100,12 +121,9 @@ void Game::ChangeState(IGameState* pState)
 {
     // cleanup the current state
     if ( !m_States.empty())
-	{
-        delete m_States.back();
+    {
         m_States.pop_back();
     }
-    // Initiate all ressources for new game state
-    pState->Init();
     // store and init the new state
     m_States.push_back(pState);
 }

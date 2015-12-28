@@ -13,8 +13,6 @@
 StaticView::StaticView(sf::FloatRect ViewSize)
 {
     m_pView = new sf::View(ViewSize);
-    
-    FrameManager::GetInstance().RegisterEventObserver(this);
 }
 
 StaticView::~StaticView()
@@ -22,6 +20,11 @@ StaticView::~StaticView()
     FrameManager::GetInstance().UnregisterEventObserver(this);
     
     delete m_pView;
+}
+
+void StaticView::Init()
+{
+    FrameManager::GetInstance().RegisterEventObserver(this);
 }
 
 sf::FloatRect StaticView::GetViewport()

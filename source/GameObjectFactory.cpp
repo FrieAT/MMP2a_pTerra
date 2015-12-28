@@ -60,7 +60,7 @@ GameObject* GameObjectFactory::CreateAsteroid(sf::Vector2f vPosition, float fRot
 	pAsteroid->SetComponent(new SpriteDrawing(std::string("assets/asteroid.png"),sf::Vector2f(83.f, 66.5f)));
 	//pAsteroid->SetComponent(new CircleCollision(40.f, pos));
 	pAsteroid->SetComponent(new BoxCollision(80, 80));
-    pAsteroid->SetComponent(new HealthAsteroid(50.f));
+    pAsteroid->SetComponent(new HealthAsteroid(200.f));
 	return pAsteroid;
 }
 
@@ -69,7 +69,7 @@ GameObject* GameObjectFactory::CreateBackgroundSprite(std::string strBackgroundP
     // TODO: Make it possible to change component values / change the whole factory
     GameObject* pBackground = new GameObject(std::string("background"));
     
-    pBackground->SetComponent(new PixelPosition(sf::Vector2f(0.f, 0.f), sf::Vector2f(0.f, 0.f)));
+    pBackground->SetComponent(new QuadrantPosition(sf::Vector2f(0.f, 0.f), sf::Vector2f(0.f, 0.f)));
     pBackground->SetComponent(new SpriteDrawing(strBackgroundPath));
     pBackground->SetComponent(new StaticView(sf::FloatRect(0, 0, static_cast<float>(Game::m_iWindowWidth), static_cast<float>(Game::m_iWindowHeight))));
     
@@ -79,7 +79,7 @@ GameObject* GameObjectFactory::CreateBackgroundSprite(std::string strBackgroundP
 {
 	GameObject* pBackground = new GameObject(std::string("background"));
     
-	pBackground->SetComponent(new PixelPosition(sf::Vector2f(0.f, 0.f), sf::Vector2f(0.f, 0.f)));
+	pBackground->SetComponent(new QuadrantPosition(sf::Vector2f(0.f, 0.f), sf::Vector2f(0.f, 0.f)));
     pBackground->SetComponent(new SpriteDrawing(strBackgroundPath, ScaleTo));
     pBackground->SetComponent(new StaticView(sf::FloatRect(0, 0, static_cast<float>(Game::m_iWindowWidth), static_cast<float>(Game::m_iWindowHeight))));
     

@@ -34,7 +34,6 @@ Copyright (c) MultiMediaTechnology, 2015
 
 LinearMovement::LinearMovement(float fRotation, float fSpeed, float fmass, sf::Vector2f fStartSpeed, bool bAccelerating)
 {
-	FrameManager::GetInstance().RegisterEventObserver(this);
 	sf::Transform RotationMatrix = sf::Transform::Identity;
 	RotationMatrix.rotate(fRotation);
 	m_Direction = RotationMatrix*(sf::Vector2f(0, -1));
@@ -56,6 +55,10 @@ LinearMovement::~LinearMovement()
     FrameManager::GetInstance().UnregisterEventObserver(this);
 }
 
+void LinearMovement::Init()
+{
+    FrameManager::GetInstance().RegisterEventObserver(this);
+}
 
 void LinearMovement::OnFrameUpdate(sf::Time DeltaTime)
 {

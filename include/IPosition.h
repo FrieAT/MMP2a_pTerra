@@ -27,7 +27,7 @@ public:
 	virtual void SetOrigin(sf::Vector2f Origin) = 0;
 	virtual sf::Vector2f GetOrigin() = 0;
     virtual Quadrant* GetQuadrant() { return nullptr; }
-
+    
 	EComponentType GetComponentType()
 	{
 		return EComponentType::Position;

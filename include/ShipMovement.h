@@ -15,6 +15,7 @@ class ShipMovement : public IMovement, public IInputObserver, public IFrameObser
 public:
 	ShipMovement(char cPlayer);
 	~ShipMovement();
+    void Init();
 	void OnInputUpdate(std::string strEvent);
 	void OnFrameUpdate(sf::Time DeltaTime);
 	void UpdateMovement(sf::Time DeltaTime);

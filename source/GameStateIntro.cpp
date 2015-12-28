@@ -14,17 +14,15 @@ Copyright (c) MultiMediaTechnology, 2015
 GameStateIntro::~GameStateIntro()
 {
     InputManager::GetInstance().UnregisterEventObserver(this);
-    ObjectManager::GetInstance().RemoveAllGameObjects();
-    WorldManager::GetInstance().Clear();
 }
 
 void GameStateIntro::Init()
 {
     m_bKeyPressed = false;
     
-    ObjectManager::GetInstance().AddGameObject(GameObjectFactory::CreateBackgroundSprite("assets/intro-bg.jpg", sf::Vector2f(static_cast<float>(Game::m_iWindowWidth), static_cast<float>(Game::m_iWindowHeight))));
-    ObjectManager::GetInstance().AddGameObject(GameObjectFactory::CreateFontText(sf::Vector2f(280.f, 100.f), "assets/Starjedi.ttf", "The Space Game", 24));
-    ObjectManager::GetInstance().AddGameObject(GameObjectFactory::CreateFontText(sf::Vector2f(230.f, 500.f), "assets/Starjedi.ttf", "-- Press Space-Key to start game --", 16));
+    GameObjectFactory::CreateBackgroundSprite("assets/intro-bg.jpg", sf::Vector2f(static_cast<float>(Game::m_iWindowWidth), static_cast<float>(Game::m_iWindowHeight)));
+    GameObjectFactory::CreateFontText(sf::Vector2f(280.f, 100.f), "assets/Starjedi.ttf", "The Space Game", 24);
+    GameObjectFactory::CreateFontText(sf::Vector2f(230.f, 500.f), "assets/Starjedi.ttf", "-- Press Space-Key to start game --", 16);
     
     InputManager::GetInstance().RegisterEventObserver(this);
 }
