@@ -23,6 +23,7 @@ public:
 	void SetComponent(IComponent* pComponent);
 	void RemoveComponent(EComponentType eComponentType);
 	IComponent* GetComponent(EComponentType eComponentType);
+    int GetAmountOfUsedComponentTypes();
     bool IsInFreezedState();
 private:
 	std::string m_strID;

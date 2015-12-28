@@ -83,3 +83,8 @@ bool GameObject::IsInFreezedState()
     }
     return false;
 }
+
+int GameObject::GetAmountOfUsedComponentTypes()
+{
+    return m_Components.size();
+}

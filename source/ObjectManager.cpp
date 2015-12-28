@@ -121,7 +121,11 @@ void ObjectManager::RemoveAllGameObjects()
             }
             if(!already_ereased)
             {
-                delete((*vec_it));
+                // TODO: Fix maybe possible heap corruption.
+                if(((*vec_it)->GetID()).length() > 0 && (*vec_it)->GetAmountOfUsedComponentTypes() <= (int)EComponentType::MaxItem)
+                {
+                    delete((*vec_it));
+                }
                 EreasedGameObjects.push_back((*vec_it));
             }
             vec_it++;
@@ -204,7 +208,7 @@ void ObjectManager::Draw(sf::RenderWindow* pWindow)
                     // Check if GameObject is in right Quadrant
                     // (Could be, if GameObject moved to other Quadrant, and isn´t deleted from List due of inefficient performance)
                     IPosition* pPosition = nullptr;
-                    if((*objects_it) != nullptr)
+                    if((*objects_it) != nullptr || ((*objects_it)->GetID()).length() > 0)
                     {
                         pPosition = static_cast<IPosition*>((*objects_it)->GetComponent(EComponentType::Position));
                     }
