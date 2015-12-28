@@ -176,6 +176,9 @@ void ObjectManager::Update(sf::Time DeltaTime)
 
 void ObjectManager::Draw(sf::RenderWindow* pWindow)
 {
+    // Clear old active GameObjects, as it will be generated new.
+    m_ActiveGameObjects.clear();
+    
     // std::vector Iteratores to perform after the Loop
     std::vector<std::pair<std::pair<std::string, Quadrant*>, int>> RemoveGameObjectsFromList;
     std::vector<std::pair<int, int>> RemoveQuadrantFromList;
@@ -218,6 +221,10 @@ void ObjectManager::Draw(sf::RenderWindow* pWindow)
                     {
                         pDrawing->Draw(pWindow);
                     }
+                    
+                    // Add GameObject to current ActiveGameObject list
+                    m_ActiveGameObjects.push_back((*objects_it));
+                    
                     objects_it++;
                 }
             }
@@ -254,4 +261,9 @@ void ObjectManager::Clear()
 {
     RemoveAllGameObjects();
     RemoveAllQuadrants(); 
+}
+
+std::vector<GameObject*> ObjectManager::GetActiveGameObjects()
+{
+    return m_ActiveGameObjects;
 }

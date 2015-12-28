@@ -13,20 +13,19 @@ QuadrantPosition::QuadrantPosition(sf::Vector2f Position, sf::Vector2f Origin)
 : IPosition(Position, Origin)
 , m_ELastDirection(EQuadrantPos::Null)
 {
-    UpdateQuadrantPosition();
     m_pQuadrant = new Quadrant(Position);
     WorldManager::GetInstance().AddQuadrant(m_pQuadrant);
     m_pQuadrant->GetNeighbour(EQuadrantPos::Null, true);
 }
 
+void QuadrantPosition::Init()
+{
+    ObjectManager::GetInstance().AddGameObject(GetAssignedGameObject());
+}
+
 Quadrant* QuadrantPosition::GetQuadrant()
 {
     return m_pQuadrant;
-}
-
-void QuadrantPosition::UpdateQuadrantPosition()
-{
-    
 }
 
 void QuadrantPosition::SetPosition(sf::Vector2f Position)

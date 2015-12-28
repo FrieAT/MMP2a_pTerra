@@ -15,12 +15,12 @@ Copyright (c) MultiMediaTechnology, 2015
 HealthShip::HealthShip(float fHealth)
 {
 	this->m_fHealth = fHealth;
-	FrameManager::GetInstance().RegisterEventObserver(this);
     m_pHealthDebug = GameObjectFactory::CreateFontText(sf::Vector2f(0.f,0.f), "assets/Starjedi.ttf", "", 8);
 }
 
 void HealthShip::Init()
 {
+    FrameManager::GetInstance().RegisterEventObserver(this);
     CollisionManager::GetInstance().RegisterCollisionEvent(this, GetAssignedGameObject());
 }
 

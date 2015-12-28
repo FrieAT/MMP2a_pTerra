@@ -10,8 +10,6 @@ HealthMissile::HealthMissile(float fHealth, GameObject* pOwner)
 {
 	this->m_fHealth = fHealth;
     this->m_pOwner = pOwner;
-	FrameManager::GetInstance().RegisterEventObserver(this);
-
 }
 
 HealthMissile::~HealthMissile()
@@ -22,6 +20,7 @@ HealthMissile::~HealthMissile()
 
 void HealthMissile::Init()
 {
+    FrameManager::GetInstance().RegisterEventObserver(this);
     CollisionManager::GetInstance().RegisterCollisionEvent(this, GetAssignedGameObject());
 }
 

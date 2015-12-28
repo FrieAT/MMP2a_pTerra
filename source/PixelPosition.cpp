@@ -15,7 +15,7 @@ PixelPosition::PixelPosition(sf::Vector2f Position, sf::Vector2f Origin)
 
 void PixelPosition::Init()
 {
-    UpdateQuadrantPosition();
+    SetPosition(m_Position);
 }
 
 void PixelPosition::SetPosition(sf::Vector2f Position)

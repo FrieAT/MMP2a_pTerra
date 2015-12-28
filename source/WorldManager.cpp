@@ -92,6 +92,7 @@ sf::Vector2f WorldManager::GetQuadrantCorrectedPos(sf::Vector2f Position)
 void WorldManager::Update(sf::RenderWindow *pWindow)
 {
     // DEBUG Purpose: Zeige die Quadranten.
+    /*
     auto it = m_Quadrants.begin();
     while(it != m_Quadrants.end())
     {
@@ -125,6 +126,7 @@ void WorldManager::Update(sf::RenderWindow *pWindow)
         }
         ++it;
     }
+     */
 }
 
 void WorldManager::RegisterEventObserver(IQuadrantObserver* pObserver)

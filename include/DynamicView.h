@@ -13,6 +13,7 @@ class DynamicView : public IView, public IFrameObserver
 public:
     DynamicView(sf::FloatRect ViewSize, sf::Vector2f MoveVector, float fSpeed);
     ~DynamicView();
+    void Init();
     void OnFrameUpdate(sf::Time DeltaTime);
     void OnFrameDraw(sf::RenderWindow* pWindow);
     

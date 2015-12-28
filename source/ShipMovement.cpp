@@ -8,8 +8,6 @@ Copyright (c) MultiMediaTechnology, 2015
 
 ShipMovement::ShipMovement(char cPlayer)
 {
-	InputManager::GetInstance().RegisterEventObserver(this);
-	FrameManager::GetInstance().RegisterEventObserver(this);
 	this->m_cPlayer = cPlayer;
 	mass = 3;
 	invMass = 1 / mass;
@@ -25,6 +23,12 @@ ShipMovement::~ShipMovement()
 {
     InputManager::GetInstance().UnregisterEventObserver(this);
     FrameManager::GetInstance().UnregisterEventObserver(this);
+}
+
+void ShipMovement::Init()
+{
+    InputManager::GetInstance().RegisterEventObserver(this);
+    FrameManager::GetInstance().RegisterEventObserver(this);
 }
 
 

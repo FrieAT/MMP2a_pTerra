@@ -7,38 +7,57 @@ Copyright (c) MultiMediaTechnology, 2015
 #include "CollisionManager.h"
 #include "IMovement.h"
 #include "ICollision.h"
+#include "ObjectManager.h"
 
 void CollisionManager::Update(sf::Time DeltaTime)
 {
 	if (m_Colliders.size() > 0)
 	{
-		for (int ship = 0; ship < m_Colliders.size(); ship++)
+        std::vector<GameObject*> CurrentGameObjects = ObjectManager::GetInstance().GetActiveGameObjects();
+		for (int ship = 0; ship < CurrentGameObjects.size(); ship++)
 		{
             // Check if Observer is a IComponent and check from GameObject within, if it is in a Freezed-State.
-            IComponent* pComponent = dynamic_cast<IComponent*>(m_Colliders[ship]);
-            if(pComponent->GetAssignedGameObject()->IsInFreezedState())
+            if(CurrentGameObjects[ship]->IsInFreezedState())
             {
                 continue;
             }
             
-			ICollision* current_col = m_Colliders[ship];
-			for (int i = 0; i < m_Colliders.size(); i++)
-			{
-				if (m_Colliders[i] == current_col)
-                {
-                    continue;	//don't check the object with it self
-                }
-                
-                // Check if Observer is a IComponent and check from GameObject within, if it is in a Freezed-State.
-                IComponent* pComponent = dynamic_cast<IComponent*>(m_Colliders[i]);
-                if(pComponent->GetAssignedGameObject()->IsInFreezedState())
+            ICollision* pCollisionComponent = static_cast<ICollision*>(CurrentGameObjects[ship]->GetComponent(EComponentType::Collision));
+			if(pCollisionComponent != nullptr)
+            {
+                // Check if GameObject is a Observer from CollisionManager
+                if(!m_Colliders[pCollisionComponent])
                 {
                     continue;
                 }
                 
-				current_col->colliding(m_Colliders[i]);
-				
-			}
+                for (int i = 0; i < CurrentGameObjects.size(); i++)
+                {
+                    ICollision* pCollisionComponentOther = static_cast<ICollision*>(CurrentGameObjects[i]->GetComponent(EComponentType::Collision));
+                    if(pCollisionComponentOther != nullptr)
+                    {
+                        //don't check the object with it self
+                        if (pCollisionComponentOther == pCollisionComponent)
+                        {
+                            continue;
+                        }
+                        
+                        // Check if other GameObject is a observer from CollisionManager
+                        if(!m_Colliders[pCollisionComponentOther])
+                        {
+                            continue;
+                        }
+                        
+                        // Check if Observer is a IComponent and check from GameObject within, if it is in a Freezed-State.
+                        if(CurrentGameObjects[i]->IsInFreezedState())
+                        {
+                            continue;
+                        }
+                        
+                        pCollisionComponent->colliding(pCollisionComponentOther);
+                    }
+                }
+            }
 		}
 	}
 	HandleCollisions();
@@ -136,7 +155,7 @@ void CollisionManager::RegisterCollisionbody(ICollision* pCollisionBody)
     {
         throw std::runtime_error("This component references to a null-pointer game-object. Maybe register in Init()?");
     }
-	m_Colliders.push_back(pCollisionBody);
+	m_Colliders[pCollisionBody] = true;
     m_ActiveGameObjects[pCollisionBody->GetAssignedGameObject()] = true;
 }
 
@@ -146,19 +165,13 @@ void CollisionManager::UnregisterCollisionbody(ICollision* pCollisionBody)
     {
         throw std::runtime_error("This component references to a null-pointer game-object. Maybe unregister after or in Init()?");
     }
-	for (unsigned int i = 0; i < m_Colliders.size(); i++)
-	{
-		if (m_Colliders[i] != pCollisionBody) continue;
-		m_Colliders.erase(m_Colliders.begin() + i);
-		break;
-	}
+	m_Colliders.erase(pCollisionBody);
     m_ActiveGameObjects.erase(pCollisionBody->GetAssignedGameObject());
 }
 
 void CollisionManager::Clear()
 {
 	m_Colliders.clear();
-	m_Colliders.shrink_to_fit();
 }
 
 void CollisionManager::RegisterCollisionEvent(ICollisionEventObserver* pThisComponent, GameObject* pGameObject)

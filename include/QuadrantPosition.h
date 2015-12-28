@@ -12,6 +12,7 @@ class QuadrantPosition : public IPosition
 {
 public:
     QuadrantPosition(sf::Vector2f Position, sf::Vector2f Origin);
+    void Init();
     void SetPosition(sf::Vector2f Position);
     sf::Vector2f GetPosition();
     void SetRotation(float rotation);
@@ -25,5 +26,4 @@ public:
 private:
     Quadrant* m_pQuadrant;
     EQuadrantPos m_ELastDirection;
-    void UpdateQuadrantPosition();
 };

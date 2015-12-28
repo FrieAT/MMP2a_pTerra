@@ -17,8 +17,6 @@ DynamicView::DynamicView(sf::FloatRect ViewSize, sf::Vector2f MoveVector, float 
 	m_fSpeed = fSpeed;
 	m_zoom = 1.f;
 	m_pView = new sf::View(ViewSize);
-    
-    FrameManager::GetInstance().RegisterEventObserver(this);
 }
 
 DynamicView::~DynamicView()
@@ -26,6 +24,11 @@ DynamicView::~DynamicView()
     FrameManager::GetInstance().UnregisterEventObserver(this);
     
     delete m_pView;
+}
+
+void DynamicView::Init()
+{
+    FrameManager::GetInstance().RegisterEventObserver(this);
 }
 
 sf::FloatRect DynamicView::GetViewport()

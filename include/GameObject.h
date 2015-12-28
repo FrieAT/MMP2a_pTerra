@@ -21,8 +21,8 @@ public:
 
 	std::string GetID();
 	void SetComponent(IComponent* pComponent);
-	void RemoveComponent(const EComponentType& eComponentType);
-	IComponent* GetComponent(const EComponentType& eComponentType);
+	void RemoveComponent(EComponentType eComponentType);
+	IComponent* GetComponent(EComponentType eComponentType);
     bool IsInFreezedState();
 private:
 	std::string m_strID;

@@ -7,6 +7,7 @@ Copyright (c) MultiMediaTechnology, 2015
 #include <SFML/Graphics.hpp>
 
 #include "IFrameObserver.h"
+#include "GameObject.h"
 
 class FrameManager
 {
@@ -25,5 +26,5 @@ private:
 	FrameManager() { }
 	FrameManager(const FrameManager&) = delete;
 	void operator= (const FrameManager&) = delete;
-	std::vector<IFrameObserver*> m_Observers;
+    std::map<GameObject*, std::vector<IFrameObserver*>> m_Observers;
 };

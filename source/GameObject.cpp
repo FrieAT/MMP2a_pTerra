@@ -16,9 +16,15 @@ GameObject::GameObject(std::string strID)
 GameObject::~GameObject()
 {
 	// Remove all components from game object
-    for(int i = 0; i < (int)EComponentType::MaxItem; i++)
+    if(m_Components.size() > 0)
     {
-        RemoveComponent((EComponentType)i);
+        auto component_it = m_Components.begin();
+        while(component_it != m_Components.end())
+        {
+            delete(component_it->second);
+            component_it++;
+        }
+        m_Components.clear();
     }
 }
 
@@ -40,7 +46,7 @@ void GameObject::SetComponent(IComponent* pComponent)
     pComponent->Init();
 }
 
-void GameObject::RemoveComponent(const EComponentType& eComponentType)
+void GameObject::RemoveComponent(EComponentType eComponentType)
 {
     auto i = m_Components.find(eComponentType);
 	if (i != m_Components.end())
@@ -50,9 +56,14 @@ void GameObject::RemoveComponent(const EComponentType& eComponentType)
 	}
 }
 
-IComponent* GameObject::GetComponent(const EComponentType& eComponentType)
+IComponent* GameObject::GetComponent(EComponentType eComponentType)
 {
-	return m_Components[eComponentType];
+    auto it = m_Components.find(eComponentType);
+    if(it == m_Components.end())
+    {
+        return nullptr;
+    }
+	return it->second;
 }
 
 bool GameObject::IsInFreezedState()
