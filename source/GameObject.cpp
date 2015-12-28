@@ -16,7 +16,7 @@ GameObject::GameObject(std::string strID)
 GameObject::~GameObject()
 {
 	// Remove all components from game object
-    if(m_Components.size() > 0)
+    if(m_Components.size() > 0 && m_Components.size() <= (int)EComponentType::MaxItem)
     {
         auto component_it = m_Components.begin();
         while(component_it != m_Components.end())
@@ -24,8 +24,8 @@ GameObject::~GameObject()
             delete(component_it->second);
             component_it++;
         }
+        m_Components.clear();
     }
-    m_Components.clear();
 }
 
 std::string GameObject::GetID()
