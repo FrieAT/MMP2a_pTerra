@@ -24,8 +24,7 @@ public:
     void RegisterCollisionEvent(ICollisionEventObserver* pThisComponent, GameObject* pGameObject);
     void UnregisterCollisionEvent(ICollisionEventObserver* pThisComponent, GameObject* pGameObject);
 	void Clear();
-	std::stack<CollisionEvent> m_CollisonEvents;
-
+    std::stack<CollisionEvent> m_CollisonEvents;
 private:
 	CollisionManager() { }
 	CollisionManager(const CollisionManager&) = delete;

@@ -65,7 +65,7 @@ void CollisionManager::Update(sf::Time DeltaTime)
 
 void CollisionManager::HandleCollisions()
 {
-	while (m_CollisonEvents.size()>0)
+	while (!m_CollisonEvents.empty())
 	{
 		CollisionEvent col_ev = m_CollisonEvents.top();
 		
@@ -135,6 +135,13 @@ void CollisionManager::HandleCollisions()
                 (*pCollisionBody1)[i]->OnCollisionEvent(col_ev.Body2, Impulse);
             }
         }
+        
+        // Das folgende kann tatstächlich passiern, wenn der GameState mitten in einer Collision beendet wird.
+        if(m_CollisonEvents.size() == 0)
+        {
+            break;
+        }
+        
         if(PhysicsApplyable || (!PhysicsApplyable && !pCollisionComponentB->m_bPhysicsApplyable))
         {
             auto* pCollisionBody2 = &m_CollisionEventObservers[col_ev.Body2];
@@ -144,8 +151,14 @@ void CollisionManager::HandleCollisions()
             }
         }
         
-		m_CollisonEvents.pop();
-	}
+        // Das folgende kann tatstächlich passiern, wenn der GameState mitten in einer Collision beendet wird.
+        if(m_CollisonEvents.size() == 0)
+        {
+            break;
+        }
+        
+        m_CollisonEvents.pop();
+    }
 
 }
 
@@ -172,6 +185,7 @@ void CollisionManager::UnregisterCollisionbody(ICollision* pCollisionBody)
 void CollisionManager::Clear()
 {
 	m_Colliders.clear();
+    m_CollisonEvents = std::stack<CollisionEvent>();
 }
 
 void CollisionManager::RegisterCollisionEvent(ICollisionEventObserver* pThisComponent, GameObject* pGameObject)

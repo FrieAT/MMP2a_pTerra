@@ -4,6 +4,7 @@ Copyright (c) MultiMediaTechnology, 2015
 
 #include "ObjectManager.h"
 #include "IPosition.h"
+#include "WorldManager.h"
 
 ObjectManager::ObjectManager()
 {
@@ -65,14 +66,14 @@ void ObjectManager::RemoveGameObject(GameObject* pObject)
     auto i = m_Objects[key].begin();
     while(i != m_Objects[key].end())
 	{
-		if (*i != pObject)
+		if ((*i) != pObject)
 		{
 			i++;
 			continue;
 		}
 		else
 		{
-			m_CleanUp.push_back(*i);
+			m_CleanUp.push_back((*i));
 			m_Objects[key].erase(i);
 			break;
 		}
@@ -130,6 +131,7 @@ void ObjectManager::RemoveAllGameObjects()
     }
     PerformGameObjectCleanUp();
     m_Objects.clear();
+    m_ActiveGameObjects.clear();
     EreasedGameObjects.clear();
 }
 

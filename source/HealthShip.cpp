@@ -38,8 +38,8 @@ void HealthShip::Damage(float fDamage)
 	m_fHealth -= fDamage;
 	if (m_fHealth < 0)
 	{
-		//TODO destroy Ship and remove end game
-		ObjectManager::GetInstance().RemoveGameObject(GetAssignedGameObject());
+		// Hier wird das Schiff nicht zerstört, weil es sowieso einen GameState-Switch auslöst.
+		// ObjectManager::GetInstance().RemoveGameObject(GetAssignedGameObject());
         
         Game::m_pEngine->ChangeState(new GameStateGameOver());
 	}

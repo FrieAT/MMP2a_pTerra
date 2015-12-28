@@ -24,8 +24,8 @@ GameObject::~GameObject()
             delete(component_it->second);
             component_it++;
         }
-        m_Components.clear();
     }
+    m_Components.clear();
 }
 
 std::string GameObject::GetID()
@@ -36,7 +36,7 @@ std::string GameObject::GetID()
 void GameObject::SetComponent(IComponent* pComponent)
 {
 	EComponentType eComponentType = pComponent->GetComponentType();
-	if (m_Components[eComponentType] != nullptr)
+	if (m_Components.size() > 0 && m_Components.find(eComponentType) != m_Components.end())
 	{
 		delete m_Components[eComponentType];
 		m_Components.erase(eComponentType);
