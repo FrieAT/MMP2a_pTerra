@@ -22,6 +22,7 @@ public:
     static const int m_iWindowHeight = 600;
 protected:
     sf::RenderWindow* m_pWindow;
+    IGameState* m_pCurrentState;
     std::vector<IGameState*> m_States;
     sf::Image m_Icon;
 };

@@ -136,12 +136,6 @@ void CollisionManager::HandleCollisions()
             }
         }
         
-        // Das folgende kann tatstächlich passiern, wenn der GameState mitten in einer Collision beendet wird.
-        if(m_CollisonEvents.size() == 0)
-        {
-            break;
-        }
-        
         if(PhysicsApplyable || (!PhysicsApplyable && !pCollisionComponentB->m_bPhysicsApplyable))
         {
             auto* pCollisionBody2 = &m_CollisionEventObservers[col_ev.Body2];
@@ -149,12 +143,6 @@ void CollisionManager::HandleCollisions()
             {
                 (*pCollisionBody2)[i]->OnCollisionEvent(col_ev.Body1, Impulse);
             }
-        }
-        
-        // Das folgende kann tatstächlich passiern, wenn der GameState mitten in einer Collision beendet wird.
-        if(m_CollisonEvents.size() == 0)
-        {
-            break;
         }
         
         m_CollisonEvents.pop();
