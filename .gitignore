@@ -6,7 +6,9 @@
 *.user
 *.userosscache
 *.sln.docstates
+*.opendb
 
+enc_temp*
 # Ignore files
 .DS_Store
 .DS_Store?
