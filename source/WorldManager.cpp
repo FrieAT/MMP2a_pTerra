@@ -57,14 +57,12 @@ void WorldManager::AddQuadrant(Quadrant *Quadrant)
     
     for(int i = 0; i < MaxAsteroidRandItems; i++)
     {
-        GameObject* asteroid = GameObjectFactory::CreateAsteroid(GetRandomChunkPositionFromChunk(Quadrant), rand() % 360, rand() % 10);
-        ObjectManager::GetInstance().AddGameObject(asteroid);
+        GameObjectFactory::CreateAsteroid(GetRandomChunkPositionFromChunk(Quadrant), rand() % 360, rand() % 10);
     }
     
     for(int i = 0; i < MaxStarsRandItems; i++)
     {
-        GameObject* star_background = GameObjectFactory::CreateBackgroundStar(GetRandomChunkPositionFromChunk(Quadrant));
-        ObjectManager::GetInstance().AddGameObject(star_background);
+        GameObjectFactory::CreateBackgroundStar(GetRandomChunkPositionFromChunk(Quadrant));
     }
 }
 

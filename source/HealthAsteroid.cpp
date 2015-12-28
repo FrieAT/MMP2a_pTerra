@@ -23,7 +23,7 @@ HealthAsteroid::~HealthAsteroid()
 {
     FrameManager::GetInstance().UnregisterEventObserver(this);
     CollisionManager::GetInstance().UnregisterCollisionEvent(this, GetAssignedGameObject());
-    delete(m_pHealthDebug);
+    ObjectManager::GetInstance().RemoveGameObject(m_pHealthDebug);
     m_pHealthDebug = nullptr;
 }
 

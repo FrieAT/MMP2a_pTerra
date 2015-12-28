@@ -29,7 +29,7 @@ GameObject* GameObjectFactory::CreatePlayerShip(sf::Vector2f Position, char cPla
 
     //pShip->SetComponent(new CircleCollision(30.f,pos));
 	pShip->SetComponent(new BoxCollision(50, 50));
-    pShip->SetComponent(new HealthShip(100.f));
+    pShip->SetComponent(new HealthShip(10.f));
 
 	return pShip;
 }

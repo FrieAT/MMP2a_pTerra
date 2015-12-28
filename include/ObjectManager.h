@@ -37,4 +37,5 @@ private:
     std::map<std::pair<int,int>, Quadrant*> m_Quadrants;
     std::pair<std::string, Quadrant*> GetKeyFromGameObject(GameObject* pGameObject);
     std::pair<std::string, Quadrant*> GetKeyFromIDAndQuadrant(std::string object_id, Quadrant* pQuadrant);
+    void PerformGameObjectCleanUp();
 };

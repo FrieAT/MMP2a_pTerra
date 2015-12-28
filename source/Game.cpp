@@ -104,6 +104,14 @@ void Game::ChangeState(IGameState* pState)
     if ( !m_States.empty())
 	{
         delete m_States.back();
+        
+        ObjectManager::GetInstance().Clear();
+        WorldManager::GetInstance().Clear();
+        FrameManager::GetInstance().Clear();
+        InputManager::GetInstance().Clear();
+        ObjectManager::GetInstance().Clear();
+        CollisionManager::GetInstance().Clear();
+        
         m_States.pop_back();
     }
     // Initiate all ressources for new game state
