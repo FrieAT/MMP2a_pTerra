@@ -52,8 +52,8 @@ void WorldManager::AddQuadrant(Quadrant *Quadrant)
     sf::Vector2f ChunkSize = WorldManager::GetInstance().m_ChunkSize;
     sf::Vector2f TopLeftPosition = Quadrant->GetTopLeftPosition();
     
-    const int MaxAsteroidRandItems = 1;
-    const int MaxStarsRandItems = 3;
+    const int MaxAsteroidRandItems = 2;
+    const int MaxStarsRandItems = 5;
     
     for(int i = 0; i < MaxAsteroidRandItems; i++)
     {
