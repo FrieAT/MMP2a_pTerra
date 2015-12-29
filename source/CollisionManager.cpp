@@ -16,7 +16,7 @@ void CollisionManager::Update(sf::Time DeltaTime)
         std::vector<GameObject*> CurrentGameObjects = ObjectManager::GetInstance().GetActiveGameObjects();
 		for (int ship = 0; ship < CurrentGameObjects.size(); ship++)
 		{
-			if ((CurrentGameObjects[ship]->GetID()).length() < 1 || CurrentGameObjects[ship]->GetAmountOfUsedComponentTypes() > (int)EComponentType::MaxItem)
+			if (CurrentGameObjects[ship] == nullptr)
 			{
 				continue;
 			}
@@ -38,12 +38,12 @@ void CollisionManager::Update(sf::Time DeltaTime)
                 
                 for (int i = 0; i < CurrentGameObjects.size(); i++)
                 {
-					if ((CurrentGameObjects[i]->GetID()).length() < 1 || CurrentGameObjects[i]->GetAmountOfUsedComponentTypes() > (int)EComponentType::MaxItem)
+					if (CurrentGameObjects[i] == nullptr)
 					{
 						continue;
 					}
 
-                    ICollision* pCollisionComponentOther = static_cast<ICollision*>(CurrentGameObjects[i]->GetComponent(EComponentType::Collision));
+					ICollision* pCollisionComponentOther = static_cast<ICollision*>(CurrentGameObjects[i]->GetComponent(EComponentType::Collision));
                     if(pCollisionComponentOther != nullptr)
                     {
                         //don't check the object with it self

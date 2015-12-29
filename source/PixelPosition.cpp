@@ -65,7 +65,12 @@ void PixelPosition::UpdateQuadrantPosition()
     Quadrant* pNewQuadrant = WorldManager::GetInstance().GetQuadrant(ChunkIndex);
     if(m_pQuadrant != pNewQuadrant)
     {
-        m_pQuadrant = pNewQuadrant;
+		// Delete GameObject from old chunk, if a old chunk exists.
+		if (m_pQuadrant != nullptr)
+		{
+			ObjectManager::GetInstance().RemoveGameObject(GetAssignedGameObject(), false);
+		}
+		m_pQuadrant = pNewQuadrant;
         ObjectManager::GetInstance().AddGameObject(GetAssignedGameObject());
     }
 }

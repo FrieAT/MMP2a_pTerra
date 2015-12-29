@@ -42,7 +42,10 @@ void ObjectManager::AddGameObject(GameObject* pObject)
         throw std::runtime_error("Given GameObject-object has a null-pointer-reference.");
     }
     auto key = GetKeyFromGameObject(pObject);
-    /*
+	
+	// Check if game object already exists in this quadrant
+	// NOTE: Yes it only checks the given quadrant from the game object. if the game object is added twice to a quadrant, to which it isn´t defined
+	// so the ObjectManager will erase the wrong entry in the draw-cycle.
     auto objects_it = m_Objects[key].begin();
     while(objects_it != m_Objects[key].end())
     {
@@ -52,11 +55,11 @@ void ObjectManager::AddGameObject(GameObject* pObject)
         }
         objects_it++;
     }
-    */
+	
     m_Objects[key].push_back(pObject);
 }
 
-void ObjectManager::RemoveGameObject(GameObject* pObject)
+void ObjectManager::RemoveGameObject(GameObject* pObject, bool bDelete)
 {
     if(pObject == nullptr)
     {
@@ -73,9 +76,28 @@ void ObjectManager::RemoveGameObject(GameObject* pObject)
 		}
 		else
 		{
-			m_CleanUp.push_back((*i));
+			if (bDelete)
+			{
+				m_CleanUp.push_back((*i));
+			}
 			m_Objects[key].erase(i);
 			break;
+		}
+	}
+	if (!pObject->IsInFreezedState())
+	{
+		auto active_it = m_ActiveGameObjects.begin();
+		while (active_it != m_ActiveGameObjects.end())
+		{
+			if ((*active_it) == pObject)
+			{
+				// It is not possible to erase-Element, because it could destroy the iterator´s which accesses to m_ActiveGameObjects
+				// However if it is set to nullptr, it is only in one frame there. In the next frame it won´t show up again, as it is removed
+				// from m_Objects
+				(*active_it) = nullptr;
+				break;
+			}
+			active_it++;
 		}
 	}
 }
@@ -95,6 +117,11 @@ void ObjectManager::RemoveAllGameObjects()
         auto vec_it = it->second.begin();
         while(vec_it != it->second.end())
         {
+			if ((*vec_it) == nullptr)
+			{
+				vec_it++;
+				continue;
+			}
             bool already_ereased = false;
             auto check_it = EreasedGameObjects.begin();
             while(check_it != EreasedGameObjects.end())
@@ -122,7 +149,7 @@ void ObjectManager::RemoveAllGameObjects()
             if(!already_ereased)
             {
                 // TODO: Fix maybe possible heap corruption.
-                if(((*vec_it)->GetID()).length() > 0 && (*vec_it)->GetAmountOfUsedComponentTypes() <= (int)EComponentType::MaxItem)
+                if((*vec_it)->GetAmountOfUsedComponentTypes() > 0 && (*vec_it)->GetAmountOfUsedComponentTypes() <= (int)EComponentType::MaxItem)
                 {
                     delete((*vec_it));
                 }

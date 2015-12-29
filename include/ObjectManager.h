@@ -19,7 +19,7 @@ public:
 		return g_Instance;
 	}
 	void AddGameObject(GameObject* pObject);
-	void RemoveGameObject(GameObject* pObject);
+	void RemoveGameObject(GameObject* pObject, bool bDelete = true);
     void RemoveAllGameObjects();
     void AddQuadrant(Quadrant* pChunk);
     void RemoveQuadrant(Quadrant* pChunk);

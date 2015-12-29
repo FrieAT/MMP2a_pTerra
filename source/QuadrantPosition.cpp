@@ -59,6 +59,7 @@ void QuadrantPosition::SetPosition(sf::Vector2f Position)
             }
             pPreNeighbour->GetNeighbour(eReverseChunkPosition, false, static_cast<int>(WorldManager::GetInstance().GetChunkDepth()) + 1);
         }
+		ObjectManager::GetInstance().RemoveGameObject(GetAssignedGameObject(), false); //< Remove game object from old chunk.
         m_pQuadrant = m_pQuadrant->GetNeighbour(eNextChunkPosition, true);
         m_pQuadrant->m_bCurrentlyVisited = 1;
         m_ELastDirection = eNextChunkPosition;
