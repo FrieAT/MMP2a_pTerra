@@ -57,7 +57,7 @@ void WorldManager::AddQuadrant(Quadrant *Quadrant)
     
     for(int i = 0; i < MaxAsteroidRandItems; i++)
     {
-        GameObjectFactory::CreateAsteroid(GetRandomChunkPositionFromChunk(Quadrant), rand() % 360, rand() % 10);
+        GameObjectFactory::CreateAsteroid(GetRandomChunkPositionFromChunk(Quadrant), static_cast<float>(rand() % 360), static_cast<float>(rand() % 10));
     }
     
     for(int i = 0; i < MaxStarsRandItems; i++)

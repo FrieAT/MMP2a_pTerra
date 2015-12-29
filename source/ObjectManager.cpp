@@ -195,7 +195,7 @@ void ObjectManager::RemoveAllQuadrants()
 void ObjectManager::PerformGameObjectCleanUp()
 {
     // Get rid of obsolete Gameobjects
-    for (int i = 0; i < m_CleanUp.size(); i++)
+    for (unsigned int i = 0; i < m_CleanUp.size(); i++)
     {
         delete m_CleanUp[i];
     }
