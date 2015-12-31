@@ -9,12 +9,6 @@
 #include "IQuadrantObserver.h"
 #include "Quadrant.h"
 
-enum class WorldManagerSettings
-{
-    ChunkSizeWidth,
-    ChunkSizeHeight
-};
-
 class WorldManager
 {
 public:
