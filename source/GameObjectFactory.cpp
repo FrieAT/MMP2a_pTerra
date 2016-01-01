@@ -122,7 +122,7 @@ GameObject* GameObjectFactory::CreateSpaceStation(sf::Vector2f Position)
     GameObject* pSpaceStation = new GameObject(std::string("space_station"));
     
     pSpaceStation->SetComponent(new PixelPosition(Position, sf::Vector2f(0.f, 0.f)));
-    pSpaceStation->SetComponent(new SpriteDrawing("space_station.png", sf::Vector2f(32.f, 32.f)));
+    pSpaceStation->SetComponent(new SpriteDrawing("assets/space_station.png", sf::Vector2f(500.f, 500.f)));
     
     return pSpaceStation;
 }
@@ -132,7 +132,7 @@ GameObject* GameObjectFactory::CreatePlanet(sf::Vector2f Position)
     GameObject* pPlanet = new GameObject(std::string("planet"));
     
     pPlanet->SetComponent(new PixelPosition(Position, sf::Vector2f(0.f, 0.f)));
-    pPlanet->SetComponent(new SpriteDrawing("planet.png", sf::Vector2f(32.f, 32.f)));
+    pPlanet->SetComponent(new SpriteDrawing("assets/planet.png"));
     
     return pPlanet;
 }
