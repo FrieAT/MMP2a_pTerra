@@ -187,11 +187,6 @@ void WorldManager::GenerateWorld()
     
     while(!Spaces.empty())
     {
-        if(Spaces.size() > 253)
-        {
-            std::cout << "BlahBlah" << std::endl;
-        }
-        
         // Get next space and pop it from the stack.
         LongRect coord = Spaces.back();
         Spaces.pop_back();
