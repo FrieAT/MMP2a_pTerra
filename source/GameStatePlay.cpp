@@ -8,6 +8,8 @@ Copyright (c) MultiMediaTechnology, 2015
 #include "ObjectManager.h"
 #include "InputManager.h"
 #include "WorldManager.h"
+#include "CollisionManager.h"
+#include "FrameManager.h"
 
 GameStatePlay::~GameStatePlay()
 {
@@ -32,4 +34,18 @@ void GameStatePlay::Init()
     }
     m_pMusic->play();
     */
+}
+
+void GameStatePlay::Update(sf::Time DeltaTime, sf::RenderWindow* pWindow)
+{
+	// Manager updates
+	FrameManager::GetInstance().Update(DeltaTime);
+	InputManager::GetInstance().Update(pWindow);
+	ObjectManager::GetInstance().Update(DeltaTime);
+	CollisionManager::GetInstance().Update(DeltaTime);
+
+	// Rendering
+	FrameManager::GetInstance().Draw(pWindow);
+	ObjectManager::GetInstance().Draw(pWindow);
+	//WorldManager::GetInstance().Draw(pWindow); DEBUG
 }

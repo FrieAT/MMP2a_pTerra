@@ -28,6 +28,11 @@ void GameStateGameOver::Init()
     InputManager::GetInstance().RegisterEventObserver(this);
 }
 
+void GameStateGameOver::Update(sf::Time DeltaTime, sf::RenderWindow* pWindow)
+{
+
+}
+
 void GameStateGameOver::OnInputUpdate(std::string strEvent)
 {
     std::size_t iDelimiterPos = strEvent.find('_');

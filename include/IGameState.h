@@ -8,8 +8,7 @@ class IGameState
 {
 public:
 	virtual ~IGameState() { }
-    
+
     virtual void Init() = 0;
-    // virtual void Pause() = 0; // TODO: Implementation
-    // virtual void Resume() = 0; // TODO: Implementation
+	virtual void Update(sf::Time DeltaTime, sf::RenderWindow* pWindow) = 0;
 };

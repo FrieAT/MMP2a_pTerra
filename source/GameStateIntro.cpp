@@ -27,6 +27,15 @@ void GameStateIntro::Init()
     InputManager::GetInstance().RegisterEventObserver(this);
 }
 
+void GameStateIntro::Update(sf::Time DeltaTime, sf::RenderWindow* pWindow)
+{
+	// Manager updates
+	
+
+	// Rendering
+	
+}
+
 void GameStateIntro::OnInputUpdate(std::string strEvent)
 {
     std::size_t iDelimiterPos = strEvent.find('_');
@@ -41,6 +50,6 @@ void GameStateIntro::OnInputUpdate(std::string strEvent)
     {
         // Prevent of double changing states.
         m_bKeyPressed = true;
-        Game::m_pEngine->ChangeState(new GameStatePlay());
+		Game::m_pEngine->ChangeState(new GameStatePlay());
     }
 }
