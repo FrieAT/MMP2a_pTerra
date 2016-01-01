@@ -8,6 +8,7 @@ WorldObjectInformation::WorldObjectInformation(EWorldObjectType eType, sf::Vecto
 : m_eType(eType)
 , m_Position(Position)
 , m_Size(Size)
+, m_bCreated(false)
 {
     
 }

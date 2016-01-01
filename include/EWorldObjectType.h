@@ -6,7 +6,8 @@
 
 enum class EWorldObjectType
 {
-    Exit,
     Planet,
     SpaceStation,
+    MaxItem,
+    Null,
 };

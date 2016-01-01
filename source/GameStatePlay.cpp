@@ -16,6 +16,9 @@ GameStatePlay::~GameStatePlay()
 
 void GameStatePlay::Init()
 {
+    // Generate estimated World
+    WorldManager::GetInstance().GenerateWorld();
+    
     // GameObjectFactory::CreatePlayerShip(sf::Vector2f(50,30),'2');
     GameObjectFactory::CreatePlayerShip(sf::Vector2f(50, Game::m_iWindowHeight - 30), '2');
 	GameObjectFactory::CreateAsteroid(sf::Vector2f(50,150),-120,50);

@@ -3,10 +3,12 @@
  =================================================================*/
 
 #include <math.h>
+#include <stack>
 
 #include "WorldManager.h"
 #include "ObjectManager.h"
 #include "GameObjectFactory.h"
+#include "LongRect.h"
 
 WorldManager::WorldManager(sf::Vector2f ChunkSize, unsigned long MaxRandomCoordinates, char iChunkDepth)
 : m_ChunkSize(ChunkSize)
@@ -160,4 +162,97 @@ void WorldManager::Clear()
 char WorldManager::GetChunkDepth()
 {
     return m_iChunkDepth;
+}
+
+void WorldManager::GenerateWorld()
+{
+    if(m_WorldInfo.size() > 0)
+    {
+        m_WorldInfo.clear();
+    }
+    
+    std::vector<LongRect> Spaces;
+    Spaces.push_back(LongRect(std::numeric_limits<int>::min() + 1l, std::numeric_limits<int>::min() + 1l, std::numeric_limits<int>::max() * 2l - 1l, std::numeric_limits<int>::max() * 2l - 1l));
+    std::map<EWorldObjectType, long> ObjectsSize;
+    ObjectsSize[EWorldObjectType::Planet] = 100000000l;
+    ObjectsSize[EWorldObjectType::SpaceStation] = 1000000l;
+    
+    EWorldObjectType eTryingToCreate = EWorldObjectType::SpaceStation;
+    long iRandX, iRandY;
+    long iSize = ObjectsSize[eTryingToCreate];
+    
+    const std::vector<std::string> PlanetRes;
+    const std::vector<std::string> SpaceStationRes;
+    // const std::vector<std::string> BlackHoleRes;
+    
+    while(!Spaces.empty())
+    {
+        if(Spaces.size() > 253)
+        {
+            std::cout << "BlahBlah" << std::endl;
+        }
+        
+        // Get next space and pop it from the stack.
+        LongRect coord = Spaces.back();
+        Spaces.pop_back();
+        
+        // Calculate a random position for current space.
+        iRandX = static_cast<int>(coord.m_Left + static_cast<long>(rand()) % coord.m_Width);
+        iRandY = static_cast<int>(coord.m_Top + static_cast<long>(rand()) % coord.m_Height);
+        
+        // Insert Object into m_WorldInfo
+        m_WorldInfo[eTryingToCreate].push_back(WorldObjectInformation(eTryingToCreate, sf::Vector2f(iRandX, iRandY), sf::Vector2f(iSize, iSize)));
+        
+        // Build Spaces for top & bottom & left & right
+        LongRect LeftRectangle(coord.m_Left, coord.m_Top, (iRandX - coord.m_Left), coord.m_Height);
+        LongRect RightRectangle((iRandX + iSize), coord.m_Top, (coord.m_Width - LeftRectangle.m_Width - iSize), coord.m_Height);
+        LongRect TopRectangle(coord.m_Left, coord.m_Top, coord.m_Width, (iRandY - coord.m_Top));
+        LongRect BottomRectangle(coord.m_Left, (iRandY + iSize), coord.m_Width, (coord.m_Height - TopRectangle.m_Height - iSize));
+        
+        // Decide wether left & right or top & bottom is bigger.
+        long AreaFromLeftAndRight = (LeftRectangle.m_Width * LeftRectangle.m_Height + RightRectangle.m_Width * RightRectangle.m_Height);
+        long AreaFromTopAndBottom = (TopRectangle.m_Width * TopRectangle.m_Height + BottomRectangle.m_Width * BottomRectangle.m_Height);
+        if(AreaFromLeftAndRight > AreaFromTopAndBottom)
+        {
+            // left & right area is bigger.
+            // so resize the area from top & bottom
+            TopRectangle.m_Left += LeftRectangle.m_Width;
+            TopRectangle.m_Width -= (LeftRectangle.m_Width + RightRectangle.m_Width);
+            BottomRectangle.m_Left = TopRectangle.m_Left;
+            BottomRectangle.m_Width = TopRectangle.m_Width;
+        }
+        else
+        {
+            // top & bottom area is bigger.
+            // so resize the area from left & right
+            LeftRectangle.m_Top += TopRectangle.m_Height;
+            LeftRectangle.m_Height -= (TopRectangle.m_Height + BottomRectangle.m_Height);
+            RightRectangle.m_Top = LeftRectangle.m_Top;
+            RightRectangle.m_Height = LeftRectangle.m_Height;
+        }
+        
+        // set size for next element
+        eTryingToCreate = (EWorldObjectType)(rand() % (int)EWorldObjectType::MaxItem);
+        iSize = ObjectsSize[eTryingToCreate];
+        
+        // push the 4 spaces to stack.
+        // but only, if next size fits into area.
+        if(TopRectangle.m_Width > 0 && TopRectangle.m_Height > 0 && TopRectangle.m_Width * TopRectangle.m_Height >= iSize * iSize)
+        {
+            Spaces.push_back(TopRectangle);
+        }
+        if(RightRectangle.m_Width > 0 && RightRectangle.m_Height > 0 && RightRectangle.m_Width * RightRectangle.m_Height >= iSize * iSize)
+        {
+            Spaces.push_back(RightRectangle);
+        }
+        if(BottomRectangle.m_Width > 0 && BottomRectangle.m_Height > 0 && BottomRectangle.m_Width * BottomRectangle.m_Height >= iSize * iSize)
+        {
+            Spaces.push_back(BottomRectangle);
+        }
+        if(LeftRectangle.m_Width > 0 && LeftRectangle.m_Height > 0 && LeftRectangle.m_Width * LeftRectangle.m_Height >= iSize * iSize)
+        {
+            Spaces.push_back(LeftRectangle);
+        }
+    }
+    std::cout << "[WorldManager]: Generated " << m_WorldInfo[EWorldObjectType::Planet].size() << " Planets and " << m_WorldInfo[EWorldObjectType::SpaceStation].size() << " SpaceStations." << std::endl;
 }

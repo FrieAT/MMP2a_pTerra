@@ -8,6 +8,8 @@
 
 #include "IQuadrantObserver.h"
 #include "Quadrant.h"
+#include "WorldObjectInformation.h"
+#include "EWorldObjectType.h"
 
 class WorldManager
 {
@@ -30,6 +32,7 @@ public:
     void RegisterEventObserver(IQuadrantObserver* pObserver);
     void UnregisterEventObserver(IQuadrantObserver* pObserver);
     void Clear();
+    void GenerateWorld();
 private:
     WorldManager(sf::Vector2f ChunkSize, unsigned long MaxRandomCoordinates, char iChunkDepth);
     WorldManager(const WorldManager&) = delete;
@@ -37,6 +40,7 @@ private:
     std::vector<IQuadrantObserver*> m_Observers;
     std::map<std::pair<int, int>, Quadrant*> m_Quadrants;
     std::vector<sf::Vector2f> m_RandomCoordinates;
+    std::map<EWorldObjectType, std::vector<WorldObjectInformation>> m_WorldInfo;
     unsigned long m_IndexRandomCoordinates;
     char m_iChunkDepth;
     void UpdateEventObserver(std::string strEvent);
