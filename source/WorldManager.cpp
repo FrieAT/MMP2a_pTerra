@@ -55,16 +55,12 @@ void WorldManager::AddQuadrant(Quadrant *Quadrant)
     sf::Vector2f TopLeftPosition = Quadrant->GetTopLeftPosition();
     
     const int MaxAsteroidRandItems = 2;
-    const int MaxStarsRandItems = 5;
+    
+    GameObjectFactory::CreateBackgroundSprite(std::string("assets/space.png"), TopLeftPosition, m_ChunkSize);
     
     for(int i = 0; i < MaxAsteroidRandItems; i++)
     {
         GameObjectFactory::CreateAsteroid(GetRandomChunkPositionFromChunk(Quadrant), static_cast<float>(rand() % 360), static_cast<float>(rand() % 10));
-    }
-    
-    for(int i = 0; i < MaxStarsRandItems; i++)
-    {
-        GameObjectFactory::CreateBackgroundStar(GetRandomChunkPositionFromChunk(Quadrant));
     }
     
     for(int i = 0; i < (int)EWorldObjectType::MaxItem; i++)

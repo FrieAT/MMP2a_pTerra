@@ -86,6 +86,17 @@ GameObject* GameObjectFactory::CreateBackgroundSprite(std::string strBackgroundP
     return pBackground;
 }
 
+GameObject* GameObjectFactory::CreateBackgroundSprite(std::string strBackgroundPath, sf::Vector2f Position, sf::Vector2f ScaleTo)
+{
+    GameObject* pBackground = new GameObject(std::string("background"));
+    
+    pBackground->SetComponent(new PixelPosition(Position, sf::Vector2f(0.f, 0.f)));
+    pBackground->SetComponent(new SpriteDrawing(strBackgroundPath, ScaleTo));
+    pBackground->SetComponent(new StaticView(sf::FloatRect(0, 0, static_cast<float>(Game::m_iWindowWidth), static_cast<float>(Game::m_iWindowHeight))));
+    
+    return pBackground;
+}
+
 GameObject* GameObjectFactory::CreateBackgroundStar(sf::Vector2f Position)
 {
     float TextureWidth = 100.f;
