@@ -23,7 +23,7 @@ public:
     
     static WorldManager& GetInstance()
     {
-        static WorldManager g_Instance(sf::Vector2f(5000.f, 5000.f), 10000, 1);
+        static WorldManager g_Instance(sf::Vector2f(1000.f, 1000.f), 10000, 1);
         return g_Instance;
     }
     void AddQuadrant(Quadrant* Quadrant);
@@ -32,7 +32,7 @@ public:
     std::pair<int,int> GetQuadrantIndexAtPos(sf::Vector2f TopLeftPosition);
     sf::Vector2f GetQuadrantCorrectedPos(sf::Vector2f Position);
     sf::Vector2f GetRandomChunkPositionFromChunk(Quadrant* pChunk);
-    void Update(sf::RenderWindow* pWindow);
+    void Draw(sf::RenderWindow* pWindow);
     void RegisterEventObserver(IQuadrantObserver* pObserver);
     void UnregisterEventObserver(IQuadrantObserver* pObserver);
     void Clear();

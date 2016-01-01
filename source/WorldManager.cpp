@@ -52,8 +52,8 @@ void WorldManager::AddQuadrant(Quadrant *Quadrant)
     sf::Vector2f ChunkSize = WorldManager::GetInstance().m_ChunkSize;
     sf::Vector2f TopLeftPosition = Quadrant->GetTopLeftPosition();
     
-    const int MaxAsteroidRandItems = 2;
-    const int MaxStarsRandItems = 5;
+    const int MaxAsteroidRandItems = 5;
+    const int MaxStarsRandItems = 3;
     
     for(int i = 0; i < MaxAsteroidRandItems; i++)
     {
@@ -89,10 +89,10 @@ sf::Vector2f WorldManager::GetQuadrantCorrectedPos(sf::Vector2f Position)
     return sf::Vector2f(dXIndex * ChunkSize.x, dYIndex * ChunkSize.y);
 }
 
-void WorldManager::Update(sf::RenderWindow *pWindow)
+void WorldManager::Draw(sf::RenderWindow *pWindow)
 {
     // DEBUG Purpose: Zeige die Quadranten.
-    /*
+    
     auto it = m_Quadrants.begin();
     while(it != m_Quadrants.end())
     {
@@ -126,7 +126,6 @@ void WorldManager::Update(sf::RenderWindow *pWindow)
         }
         ++it;
     }
-     */
 }
 
 void WorldManager::RegisterEventObserver(IQuadrantObserver* pObserver)

@@ -109,8 +109,8 @@ void Game::Start()
         
 		// Rendering
         FrameManager::GetInstance().Draw(m_pWindow);
-        WorldManager::GetInstance().Update(m_pWindow);
         ObjectManager::GetInstance().Draw(m_pWindow);
+		//WorldManager::GetInstance().Draw(m_pWindow); DEBUG
 
 		// Update the window
         m_pWindow->display();
