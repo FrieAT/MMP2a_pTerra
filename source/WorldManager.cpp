@@ -66,6 +66,26 @@ void WorldManager::AddQuadrant(Quadrant *Quadrant)
     {
         GameObjectFactory::CreateBackgroundStar(GetRandomChunkPositionFromChunk(Quadrant));
     }
+    
+    for(int i = 0; i < (int)EWorldObjectType::MaxItem; i++)
+    {
+        std::pair<std::pair<int,int>, EWorldObjectType> world_info_idx(Quadrant->GetIndex(), (EWorldObjectType)i);
+        auto it_world_info = m_WorldInfo[world_info_idx].begin();
+        while(it_world_info != m_WorldInfo[world_info_idx].end())
+        {
+            switch ((EWorldObjectType)i) {
+                case EWorldObjectType::Planet:
+                    GameObjectFactory::CreatePlanet(it_world_info->GetPosition());
+                    break;
+                case EWorldObjectType::SpaceStation:
+                    GameObjectFactory::CreateSpaceStation(it_world_info->GetPosition());
+                    break;
+                default:
+                    break;
+            }
+            it_world_info++;
+        }
+    }
 }
 
 Quadrant* WorldManager::GetQuadrant(std::pair<int,int> QuadrantIndex)
@@ -174,12 +194,13 @@ void WorldManager::GenerateWorld()
     std::vector<LongRect> Spaces;
     Spaces.push_back(LongRect(std::numeric_limits<int>::min() + 1l, std::numeric_limits<int>::min() + 1l, std::numeric_limits<int>::max() * 2l - 1l, std::numeric_limits<int>::max() * 2l - 1l));
     std::map<EWorldObjectType, long> ObjectsSize;
-    ObjectsSize[EWorldObjectType::Planet] = 100000000l;
+    ObjectsSize[EWorldObjectType::Planet] = 1000000000l;
     ObjectsSize[EWorldObjectType::SpaceStation] = 1000000l;
     
     EWorldObjectType eTryingToCreate = EWorldObjectType::SpaceStation;
     long iRandX, iRandY;
     long iSize = ObjectsSize[eTryingToCreate];
+    bool bFirstIteration = true;
     
     const std::vector<std::string> PlanetRes;
     const std::vector<std::string> SpaceStationRes;
@@ -192,11 +213,22 @@ void WorldManager::GenerateWorld()
         Spaces.pop_back();
         
         // Calculate a random position for current space.
-        iRandX = static_cast<int>(coord.m_Left + static_cast<long>(rand()) % coord.m_Width);
-        iRandY = static_cast<int>(coord.m_Top + static_cast<long>(rand()) % coord.m_Height);
+        if(bFirstIteration)
+        {
+            iRandX = -250;
+            iRandY = -250;
+            bFirstIteration = false;
+        }
+        else
+        {
+            iRandX = static_cast<int>(coord.m_Left + static_cast<long>(rand()) % coord.m_Width);
+            iRandY = static_cast<int>(coord.m_Top + static_cast<long>(rand()) % coord.m_Height);
+        }
         
         // Insert Object into m_WorldInfo
-        m_WorldInfo[eTryingToCreate].push_back(WorldObjectInformation(eTryingToCreate, sf::Vector2f(iRandX, iRandY), sf::Vector2f(iSize, iSize)));
+        std::pair<int, int> quadrant_idx = GetQuadrantIndexAtPos(GetQuadrantCorrectedPos(sf::Vector2f(iRandX, iRandY)));
+        std::pair<std::pair<int, int>, EWorldObjectType> worldinfo_idx(quadrant_idx, eTryingToCreate);
+        m_WorldInfo[worldinfo_idx].push_back(WorldObjectInformation(eTryingToCreate, sf::Vector2f(iRandX, iRandY), sf::Vector2f(iSize, iSize)));
         
         // Build Spaces for top & bottom & left & right
         LongRect LeftRectangle(coord.m_Left, coord.m_Top, (iRandX - coord.m_Left), coord.m_Height);
@@ -249,5 +281,5 @@ void WorldManager::GenerateWorld()
             Spaces.push_back(LeftRectangle);
         }
     }
-    std::cout << "[WorldManager]: Generated " << m_WorldInfo[EWorldObjectType::Planet].size() << " Planets and " << m_WorldInfo[EWorldObjectType::SpaceStation].size() << " SpaceStations." << std::endl;
+    // std::cout << "[WorldManager]: Generated " << m_WorldInfo[EWorldObjectType::Planet].size() << " Planets and " << m_WorldInfo[EWorldObjectType::SpaceStation].size() << " SpaceStations." << std::endl;
 }

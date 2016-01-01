@@ -40,7 +40,7 @@ private:
     std::vector<IQuadrantObserver*> m_Observers;
     std::map<std::pair<int, int>, Quadrant*> m_Quadrants;
     std::vector<sf::Vector2f> m_RandomCoordinates;
-    std::map<EWorldObjectType, std::vector<WorldObjectInformation>> m_WorldInfo;
+    std::map<std::pair<std::pair<int, int>, EWorldObjectType>, std::vector<WorldObjectInformation>> m_WorldInfo;
     unsigned long m_IndexRandomCoordinates;
     char m_iChunkDepth;
     void UpdateEventObserver(std::string strEvent);
