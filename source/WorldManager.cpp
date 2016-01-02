@@ -172,6 +172,15 @@ void WorldManager::Clear()
     m_Quadrants.clear();
     m_Observers.clear();
     m_Observers.shrink_to_fit();
+    
+    auto it_world_info = m_WorldInfo.begin();
+    while(it_world_info != m_WorldInfo.end())
+    {
+        it_world_info->second.clear();
+        it_world_info->second.shrink_to_fit();
+        it_world_info++;
+    }
+    m_WorldInfo.clear();
 }
 
 char WorldManager::GetChunkDepth()
