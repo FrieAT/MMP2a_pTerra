@@ -141,6 +141,9 @@
     <ClCompile Include="source\TextureFactory.cpp">
       <Filter>Source Files\Components\IDrawing</Filter>
     </ClCompile>
+    <ClCompile Include="source\WorldObjectInformation.cpp">
+      <Filter>Source Files\Managers\WorldManager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\IComponent.h">
@@ -262,6 +265,15 @@
     </ClInclude>
     <ClInclude Include="include\TextureFactory.h">
       <Filter>Source Files\Components\IDrawing</Filter>
+    </ClInclude>
+    <ClInclude Include="include\EWorldObjectType.h">
+      <Filter>Source Files\Managers\WorldManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\LongRect.h">
+      <Filter>Source Files\Managers\WorldManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\WorldObjectInformation.h">
+      <Filter>Source Files\Managers\WorldManager</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

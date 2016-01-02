@@ -122,9 +122,9 @@ void WorldManager::Draw(sf::RenderWindow *pWindow)
                 continue;
             }
             sf::RectangleShape shape;
-            sf::Color color(255.f, 128.f, 0.f, 128.f);
-            sf::Color color_visit(0.f, 0.f, 255, 128.f);
-            sf::Color color_look_back(0.f, 255.f, 0.f, 128.f);
+            sf::Color color(255, 128, 0, 128);
+            sf::Color color_visit(0, 0, 255, 128);
+            sf::Color color_look_back(0, 255, 0, 128);
             shape.setSize(WorldManager::GetInstance().m_ChunkSize);
             shape.setPosition(it->second->GetTopLeftPosition());
             switch(it->second->m_bCurrentlyVisited)
@@ -188,12 +188,12 @@ void WorldManager::GenerateWorld()
     
     std::vector<LongRect> Spaces;
     Spaces.push_back(LongRect(std::numeric_limits<int>::min() + 1l, std::numeric_limits<int>::min() + 1l, std::numeric_limits<int>::max() * 2l - 1l, std::numeric_limits<int>::max() * 2l - 1l));
-    std::map<EWorldObjectType, long> ObjectsSize;
-    ObjectsSize[EWorldObjectType::Planet] = 1000000000l;
-    ObjectsSize[EWorldObjectType::SpaceStation] = 1000000l;
+    std::map<EWorldObjectType, unsigned long> ObjectsSize;
+    ObjectsSize[EWorldObjectType::Planet] = 10000000000ul;
+    ObjectsSize[EWorldObjectType::SpaceStation] = 100000000ul;
     
     EWorldObjectType eTryingToCreate = EWorldObjectType::SpaceStation;
-    long iRandX, iRandY;
+    int iRandX, iRandY;
     long iSize = ObjectsSize[eTryingToCreate];
     bool bFirstIteration = true;
     
@@ -221,9 +221,9 @@ void WorldManager::GenerateWorld()
         }
         
         // Insert Object into m_WorldInfo
-        std::pair<int, int> quadrant_idx = GetQuadrantIndexAtPos(GetQuadrantCorrectedPos(sf::Vector2f(iRandX, iRandY)));
+        std::pair<int, int> quadrant_idx = GetQuadrantIndexAtPos(GetQuadrantCorrectedPos(sf::Vector2f(static_cast<float>(iRandX), static_cast<float>(iRandY))));
         std::pair<std::pair<int, int>, EWorldObjectType> worldinfo_idx(quadrant_idx, eTryingToCreate);
-        m_WorldInfo[worldinfo_idx].push_back(WorldObjectInformation(eTryingToCreate, sf::Vector2f(iRandX, iRandY), sf::Vector2f(iSize, iSize)));
+        m_WorldInfo[worldinfo_idx].push_back(WorldObjectInformation(eTryingToCreate, sf::Vector2f(static_cast<float>(iRandX), static_cast<float>(iRandY)), iSize));
         
         // Build Spaces for top & bottom & left & right
         LongRect LeftRectangle(coord.m_Left, coord.m_Top, (iRandX - coord.m_Left), coord.m_Height);
