@@ -108,11 +108,11 @@ void CollisionManager::HandleCollisions()
 		sf::Vector2f rv;
         if(body1 != nullptr)
         {
-            rv = rv - body1->GetVelocity();
+            rv += body1->GetVelocity();
         }
         if(body2 != nullptr)
         {
-            rv = rv - body2->GetVelocity();
+            rv -= body2->GetVelocity();
         }
 
 		// Calculate relative velocity in terms of the normal direction (length through vector projection)
