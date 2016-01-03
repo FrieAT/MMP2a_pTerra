@@ -70,3 +70,8 @@ std::string SerializeNode::GetValue()
 {
     return m_strValue;
 }
+
+void SerializeNode::Accept(INodeVisitor Visitor)
+{
+    Visitor.Visit(this);
+}

@@ -9,6 +9,8 @@
 #include "ObjectManager.h"
 #include "GameObjectFactory.h"
 #include "LongRect.h"
+#include "rapidxml/rapidxml.hpp"
+#include "XMLSerializeNodeVisitor.h"
 
 WorldManager::WorldManager(sf::Vector2f ChunkSize, unsigned long MaxRandomCoordinates, char iChunkDepth)
 : m_ChunkSize(ChunkSize)
@@ -286,4 +288,22 @@ void WorldManager::GenerateWorld()
         }
     }
     // std::cout << "[WorldManager]: Generated " << m_WorldInfo[EWorldObjectType::Planet].size() << " Planets and " << m_WorldInfo[EWorldObjectType::SpaceStation].size() << " SpaceStations." << std::endl;
+}
+
+void WorldManager::LoadGame(std::string strPath)
+{
+    
+}
+
+void WorldManager::SaveGame(std::string strPath)
+{
+    auto game_objects = ObjectManager::GetInstance().GetActiveGameObjects();
+    auto it_game_objects = game_objects.begin();
+    while(it_game_objects != game_objects.end())
+    {
+        SerializeNode* pRootNode = (*it_game_objects)->Serialize();
+        pRootNode->Accept(XMLSerializeNodeVisitor(strPath));
+        delete pRootNode;
+        it_game_objects++;
+    }
 }

@@ -33,6 +33,8 @@ public:
     void UnregisterEventObserver(IQuadrantObserver* pObserver);
     void Clear();
     void GenerateWorld();
+    void SaveGame(std::string strPath);
+    void LoadGame(std::string strPath);
 private:
     WorldManager(sf::Vector2f ChunkSize, unsigned long MaxRandomCoordinates, char iChunkDepth);
     WorldManager(const WorldManager&) = delete;
