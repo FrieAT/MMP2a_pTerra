@@ -4,7 +4,7 @@
 
 #pragma once
 
-#include "SerializeNode.h"
+class SerializeNode;
 
 class INodeVisitor
 {

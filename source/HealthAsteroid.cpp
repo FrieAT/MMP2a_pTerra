@@ -7,6 +7,7 @@
 
 #include "HealthAsteroid.h"
 #include "ObjectManager.h"
+#include "WorldManager.h"
 #include "CollisionManager.h"
 #include "GameObjectFactory.h"
 #include "GameStateIntro.h"
@@ -39,6 +40,7 @@ void HealthAsteroid::Damage(float fDamage)
     {
         //TODO destroy Ship and remove end game
         ObjectManager::GetInstance().RemoveGameObject(GetAssignedGameObject());
+        WorldManager::GetInstance().SaveGame("savegame.txt"); // DEBUG: For testing purpose create savegame every-time when asteroid will be deleted.
     }
 }
 

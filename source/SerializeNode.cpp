@@ -71,7 +71,7 @@ std::string SerializeNode::GetValue()
     return m_strValue;
 }
 
-void SerializeNode::Accept(INodeVisitor Visitor)
+void SerializeNode::Accept(INodeVisitor* pVisitor)
 {
-    Visitor.Visit(this);
+    pVisitor->Visit(this);
 }

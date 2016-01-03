@@ -22,7 +22,7 @@ public:
     std::string GetValue();
     std::map<std::string, SerializeNode*> GetChildren() { return m_Elements; }
     ESerializeNodeType GetType() { return m_eNodeType; }
-    void Accept(INodeVisitor Visitor);
+    void Accept(INodeVisitor* pVisitor);
 private:
     ESerializeNodeType m_eNodeType;
     std::string m_strName;

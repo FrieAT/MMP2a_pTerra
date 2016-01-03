@@ -302,7 +302,9 @@ void WorldManager::SaveGame(std::string strPath)
     while(it_game_objects != game_objects.end())
     {
         SerializeNode* pRootNode = (*it_game_objects)->Serialize();
-        pRootNode->Accept(XMLSerializeNodeVisitor(strPath));
+        auto pXMLVisitor = new XMLSerializeNodeVisitor(strPath);
+        pRootNode->Accept(pXMLVisitor);
+        delete pXMLVisitor;
         delete pRootNode;
         it_game_objects++;
     }

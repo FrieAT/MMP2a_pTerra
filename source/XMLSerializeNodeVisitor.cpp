@@ -3,6 +3,7 @@
  =================================================================*/
 
 #include "XMLSerializeNodeVisitor.h"
+#include "SerializeNode.h"
 
 XMLSerializeNodeVisitor::XMLSerializeNodeVisitor(std::string strPath)
 : m_iCurrentDepth(0)
