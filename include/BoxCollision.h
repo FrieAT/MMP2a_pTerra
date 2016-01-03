@@ -20,5 +20,5 @@ public:
 	float m_fHeight;
 	bool m_bHit;
 	void OnFrameDraw(sf::RenderWindow* pWindow);
-
+    void Serialize(SerializeNode* pParentNode);
 };

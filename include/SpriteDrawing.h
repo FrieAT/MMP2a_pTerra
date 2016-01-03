@@ -18,7 +18,10 @@ public:
 	void Draw(sf::RenderWindow* pWindow);
     void SetTextureArea(sf::FloatRect Area);
     sf::FloatRect GetTextureArea();
+    void Serialize(SerializeNode* pParentNode);
 protected:
 	sf::Sprite* m_pSprite;
 	sf::Texture* m_pTexture;
+    std::string m_strResPath;
+    sf::Vector2f m_ScaleToSize;
 };

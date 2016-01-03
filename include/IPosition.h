@@ -32,6 +32,15 @@ public:
 	{
 		return EComponentType::Position;
 	}
+    virtual void Serialize(SerializeNode* pParentNode)
+    {
+        this->IComponent::Serialize(pParentNode);
+        pParentNode->AddElement(new SerializeNode("PositionX", ESerializeNodeType::Property, std::to_string(m_Position.x)));
+        pParentNode->AddElement(new SerializeNode("PositionY", ESerializeNodeType::Property, std::to_string(m_Position.y)));
+        pParentNode->AddElement(new SerializeNode("OriginX", ESerializeNodeType::Property, std::to_string(m_Origin.x)));
+        pParentNode->AddElement(new SerializeNode("OriginY", ESerializeNodeType::Property, std::to_string(m_Origin.y)));
+        pParentNode->AddElement(new SerializeNode("Rotation", ESerializeNodeType::Property, std::to_string(m_fRotation)));
+    }
 protected:
 	sf::Vector2f m_Position;
 	sf::Vector2f m_Origin;

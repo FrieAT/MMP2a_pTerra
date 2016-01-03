@@ -95,7 +95,9 @@ SerializeNode* GameObject::Serialize()
     auto it_components = m_Components.begin();
     while(it_components != m_Components.end())
     {
-        // TODO: Call Serialize from each Component.
+        SerializeNode* pNodeComponent = new SerializeNode("Component", ESerializeNodeType::Class);
+        it_components->second->Serialize(pNodeComponent);
+        pNode->AddElement(pNodeComponent);
         it_components++;
     }
     return pNode;

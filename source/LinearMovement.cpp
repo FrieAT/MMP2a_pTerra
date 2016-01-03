@@ -87,3 +87,14 @@ void LinearMovement::OnFrameUpdate(sf::Time DeltaTime)
 	pPositionComponent->SetPosition(pPositionComponent->GetPosition()+ velocity* DeltaTime.asSeconds());
 }
 
+void LinearMovement::Serialize(SerializeNode *pParentNode)
+{
+    this->IMovement::Serialize(pParentNode);
+    pParentNode->AddElement(new SerializeNode("Speed", ESerializeNodeType::Property, std::to_string(m_fSpeed)));
+    pParentNode->AddElement(new SerializeNode("MaxSpeed", ESerializeNodeType::Property, std::to_string(m_fMaxSpeed)));
+    pParentNode->AddElement(new SerializeNode("DirectionX", ESerializeNodeType::Property, std::to_string(m_Direction.x)));
+    pParentNode->AddElement(new SerializeNode("DirectionY", ESerializeNodeType::Property, std::to_string(m_Direction.y)));
+    pParentNode->AddElement(new SerializeNode("Rotation", ESerializeNodeType::Property, std::to_string(m_fRotation)));
+    pParentNode->AddElement(new SerializeNode("Accelerating", ESerializeNodeType::Property, std::to_string(m_bAccelerating)));
+}
+

@@ -153,3 +153,23 @@ void ShipMovement::OnFrameUpdate(sf::Time DeltaTime)
 	pPositionComponent->SetPosition(pPositionComponent->GetPosition() + velocity * DeltaTime.asSeconds());
 
 }
+
+void ShipMovement::Serialize(SerializeNode *pParentNode)
+{
+    this->IMovement::Serialize(pParentNode);
+    pParentNode->AddElement(new SerializeNode("ControlID", ESerializeNodeType::Property, std::to_string(m_cPlayer)));
+    pParentNode->AddElement(new SerializeNode("Speed", ESerializeNodeType::Property, std::to_string(m_fSpeed)));
+    pParentNode->AddElement(new SerializeNode("MaxSpeed", ESerializeNodeType::Property, std::to_string(m_fMaxSpeed)));
+    pParentNode->AddElement(new SerializeNode("Firerate", ESerializeNodeType::Property, std::to_string(m_fFirerate)));
+    pParentNode->AddElement(new SerializeNode("WeaponCooldown", ESerializeNodeType::Property, std::to_string(m_fWeaponcoolDown)));
+    pParentNode->AddElement(new SerializeNode("DirectionX", ESerializeNodeType::Property, std::to_string(m_Direction.x)));
+    pParentNode->AddElement(new SerializeNode("DirectionY", ESerializeNodeType::Property, std::to_string(m_Direction.y)));
+    SerializeNode *pNodeStates = new SerializeNode("ShipStates", ESerializeNodeType::List);
+    auto it = m_ShipState.begin();
+    while(it != m_ShipState.end())
+    {
+        pNodeStates->AddElement(new SerializeNode("State", ESerializeNodeType::Property, std::to_string((*it))));
+        it++;
+    }
+    pParentNode->AddElement(pNodeStates);
+}

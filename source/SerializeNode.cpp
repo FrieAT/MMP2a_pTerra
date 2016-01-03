@@ -4,9 +4,10 @@
 
 #include "SerializeNode.h"
 
-SerializeNode::SerializeNode(std::string strName, ESerializeNodeType eNodeType)
+SerializeNode::SerializeNode(std::string strName, ESerializeNodeType eNodeType, std::string strValue)
 : m_strName(strName)
 , m_eNodeType(eNodeType)
+, m_strValue(strValue)
 {
     
 }

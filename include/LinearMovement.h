@@ -17,6 +17,7 @@ public:
     ~LinearMovement();
     void Init();
     void OnFrameUpdate(sf::Time DeltaTime);
+    void Serialize(SerializeNode* pParentNode);
 	float m_fSpeed;
 	float m_fMaxSpeed;
 

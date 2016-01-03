@@ -114,3 +114,11 @@ void BoxCollision::OnFrameDraw(sf::RenderWindow* pWindow)
      pWindow->draw(test);
      */
 }
+
+void BoxCollision::Serialize(SerializeNode *pParentNode)
+{
+    this->ICollision::Serialize(pParentNode);
+    pParentNode->AddElement(new SerializeNode("Width", ESerializeNodeType::Property, std::to_string(m_fWidth)));
+    pParentNode->AddElement(new SerializeNode("Height", ESerializeNodeType::Property, std::to_string(m_fHeight)));
+    pParentNode->AddElement(new SerializeNode("Hit", ESerializeNodeType::Property, std::to_string(m_bHit)));
+}

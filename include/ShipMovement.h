@@ -19,6 +19,7 @@ public:
 	void OnInputUpdate(std::string strEvent);
 	void OnFrameUpdate(sf::Time DeltaTime);
 	void UpdateMovement(sf::Time DeltaTime);
+    void Serialize(SerializeNode* pParentNode);
 
 	char m_cPlayer;	//player id for multiple playercontrolled ships
 

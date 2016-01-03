@@ -8,6 +8,7 @@ Copyright (c) MultiMediaTechnology, 2015
 
 #include "EComponentType.h"
 #include "GameObject.h"
+#include "SerializeNode.h"
 
 class IComponent
 {
@@ -16,6 +17,7 @@ public:
     virtual ~IComponent() { }
     virtual void Init() { }
 	virtual EComponentType GetComponentType() = 0;
+    virtual void Serialize(SerializeNode* pParentNode) { }
 	void SetAssignedGameObject(GameObject* pObject)
 	{
         m_pGameObject = pObject;

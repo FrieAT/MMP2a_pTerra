@@ -19,5 +19,5 @@ public:
 	float m_fRadius;
 	bool m_bHit;
 	void OnFrameDraw(sf::RenderWindow* pWindow);
-
+    void Serialize(SerializeNode *pParentNode);
 };

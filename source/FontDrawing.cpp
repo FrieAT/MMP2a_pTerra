@@ -8,6 +8,9 @@ Copyright (c) MultiMediaTechnology, 2015
 #include "TextureFactory.h"
 
 FontDrawing::FontDrawing(std::string strFontPath, std::string strText, int iCharSize)
+: m_strResPath(strFontPath)
+, m_strText(strText)
+, m_iCharSize(iCharSize)
 {
     // Load a font to display
     m_pFont = TextureFactory::GetInstance().GetFont(strFontPath);
@@ -55,4 +58,12 @@ void FontDrawing::SetTextureArea(sf::FloatRect Area)
 void FontDrawing::SetText(std::string strText)
 {
     m_pText->setString(strText);
+}
+
+void FontDrawing::Serialize(SerializeNode *pParentNode)
+{
+    this->IDrawing::Serialize(pParentNode);
+    pParentNode->AddElement(new SerializeNode("ResourcePath", ESerializeNodeType::Property, m_strResPath));
+    pParentNode->AddElement(new SerializeNode("Text", ESerializeNodeType::Property, m_strText));
+    pParentNode->AddElement(new SerializeNode("CharSize", ESerializeNodeType::Property, std::to_string(m_iCharSize)));
 }

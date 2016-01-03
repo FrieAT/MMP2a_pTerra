@@ -15,6 +15,10 @@ public:
     {
         return EComponentType::View;
     }
+    virtual void Serialize(SerializeNode* pParentNode)
+    {
+        this->IComponent::Serialize(pParentNode);
+    }
 protected:
     
 };

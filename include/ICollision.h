@@ -22,6 +22,11 @@ public:
 	virtual ~ICollision() { }
 	virtual bool colliding(ICollision* pCollisionBody) = 0;
     bool m_bPhysicsApplyable;
+    virtual void Serialize(SerializeNode* pParentNode)
+    {
+        this->IComponent::Serialize(pParentNode);
+        pParentNode->AddElement(new SerializeNode("PhysicsApplyable", ESerializeNodeType::Property, std::to_string(m_bPhysicsApplyable)));
+    }
 	EComponentType GetComponentType()
 	{
 		return EComponentType::Collision;
