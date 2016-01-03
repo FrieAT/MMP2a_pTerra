@@ -17,11 +17,10 @@ SerializeNode::~SerializeNode()
     auto it = m_Elements.begin();
     while(it != m_Elements.end())
     {
-        delete(*it);
+        delete(it->second);
         it++;
     }
     m_Elements.clear();
-    m_Elements.shrink_to_fit();
 }
 
 void SerializeNode::AddElement(SerializeNode *pNode)
@@ -30,7 +29,12 @@ void SerializeNode::AddElement(SerializeNode *pNode)
     {
         throw std::runtime_error("SerializeNode´s from type Property may not allowed to have Elements.");
     }
-    m_Elements.push_back(pNode);
+    auto it = m_Elements.find(pNode->m_strName);
+    if(it != m_Elements.end())
+    {
+        throw std::runtime_error("Key already used, use a other key or remove old value.");
+    }
+    m_Elements[pNode->m_strName] = pNode;
 }
 
 void SerializeNode::RemoveElement(SerializeNode *pNode)
@@ -42,9 +46,9 @@ void SerializeNode::RemoveElement(SerializeNode *pNode)
     auto it = m_Elements.begin();
     while(it != m_Elements.end())
     {
-        if((*it) == pNode)
+        if(it->second == pNode)
         {
-            delete((*it));
+            delete(it->second);
             m_Elements.erase(it);
             break;
         }

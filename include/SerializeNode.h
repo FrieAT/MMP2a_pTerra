@@ -4,7 +4,7 @@
 
 #pragma once
 
-#include <vector>
+#include <map>
 #include <string>
 
 #include "ESerializeNodeType.h"
@@ -20,5 +20,5 @@ private:
     ESerializeNodeType m_eNodeType;
     std::string m_strName;
     std::string m_strValue;
-    std::vector<SerializeNode*> m_Elements;
+    std::map<std::string, SerializeNode*> m_Elements;
 };
