@@ -6,7 +6,7 @@
 #include "SerializeNode.h"
 
 XMLSerializeNodeVisitor::XMLSerializeNodeVisitor(std::string strPath)
-: m_iCurrentDepth(0)
+: m_iCurrentDepth(1)
 {
     m_File.open(strPath);
     if(!m_File.is_open())
@@ -20,6 +20,7 @@ XMLSerializeNodeVisitor::XMLSerializeNodeVisitor(std::string strPath)
 XMLSerializeNodeVisitor::~XMLSerializeNodeVisitor()
 {
     m_File << "</savegame>\n";
+    m_File.flush();
     m_File.close();
 }
 
@@ -43,7 +44,7 @@ void XMLSerializeNodeVisitor::Visit(SerializeNode* pNode)
         {
             m_File << " value=\"" << pNode->GetValue() << "\"";
         }
-        m_File << " />\n";
+        m_File << ">\n";
         m_iCurrentDepth++;
         auto elements = pNode->GetChildren();
         auto it = elements.begin();

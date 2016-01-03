@@ -91,14 +91,18 @@ int GameObject::GetAmountOfUsedComponentTypes()
 
 SerializeNode* GameObject::Serialize()
 {
-    SerializeNode* pNode = new SerializeNode(this->GetID(), ESerializeNodeType::Class);
+    SerializeNode* pNode = new SerializeNode("gameobject", ESerializeNodeType::Class, m_strID);
+    SerializeNode* pNodeComponents = new SerializeNode("Components", ESerializeNodeType::List);
     auto it_components = m_Components.begin();
+    unsigned int iCount = 0;
     while(it_components != m_Components.end())
     {
-        SerializeNode* pNodeComponent = new SerializeNode("Component", ESerializeNodeType::Class, it_components->second->GetComponentName());
+        SerializeNode* pNodeComponent = new SerializeNode(std::to_string(iCount), ESerializeNodeType::Class, it_components->second->GetComponentName());
         it_components->second->Serialize(pNodeComponent);
-        pNode->AddElement(pNodeComponent);
+        pNodeComponents->AddElement(pNodeComponent);
         it_components++;
+        iCount++;
     }
+    pNode->AddElement(pNodeComponents);
     return pNode;
 }

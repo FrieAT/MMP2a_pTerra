@@ -297,15 +297,20 @@ void WorldManager::LoadGame(std::string strPath)
 
 void WorldManager::SaveGame(std::string strPath)
 {
+    auto pXMLVisitor = new XMLSerializeNodeVisitor(strPath);
     auto game_objects = ObjectManager::GetInstance().GetActiveGameObjects();
     auto it_game_objects = game_objects.begin();
     while(it_game_objects != game_objects.end())
     {
+        if((*it_game_objects) == nullptr)
+        {
+            it_game_objects++;
+            continue;
+        }
         SerializeNode* pRootNode = (*it_game_objects)->Serialize();
-        auto pXMLVisitor = new XMLSerializeNodeVisitor(strPath);
         pRootNode->Accept(pXMLVisitor);
-        delete pXMLVisitor;
         delete pRootNode;
         it_game_objects++;
     }
+    delete pXMLVisitor;
 }
