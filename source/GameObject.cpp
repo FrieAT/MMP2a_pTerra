@@ -88,3 +88,15 @@ int GameObject::GetAmountOfUsedComponentTypes()
 {
     return m_Components.size();
 }
+
+SerializeNode* GameObject::Serialize()
+{
+    SerializeNode* pNode = new SerializeNode(this->GetID(), ESerializeNodeType::Class);
+    auto it_components = m_Components.begin();
+    while(it_components != m_Components.end())
+    {
+        // TODO: Call Serialize from each Component.
+        it_components++;
+    }
+    return pNode;
+}
