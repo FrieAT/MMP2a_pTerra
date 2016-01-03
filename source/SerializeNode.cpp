@@ -55,3 +55,18 @@ void SerializeNode::RemoveElement(SerializeNode *pNode)
         it++;
     }
 }
+
+SerializeNode* SerializeNode::GetNode(std::string strName)
+{
+    auto it = m_Elements.find(strName);
+    if(it == m_Elements.end())
+    {
+        return nullptr;
+    }
+    return it->second;
+}
+
+std::string SerializeNode::GetValue()
+{
+    return m_strValue;
+}

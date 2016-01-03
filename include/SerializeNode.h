@@ -16,6 +16,8 @@ public:
     ~SerializeNode();
     void AddElement(SerializeNode* pNode);
     void RemoveElement(SerializeNode* pNode);
+    SerializeNode* GetNode(std::string strName);
+    std::string GetValue();
 private:
     ESerializeNodeType m_eNodeType;
     std::string m_strName;
