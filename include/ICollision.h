@@ -17,8 +17,12 @@ struct CollisionEvent {
 class ICollision : public IComponent
 {
 public:
-    ICollision()
-    : m_bPhysicsApplyable(true) { }
+    ICollision() : m_bPhysicsApplyable(true) { }
+    ICollision(SerializeNode* pNode)
+    : IComponent(pNode)
+    {
+        m_bPhysicsApplyable = stoi((pNode->GetNode("PhysicsApplyable"))->GetValue());
+    }
 	virtual ~ICollision() { }
 	virtual bool colliding(ICollision* pCollisionBody) = 0;
     bool m_bPhysicsApplyable;

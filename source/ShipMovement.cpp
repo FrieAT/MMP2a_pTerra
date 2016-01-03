@@ -18,6 +18,33 @@ ShipMovement::ShipMovement(char cPlayer)
 	m_fFirerate = 0.5f;
 }
 
+ShipMovement::ShipMovement(SerializeNode* pNode)
+{
+    float x, y;
+    
+    m_cPlayer = stoi((pNode->GetNode("ControlID"))->GetValue());
+    m_fSpeed = stof((pNode->GetNode("Speed"))->GetValue());
+    m_fMaxSpeed = stof((pNode->GetNode("MaxSpeed"))->GetValue());
+    m_fFirerate = stof((pNode->GetNode("Firerate"))->GetValue());
+    m_fWeaponcoolDown = stof((pNode->GetNode("WeaponCooldown"))->GetValue());
+    
+    x = stof((pNode->GetNode("DirectionX"))->GetValue());
+    y = stof((pNode->GetNode("DirectionY"))->GetValue());
+    m_Direction = sf::Vector2f(x, y);
+    
+    SerializeNode* pNodeShipStates = pNode->GetNode("ShipStates");
+    unsigned int count = 0;
+    do
+    {
+        SerializeNode* pCurrentNode = pNodeShipStates->GetNode(std::to_string(count));
+        if(pCurrentNode == nullptr)
+        {
+            pNodeShipStates = nullptr;
+            continue;
+        }
+        m_ShipState.push_back(stoi(pCurrentNode->GetValue()));
+    } while(pNodeShipStates != nullptr);
+}
 
 ShipMovement::~ShipMovement()
 {
@@ -166,10 +193,12 @@ void ShipMovement::Serialize(SerializeNode *pParentNode)
     pParentNode->AddElement(new SerializeNode("DirectionY", ESerializeNodeType::Property, std::to_string(m_Direction.y)));
     SerializeNode *pNodeStates = new SerializeNode("ShipStates", ESerializeNodeType::List);
     auto it = m_ShipState.begin();
+    unsigned count = 0;
     while(it != m_ShipState.end())
     {
-        pNodeStates->AddElement(new SerializeNode("State", ESerializeNodeType::Property, std::to_string((*it))));
+        pNodeStates->AddElement(new SerializeNode(std::to_string(count), ESerializeNodeType::Property, std::to_string((*it))));
         it++;
+        count++;
     }
     pParentNode->AddElement(pNodeStates);
 }

@@ -35,6 +35,12 @@ SpriteDrawing::SpriteDrawing(std::string strRessourcePath, sf::Vector2f ScaleToS
     m_pSprite->setScale((ScaleToSize.x / TextureSize.x), (ScaleToSize.y / TextureSize.y));
 }
 
+SpriteDrawing::SpriteDrawing(SerializeNode* pNode)
+: SpriteDrawing((pNode->GetNode("ResourcePath"))->GetValue(), sf::Vector2f(stof((pNode->GetNode("ResizeToX"))->GetValue()), stof((pNode->GetNode("ResizeToY"))->GetValue())))
+{
+    
+}
+
 SpriteDrawing::~SpriteDrawing()
 {
     delete m_pSprite;

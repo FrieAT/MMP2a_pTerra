@@ -16,6 +16,14 @@ BoxCollision::BoxCollision(float fWidth, float fHeight)
     
 }
 
+BoxCollision::BoxCollision(SerializeNode* pNode)
+: ICollision(pNode)
+{
+    m_fWidth = stof((pNode->GetNode("Width"))->GetValue());
+    m_fHeight = stof((pNode->GetNode("Height"))->GetValue());
+    m_bHit = stoi((pNode->GetNode("Hit"))->GetValue());
+}
+
 BoxCollision::~BoxCollision()
 {
     CollisionManager::GetInstance().UnregisterCollisionbody(this);

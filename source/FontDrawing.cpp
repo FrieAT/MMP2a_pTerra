@@ -23,6 +23,12 @@ FontDrawing::FontDrawing(std::string strFontPath, std::string strText, int iChar
     m_pText->setColor(sf::Color::White);
 }
 
+FontDrawing::FontDrawing(SerializeNode* pNode)
+: FontDrawing((pNode->GetNode("ResourcePath"))->GetValue(), (pNode->GetNode("Text"))->GetValue(), stoi((pNode->GetNode("CharSize"))->GetValue()))
+{
+    
+}
+
 FontDrawing::~FontDrawing()
 {
     delete m_pText;

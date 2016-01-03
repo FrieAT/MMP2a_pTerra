@@ -14,6 +14,7 @@ class ShipMovement : public IMovement, public IInputObserver, public IFrameObser
 {
 public:
 	ShipMovement(char cPlayer);
+    ShipMovement(SerializeNode* pNode);
 	~ShipMovement();
     void Init();
 	void OnInputUpdate(std::string strEvent);

@@ -49,6 +49,20 @@ LinearMovement::LinearMovement(float fRotation, float fSpeed, float fmass, sf::V
 	invMass = 1 / mass;
 }
 
+LinearMovement::LinearMovement(SerializeNode* pNode)
+{
+    float x, y;
+    
+    m_fSpeed = stof((pNode->GetNode("Speed"))->GetValue());
+    m_fMaxSpeed = stof((pNode->GetNode("MaxSpeed"))->GetValue());
+    
+    x = stof((pNode->GetNode("DirectionX"))->GetValue());
+    y = stof((pNode->GetNode("DirectionY"))->GetValue());
+    m_Direction = sf::Vector2f(x, y);
+    
+    m_fRotation = stof((pNode->GetNode("Rotation"))->GetValue());
+    m_bAccelerating = stof((pNode->GetNode("Accelerating"))->GetValue());
+}
 
 LinearMovement::~LinearMovement()
 {

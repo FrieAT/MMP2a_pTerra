@@ -12,6 +12,7 @@ class FontDrawing : public IDrawing
 {
 public:
     FontDrawing(std::string strFontPath, std::string strText, int iCharSize);
+    FontDrawing(SerializeNode* pNode);
     ~FontDrawing();
     void Update();
     void Draw(sf::RenderWindow* pWindow);

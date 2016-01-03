@@ -10,6 +10,40 @@ Copyright (c) MultiMediaTechnology, 2015
 class IMovement : public IComponent
 {
 public:
+    IMovement() { }
+    IMovement(SerializeNode* pNode)
+    : IComponent(pNode)
+    {
+        SerializeNode* pNodeImpulses = pNode->GetNode("Impulses");
+        unsigned int count = 0;
+        float x, y;
+        do
+        {
+            SerializeNode* pCurrentNode = pNodeImpulses->GetNode(std::to_string(count));
+            if(pCurrentNode == nullptr)
+            {
+                pNodeImpulses = nullptr;
+                continue;
+            }
+            x = stof((pCurrentNode->GetNode("X"))->GetValue());
+            y = stof((pCurrentNode->GetNode("Y"))->GetValue());
+            
+            impulses.push_back(sf::Vector2f(x, y));
+        } while(pNodeImpulses != nullptr);
+        
+        x = stof((pNode->GetNode("AccelerationX"))->GetValue());
+        y = stof((pNode->GetNode("AccelerationY"))->GetValue());
+        acceleration = sf::Vector2f(x, y);
+        
+        x = stof((pNode->GetNode("VelocityX"))->GetValue());
+        y = stof((pNode->GetNode("VelocityY"))->GetValue());
+        velocity = sf::Vector2f(x, y);
+        
+        mass = stof((pNode->GetNode("Mass"))->GetValue());
+        
+        invMass = stof((pNode->GetNode("InvMass"))->GetValue());
+        
+    }
     virtual ~IMovement() { }
     
 	virtual sf::Vector2f GetVelocity() { return velocity; };
@@ -25,13 +59,15 @@ public:
         
         SerializeNode* pNodeImpulses = new SerializeNode("Impulses", ESerializeNodeType::List);
         auto it = impulses.begin();
+        unsigned int count = 0;
         while(it != impulses.end())
         {
-            SerializeNode* pNodeImpulse = new SerializeNode("Impulse", ESerializeNodeType::List);
+            SerializeNode* pNodeImpulse = new SerializeNode(std::to_string(count), ESerializeNodeType::List);
             pNodeImpulse->AddElement(new SerializeNode("X", ESerializeNodeType::Property, std::to_string((*it).x)));
             pNodeImpulse->AddElement(new SerializeNode("Y", ESerializeNodeType::Property, std::to_string((*it).y)));
             pNodeImpulses->AddElement(pNodeImpulse);
             it++;
+            count++;
         }
         pParentNode->AddElement(pNodeImpulses);
         

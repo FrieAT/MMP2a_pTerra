@@ -13,6 +13,7 @@ class BoxCollision : public ICollision, public IFrameObserver
 {
 public:
 	BoxCollision(float fWidth, float fHeight);
+    BoxCollision(SerializeNode* pNode);
 	~BoxCollision();
     void Init();
 	bool colliding(ICollision* pCollisionBody);

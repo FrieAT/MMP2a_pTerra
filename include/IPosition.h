@@ -18,6 +18,20 @@ public:
 		this->m_fRotation = 0.0;
 		this->m_Origin = Origin;
 	}
+    IPosition(SerializeNode* pNode)
+    {
+        float x, y;
+        
+        x = stof((pNode->GetNode("PositionX"))->GetValue());
+        y = stof((pNode->GetNode("PositionY"))->GetValue());
+        m_Position = sf::Vector2f(x, y);
+        
+        x = stof((pNode->GetNode("OriginX"))->GetValue());
+        y = stof((pNode->GetNode("OriginY"))->GetValue());
+        m_Origin = sf::Vector2f(x, y);
+        
+        m_fRotation = stof((pNode->GetNode("Rotation"))->GetValue());
+    }
     virtual ~IPosition() { }
 	virtual void SetPosition(sf::Vector2f Position) = 0;
 	virtual sf::Vector2f GetPosition() = 0;

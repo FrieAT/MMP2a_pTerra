@@ -13,6 +13,13 @@ CircleCollision::CircleCollision(float fRadius)
 
 }
 
+CircleCollision::CircleCollision(SerializeNode* pNode)
+: ICollision(pNode)
+{
+    m_fRadius = stof((pNode->GetNode("Radius"))->GetValue());
+    m_bHit = stof((pNode->GetNode("Hit"))->GetValue());
+}
+
 CircleCollision::~CircleCollision()
 {
 	CollisionManager::GetInstance().UnregisterCollisionbody(this);

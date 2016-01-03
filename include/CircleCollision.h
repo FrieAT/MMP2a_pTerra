@@ -13,6 +13,7 @@ class CircleCollision : public ICollision, public IFrameObserver
 {
 public:
 	CircleCollision(float radius);
+    CircleCollision(SerializeNode* pNode);
 	~CircleCollision();
     void Init();
 	bool colliding(ICollision* pCollisionBody);

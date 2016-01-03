@@ -9,6 +9,12 @@ Copyright (c) MultiMediaTechnology, 2015
 class IHealth : public IComponent
 {
 public:
+    IHealth() { }
+    IHealth(SerializeNode* pNode)
+    : IComponent(pNode)
+    {
+        m_fHealth = stof((pNode->GetNode("Health"))->GetValue());
+    }
 	EComponentType GetComponentType()
 	{
 		return EComponentType::Health;

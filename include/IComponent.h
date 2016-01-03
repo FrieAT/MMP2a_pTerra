@@ -14,6 +14,7 @@ class IComponent
 {
 public:
     IComponent() : m_pGameObject(nullptr) { }
+    IComponent(SerializeNode* pNode) : m_pGameObject(nullptr) { }
     virtual ~IComponent() { }
     virtual void Init() { }
 	virtual EComponentType GetComponentType() = 0;
