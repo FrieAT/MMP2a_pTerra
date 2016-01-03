@@ -19,6 +19,7 @@ public:
     {
         this->IComponent::Serialize(pParentNode);
     }
+    virtual std::string GetComponentName() { return std::string("IView"); }
 protected:
     
 };

@@ -20,4 +20,5 @@ public:
         this->IComponent::Serialize(pParentNode);
         pParentNode->AddElement(new SerializeNode("Health", ESerializeNodeType::Property, std::to_string(m_fHealth)));
     }
+    virtual std::string GetComponentName() { return std::string("IHealth"); }
 };

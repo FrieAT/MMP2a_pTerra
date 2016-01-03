@@ -17,6 +17,7 @@ public:
 	void Damage(float fDamage);
 	void OnFrameUpdate(sf::Time DeltaTime);
     void OnCollisionEvent(GameObject* pOther, sf::Vector2f ImpulseImpact);
+    std::string GetComponentName() { return std::string("HealthMissile"); }
 private:
     GameObject* m_pOwner;
 };

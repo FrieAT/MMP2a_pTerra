@@ -23,6 +23,7 @@ public:
     
     Quadrant* GetQuadrant();
     EQuadrantPos GetDirectionKeyFromPos(sf::Vector2f Position);
+    std::string GetComponentName() { return std::string("QuadrantPosition"); }
 private:
     Quadrant* m_pQuadrant;
     EQuadrantPos m_ELastDirection;

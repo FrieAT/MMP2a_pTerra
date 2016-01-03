@@ -42,6 +42,7 @@ public:
         pParentNode->AddElement(new SerializeNode("Mass", ESerializeNodeType::Property, std::to_string(mass)));
         pParentNode->AddElement(new SerializeNode("InvMass", ESerializeNodeType::Property, std::to_string(invMass)));
     }
+    virtual std::string GetComponentName() { return std::string("IMovement"); }
 protected:
 	sf::Clock m_DeltaClock;
 	std::list<sf::Vector2f> impulses;

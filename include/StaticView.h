@@ -16,6 +16,7 @@ public:
     void Init();
     void OnFrameUpdate(sf::Time DeltaTime);
     void OnFrameDraw(sf::RenderWindow* pWindow);
+    std::string GetComponentName() { return std::string("StaticView"); }
     
     sf::FloatRect GetViewport();
 private:

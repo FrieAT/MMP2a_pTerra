@@ -20,6 +20,7 @@ public:
 	void OnFrameUpdate(sf::Time DeltaTime);
 	void UpdateMovement(sf::Time DeltaTime);
     void Serialize(SerializeNode* pParentNode);
+    std::string GetComponentName() { return std::string("ShipMovement"); }
 
 	char m_cPlayer;	//player id for multiple playercontrolled ships
 

@@ -18,6 +18,7 @@ public:
     void OnFrameDraw(sf::RenderWindow* pWindow);
     void OnFrameUpdate(sf::Time DeltaTime);
     void OnCollisionEvent(GameObject* pOther, sf::Vector2f ImpulseImpact);
+    std::string GetComponentName() { return std::string("HealthAsteroid"); }
 private:
     GameObject* m_pHealthDebug;
 };

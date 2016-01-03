@@ -31,4 +31,5 @@ public:
 	{
 		return EComponentType::Collision;
 	}
+    virtual std::string GetComponentName() { return std::string("ICollision"); }
 };

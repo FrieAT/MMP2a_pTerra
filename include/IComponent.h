@@ -26,6 +26,7 @@ public:
 	{
 		return m_pGameObject;
 	}
+    virtual std::string GetComponentName() { return std::string("IComponent"); }
 private:
     GameObject* m_pGameObject;
 };

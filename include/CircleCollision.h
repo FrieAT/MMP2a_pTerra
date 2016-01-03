@@ -20,4 +20,5 @@ public:
 	bool m_bHit;
 	void OnFrameDraw(sf::RenderWindow* pWindow);
     void Serialize(SerializeNode *pParentNode);
+    std::string GetComponentName() { return std::string("CircleCollision"); }
 };

@@ -19,6 +19,7 @@ public:
     void SetTextureArea(sf::FloatRect Area);
     sf::FloatRect GetTextureArea();
     void Serialize(SerializeNode* pParentNode);
+    std::string GetComponentName() { return std::string("SpriteDrawing"); }
 protected:
 	sf::Sprite* m_pSprite;
 	sf::Texture* m_pTexture;

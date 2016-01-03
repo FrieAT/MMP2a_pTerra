@@ -41,6 +41,7 @@ public:
         pParentNode->AddElement(new SerializeNode("OriginY", ESerializeNodeType::Property, std::to_string(m_Origin.y)));
         pParentNode->AddElement(new SerializeNode("Rotation", ESerializeNodeType::Property, std::to_string(m_fRotation)));
     }
+    virtual std::string GetComponentName() { return std::string("IPosition"); }
 protected:
 	sf::Vector2f m_Position;
 	sf::Vector2f m_Origin;
