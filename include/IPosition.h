@@ -18,20 +18,6 @@ public:
 		this->m_fRotation = 0.0;
 		this->m_Origin = Origin;
 	}
-    IPosition(SerializeNode* pNode)
-    {
-        float x, y;
-        
-        x = stof((pNode->GetNode("PositionX"))->GetValue());
-        y = stof((pNode->GetNode("PositionY"))->GetValue());
-        m_Position = sf::Vector2f(x, y);
-        
-        x = stof((pNode->GetNode("OriginX"))->GetValue());
-        y = stof((pNode->GetNode("OriginY"))->GetValue());
-        m_Origin = sf::Vector2f(x, y);
-        
-        m_fRotation = stof((pNode->GetNode("Rotation"))->GetValue());
-    }
     virtual ~IPosition() { }
 	virtual void SetPosition(sf::Vector2f Position) = 0;
 	virtual sf::Vector2f GetPosition() = 0;
@@ -54,6 +40,20 @@ public:
         pParentNode->AddElement(new SerializeNode("OriginX", ESerializeNodeType::Property, std::to_string(m_Origin.x)));
         pParentNode->AddElement(new SerializeNode("OriginY", ESerializeNodeType::Property, std::to_string(m_Origin.y)));
         pParentNode->AddElement(new SerializeNode("Rotation", ESerializeNodeType::Property, std::to_string(m_fRotation)));
+    }
+    static IComponent* Deserialize(SerializeNode* pNode, IPosition* pParentComponent)
+    {
+        float x, y;
+        
+        x = stof((pNode->GetNode("PositionX"))->GetValue());
+        y = stof((pNode->GetNode("PositionY"))->GetValue());
+        pParentComponent->m_Position = sf::Vector2f(x, y);
+        
+        x = stof((pNode->GetNode("OriginX"))->GetValue());
+        y = stof((pNode->GetNode("OriginY"))->GetValue());
+        pParentComponent->m_Origin = sf::Vector2f(x, y);
+        
+        pParentComponent->m_fRotation = stof((pNode->GetNode("Rotation"))->GetValue());
     }
     virtual std::string GetComponentName() { return std::string("IPosition"); }
 protected:

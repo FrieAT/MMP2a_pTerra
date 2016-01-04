@@ -16,14 +16,6 @@ BoxCollision::BoxCollision(float fWidth, float fHeight)
     
 }
 
-BoxCollision::BoxCollision(SerializeNode* pNode)
-: ICollision(pNode)
-{
-    m_fWidth = stof((pNode->GetNode("Width"))->GetValue());
-    m_fHeight = stof((pNode->GetNode("Height"))->GetValue());
-    m_bHit = stoi((pNode->GetNode("Hit"))->GetValue());
-}
-
 BoxCollision::~BoxCollision()
 {
     CollisionManager::GetInstance().UnregisterCollisionbody(this);
@@ -129,4 +121,16 @@ void BoxCollision::Serialize(SerializeNode *pParentNode)
     pParentNode->AddElement(new SerializeNode("Width", ESerializeNodeType::Property, std::to_string(m_fWidth)));
     pParentNode->AddElement(new SerializeNode("Height", ESerializeNodeType::Property, std::to_string(m_fHeight)));
     pParentNode->AddElement(new SerializeNode("Hit", ESerializeNodeType::Property, std::to_string(m_bHit)));
+}
+
+IComponent* BoxCollision::Deserialize(SerializeNode* pNode)
+{
+    float fWidth = stof((pNode->GetNode("Width"))->GetValue());
+    float fHeight = stof((pNode->GetNode("Height"))->GetValue());
+    bool bHit = stoi((pNode->GetNode("Hit"))->GetValue());
+    
+    BoxCollision* pComponent = new BoxCollision(fWidth, fHeight);
+    pComponent->m_bHit = bHit;
+    
+    return pComponent;
 }

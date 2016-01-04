@@ -145,3 +145,12 @@ EQuadrantPos QuadrantPosition::GetDirectionKeyFromPos(sf::Vector2f Position)
         return EQuadrantPos::Null;
     }
 }
+
+IComponent* QuadrantPosition::Deserialize(SerializeNode *pNode)
+{
+    QuadrantPosition* pComponent = new QuadrantPosition(sf::Vector2f(), sf::Vector2f());
+    
+    IPosition::Deserialize(pNode, pComponent);
+    
+    return pComponent;
+}

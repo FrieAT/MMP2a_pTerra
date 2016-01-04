@@ -19,6 +19,10 @@ public:
     {
         this->IComponent::Serialize(pParentNode);
     }
+    static IComponent* Deserialize(SerializeNode* pNode, IView* pParentComponent)
+    {
+        // Nothing to extract here...
+    }
     virtual std::string GetComponentName() { return std::string("IView"); }
 protected:
     

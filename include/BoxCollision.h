@@ -13,7 +13,6 @@ class BoxCollision : public ICollision, public IFrameObserver
 {
 public:
 	BoxCollision(float fWidth, float fHeight);
-    BoxCollision(SerializeNode* pNode);
 	~BoxCollision();
     void Init();
 	bool colliding(ICollision* pCollisionBody);
@@ -22,5 +21,6 @@ public:
 	bool m_bHit;
 	void OnFrameDraw(sf::RenderWindow* pWindow);
     void Serialize(SerializeNode* pParentNode);
+    static IComponent* Deserialize(SerializeNode* pNode);
     std::string GetComponentName() { return std::string("BoxCollision"); }
 };

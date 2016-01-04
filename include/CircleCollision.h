@@ -13,7 +13,6 @@ class CircleCollision : public ICollision, public IFrameObserver
 {
 public:
 	CircleCollision(float radius);
-    CircleCollision(SerializeNode* pNode);
 	~CircleCollision();
     void Init();
 	bool colliding(ICollision* pCollisionBody);
@@ -21,5 +20,6 @@ public:
 	bool m_bHit;
 	void OnFrameDraw(sf::RenderWindow* pWindow);
     void Serialize(SerializeNode *pParentNode);
+    static IComponent* Deserialize(SerializeNode* pNode);
     std::string GetComponentName() { return std::string("CircleCollision"); }
 };

@@ -74,3 +74,12 @@ void HealthShip::OnCollisionEvent(GameObject* pOther, sf::Vector2f ImpulseImpact
     // std::cout << "Detected Collision with a " << pOther->GetID() << " (Impulse: " << impulse_length << ")" << std::endl;
     Damage(impulse_length / 10000 );
 }
+
+IComponent* HealthShip::Deserialize(SerializeNode *pNode)
+{
+    HealthShip* pComponent = new HealthShip(0.f); // Only properties from own class, should be handled in Deserialize!
+    
+    IHealth::Deserialize(pNode, pComponent);
+    
+    return pComponent;
+}

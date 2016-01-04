@@ -16,6 +16,8 @@ public:
     void Init();
     void OnFrameUpdate(sf::Time DeltaTime);
     void OnFrameDraw(sf::RenderWindow* pWindow);
+    void Serialize(SerializeNode* pParentNode);
+    static IComponent* Deserialize(SerializeNode* pNode);
     std::string GetComponentName() { return std::string("DynamicView"); }
     
     sf::FloatRect GetViewport();

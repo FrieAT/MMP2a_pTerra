@@ -35,12 +35,6 @@ SpriteDrawing::SpriteDrawing(std::string strRessourcePath, sf::Vector2f ScaleToS
     m_pSprite->setScale((ScaleToSize.x / TextureSize.x), (ScaleToSize.y / TextureSize.y));
 }
 
-SpriteDrawing::SpriteDrawing(SerializeNode* pNode)
-: SpriteDrawing((pNode->GetNode("ResourcePath"))->GetValue(), sf::Vector2f(stof((pNode->GetNode("ResizeToX"))->GetValue()), stof((pNode->GetNode("ResizeToY"))->GetValue())))
-{
-    
-}
-
 SpriteDrawing::~SpriteDrawing()
 {
     delete m_pSprite;
@@ -79,4 +73,14 @@ void SpriteDrawing::Serialize(SerializeNode *pParentNode)
     pParentNode->AddElement(new SerializeNode("ResourcePath", ESerializeNodeType::Property, m_strResPath));
     pParentNode->AddElement(new SerializeNode("ResizeToX", ESerializeNodeType::Property, std::to_string(m_ScaleToSize.x)));
     pParentNode->AddElement(new SerializeNode("ResizeToY", ESerializeNodeType::Property, std::to_string(m_ScaleToSize.y)));
+}
+
+IComponent* SpriteDrawing::Deserialize(SerializeNode *pNode)
+{
+    std::string strResPath = (pNode->GetNode("ResourcePath"))->GetValue();
+    sf::Vector2f ResizeToSize(stof((pNode->GetNode("ResizeToX"))->GetValue()), stof((pNode->GetNode("ResizeToY"))->GetValue()));
+    
+    SpriteDrawing* pComponent = new SpriteDrawing(strResPath, ResizeToSize);
+    
+    return pComponent;
 }

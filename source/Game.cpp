@@ -15,6 +15,7 @@ Copyright (c) MultiMediaTechnology, 2015
 #include "CollisionManager.h"
 #include "GameStateIntro.h"
 #include "TextureFactory.h"
+#include "ClassRegistry.h"
 
 Game* Game::m_pEngine = nullptr;
 
@@ -63,6 +64,8 @@ Game::~Game()
 
 void Game::Start()
 {
+    ClassRegistry::GetInstance().Init();
+    
     IGameState* pGameState;
 	sf::Clock DeltaClock;
     

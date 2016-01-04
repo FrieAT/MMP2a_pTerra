@@ -12,7 +12,6 @@ class FontDrawing : public IDrawing
 {
 public:
     FontDrawing(std::string strFontPath, std::string strText, int iCharSize);
-    FontDrawing(SerializeNode* pNode);
     ~FontDrawing();
     void Update();
     void Draw(sf::RenderWindow* pWindow);
@@ -20,6 +19,7 @@ public:
     sf::FloatRect GetTextureArea();
     void SetText(std::string strText);
     void Serialize(SerializeNode* pParentNode);
+    static IComponent* Deserialize(SerializeNode* pNode);
     std::string GetComponentName() { return std::string("FontDrawing"); }
 protected:
     sf::Font* m_pFont; // TODO: Make of Font a flyweight pattern. Just do it.

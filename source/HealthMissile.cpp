@@ -55,3 +55,13 @@ void HealthMissile::OnCollisionEvent(GameObject* pOther, sf::Vector2f ImpulseImp
         pOtherHealth->Damage(90001.f); // What does the scouter say to his power level?
     }
 }
+
+IComponent* HealthMissile::Deserialize(SerializeNode *pNode)
+{
+    // TODO: Don´t create missile after Savegame-Load, cuz Reference to its owner is loss.
+    HealthMissile* pComponent = new HealthMissile(0.f, nullptr); // Only properties from own class, should be handled in Deserialize!
+    
+    IHealth::Deserialize(pNode, pComponent);
+    
+    return pComponent;
+}

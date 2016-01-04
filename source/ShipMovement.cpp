@@ -18,34 +18,6 @@ ShipMovement::ShipMovement(char cPlayer)
 	m_fFirerate = 0.5f;
 }
 
-ShipMovement::ShipMovement(SerializeNode* pNode)
-{
-    float x, y;
-    
-    m_cPlayer = stoi((pNode->GetNode("ControlID"))->GetValue());
-    m_fSpeed = stof((pNode->GetNode("Speed"))->GetValue());
-    m_fMaxSpeed = stof((pNode->GetNode("MaxSpeed"))->GetValue());
-    m_fFirerate = stof((pNode->GetNode("Firerate"))->GetValue());
-    m_fWeaponcoolDown = stof((pNode->GetNode("WeaponCooldown"))->GetValue());
-    
-    x = stof((pNode->GetNode("DirectionX"))->GetValue());
-    y = stof((pNode->GetNode("DirectionY"))->GetValue());
-    m_Direction = sf::Vector2f(x, y);
-    
-    SerializeNode* pNodeShipStates = pNode->GetNode("ShipStates");
-    unsigned int count = 0;
-    do
-    {
-        SerializeNode* pCurrentNode = pNodeShipStates->GetNode(std::to_string(count));
-        if(pCurrentNode == nullptr)
-        {
-            pNodeShipStates = nullptr;
-            continue;
-        }
-        m_ShipState.push_back(stoi(pCurrentNode->GetValue()));
-    } while(pNodeShipStates != nullptr);
-}
-
 ShipMovement::~ShipMovement()
 {
     InputManager::GetInstance().UnregisterEventObserver(this);
@@ -201,4 +173,38 @@ void ShipMovement::Serialize(SerializeNode *pParentNode)
         count++;
     }
     pParentNode->AddElement(pNodeStates);
+}
+
+IComponent* ShipMovement::Deserialize(SerializeNode* pNode)
+{
+    ShipMovement* pComponent = new ShipMovement('0');
+    
+    IMovement::Deserialize(pNode, pComponent);
+    
+    float x, y;
+    
+    pComponent->m_cPlayer = stoi((pNode->GetNode("ControlID"))->GetValue());
+    pComponent->m_fSpeed = stof((pNode->GetNode("Speed"))->GetValue());
+    pComponent->m_fMaxSpeed = stof((pNode->GetNode("MaxSpeed"))->GetValue());
+    pComponent->m_fFirerate = stof((pNode->GetNode("Firerate"))->GetValue());
+    pComponent->m_fWeaponcoolDown = stof((pNode->GetNode("WeaponCooldown"))->GetValue());
+    
+    x = stof((pNode->GetNode("DirectionX"))->GetValue());
+    y = stof((pNode->GetNode("DirectionY"))->GetValue());
+    pComponent->m_Direction = sf::Vector2f(x, y);
+    
+    SerializeNode* pNodeShipStates = pNode->GetNode("ShipStates");
+    unsigned int count = 0;
+    do
+    {
+        SerializeNode* pCurrentNode = pNodeShipStates->GetNode(std::to_string(count));
+        if(pCurrentNode == nullptr)
+        {
+            pNodeShipStates = nullptr;
+            continue;
+        }
+        pComponent->m_ShipState.push_back(stoi(pCurrentNode->GetValue()));
+    } while(pNodeShipStates != nullptr);
+    
+    return pComponent;
 }

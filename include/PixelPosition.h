@@ -19,6 +19,7 @@ public:
 	void SetOrigin(sf::Vector2f Origin);
 	sf::Vector2f GetOrigin();
     Quadrant* GetQuadrant();
+    static IComponent* Deserialize(SerializeNode* pNode);
     std::string GetComponentName() { return std::string("PixelPosition"); }
 private:
     Quadrant* m_pQuadrant;

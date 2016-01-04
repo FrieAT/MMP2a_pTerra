@@ -14,11 +14,11 @@ public:
  //   LinearMovement(float fRotation, sf::Vector2f ShipSpeed);
 	//LinearMovement(float fRotation, float fSpeed);
 	LinearMovement(float fRotation, float fSpeed, float fmass, sf::Vector2f fStartSpeed = sf::Vector2f(0,0), bool bAccelerating = false);
-    LinearMovement(SerializeNode* pNode);
     ~LinearMovement();
     void Init();
     void OnFrameUpdate(sf::Time DeltaTime);
     void Serialize(SerializeNode* pParentNode);
+    static IComponent* Deserialize(SerializeNode* pNode);
     std::string GetComponentName() { return std::string("LinearMovement"); }
 	float m_fSpeed;
 	float m_fMaxSpeed;
