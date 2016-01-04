@@ -13,8 +13,15 @@ QuadrantPosition::QuadrantPosition(sf::Vector2f Position, sf::Vector2f Origin)
 : IPosition(Position, Origin)
 , m_ELastDirection(EQuadrantPos::Null)
 {
-    m_pQuadrant = new Quadrant(Position);
-    WorldManager::GetInstance().AddQuadrant(m_pQuadrant);
+    auto* pWorldMgrInstance = &WorldManager::GetInstance();
+    sf::Vector2f CorrectedPosition = pWorldMgrInstance->GetQuadrantCorrectedPos(Position);
+    std::pair<int, int> QuadrantIndex = pWorldMgrInstance->GetQuadrantIndexAtPos(CorrectedPosition);
+    m_pQuadrant = pWorldMgrInstance->GetQuadrant(QuadrantIndex);
+    if(m_pQuadrant == nullptr)
+    {
+        m_pQuadrant = new Quadrant(Position);
+        pWorldMgrInstance->AddQuadrant(m_pQuadrant);
+    }
     m_pQuadrant->GetNeighbour(EQuadrantPos::Null, true);
 }
 
