@@ -92,6 +92,24 @@ void SpriteDrawing::Serialize(SerializeNode *pParentNode)
     pParentNode->AddElement(new SerializeNode("ResourcePath", ESerializeNodeType::Property, m_strResPath));
     pParentNode->AddElement(new SerializeNode("ResizeToX", ESerializeNodeType::Property, std::to_string(m_ScaleToSize.x)));
     pParentNode->AddElement(new SerializeNode("ResizeToY", ESerializeNodeType::Property, std::to_string(m_ScaleToSize.y)));
+    SerializeNode* pTextureRects = new SerializeNode("TextureAreaRects", ESerializeNodeType::List);
+    auto it = m_TextureRects.begin();
+    unsigned int iCount = 0;
+    while(it != m_TextureRects.end())
+    {
+        SerializeNode* pTextureRect = new SerializeNode(std::to_string(iCount), ESerializeNodeType::List);
+        pTextureRect->AddElement(new SerializeNode("Left", ESerializeNodeType::Property, std::to_string(it->left)));
+        pTextureRect->AddElement(new SerializeNode("Top", ESerializeNodeType::Property, std::to_string(it->top)));
+        pTextureRect->AddElement(new SerializeNode("Width", ESerializeNodeType::Property, std::to_string(it->width)));
+        pTextureRect->AddElement(new SerializeNode("Height", ESerializeNodeType::Property, std::to_string(it->height)));
+        pTextureRects->AddElement(pTextureRect);
+        it++;
+        iCount++;
+    }
+    pParentNode->AddElement(pTextureRects);
+    pParentNode->AddElement(new SerializeNode("TextureRectsCount", ESerializeNodeType::Property, std::to_string(m_iTextureRectsCount)));
+    pParentNode->AddElement(new SerializeNode("CurrentFrameCount", ESerializeNodeType::Property, std::to_string(m_iCurrentFrameCount)));
+    pParentNode->AddElement(new SerializeNode("TextureFrameUpdateCount", ESerializeNodeType::Property, std::to_string(m_iTextureFrameUpdateCount)));
 }
 
 IComponent* SpriteDrawing::Deserialize(SerializeNode *pNode)
@@ -100,6 +118,25 @@ IComponent* SpriteDrawing::Deserialize(SerializeNode *pNode)
     sf::Vector2f ResizeToSize(stof((pNode->GetNode("ResizeToX"))->GetValue()), stof((pNode->GetNode("ResizeToY"))->GetValue()));
     
     SpriteDrawing* pComponent = new SpriteDrawing(strResPath, ResizeToSize);
+    
+    SerializeNode* pNodeRects = pNode->GetNode("TextureAreaRects");
+    int iCount = 0;
+    SerializeNode* pCurrentRectNode = pNodeRects->GetNode(iCount++);
+    while(pCurrentRectNode != nullptr)
+    {
+        int iLeft = stoi((pCurrentRectNode->GetNode("Left"))->GetValue());
+        int iTop = stoi((pCurrentRectNode->GetNode("Top"))->GetValue());
+        int iWidth = stoi((pCurrentRectNode->GetNode("Width"))->GetValue());
+        int iHeight = stoi((pCurrentRectNode->GetNode("Height"))->GetValue());
+        
+        pComponent->m_TextureRects.push_back(sf::IntRect(iLeft, iTop, iWidth, iHeight));
+        
+        pCurrentRectNode = pNodeRects->GetNode(iCount++);
+    }
+    
+    pComponent->m_iTextureRectsCount = stoi((pNode->GetNode("TextureRectsCount"))->GetValue());
+    pComponent->m_iCurrentFrameCount = stoi((pNode->GetNode("CurrentFrameCount"))->GetValue());
+    pComponent->m_iTextureFrameUpdateCount = stoi((pNode->GetNode("TextureFrameUpdateCount"))->GetValue());
     
     return pComponent;
 }
