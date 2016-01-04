@@ -57,6 +57,7 @@ void FontDrawing::SetTextureArea(sf::FloatRect Area)
 
 void FontDrawing::SetText(std::string strText)
 {
+    m_strText = strText;
     m_pText->setString(strText);
 }
 
