@@ -60,7 +60,7 @@ void HealthAsteroid::OnFrameUpdate(sf::Time DeltaTime)
     
     sf::Vector2f ship_pos = pPositionShipComponent->GetPosition() + sf::Vector2f(-30.f, 50.f);
     std::stringstream health_text;
-    health_text << std::string("Health: ") << m_fHealth;
+    health_text << "Health: " << m_fHealth << "\nPosition: (" << round(pPositionShipComponent->GetPosition().x) << " / " << round(pPositionShipComponent->GetPosition().y) << ")";
     pPositionTextComponent->SetPosition(ship_pos);
     pDrawingTextComponent->SetText(health_text.str());
 }
