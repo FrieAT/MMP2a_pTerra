@@ -17,6 +17,9 @@ public:
     ~LinearMovement();
     void Init();
     void OnFrameUpdate(sf::Time DeltaTime);
+    void Serialize(SerializeNode* pParentNode);
+    static IComponent* Deserialize(SerializeNode* pNode);
+    std::string GetComponentName() { return std::string("LinearMovement"); }
 	float m_fSpeed;
 	float m_fMaxSpeed;
 

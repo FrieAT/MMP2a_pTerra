@@ -22,6 +22,9 @@ public:
 
     static GameObject* CreateBackgroundSprite(std::string strBackgroundPath);
     static GameObject* CreateBackgroundSprite(std::string strBackgroundPath, sf::Vector2f ScaleTo);
+    static GameObject* CreateBackgroundSprite(std::string strBackgroundPath, sf::Vector2f Position, sf::Vector2f ScaleTo);
     static GameObject* CreateFontText(sf::Vector2f Position, std::string strFontPath, std::string strText, int iCharSize);
+    static GameObject* CreateSpaceStation(sf::Vector2f Position);
+    static GameObject* CreatePlanet(sf::Vector2f Position);
 };
 

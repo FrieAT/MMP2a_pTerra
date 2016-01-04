@@ -72,3 +72,21 @@ void CircleCollision::OnFrameDraw(sf::RenderWindow* pWindow)
 	//pWindow->draw(test);
      */
 }
+
+void CircleCollision::Serialize(SerializeNode *pParentNode)
+{
+    this->ICollision::Serialize(pParentNode);
+    pParentNode->AddElement(new SerializeNode("Radius", ESerializeNodeType::Property, std::to_string(m_fRadius)));
+    pParentNode->AddElement(new SerializeNode("Hit", ESerializeNodeType::Property, std::to_string(m_bHit)));
+}
+
+IComponent* CircleCollision::Deserialize(SerializeNode* pNode)
+{
+    float fRadius = stof((pNode->GetNode("Radius"))->GetValue());
+    int bHit = stoi((pNode->GetNode("Hit"))->GetValue());
+    
+    CircleCollision* pComponent = new CircleCollision(fRadius);
+    pComponent->m_bHit = (bHit ? true : false);
+    
+    return pComponent;
+}

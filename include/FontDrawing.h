@@ -18,7 +18,13 @@ public:
     void SetTextureArea(sf::FloatRect Area);
     sf::FloatRect GetTextureArea();
     void SetText(std::string strText);
+    void Serialize(SerializeNode* pParentNode);
+    static IComponent* Deserialize(SerializeNode* pNode);
+    std::string GetComponentName() { return std::string("FontDrawing"); }
 protected:
     sf::Font* m_pFont; // TODO: Make of Font a flyweight pattern. Just do it.
     sf::Text* m_pText;
+    std::string m_strResPath;
+    std::string m_strText;
+    int m_iCharSize;
 };

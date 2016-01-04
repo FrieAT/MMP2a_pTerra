@@ -23,6 +23,7 @@ public:
 	{
 		return EComponentType::Drawing;
 	}
+    virtual std::string GetComponentName() { return std::string("IDrawing"); }
 
 private:
 

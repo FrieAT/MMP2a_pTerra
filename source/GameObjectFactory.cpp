@@ -86,6 +86,17 @@ GameObject* GameObjectFactory::CreateBackgroundSprite(std::string strBackgroundP
     return pBackground;
 }
 
+GameObject* GameObjectFactory::CreateBackgroundSprite(std::string strBackgroundPath, sf::Vector2f Position, sf::Vector2f ScaleTo)
+{
+    GameObject* pBackground = new GameObject(std::string("background"));
+    
+    pBackground->SetComponent(new PixelPosition(Position, sf::Vector2f(0.f, 0.f)));
+    pBackground->SetComponent(new SpriteDrawing(strBackgroundPath, ScaleTo));
+    pBackground->SetComponent(new StaticView(sf::FloatRect(0, 0, static_cast<float>(Game::m_iWindowWidth), static_cast<float>(Game::m_iWindowHeight))));
+    
+    return pBackground;
+}
+
 GameObject* GameObjectFactory::CreateBackgroundStar(sf::Vector2f Position)
 {
     float TextureWidth = 100.f;
@@ -115,4 +126,24 @@ GameObject* GameObjectFactory::CreateFontText(sf::Vector2f Position, std::string
     pFontText->SetComponent(new FontDrawing(strFontPath, strText, iCharSize));
     
     return pFontText;
+}
+
+GameObject* GameObjectFactory::CreateSpaceStation(sf::Vector2f Position)
+{
+    GameObject* pSpaceStation = new GameObject(std::string("space_station"));
+    
+    pSpaceStation->SetComponent(new PixelPosition(Position, sf::Vector2f(0.f, 0.f)));
+    pSpaceStation->SetComponent(new SpriteDrawing("assets/space_station.png", sf::Vector2f(500.f, 500.f)));
+    
+    return pSpaceStation;
+}
+
+GameObject* GameObjectFactory::CreatePlanet(sf::Vector2f Position)
+{
+    GameObject* pPlanet = new GameObject(std::string("planet"));
+    
+    pPlanet->SetComponent(new PixelPosition(Position, sf::Vector2f(0.f, 0.f)));
+    pPlanet->SetComponent(new SpriteDrawing("assets/planet.png"));
+    
+    return pPlanet;
 }

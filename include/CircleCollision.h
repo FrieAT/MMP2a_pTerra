@@ -19,5 +19,7 @@ public:
 	float m_fRadius;
 	bool m_bHit;
 	void OnFrameDraw(sf::RenderWindow* pWindow);
-
+    void Serialize(SerializeNode *pParentNode);
+    static IComponent* Deserialize(SerializeNode* pNode);
+    std::string GetComponentName() { return std::string("CircleCollision"); }
 };

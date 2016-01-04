@@ -62,3 +62,38 @@ void DynamicView::OnFrameDraw(sf::RenderWindow* pWindow)
 	m_pView->setSize(sf::Vector2f(pWindow->getSize()) / m_zoom);
     pWindow->setView(*m_pView);
 }
+
+void DynamicView::Serialize(SerializeNode *pParentNode)
+{
+    IView::Serialize(pParentNode);
+    pParentNode->AddElement(new SerializeNode("ViewSizeX", ESerializeNodeType::Property, std::to_string((m_pView->getViewport()).left)));
+    pParentNode->AddElement(new SerializeNode("ViewSizeY", ESerializeNodeType::Property, std::to_string((m_pView->getViewport()).top)));
+    pParentNode->AddElement(new SerializeNode("ViewSizeWidth", ESerializeNodeType::Property, std::to_string((m_pView->getViewport()).width)));
+    pParentNode->AddElement(new SerializeNode("ViewSizeHeight", ESerializeNodeType::Property, std::to_string((m_pView->getViewport()).height)));
+    pParentNode->AddElement(new SerializeNode("MoveVectorX", ESerializeNodeType::Property, std::to_string(m_MoveVector.x)));
+    pParentNode->AddElement(new SerializeNode("MoveVectorY", ESerializeNodeType::Property, std::to_string(m_MoveVector.y)));
+    pParentNode->AddElement(new SerializeNode("Speed", ESerializeNodeType::Property, std::to_string(m_fSpeed)));
+}
+
+IComponent* DynamicView::Deserialize(SerializeNode *pNode)
+{
+    DynamicView* pComponent = new DynamicView(sf::FloatRect(), sf::Vector2f(), 0.f);
+    
+    IView::Deserialize(pNode, pComponent);
+    
+    sf::FloatRect ViewSize;
+    ViewSize.left = stof((pNode->GetNode("ViewSizeX"))->GetValue());
+    ViewSize.top = stof((pNode->GetNode("ViewSizeY"))->GetValue());
+    ViewSize.width = stof((pNode->GetNode("ViewSizeWidth"))->GetValue());
+    ViewSize.height = stof((pNode->GetNode("ViewSizeHeight"))->GetValue());
+    pComponent->m_pView = new sf::View(ViewSize);
+    
+    sf::Vector2f MoveVector;
+    MoveVector.x = stof((pNode->GetNode("MoveVectorX"))->GetValue());
+    MoveVector.y = stof((pNode->GetNode("MoveVectorY"))->GetValue());
+    pComponent->m_MoveVector = MoveVector;
+    
+    pComponent->m_fSpeed = stof((pNode->GetNode("Speed"))->GetValue());
+    
+    return pComponent;
+}

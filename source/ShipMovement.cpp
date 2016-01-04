@@ -18,7 +18,6 @@ ShipMovement::ShipMovement(char cPlayer)
 	m_fFirerate = 0.5f;
 }
 
-
 ShipMovement::~ShipMovement()
 {
     InputManager::GetInstance().UnregisterEventObserver(this);
@@ -105,7 +104,8 @@ void ShipMovement::UpdateMovement(sf::Time DeltaTime)
 	if (m_ShipState[4] && m_fWeaponcoolDown <= 0.f)
 	{
 		m_fWeaponcoolDown = m_fFirerate;
-		GameObjectFactory::CreateMissile(GetAssignedGameObject(), pPositionComponent, velocity); //shoot rockets
+		GameObject* pMissile = GameObjectFactory::CreateMissile(GetAssignedGameObject(), pPositionComponent, velocity); //shoot rockets
+        pMissile->SetTemporaryState(true);
 		std::cout << velocity.x << " "<<velocity.y << std::endl;
 	}
 	if (m_fWeaponcoolDown > 0.f)
@@ -152,4 +152,60 @@ void ShipMovement::OnFrameUpdate(sf::Time DeltaTime)
 
 	pPositionComponent->SetPosition(pPositionComponent->GetPosition() + velocity * DeltaTime.asSeconds());
 
+}
+
+void ShipMovement::Serialize(SerializeNode *pParentNode)
+{
+    this->IMovement::Serialize(pParentNode);
+    pParentNode->AddElement(new SerializeNode("ControlID", ESerializeNodeType::Property, std::to_string(m_cPlayer)));
+    pParentNode->AddElement(new SerializeNode("Speed", ESerializeNodeType::Property, std::to_string(m_fSpeed)));
+    pParentNode->AddElement(new SerializeNode("MaxSpeed", ESerializeNodeType::Property, std::to_string(m_fMaxSpeed)));
+    pParentNode->AddElement(new SerializeNode("Firerate", ESerializeNodeType::Property, std::to_string(m_fFirerate)));
+    pParentNode->AddElement(new SerializeNode("WeaponCooldown", ESerializeNodeType::Property, std::to_string(m_fWeaponcoolDown)));
+    pParentNode->AddElement(new SerializeNode("DirectionX", ESerializeNodeType::Property, std::to_string(m_Direction.x)));
+    pParentNode->AddElement(new SerializeNode("DirectionY", ESerializeNodeType::Property, std::to_string(m_Direction.y)));
+    SerializeNode *pNodeStates = new SerializeNode("ShipStates", ESerializeNodeType::List);
+    auto it = m_ShipState.begin();
+    unsigned count = 0;
+    while(it != m_ShipState.end())
+    {
+        pNodeStates->AddElement(new SerializeNode(std::to_string(count), ESerializeNodeType::Property, std::to_string((*it))));
+        it++;
+        count++;
+    }
+    pParentNode->AddElement(pNodeStates);
+}
+
+IComponent* ShipMovement::Deserialize(SerializeNode* pNode)
+{
+    ShipMovement* pComponent = new ShipMovement('0');
+    
+    IMovement::Deserialize(pNode, pComponent);
+    
+    float x, y;
+    
+    pComponent->m_cPlayer = stoi((pNode->GetNode("ControlID"))->GetValue());
+    pComponent->m_fSpeed = stof((pNode->GetNode("Speed"))->GetValue());
+    pComponent->m_fMaxSpeed = stof((pNode->GetNode("MaxSpeed"))->GetValue());
+    pComponent->m_fFirerate = stof((pNode->GetNode("Firerate"))->GetValue());
+    pComponent->m_fWeaponcoolDown = stof((pNode->GetNode("WeaponCooldown"))->GetValue());
+    
+    x = stof((pNode->GetNode("DirectionX"))->GetValue());
+    y = stof((pNode->GetNode("DirectionY"))->GetValue());
+    pComponent->m_Direction = sf::Vector2f(x, y);
+    
+    SerializeNode* pNodeShipStates = pNode->GetNode("ShipStates");
+    unsigned int count = 0;
+    do
+    {
+        SerializeNode* pCurrentNode = pNodeShipStates->GetNode(std::to_string(count++));
+        if(pCurrentNode == nullptr)
+        {
+            pNodeShipStates = nullptr;
+            continue;
+        }
+        pComponent->m_ShipState.push_back(stoi(pCurrentNode->GetValue()));
+    } while(pNodeShipStates != nullptr);
+    
+    return pComponent;
 }

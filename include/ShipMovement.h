@@ -19,6 +19,9 @@ public:
 	void OnInputUpdate(std::string strEvent);
 	void OnFrameUpdate(sf::Time DeltaTime);
 	void UpdateMovement(sf::Time DeltaTime);
+    void Serialize(SerializeNode* pParentNode);
+    static IComponent* Deserialize(SerializeNode* pNode);
+    std::string GetComponentName() { return std::string("ShipMovement"); }
 
 	char m_cPlayer;	//player id for multiple playercontrolled ships
 

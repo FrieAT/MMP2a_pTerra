@@ -17,13 +17,23 @@ struct CollisionEvent {
 class ICollision : public IComponent
 {
 public:
-    ICollision()
-    : m_bPhysicsApplyable(true) { }
+    ICollision() : m_bPhysicsApplyable(true) { }
+    ICollision(SerializeNode* pNode)
+    : IComponent(pNode)
+    {
+        m_bPhysicsApplyable = (stoi((pNode->GetNode("PhysicsApplyable"))->GetValue()) ? true : false);
+    }
 	virtual ~ICollision() { }
 	virtual bool colliding(ICollision* pCollisionBody) = 0;
     bool m_bPhysicsApplyable;
+    virtual void Serialize(SerializeNode* pParentNode)
+    {
+        this->IComponent::Serialize(pParentNode);
+        pParentNode->AddElement(new SerializeNode("PhysicsApplyable", ESerializeNodeType::Property, std::to_string(m_bPhysicsApplyable)));
+    }
 	EComponentType GetComponentType()
 	{
 		return EComponentType::Collision;
 	}
+    virtual std::string GetComponentName() { return std::string("ICollision"); }
 };

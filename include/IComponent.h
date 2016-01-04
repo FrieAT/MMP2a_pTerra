@@ -8,14 +8,17 @@ Copyright (c) MultiMediaTechnology, 2015
 
 #include "EComponentType.h"
 #include "GameObject.h"
+#include "SerializeNode.h"
 
 class IComponent
 {
 public:
     IComponent() : m_pGameObject(nullptr) { }
+    IComponent(SerializeNode* pNode) : m_pGameObject(nullptr) { }
     virtual ~IComponent() { }
     virtual void Init() { }
 	virtual EComponentType GetComponentType() = 0;
+    virtual void Serialize(SerializeNode* pParentNode) { }
 	void SetAssignedGameObject(GameObject* pObject)
 	{
         m_pGameObject = pObject;
@@ -24,6 +27,7 @@ public:
 	{
 		return m_pGameObject;
 	}
+    virtual std::string GetComponentName() { return std::string("IComponent"); }
 private:
     GameObject* m_pGameObject;
 };

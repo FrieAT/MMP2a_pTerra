@@ -58,6 +58,15 @@
     <Filter Include="Source Files\Managers\WorldManager">
       <UniqueIdentifier>{c4c6b681-1d07-400b-9fe2-66556a543077}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\GameObject\Serializer">
+      <UniqueIdentifier>{c09f9621-6e54-4348-88f7-07806ba8facc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\External Frameworks">
+      <UniqueIdentifier>{2859c1e5-1a68-4d7d-892e-df38f89f9aa9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\External Frameworks\rapidxml">
+      <UniqueIdentifier>{6a55d646-3d2c-4481-8ee9-ad9df2b41855}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\main.cpp">
@@ -140,6 +149,18 @@
     </ClCompile>
     <ClCompile Include="source\TextureFactory.cpp">
       <Filter>Source Files\Components\IDrawing</Filter>
+    </ClCompile>
+    <ClCompile Include="source\WorldObjectInformation.cpp">
+      <Filter>Source Files\Managers\WorldManager</Filter>
+    </ClCompile>
+    <ClCompile Include="source\SerializeNode.cpp">
+      <Filter>Source Files\GameObject\Serializer</Filter>
+    </ClCompile>
+    <ClCompile Include="source\XMLReadVisitor.cpp">
+      <Filter>Source Files\GameObject\Serializer</Filter>
+    </ClCompile>
+    <ClCompile Include="source\XMLWriteVisitor.cpp">
+      <Filter>Source Files\GameObject\Serializer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -262,6 +283,45 @@
     </ClInclude>
     <ClInclude Include="include\TextureFactory.h">
       <Filter>Source Files\Components\IDrawing</Filter>
+    </ClInclude>
+    <ClInclude Include="include\EWorldObjectType.h">
+      <Filter>Source Files\Managers\WorldManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\LongRect.h">
+      <Filter>Source Files\Managers\WorldManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\WorldObjectInformation.h">
+      <Filter>Source Files\Managers\WorldManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ClassRegistry.h">
+      <Filter>Source Files\GameObject\Serializer</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ESerializeNodeType.h">
+      <Filter>Source Files\GameObject\Serializer</Filter>
+    </ClInclude>
+    <ClInclude Include="include\INodeVisitor.h">
+      <Filter>Source Files\GameObject\Serializer</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SerializeNode.h">
+      <Filter>Source Files\GameObject\Serializer</Filter>
+    </ClInclude>
+    <ClInclude Include="include\XMLReadVisitor.h">
+      <Filter>Source Files\GameObject\Serializer</Filter>
+    </ClInclude>
+    <ClInclude Include="include\XMLWriteVisitor.h">
+      <Filter>Source Files\GameObject\Serializer</Filter>
+    </ClInclude>
+    <ClInclude Include="include\rapidxml\rapidxml.hpp">
+      <Filter>Source Files\External Frameworks\rapidxml</Filter>
+    </ClInclude>
+    <ClInclude Include="include\rapidxml\rapidxml_iterators.hpp">
+      <Filter>Source Files\External Frameworks\rapidxml</Filter>
+    </ClInclude>
+    <ClInclude Include="include\rapidxml\rapidxml_print.hpp">
+      <Filter>Source Files\External Frameworks\rapidxml</Filter>
+    </ClInclude>
+    <ClInclude Include="include\rapidxml\rapidxml_utils.hpp">
+      <Filter>Source Files\External Frameworks\rapidxml</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

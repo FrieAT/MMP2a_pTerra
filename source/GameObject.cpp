@@ -6,11 +6,13 @@ Copyright (c) MultiMediaTechnology, 2015
 #include "IComponent.h"
 #include "IPosition.h"
 #include "Quadrant.h"
+#include "ClassRegistry.h"
 
 // GameObject constructor
 GameObject::GameObject(std::string strID)
 {
 	this->m_strID = strID;
+    this->m_bTemporaryCreated = false;
 }
 
 GameObject::~GameObject()
@@ -87,4 +89,34 @@ bool GameObject::IsInFreezedState()
 int GameObject::GetAmountOfUsedComponentTypes()
 {
     return m_Components.size();
+}
+
+SerializeNode* GameObject::Serialize()
+{
+    SerializeNode* pNode = new SerializeNode("GameObject", ESerializeNodeType::Class, m_strID);
+    auto it_components = m_Components.begin();
+    while(it_components != m_Components.end())
+    {
+        SerializeNode* pNodeComponent = new SerializeNode(it_components->second->GetComponentName(), ESerializeNodeType::Class);
+        it_components->second->Serialize(pNodeComponent);
+        pNode->AddElement(pNodeComponent);
+        it_components++;
+    }
+    return pNode;
+}
+
+GameObject* GameObject::Deserialize(SerializeNode *pNode)
+{
+    GameObject* pGameObject = new GameObject(pNode->GetValue());
+    
+    unsigned int iCount = 0;
+    SerializeNode* pComponentNode = pNode->GetNode(iCount++);
+    while(pComponentNode != nullptr)
+    {
+        IComponent* pComponent = ClassRegistry::GetInstance().CreateComponent(pComponentNode->GetName(), pComponentNode);
+        pGameObject->SetComponent(pComponent);
+        pComponentNode = pNode->GetNode(iCount++);
+    }
+    
+    return pGameObject;
 }

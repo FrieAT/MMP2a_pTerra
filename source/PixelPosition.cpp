@@ -74,3 +74,12 @@ void PixelPosition::UpdateQuadrantPosition()
         ObjectManager::GetInstance().AddGameObject(GetAssignedGameObject());
     }
 }
+
+IComponent* PixelPosition::Deserialize(SerializeNode *pNode)
+{
+    PixelPosition* pComponent = new PixelPosition(sf::Vector2f(), sf::Vector2f());
+    
+    IPosition::Deserialize(pNode, pComponent);
+    
+    return pComponent;
+}

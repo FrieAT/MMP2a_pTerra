@@ -15,6 +15,15 @@ public:
     {
         return EComponentType::View;
     }
+    virtual void Serialize(SerializeNode* pParentNode)
+    {
+        this->IComponent::Serialize(pParentNode);
+    }
+    static void Deserialize(SerializeNode* pNode, IView* pParentComponent)
+    {
+        // Nothing to extract here...
+    }
+    virtual std::string GetComponentName() { return std::string("IView"); }
 protected:
     
 };

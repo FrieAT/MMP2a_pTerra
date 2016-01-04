@@ -7,6 +7,7 @@
 
 #include "HealthAsteroid.h"
 #include "ObjectManager.h"
+#include "WorldManager.h"
 #include "CollisionManager.h"
 #include "GameObjectFactory.h"
 #include "GameStateIntro.h"
@@ -16,6 +17,7 @@ HealthAsteroid::HealthAsteroid(float fHealth)
 {
     this->m_fHealth = fHealth;
     m_pHealthDebug = GameObjectFactory::CreateFontText(sf::Vector2f(0.f,0.f), "assets/Starjedi.ttf", "", 8);
+    m_pHealthDebug->SetTemporaryState(true);
 }
 
 HealthAsteroid::~HealthAsteroid()
@@ -37,6 +39,8 @@ void HealthAsteroid::Damage(float fDamage)
     m_fHealth -= fDamage;
     if (m_fHealth < 0)
     {
+        WorldManager::GetInstance().SaveGame("savegame.txt"); // DEBUG: For testing purpose create savegame every-time when asteroid will be deleted.
+        
         //TODO destroy Ship and remove end game
         ObjectManager::GetInstance().RemoveGameObject(GetAssignedGameObject());
     }
@@ -56,7 +60,7 @@ void HealthAsteroid::OnFrameUpdate(sf::Time DeltaTime)
     
     sf::Vector2f ship_pos = pPositionShipComponent->GetPosition() + sf::Vector2f(-30.f, 50.f);
     std::stringstream health_text;
-    health_text << std::string("Health: ") << m_fHealth;
+    health_text << "Health: " << m_fHealth << "\nPosition: (" << round(pPositionShipComponent->GetPosition().x) << " / " << round(pPositionShipComponent->GetPosition().y) << ")";
     pPositionTextComponent->SetPosition(ship_pos);
     pDrawingTextComponent->SetText(health_text.str());
 }
@@ -67,4 +71,13 @@ void HealthAsteroid::OnCollisionEvent(GameObject* pOther, sf::Vector2f ImpulseIm
     
     // std::cout << "Detected Collision with a " << pOther->GetID() << " (Impulse: " << impulse_length << ")" << std::endl;
     Damage(impulse_length / 10000 );
+}
+
+IComponent* HealthAsteroid::Deserialize(SerializeNode *pNode)
+{
+    HealthAsteroid* pComponent = new HealthAsteroid(0.f); // Only properties from own class, should be handled in Deserialize!
+    
+    IHealth::Deserialize(pNode, pComponent);
+    
+    return pComponent;
 }

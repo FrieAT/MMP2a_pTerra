@@ -8,6 +8,8 @@ Copyright (c) MultiMediaTechnology, 2015
 #include "TextureFactory.h"
 
 SpriteDrawing::SpriteDrawing(std::string strRessourcePath)
+: m_strResPath(strRessourcePath)
+, m_ScaleToSize(sf::Vector2f(0.f, 0.f))
 {
     m_pTexture = TextureFactory::GetInstance().GetTexture(strRessourcePath);
 	m_pSprite = new sf::Sprite(*m_pTexture);
@@ -15,6 +17,8 @@ SpriteDrawing::SpriteDrawing(std::string strRessourcePath)
 
 SpriteDrawing::SpriteDrawing(std::string strRessourcePath, sf::Vector2f ScaleToSize) : SpriteDrawing(strRessourcePath)
 {
+    m_ScaleToSize = ScaleToSize;
+    
 	// Get Texture Size
     sf::Vector2f TextureSize = static_cast<sf::Vector2f>(m_pTexture->getSize());
     
@@ -61,4 +65,22 @@ sf::FloatRect SpriteDrawing::GetTextureArea()
 void SpriteDrawing::SetTextureArea(sf::FloatRect Area)
 {
     m_pSprite->setTextureRect(sf::IntRect(Area));
+}
+
+void SpriteDrawing::Serialize(SerializeNode *pParentNode)
+{
+    this->IDrawing::Serialize(pParentNode);
+    pParentNode->AddElement(new SerializeNode("ResourcePath", ESerializeNodeType::Property, m_strResPath));
+    pParentNode->AddElement(new SerializeNode("ResizeToX", ESerializeNodeType::Property, std::to_string(m_ScaleToSize.x)));
+    pParentNode->AddElement(new SerializeNode("ResizeToY", ESerializeNodeType::Property, std::to_string(m_ScaleToSize.y)));
+}
+
+IComponent* SpriteDrawing::Deserialize(SerializeNode *pNode)
+{
+    std::string strResPath = (pNode->GetNode("ResourcePath"))->GetValue();
+    sf::Vector2f ResizeToSize(stof((pNode->GetNode("ResizeToX"))->GetValue()), stof((pNode->GetNode("ResizeToY"))->GetValue()));
+    
+    SpriteDrawing* pComponent = new SpriteDrawing(strResPath, ResizeToSize);
+    
+    return pComponent;
 }

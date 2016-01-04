@@ -49,7 +49,6 @@ LinearMovement::LinearMovement(float fRotation, float fSpeed, float fmass, sf::V
 	invMass = 1 / mass;
 }
 
-
 LinearMovement::~LinearMovement()
 {
     FrameManager::GetInstance().UnregisterEventObserver(this);
@@ -85,5 +84,37 @@ void LinearMovement::OnFrameUpdate(sf::Time DeltaTime)
 	velocity += acceleration * DeltaTime.asSeconds();
 
 	pPositionComponent->SetPosition(pPositionComponent->GetPosition()+ velocity* DeltaTime.asSeconds());
+}
+
+void LinearMovement::Serialize(SerializeNode *pParentNode)
+{
+    this->IMovement::Serialize(pParentNode);
+    pParentNode->AddElement(new SerializeNode("Speed", ESerializeNodeType::Property, std::to_string(m_fSpeed)));
+    pParentNode->AddElement(new SerializeNode("MaxSpeed", ESerializeNodeType::Property, std::to_string(m_fMaxSpeed)));
+    pParentNode->AddElement(new SerializeNode("DirectionX", ESerializeNodeType::Property, std::to_string(m_Direction.x)));
+    pParentNode->AddElement(new SerializeNode("DirectionY", ESerializeNodeType::Property, std::to_string(m_Direction.y)));
+    pParentNode->AddElement(new SerializeNode("Rotation", ESerializeNodeType::Property, std::to_string(m_fRotation)));
+    pParentNode->AddElement(new SerializeNode("Accelerating", ESerializeNodeType::Property, std::to_string(m_bAccelerating)));
+}
+
+IComponent* LinearMovement::Deserialize(SerializeNode* pNode)
+{
+    LinearMovement* pComponent = new LinearMovement(0.f, 0.f, 0.f, sf::Vector2f(), false);
+    
+    IMovement::Deserialize(pNode, pComponent);
+    
+    float x, y;
+    
+    pComponent->m_fSpeed = stof((pNode->GetNode("Speed"))->GetValue());
+    pComponent->m_fMaxSpeed = stof((pNode->GetNode("MaxSpeed"))->GetValue());
+    
+    x = stof((pNode->GetNode("DirectionX"))->GetValue());
+    y = stof((pNode->GetNode("DirectionY"))->GetValue());
+    pComponent->m_Direction = sf::Vector2f(x, y);
+    
+    pComponent->m_fRotation = stof((pNode->GetNode("Rotation"))->GetValue());
+    pComponent->m_bAccelerating = (stoi((pNode->GetNode("Accelerating"))->GetValue()) ? true : false);
+    
+    return pComponent;
 }
 
