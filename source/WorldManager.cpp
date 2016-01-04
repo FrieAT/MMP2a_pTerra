@@ -21,10 +21,13 @@ WorldManager::WorldManager(sf::Vector2f ChunkSize, unsigned long MaxRandomCoordi
 , m_MaxRandomCoordinates(MaxRandomCoordinates)
 , m_iChunkDepth(iChunkDepth)
 {
+    m_iSeed = time(NULL);
+    srand(m_iSeed);
+    
     for(unsigned long i = 0; i < m_MaxRandomCoordinates; i++)
     {
-        float x = static_cast<float>(rand() % static_cast<int>(ChunkSize.x));
-        float y = static_cast<float>(rand() % static_cast<int>(ChunkSize.y));
+        float x = static_cast<float>(rand() % static_cast<int>(m_ChunkSize.x));
+        float y = static_cast<float>(rand() % static_cast<int>(m_ChunkSize.y));
         m_RandomCoordinates.push_back(sf::Vector2f(x, y));
     }
 }
@@ -209,6 +212,18 @@ void WorldManager::GenerateWorld()
         m_WorldInfo.clear();
     }
     
+    if(m_RandomCoordinates.size() > 0)
+    {
+        m_RandomCoordinates.clear();
+    }
+    
+    for(unsigned long i = 0; i < m_MaxRandomCoordinates; i++)
+    {
+        float x = static_cast<float>(rand() % static_cast<int>(m_ChunkSize.x));
+        float y = static_cast<float>(rand() % static_cast<int>(m_ChunkSize.y));
+        m_RandomCoordinates.push_back(sf::Vector2f(x, y));
+    }
+    
     std::vector<LongRect> Spaces;
     Spaces.push_back(LongRect(std::numeric_limits<int>::min() + 1l, std::numeric_limits<int>::min() + 1l, std::numeric_limits<int>::max() * 2l - 1l, std::numeric_limits<int>::max() * 2l - 1l));
     std::map<EWorldObjectType, unsigned long> ObjectsSize;
@@ -313,11 +328,14 @@ void WorldManager::LoadGame(std::string strPath)
     
     doc.parse<0>(&content[0]);
     
-    rapidxml::xml_node<> *mapnode = (doc.first_node("savegame"))->first_node("GameObject");
-    while(mapnode)
+    rapidxml::xml_node<>* pRoot = doc.first_node("savegame");
+    m_iSeed = atoi(pRoot->first_attribute("seed")->value());
+    
+    rapidxml::xml_node<>* pMapnode = pRoot->first_node("GameObject");
+    while(pMapnode)
     {
-        SerializeNode* pGameObjectNode = new SerializeNode(std::string(mapnode->name()), ESerializeNodeType::Class, std::string(mapnode->first_attribute("value")->value()));
-        pGameObjectNode->Accept(new XMLReadVisitor(mapnode));
+        SerializeNode* pGameObjectNode = new SerializeNode(std::string(pMapnode->name()), ESerializeNodeType::Class, std::string(pMapnode->first_attribute("value")->value()));
+        pGameObjectNode->Accept(new XMLReadVisitor(pMapnode));
         
         GameObject* pCreatedGameObject = GameObject::Deserialize(pGameObjectNode);
         
@@ -335,7 +353,7 @@ void WorldManager::LoadGame(std::string strPath)
             }
         }
         
-        mapnode = mapnode->next_sibling();
+        pMapnode = pMapnode->next_sibling();
     }
     
     doc.clear();
@@ -343,7 +361,7 @@ void WorldManager::LoadGame(std::string strPath)
 
 void WorldManager::SaveGame(std::string strPath)
 {
-    auto pXMLVisitor = new XMLWriteVisitor(strPath);
+    auto pXMLVisitor = new XMLWriteVisitor(strPath, m_iSeed);
     auto game_objects = ObjectManager::GetInstance().GetActiveGameObjects();
     auto it_game_objects = game_objects.begin();
     while(it_game_objects != game_objects.end())

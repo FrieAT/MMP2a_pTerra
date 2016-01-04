@@ -5,7 +5,7 @@
 #include "XMLWriteVisitor.h"
 #include "SerializeNode.h"
 
-XMLWriteVisitor::XMLWriteVisitor(std::string strPath)
+XMLWriteVisitor::XMLWriteVisitor(std::string strPath, int iSeed)
 : m_iCurrentDepth(1)
 {
     m_File.open(strPath);
@@ -14,7 +14,7 @@ XMLWriteVisitor::XMLWriteVisitor(std::string strPath)
         throw std::runtime_error("Could not open file at given path.");
     }
     m_File << "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n";
-    m_File << "<savegame>\n";
+    m_File << "<savegame seed=\"" << std::to_string(iSeed) << "\">\n";
 }
 
 XMLWriteVisitor::~XMLWriteVisitor()

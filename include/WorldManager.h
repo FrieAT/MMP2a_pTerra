@@ -35,6 +35,7 @@ public:
     void GenerateWorld();
     void SaveGame(std::string strPath);
     void LoadGame(std::string strPath);
+    int GetSeed() { return m_iSeed; }
 private:
     WorldManager(sf::Vector2f ChunkSize, unsigned long MaxRandomCoordinates, char iChunkDepth);
     WorldManager(const WorldManager&) = delete;
@@ -45,5 +46,6 @@ private:
     std::map<std::pair<std::pair<int, int>, EWorldObjectType>, std::vector<WorldObjectInformation>> m_WorldInfo;
     unsigned long m_IndexRandomCoordinates;
     char m_iChunkDepth;
+    int m_iSeed;
     void UpdateEventObserver(std::string strEvent);
 };

@@ -12,7 +12,7 @@
 class XMLWriteVisitor : public INodeVisitor
 {
 public:
-    XMLWriteVisitor(std::string strPath);
+    XMLWriteVisitor(std::string strPath, int iSeed = 1);
     ~XMLWriteVisitor();
     void Visit(SerializeNode* pNode);
 private:
