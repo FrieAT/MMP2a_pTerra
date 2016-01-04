@@ -25,6 +25,11 @@ void GameStateGameOver::Init(sf::RenderWindow* pWindow)
     GameObjectFactory::CreateFontText(sf::Vector2f(280.f, 100.f), "assets/Starjedi.ttf", "game over", 24);
     GameObjectFactory::CreateFontText(sf::Vector2f(230.f, 500.f), "assets/Starjedi.ttf", "-- Press Space-Key to restart game --", 16);
     
+	// Initialize GUI
+	m_Gui.setWindow(*pWindow);
+	m_Gui.setFont("assets/Starjedi.ttf");
+	auto theme = std::make_shared<tgui::Theme>("Black.txt");
+
     InputManager::GetInstance().RegisterEventObserver(this);
 }
 

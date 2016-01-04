@@ -5,11 +5,13 @@ Copyright (c) MultiMediaTechnology, 2015
 #include "InputManager.h"
 #include <iostream>
 
-void InputManager::Update(sf::RenderWindow* pWindow)
+void InputManager::Update(sf::RenderWindow* pWindow, tgui::Gui* pGui)
 {
 	sf::Event Event;
 	while (pWindow->pollEvent(Event))
 	{
+		pGui->handleEvent(Event);
+
 		std::string strMovement = "";
 
 		// Escape pressed: exit

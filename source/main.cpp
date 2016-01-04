@@ -12,8 +12,8 @@ int main(int argc, char const** argv)
 {
     // Initialize the "game engine"
 	Game* pGameEngine;
-
-	try
+	pGameEngine = new Game();
+	/*try
 	{
 		pGameEngine = new Game();
 	}
@@ -24,7 +24,7 @@ int main(int argc, char const** argv)
 	catch (...)
 	{
 		std::cout << "unhandled exception" << std::endl;
-	}
+	}*/
         
     // Delete all connected ressources and the game engine itself.
     delete pGameEngine;

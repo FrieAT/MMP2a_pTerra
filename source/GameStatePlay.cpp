@@ -43,6 +43,11 @@ void GameStatePlay::Init(sf::RenderWindow* pWindow)
         GameObjectFactory::CreateAsteroid(sf::Vector2f(50,150),-120,50);
     }
 
+	// Initialize GUI
+	m_Gui.setWindow(*pWindow);
+	m_Gui.setFont("assets/Starjedi.ttf");
+	auto theme = std::make_shared<tgui::Theme>("Black.txt");
+
     // ====== Below decprecated method to create things ======
     
     // Load a music to play
@@ -66,7 +71,7 @@ void GameStatePlay::Update(sf::Time DeltaTime, sf::RenderWindow* pWindow)
 {
 	// Manager updates
 	FrameManager::GetInstance().Update(DeltaTime);
-	InputManager::GetInstance().Update(pWindow);
+	InputManager::GetInstance().Update(pWindow, &m_Gui);
 	ObjectManager::GetInstance().Update(DeltaTime);
 	CollisionManager::GetInstance().Update(DeltaTime);
 
