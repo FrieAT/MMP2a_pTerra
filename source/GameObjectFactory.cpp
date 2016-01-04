@@ -60,7 +60,7 @@ GameObject* GameObjectFactory::CreateAsteroid(sf::Vector2f vPosition, float fRot
 	GameObject* pAsteroid = new GameObject(std::string("asteroid"));
 	pAsteroid->SetComponent(new PixelPosition(vPosition, sf::Vector2f(83.f, 66.5f)));
 	pAsteroid->SetComponent(new LinearMovement(fRotation, fSpeed,15));
-	pAsteroid->SetComponent(new SpriteDrawing(std::string("assets/asteroid.png"),sf::Vector2f(83.f, 66.5f)));
+	pAsteroid->SetComponent(new SpriteDrawing(std::string("assets/lilee/asteroid.png"),sf::Vector2f(83.f, 66.5f)));
 	//pAsteroid->SetComponent(new CircleCollision(40.f, pos));
 	pAsteroid->SetComponent(new BoxCollision(80, 80));
     pAsteroid->SetComponent(new HealthAsteroid(200.f));
