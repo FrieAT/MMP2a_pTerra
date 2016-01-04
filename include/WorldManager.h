@@ -22,7 +22,7 @@ public:
         static WorldManager g_Instance(sf::Vector2f(1000.f, 1000.f), 10000, 1);
         return g_Instance;
     }
-    void AddQuadrant(Quadrant* Quadrant);
+    void AddQuadrant(Quadrant* Quadrant, bool bIgnoreGenerationBehavior = false);
     char GetChunkDepth();
     Quadrant* GetQuadrant(std::pair<int,int> QuadrantIndex);
     std::pair<int,int> GetQuadrantIndexAtPos(sf::Vector2f TopLeftPosition);

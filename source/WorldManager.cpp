@@ -42,7 +42,7 @@ sf::Vector2f WorldManager::GetRandomChunkPositionFromChunk(Quadrant *pChunk)
     return (pChunk->GetTopLeftPosition() + m_RandomCoordinates[m_IndexRandomCoordinates++]);
 }
 
-void WorldManager::AddQuadrant(Quadrant *Quadrant)
+void WorldManager::AddQuadrant(Quadrant *Quadrant, bool bIgnoreGenerationBehavior)
 {
     if(Quadrant == nullptr)
     {
@@ -60,33 +60,39 @@ void WorldManager::AddQuadrant(Quadrant *Quadrant)
     sf::Vector2f ChunkSize = WorldManager::GetInstance().m_ChunkSize;
     sf::Vector2f TopLeftPosition = Quadrant->GetTopLeftPosition();
     
-    const int MaxAsteroidRandItems = 2;
-    
+    // This Background for example may be allowed to create everytime, if its needed. Cuz it isn´t saved up in a savegame
+    // See setting the TemporaryState to true.
     GameObject* pBackground = GameObjectFactory::CreateBackgroundSprite(std::string("assets/space.png"), TopLeftPosition, m_ChunkSize);
     pBackground->SetTemporaryState(true);
     
-    for(int i = 0; i < MaxAsteroidRandItems; i++)
+    // Only generate dynamic things, if it is allowed to (not allowed, if loading from a savegame)
+    if(!bIgnoreGenerationBehavior)
     {
-        GameObjectFactory::CreateAsteroid(GetRandomChunkPositionFromChunk(Quadrant), static_cast<float>(rand() % 360), static_cast<float>(rand() % 10));
-    }
-    
-    for(int i = 0; i < (int)EWorldObjectType::MaxItem; i++)
-    {
-        std::pair<std::pair<int,int>, EWorldObjectType> world_info_idx(Quadrant->GetIndex(), (EWorldObjectType)i);
-        auto it_world_info = m_WorldInfo[world_info_idx].begin();
-        while(it_world_info != m_WorldInfo[world_info_idx].end())
+        const int MaxAsteroidRandItems = 2;
+        
+        for(int i = 0; i < MaxAsteroidRandItems; i++)
         {
-            switch ((EWorldObjectType)i) {
-                case EWorldObjectType::Planet:
-                    GameObjectFactory::CreatePlanet(it_world_info->GetPosition());
-                    break;
-                case EWorldObjectType::SpaceStation:
-                    GameObjectFactory::CreateSpaceStation(it_world_info->GetPosition());
-                    break;
-                default:
-                    break;
+            GameObjectFactory::CreateAsteroid(GetRandomChunkPositionFromChunk(Quadrant), static_cast<float>(rand() % 360), static_cast<float>(rand() % 10));
+        }
+        
+        for(int i = 0; i < (int)EWorldObjectType::MaxItem; i++)
+        {
+            std::pair<std::pair<int,int>, EWorldObjectType> world_info_idx(Quadrant->GetIndex(), (EWorldObjectType)i);
+            auto it_world_info = m_WorldInfo[world_info_idx].begin();
+            while(it_world_info != m_WorldInfo[world_info_idx].end())
+            {
+                switch ((EWorldObjectType)i) {
+                    case EWorldObjectType::Planet:
+                        GameObjectFactory::CreatePlanet(it_world_info->GetPosition());
+                        break;
+                    case EWorldObjectType::SpaceStation:
+                        GameObjectFactory::CreateSpaceStation(it_world_info->GetPosition());
+                        break;
+                    default:
+                        break;
+                }
+                it_world_info++;
             }
-            it_world_info++;
         }
     }
 }
@@ -313,7 +319,21 @@ void WorldManager::LoadGame(std::string strPath)
         SerializeNode* pGameObjectNode = new SerializeNode(std::string(mapnode->name()), ESerializeNodeType::Class, std::string(mapnode->first_attribute("value")->value()));
         pGameObjectNode->Accept(new XMLReadVisitor(mapnode));
         
-        GameObject::Deserialize(pGameObjectNode);
+        GameObject* pCreatedGameObject = GameObject::Deserialize(pGameObjectNode);
+        
+        // Check if given GameObject has a IPosition to create a Quadrant
+        // Reason: Everywhere a Asteroid is already generated or something else, the player was already
+        //          so we just refresh by automation all quadrants that were be visited already.
+        IPosition* pPositionComponent = static_cast<IPosition*>(pCreatedGameObject->GetComponent(EComponentType::Position));
+        if(pPositionComponent != nullptr)
+        {
+            sf::Vector2f TopLeftPosition = GetQuadrantCorrectedPos(pPositionComponent->GetPosition());
+            if(GetQuadrant(GetQuadrantIndexAtPos(TopLeftPosition)) == nullptr)
+            {
+                // Add quadrant but ignore please.. really please the world generation for dynamic things.
+                AddQuadrant(new Quadrant(TopLeftPosition), true);
+            }
+        }
         
         mapnode = mapnode->next_sibling();
     }
