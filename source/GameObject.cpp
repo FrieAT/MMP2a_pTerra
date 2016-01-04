@@ -11,6 +11,7 @@ Copyright (c) MultiMediaTechnology, 2015
 GameObject::GameObject(std::string strID)
 {
 	this->m_strID = strID;
+    this->m_bTemporaryCreated = false;
 }
 
 GameObject::~GameObject()

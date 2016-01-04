@@ -27,8 +27,10 @@ public:
     int GetAmountOfUsedComponentTypes();
     bool IsInFreezedState();
     SerializeNode* Serialize();
-    
+    void SetTemporaryState(bool bTemporary) { m_bTemporaryCreated = bTemporary; }
+    bool GetTemporaryState() { return m_bTemporaryCreated; }
 private:
 	std::string m_strID;
 	std::map<EComponentType, IComponent*> m_Components;
+    bool m_bTemporaryCreated;
 };
