@@ -16,6 +16,15 @@ GameStatePlay::~GameStatePlay()
 
 void GameStatePlay::Init()
 {
+    // DEBUG purpose: Set fixed savegame
+    m_strLoadGame = "savegame.txt";
+    
+    // Check if there is setted a load-file.
+    if(m_strLoadGame.length() > 0)
+    {
+        WorldManager::GetInstance().LoadGame(m_strLoadGame);
+    }
+    
     // Generate estimated World
     WorldManager::GetInstance().GenerateWorld();
     
@@ -35,4 +44,9 @@ void GameStatePlay::Init()
     }
     m_pMusic->play();
     */
+}
+
+void GameStatePlay::SetLoadGame(std::string strLoadGame)
+{
+    m_strLoadGame = strLoadGame;
 }

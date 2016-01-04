@@ -27,6 +27,7 @@ public:
     int GetAmountOfUsedComponentTypes();
     bool IsInFreezedState();
     SerializeNode* Serialize();
+    static GameObject* Deserialize(SerializeNode* pNode);
     void SetTemporaryState(bool bTemporary) { m_bTemporaryCreated = bTemporary; }
     bool GetTemporaryState() { return m_bTemporaryCreated; }
 private:

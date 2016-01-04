@@ -18,6 +18,8 @@
 #include "DynamicView.h"
 #include "PixelPosition.h"
 #include "QuadrantPosition.h"
+#include "LinearMovement.h"
+#include "ShipMovement.h"
 
 #define REGISTER_COMPONENT(ComponentName) \
     ClassRegistry::GetInstance().RegisterComponent(std::string(""#ComponentName""), ComponentName::Deserialize);
@@ -46,6 +48,8 @@ public:
         REGISTER_COMPONENT(DynamicView);
         REGISTER_COMPONENT(PixelPosition);
         REGISTER_COMPONENT(QuadrantPosition);
+        REGISTER_COMPONENT(LinearMovement);
+        REGISTER_COMPONENT(ShipMovement);
     }
     void RegisterComponent(std::string strClassName, IComponent* (*ComponentConstructor)(SerializeNode* pNode))
     {
@@ -66,14 +70,13 @@ public:
         }
         return CreateComponent(it->second, pNode);
     }
+    IComponent* CreateComponent(IComponent* (*ComponentConstructor)(SerializeNode* pNode), SerializeNode* pNode)
+    {
+        return ComponentConstructor(pNode);
+    }
 private:
     ClassRegistry() { }
     ClassRegistry(const ClassRegistry&) = delete;
     void operator= (const ClassRegistry&) = delete;
     std::map<std::string, IComponent* (*)(SerializeNode* pNode)> m_ComponentConstructors;
-           
-    IComponent* CreateComponent(IComponent* (*ComponentConstructor)(SerializeNode* pNode), SerializeNode* pNode)
-    {
-        return ComponentConstructor(pNode);
-    }
 };

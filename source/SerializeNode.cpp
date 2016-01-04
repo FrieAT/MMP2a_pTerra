@@ -66,6 +66,21 @@ SerializeNode* SerializeNode::GetNode(std::string strName)
     return it->second;
 }
 
+SerializeNode* SerializeNode::GetNode(unsigned int iIndex)
+{
+    auto it = m_Elements.begin();
+    while(iIndex > 0)
+    {
+        it++;
+        iIndex--;
+    }
+    if(it == m_Elements.end())
+    {
+        return nullptr;
+    }
+    return it->second;
+}
+
 std::string SerializeNode::GetValue()
 {
     return m_strValue;

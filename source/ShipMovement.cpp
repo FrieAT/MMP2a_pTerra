@@ -198,7 +198,7 @@ IComponent* ShipMovement::Deserialize(SerializeNode* pNode)
     unsigned int count = 0;
     do
     {
-        SerializeNode* pCurrentNode = pNodeShipStates->GetNode(std::to_string(count));
+        SerializeNode* pCurrentNode = pNodeShipStates->GetNode(std::to_string(count++));
         if(pCurrentNode == nullptr)
         {
             pNodeShipStates = nullptr;

@@ -4,13 +4,17 @@
 
 #include <math.h>
 #include <stack>
+#include <fstream>
+#include <sstream>
 
 #include "WorldManager.h"
 #include "ObjectManager.h"
 #include "GameObjectFactory.h"
 #include "LongRect.h"
-#include "rapidxml/rapidxml.hpp"
 #include "XMLSerializeNodeVisitor.h"
+#include "XMLReadVisitor.h"
+#include "rapidxml/rapidxml.hpp"
+#include "ClassRegistry.h"
 
 WorldManager::WorldManager(sf::Vector2f ChunkSize, unsigned long MaxRandomCoordinates, char iChunkDepth)
 : m_ChunkSize(ChunkSize)
@@ -293,7 +297,27 @@ void WorldManager::GenerateWorld()
 
 void WorldManager::LoadGame(std::string strPath)
 {
+    rapidxml::xml_document<> doc;
+    std::ifstream file(strPath);
+    std::stringstream buffer;
+    buffer << file.rdbuf();
+    std::string content(buffer.str());
+    file.close();
     
+    doc.parse<0>(&content[0]);
+    
+    rapidxml::xml_node<> *mapnode = (doc.first_node("savegame"))->first_node("GameObject");
+    while(mapnode)
+    {
+        SerializeNode* pGameObjectNode = new SerializeNode(std::string(mapnode->name()), ESerializeNodeType::Class, std::string(mapnode->first_attribute("value")->value()));
+        pGameObjectNode->Accept(new XMLReadVisitor(mapnode));
+        
+        GameObject::Deserialize(pGameObjectNode);
+        
+        mapnode = mapnode->next_sibling();
+    }
+    
+    doc.clear();
 }
 
 void WorldManager::SaveGame(std::string strPath)

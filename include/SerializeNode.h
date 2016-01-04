@@ -18,6 +18,7 @@ public:
     void AddElement(SerializeNode* pNode);
     void RemoveElement(SerializeNode* pNode);
     SerializeNode* GetNode(std::string strName);
+    SerializeNode* GetNode(unsigned int iIndex);
     std::string GetName() { return m_strName; }
     std::string GetValue();
     std::map<std::string, SerializeNode*> GetChildren() { return m_Elements; }

@@ -52,7 +52,7 @@ public:
         float x, y;
         do
         {
-            SerializeNode* pCurrentNode = pNodeImpulses->GetNode(std::to_string(count));
+            SerializeNode* pCurrentNode = pNodeImpulses->GetNode(std::to_string(count++));
             if(pCurrentNode == nullptr)
             {
                 pNodeImpulses = nullptr;

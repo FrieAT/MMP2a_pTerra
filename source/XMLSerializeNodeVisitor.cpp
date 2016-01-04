@@ -29,7 +29,7 @@ void XMLSerializeNodeVisitor::Visit(SerializeNode* pNode)
     if(pNode->GetType() == ESerializeNodeType::Property)
     {
         for (unsigned int i = 0; i < m_iCurrentDepth; i++) { m_File << "\t"; }
-        m_File << "<" << pNode->GetName();
+        m_File << "<" << pNode->GetName() << " type=\"" << std::to_string(static_cast<int>(pNode->GetType())) << "\"";
         if(pNode->GetValue().length() > 0)
         {
             m_File << " value=\"" << pNode->GetValue() << "\"";
@@ -39,7 +39,7 @@ void XMLSerializeNodeVisitor::Visit(SerializeNode* pNode)
     else
     {
         for (unsigned int i = 0; i < m_iCurrentDepth; i++) { m_File << "\t"; }
-        m_File << "<" << pNode->GetName();
+        m_File << "<" << pNode->GetName() << " type=\"" << std::to_string(static_cast<int>(pNode->GetType())) << "\"";
         if(pNode->GetValue().length() > 0)
         {
             m_File << " value=\"" << pNode->GetValue() << "\"";

@@ -6,6 +6,7 @@ Copyright (c) MultiMediaTechnology, 2015
 #include "IComponent.h"
 #include "IPosition.h"
 #include "Quadrant.h"
+#include "ClassRegistry.h"
 
 // GameObject constructor
 GameObject::GameObject(std::string strID)
@@ -92,18 +93,30 @@ int GameObject::GetAmountOfUsedComponentTypes()
 
 SerializeNode* GameObject::Serialize()
 {
-    SerializeNode* pNode = new SerializeNode("gameobject", ESerializeNodeType::Class, m_strID);
-    SerializeNode* pNodeComponents = new SerializeNode("Components", ESerializeNodeType::List);
+    SerializeNode* pNode = new SerializeNode("GameObject", ESerializeNodeType::Class, m_strID);
     auto it_components = m_Components.begin();
-    unsigned int iCount = 0;
     while(it_components != m_Components.end())
     {
-        SerializeNode* pNodeComponent = new SerializeNode(std::to_string(iCount), ESerializeNodeType::Class, it_components->second->GetComponentName());
+        SerializeNode* pNodeComponent = new SerializeNode(it_components->second->GetComponentName(), ESerializeNodeType::Class);
         it_components->second->Serialize(pNodeComponent);
-        pNodeComponents->AddElement(pNodeComponent);
+        pNode->AddElement(pNodeComponent);
         it_components++;
-        iCount++;
     }
-    pNode->AddElement(pNodeComponents);
     return pNode;
+}
+
+GameObject* GameObject::Deserialize(SerializeNode *pNode)
+{
+    GameObject* pGameObject = new GameObject(pNode->GetName());
+    
+    unsigned int iCount = 0;
+    SerializeNode* pComponentNode = pNode->GetNode(iCount++);
+    while(pComponentNode != nullptr)
+    {
+        IComponent* pComponent = ClassRegistry::GetInstance().CreateComponent(pComponentNode->GetName(), pComponentNode);
+        pGameObject->SetComponent(pComponent);
+        pComponentNode = pNode->GetNode(iCount++);
+    }
+    
+    return pGameObject;
 }
