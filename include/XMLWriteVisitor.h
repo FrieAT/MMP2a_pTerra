@@ -9,11 +9,11 @@
 
 #include "INodeVisitor.h"
 
-class XMLSerializeNodeVisitor : public INodeVisitor
+class XMLWriteVisitor : public INodeVisitor
 {
 public:
-    XMLSerializeNodeVisitor(std::string strPath);
-    ~XMLSerializeNodeVisitor();
+    XMLWriteVisitor(std::string strPath);
+    ~XMLWriteVisitor();
     void Visit(SerializeNode* pNode);
 private:
     unsigned int m_iCurrentDepth;

@@ -2,10 +2,10 @@
  Copyright (c) MultiMediaTechnology, 2015
  =================================================================*/
 
-#include "XMLSerializeNodeVisitor.h"
+#include "XMLWriteVisitor.h"
 #include "SerializeNode.h"
 
-XMLSerializeNodeVisitor::XMLSerializeNodeVisitor(std::string strPath)
+XMLWriteVisitor::XMLWriteVisitor(std::string strPath)
 : m_iCurrentDepth(1)
 {
     m_File.open(strPath);
@@ -17,14 +17,14 @@ XMLSerializeNodeVisitor::XMLSerializeNodeVisitor(std::string strPath)
     m_File << "<savegame>\n";
 }
 
-XMLSerializeNodeVisitor::~XMLSerializeNodeVisitor()
+XMLWriteVisitor::~XMLWriteVisitor()
 {
     m_File << "</savegame>\n";
     m_File.flush();
     m_File.close();
 }
 
-void XMLSerializeNodeVisitor::Visit(SerializeNode* pNode)
+void XMLWriteVisitor::Visit(SerializeNode* pNode)
 {
     if(pNode->GetType() == ESerializeNodeType::Property)
     {

@@ -11,7 +11,7 @@
 #include "ObjectManager.h"
 #include "GameObjectFactory.h"
 #include "LongRect.h"
-#include "XMLSerializeNodeVisitor.h"
+#include "XMLWriteVisitor.h"
 #include "XMLReadVisitor.h"
 #include "rapidxml/rapidxml.hpp"
 #include "ClassRegistry.h"
@@ -343,7 +343,7 @@ void WorldManager::LoadGame(std::string strPath)
 
 void WorldManager::SaveGame(std::string strPath)
 {
-    auto pXMLVisitor = new XMLSerializeNodeVisitor(strPath);
+    auto pXMLVisitor = new XMLWriteVisitor(strPath);
     auto game_objects = ObjectManager::GetInstance().GetActiveGameObjects();
     auto it_game_objects = game_objects.begin();
     while(it_game_objects != game_objects.end())
