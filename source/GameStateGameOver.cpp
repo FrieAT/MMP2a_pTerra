@@ -17,7 +17,7 @@ GameStateGameOver::~GameStateGameOver()
     InputManager::GetInstance().UnregisterEventObserver(this);
 }
 
-void GameStateGameOver::Init()
+void GameStateGameOver::Init(sf::RenderWindow* pWindow)
 {
     m_bKeyPressed = false;
     

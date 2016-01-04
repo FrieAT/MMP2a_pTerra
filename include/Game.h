@@ -5,6 +5,8 @@ Copyright (c) MultiMediaTechnology, 2015
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include <TGUI/TGUI.hpp>
+#include <SFML/Audio.hpp>
 
 #include "IGameState.h"
 

@@ -16,7 +16,7 @@ GameStateIntro::~GameStateIntro()
     InputManager::GetInstance().UnregisterEventObserver(this);
 }
 
-void GameStateIntro::Init()
+void GameStateIntro::Init(sf::RenderWindow* pWindow)
 {
     m_bKeyPressed = false;
     
@@ -24,6 +24,12 @@ void GameStateIntro::Init()
     GameObjectFactory::CreateFontText(sf::Vector2f(280.f, 100.f), "assets/Starjedi.ttf", "The Space Game", 24);
     GameObjectFactory::CreateFontText(sf::Vector2f(230.f, 500.f), "assets/Starjedi.ttf", "-- Press Space-Key to start game --", 16);
     
+	// Initialize GUI
+	m_Gui.setWindow(*pWindow);
+	m_Gui.setFont("assets/Starjedi.ttf");
+	auto theme = std::make_shared<tgui::Theme>("Black.txt");
+
+
     InputManager::GetInstance().RegisterEventObserver(this);
 }
 

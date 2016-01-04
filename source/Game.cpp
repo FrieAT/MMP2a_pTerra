@@ -5,9 +5,6 @@ Copyright (c) MultiMediaTechnology, 2015
 
 #include <iostream>
 
-#include <SFML/Audio.hpp>
-#include <SFML/Graphics.hpp>
-
 #include "FrameManager.h"
 #include "InputManager.h"
 #include "ObjectManager.h"
@@ -98,19 +95,8 @@ void Game::Start()
             }
             
             m_pCurrentState = pGameState;
-            m_pCurrentState->Init();
+            m_pCurrentState->Init(m_pWindow);
         }
-
-        // Manager updates
-        /*FrameManager::GetInstance().Update(deltaTime);
-        InputManager::GetInstance().Update(m_pWindow);
-        ObjectManager::GetInstance().Update(deltaTime);
-        CollisionManager::GetInstance().Update(deltaTime);
-        
-		// Rendering
-        FrameManager::GetInstance().Draw(m_pWindow);
-        ObjectManager::GetInstance().Draw(m_pWindow);
-		//WorldManager::GetInstance().Draw(m_pWindow); DEBUG*/
 
 		// Update the state (Updates & Rendering)
 		m_pCurrentState->Update(deltaTime, m_pWindow);

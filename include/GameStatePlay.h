@@ -13,7 +13,7 @@ class GameStatePlay : public IGameState
 {
 public:
     ~GameStatePlay();
-    void Init();
+    void Init(sf::RenderWindow* pWindow);
 	void Update(sf::Time DeltaTime, sf::RenderWindow* pWindow);
 protected:
     sf::Music* m_pMusic;

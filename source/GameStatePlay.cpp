@@ -16,7 +16,7 @@ GameStatePlay::~GameStatePlay()
     // delete m_pMusic;
 }
 
-void GameStatePlay::Init()
+void GameStatePlay::Init(sf::RenderWindow* pWindow)
 {
     // GameObjectFactory::CreatePlayerShip(sf::Vector2f(50,30),'2');
     GameObjectFactory::CreatePlayerShip(sf::Vector2f(50, Game::m_iWindowHeight - 30), '2');
