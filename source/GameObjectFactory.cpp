@@ -38,14 +38,17 @@ GameObject* GameObjectFactory::CreateMissile(GameObject* pOwner, IPosition* pPos
 {
 	// TODO: Make it possible to change component values / change the whole factory
 	GameObject* pMissile = new GameObject(std::string("missile"));
-    BoxCollision* pCollisision = new BoxCollision(50, 50);
+    BoxCollision* pCollisision = new BoxCollision(96, 120);
     
     pCollisision->m_bPhysicsApplyable = false;
     
 	pMissile->SetComponent(new HealthMissile(1000, pOwner));
 	pMissile->SetComponent(new PixelPosition(pPosition->GetPosition(), sf::Vector2f(160.f, 320.f)));
 	pMissile->SetComponent(new LinearMovement(pPosition->GetRotation(),300.f,1,ShipSpeed,true));
-	pMissile->SetComponent(new SpriteDrawing(std::string("assets/rocket.png"),sf::Vector2f(30,60)));
+    SpriteDrawing* pSpriteComponent = new SpriteDrawing(std::string("assets/lilee/rakete_player.png"),sf::Vector2f(30,60));
+    pSpriteComponent->SetTextureArea(sf::FloatRect(96.f, 0.f, 96.f, 899.f));
+    pSpriteComponent->SetTextureArea(sf::FloatRect(192.f, 0.f, 96.f, 899.f));
+	pMissile->SetComponent(pSpriteComponent);
     pMissile->SetComponent(pCollisision);
     
 	return pMissile;

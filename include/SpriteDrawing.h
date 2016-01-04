@@ -28,4 +28,6 @@ protected:
     sf::Vector2f m_ScaleToSize;
     std::vector<sf::IntRect> m_TextureRects;
     int m_iTextureRectsCount;
+    int m_iTextureFrameUpdateCount;
+    int m_iCurrentFrameCount;
 };

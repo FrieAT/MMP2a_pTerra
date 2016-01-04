@@ -11,6 +11,8 @@ SpriteDrawing::SpriteDrawing(std::string strRessourcePath)
 : m_strResPath(strRessourcePath)
 , m_ScaleToSize(sf::Vector2f(0.f, 0.f))
 , m_iTextureRectsCount(0)
+, m_iTextureFrameUpdateCount(50)
+, m_iCurrentFrameCount(0)
 {
     m_pTexture = TextureFactory::GetInstance().GetTexture(strRessourcePath);
 	m_pSprite = new sf::Sprite(*m_pTexture);
@@ -52,8 +54,9 @@ void SpriteDrawing::Update()
 	}
     
     int iTextureAreasSize = m_TextureRects.size();
-    if(iTextureAreasSize > 1)
+    if(iTextureAreasSize > 1 && m_iCurrentFrameCount++ >= m_iTextureFrameUpdateCount)
     {
+        m_iCurrentFrameCount = 0;
         m_iTextureRectsCount++;
         if(m_iTextureRectsCount >= iTextureAreasSize)
         {
