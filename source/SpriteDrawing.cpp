@@ -10,6 +10,7 @@ Copyright (c) MultiMediaTechnology, 2015
 SpriteDrawing::SpriteDrawing(std::string strRessourcePath)
 : m_strResPath(strRessourcePath)
 , m_ScaleToSize(sf::Vector2f(0.f, 0.f))
+, m_iTextureRectsCount(0)
 {
     m_pTexture = TextureFactory::GetInstance().GetTexture(strRessourcePath);
 	m_pSprite = new sf::Sprite(*m_pTexture);
@@ -49,6 +50,17 @@ void SpriteDrawing::Update()
 		m_pSprite->setRotation((pPositionComponent->GetRotation()));
 		m_pSprite->setOrigin(pPositionComponent->GetOrigin());
 	}
+    
+    int iTextureAreasSize = m_TextureRects.size();
+    if(iTextureAreasSize > 1)
+    {
+        m_iTextureRectsCount++;
+        if(m_iTextureRectsCount >= iTextureAreasSize)
+        {
+            m_iTextureRectsCount = 0;
+        }
+        m_pSprite->setTextureRect(m_TextureRects[m_iTextureRectsCount]);
+    }
 }
 
 void SpriteDrawing::Draw(sf::RenderWindow* pWindow)
@@ -59,12 +71,13 @@ void SpriteDrawing::Draw(sf::RenderWindow* pWindow)
 
 sf::FloatRect SpriteDrawing::GetTextureArea()
 {
+    // TODO: Possible implementation to access explicit TextureRectArea.
     return sf::FloatRect(m_pSprite->getTextureRect());
 }
 
 void SpriteDrawing::SetTextureArea(sf::FloatRect Area)
 {
-    m_pSprite->setTextureRect(sf::IntRect(Area));
+    m_TextureRects.push_back(sf::IntRect(Area));
 }
 
 void SpriteDrawing::Serialize(SerializeNode *pParentNode)

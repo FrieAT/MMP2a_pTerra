@@ -26,4 +26,6 @@ protected:
 	sf::Texture* m_pTexture;
     std::string m_strResPath;
     sf::Vector2f m_ScaleToSize;
+    std::vector<sf::IntRect> m_TextureRects;
+    int m_iTextureRectsCount;
 };
