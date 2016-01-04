@@ -104,7 +104,8 @@ void ShipMovement::UpdateMovement(sf::Time DeltaTime)
 	if (m_ShipState[4] && m_fWeaponcoolDown <= 0.f)
 	{
 		m_fWeaponcoolDown = m_fFirerate;
-		GameObjectFactory::CreateMissile(GetAssignedGameObject(), pPositionComponent, velocity); //shoot rockets
+		GameObject* pMissile = GameObjectFactory::CreateMissile(GetAssignedGameObject(), pPositionComponent, velocity); //shoot rockets
+        pMissile->SetTemporaryState(true);
 		std::cout << velocity.x << " "<<velocity.y << std::endl;
 	}
 	if (m_fWeaponcoolDown > 0.f)

@@ -16,6 +16,7 @@ HealthShip::HealthShip(float fHealth)
 {
 	this->m_fHealth = fHealth;
     m_pHealthDebug = GameObjectFactory::CreateFontText(sf::Vector2f(0.f,0.f), "assets/Starjedi.ttf", "", 8);
+    m_pHealthDebug->SetTemporaryState(true);
 }
 
 void HealthShip::Init()

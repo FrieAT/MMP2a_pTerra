@@ -58,7 +58,8 @@ void WorldManager::AddQuadrant(Quadrant *Quadrant)
     
     const int MaxAsteroidRandItems = 2;
     
-    GameObjectFactory::CreateBackgroundSprite(std::string("assets/space.png"), TopLeftPosition, m_ChunkSize);
+    GameObject* pBackground = GameObjectFactory::CreateBackgroundSprite(std::string("assets/space.png"), TopLeftPosition, m_ChunkSize);
+    pBackground->SetTemporaryState(true);
     
     for(int i = 0; i < MaxAsteroidRandItems; i++)
     {
@@ -302,7 +303,7 @@ void WorldManager::SaveGame(std::string strPath)
     auto it_game_objects = game_objects.begin();
     while(it_game_objects != game_objects.end())
     {
-        if((*it_game_objects) == nullptr)
+        if((*it_game_objects) == nullptr || (*it_game_objects)->GetTemporaryState())
         {
             it_game_objects++;
             continue;
