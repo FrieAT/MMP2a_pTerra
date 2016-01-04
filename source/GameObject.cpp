@@ -107,7 +107,7 @@ SerializeNode* GameObject::Serialize()
 
 GameObject* GameObject::Deserialize(SerializeNode *pNode)
 {
-    GameObject* pGameObject = new GameObject(pNode->GetName());
+    GameObject* pGameObject = new GameObject(pNode->GetValue());
     
     unsigned int iCount = 0;
     SerializeNode* pComponentNode = pNode->GetNode(iCount++);
