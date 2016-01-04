@@ -21,7 +21,7 @@ public:
     ICollision(SerializeNode* pNode)
     : IComponent(pNode)
     {
-        m_bPhysicsApplyable = stoi((pNode->GetNode("PhysicsApplyable"))->GetValue());
+        m_bPhysicsApplyable = (stoi((pNode->GetNode("PhysicsApplyable"))->GetValue()) ? true : false);
     }
 	virtual ~ICollision() { }
 	virtual bool colliding(ICollision* pCollisionBody) = 0;

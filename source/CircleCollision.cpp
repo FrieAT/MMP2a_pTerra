@@ -83,10 +83,10 @@ void CircleCollision::Serialize(SerializeNode *pParentNode)
 IComponent* CircleCollision::Deserialize(SerializeNode* pNode)
 {
     float fRadius = stof((pNode->GetNode("Radius"))->GetValue());
-    float bHit = stof((pNode->GetNode("Hit"))->GetValue());
+    int bHit = stoi((pNode->GetNode("Hit"))->GetValue());
     
     CircleCollision* pComponent = new CircleCollision(fRadius);
-    pComponent->m_bHit = bHit;
+    pComponent->m_bHit = (bHit ? true : false);
     
     return pComponent;
 }

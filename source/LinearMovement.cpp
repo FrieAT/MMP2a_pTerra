@@ -113,7 +113,7 @@ IComponent* LinearMovement::Deserialize(SerializeNode* pNode)
     pComponent->m_Direction = sf::Vector2f(x, y);
     
     pComponent->m_fRotation = stof((pNode->GetNode("Rotation"))->GetValue());
-    pComponent->m_bAccelerating = stof((pNode->GetNode("Accelerating"))->GetValue());
+    pComponent->m_bAccelerating = (stoi((pNode->GetNode("Accelerating"))->GetValue()) ? true : false);
     
     return pComponent;
 }

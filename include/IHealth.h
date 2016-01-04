@@ -21,7 +21,7 @@ public:
         this->IComponent::Serialize(pParentNode);
         pParentNode->AddElement(new SerializeNode("Health", ESerializeNodeType::Property, std::to_string(m_fHealth)));
     }
-    static IComponent* Deserialize(SerializeNode* pNode, IHealth* pParentComponent)
+    static void Deserialize(SerializeNode* pNode, IHealth* pParentComponent)
     {
         float fHealth = stof((pNode->GetNode("Health"))->GetValue());
         

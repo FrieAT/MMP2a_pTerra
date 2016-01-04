@@ -45,7 +45,7 @@ public:
         pParentNode->AddElement(new SerializeNode("Mass", ESerializeNodeType::Property, std::to_string(mass)));
         pParentNode->AddElement(new SerializeNode("InvMass", ESerializeNodeType::Property, std::to_string(invMass)));
     }
-    static IComponent* Deserialize(SerializeNode* pNode, IMovement* pParentComponent)
+    static void Deserialize(SerializeNode* pNode, IMovement* pParentComponent)
     {
         SerializeNode* pNodeImpulses = pNode->GetNode("Impulses");
         unsigned int count = 0;

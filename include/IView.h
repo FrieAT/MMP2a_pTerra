@@ -19,7 +19,7 @@ public:
     {
         this->IComponent::Serialize(pParentNode);
     }
-    static IComponent* Deserialize(SerializeNode* pNode, IView* pParentComponent)
+    static void Deserialize(SerializeNode* pNode, IView* pParentComponent)
     {
         // Nothing to extract here...
     }

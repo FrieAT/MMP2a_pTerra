@@ -41,7 +41,7 @@ public:
         pParentNode->AddElement(new SerializeNode("OriginY", ESerializeNodeType::Property, std::to_string(m_Origin.y)));
         pParentNode->AddElement(new SerializeNode("Rotation", ESerializeNodeType::Property, std::to_string(m_fRotation)));
     }
-    static IComponent* Deserialize(SerializeNode* pNode, IPosition* pParentComponent)
+    static void Deserialize(SerializeNode* pNode, IPosition* pParentComponent)
     {
         float x, y;
         

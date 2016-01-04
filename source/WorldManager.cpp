@@ -21,7 +21,7 @@ WorldManager::WorldManager(sf::Vector2f ChunkSize, unsigned long MaxRandomCoordi
 , m_MaxRandomCoordinates(MaxRandomCoordinates)
 , m_iChunkDepth(iChunkDepth)
 {
-    m_iSeed = time(NULL);
+    m_iSeed = static_cast<int>(time(NULL));
     srand(m_iSeed);
     
     for(unsigned long i = 0; i < m_MaxRandomCoordinates; i++)
