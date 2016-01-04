@@ -42,6 +42,8 @@ void GameStateGameOver::OnInputUpdate(std::string strEvent)
     {
         // Prevent of double changing states.
         m_bKeyPressed = true;
-        Game::m_pEngine->ChangeState(new GameStatePlay());
+        GameStatePlay* pGameState = new GameStatePlay();
+        pGameState->SetLoadGame("savegame.txt");
+        Game::m_pEngine->ChangeState(pGameState);
     }
 }

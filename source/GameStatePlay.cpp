@@ -16,9 +16,6 @@ GameStatePlay::~GameStatePlay()
 
 void GameStatePlay::Init()
 {
-    // DEBUG purpose: Set fixed savegame
-    m_strLoadGame = "savegame.txt";
-    
     // Check if there is setted a load-file.
     if(m_strLoadGame.length() > 0)
     {
