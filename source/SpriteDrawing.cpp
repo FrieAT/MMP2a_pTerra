@@ -90,6 +90,10 @@ void SpriteDrawing::SetTextureArea(sf::FloatRect Area)
 void SpriteDrawing::GenerateTextureAreas(int iAmountInX, int iAmountInY)
 {
     m_TextureRects.clear(); // Clear existing Texture-Area´s
+    if(iAmountInX == 0 || iAmountInY == 0)
+    {
+        return;
+    }
     sf::Vector2u TextureSize = m_pTexture->getSize();
     sf::Vector2u AssetSize(TextureSize.x / iAmountInX, TextureSize.y / iAmountInY);
     for(int y = 0; y < iAmountInY; y++)
