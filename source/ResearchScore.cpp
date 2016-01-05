@@ -10,9 +10,9 @@
 
 ResearchScore::ResearchScore(int iLevelLimit, int iLevelUpCostFactor)
 : IScore()
-, m_iLevelLimit(0)
-, m_iLevelUpCostFactor(0)
-, m_iCurrentLevel(1)
+, m_iLevelLimit(iLevelLimit)
+, m_iLevelUpCostFactor(iLevelUpCostFactor)
+, m_iCurrentLevel(0)
 {
     
 }
@@ -28,7 +28,12 @@ void ResearchScore::AddScore(int iScore)
     
     int iNextLevelScore = (m_iCurrentLevel + 1) * m_iLevelUpCostFactor;
     
-    if(iScore >= iNextLevelScore && GetAssignedGameObject() != nullptr)
+    if(m_iScore > 20)
+    {
+        std::cout << "Found Shippi :D" << std::endl;
+    }
+    
+    if(m_iScore >= iNextLevelScore && GetAssignedGameObject() != nullptr)
     {
         m_iCurrentLevel++;
     
