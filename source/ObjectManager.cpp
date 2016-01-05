@@ -65,6 +65,15 @@ void ObjectManager::RemoveGameObject(GameObject* pObject, bool bDelete)
     {
         throw std::runtime_error("Given GameObject-object has a null-pointer-reference.");
     }
+    if(bDelete && pObject->GetAssistedState())
+    {
+        // Ignore Deletion, if it is a assisted game object.
+        // This can be caused, if GameState-Changes or GameWindow closes
+        // If so, it may be possible that AssistedGameObject will be deleted before the Owner from this Object
+        // when this occurs, the destructor in the Owner will try to delete the AssistedGameObject again
+        // and a BAD_ACCESS_EXCEPTION occurs.
+        return;
+    }
     auto key = GetKeyFromGameObject(pObject);
     auto i = m_Objects[key].begin();
     while(i != m_Objects[key].end())
@@ -122,6 +131,15 @@ void ObjectManager::RemoveAllGameObjects()
 				vec_it++;
 				continue;
 			}
+            if((*vec_it)->GetAssistedState())
+            {
+                // Ignore Deletion, if it is a assisted game object.
+                // This can be caused, if GameState-Changes or GameWindow closes
+                // If so, it may be possible that AssistedGameObject will be deleted before the Owner from this Object
+                // when this occurs, the destructor in the Owner will try to delete the AssistedGameObject again
+                // and a BAD_ACCESS_EXCEPTION occurs.
+                return;
+            }
             bool already_ereased = false;
             auto check_it = EreasedGameObjects.begin();
             while(check_it != EreasedGameObjects.end())

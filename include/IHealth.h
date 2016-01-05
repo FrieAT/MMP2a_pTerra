@@ -18,12 +18,13 @@ public:
     {
         m_pShieldAsset = new GameObject("effect");
         m_pShieldAsset->SetTemporaryState(true);
+        m_pShieldAsset->SetAssistedState(true);
         m_pShieldAsset->SetComponent(new PixelPosition(sf::Vector2f(), sf::Vector2f(44.375f, 75.f)));
     }
     virtual ~IHealth()
     {
+        m_pShieldAsset->SetAssistedState(false);
         ObjectManager::GetInstance().RemoveGameObject(m_pShieldAsset);
-        m_pShieldAsset = nullptr;
     }
     virtual void Init()
     {

@@ -15,11 +15,13 @@ NavigationCursor::NavigationCursor()
 {
     m_pCursor = new GameObject("effect");
     m_pCursor->SetTemporaryState(true);
+    m_pCursor->SetAssistedState(true);
     m_pCursor->SetComponent(new PixelPosition(sf::Vector2f(), sf::Vector2f(8.f, 8.f)));
 }
 
 NavigationCursor::~NavigationCursor()
 {
+    m_pCursor->SetAssistedState(false);
     ObjectManager::GetInstance().RemoveGameObject(m_pCursor);
     FrameManager::GetInstance().UnregisterEventObserver(this);
 }
