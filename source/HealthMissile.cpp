@@ -5,11 +5,13 @@ Copyright (c) MultiMediaTechnology, 2015
 #include "HealthMissile.h"
 #include "ObjectManager.h"
 #include "CollisionManager.h"
+#include "GameObjectFactory.h"
 
 HealthMissile::HealthMissile(float fHealth, GameObject* pOwner)
 {
 	this->m_fHealth = fHealth;
     this->m_pOwner = pOwner;
+    this->m_bSomethingHitted = false;
 }
 
 HealthMissile::~HealthMissile()
@@ -29,6 +31,15 @@ void HealthMissile::Damage(float fDamage)
 	m_fHealth -= fDamage;
 	if (m_fHealth < 0)
 	{
+        // Generate Explosion if a IPosition exists and hasn´t hitted anything.
+        if(!m_bSomethingHitted)
+        {
+            IPosition* pPositionComponent = static_cast<IPosition*>(GetAssignedGameObject()->GetComponent(EComponentType::Position));
+            if(pPositionComponent != nullptr)
+            {
+                GameObjectFactory::CreateExplosion(pPositionComponent->GetPosition());
+            }
+        }
 		//TODO add destruction effect
 		ObjectManager::GetInstance().RemoveGameObject(GetAssignedGameObject());
 	}
@@ -47,7 +58,15 @@ void HealthMissile::OnCollisionEvent(GameObject* pOther, sf::Vector2f ImpulseImp
         return;
     }
     
+    m_bSomethingHitted = true;
     this->Damage(m_fHealth);
+    
+    // Generate Explosion, if other gameobject has a IPosition (i know, what a question).
+    IPosition* pPositionComponent = static_cast<IPosition*>(pOther->GetComponent(EComponentType::Position));
+    if(pPositionComponent != nullptr)
+    {
+        GameObjectFactory::CreateExplosion(pPositionComponent->GetPosition());
+    }
     
     IHealth* pOtherHealth = static_cast<IHealth*>(pOther->GetComponent(EComponentType::Health));
     if(pOtherHealth != nullptr)

@@ -19,7 +19,7 @@ public:
 	static GameObject* CreateMissile(GameObject* pOwner, IPosition* pPosition, sf::Vector2f ShipSpeed);
 	static GameObject* CreateAsteroid(sf::Vector2f vPosition, float fRotation, float fSpeed);
     static GameObject* CreateBackgroundStar(sf::Vector2f Position);
-
+    static GameObject* CreateExplosion(sf::Vector2f Position);
     static GameObject* CreateBackgroundSprite(std::string strBackgroundPath);
     static GameObject* CreateBackgroundSprite(std::string strBackgroundPath, sf::Vector2f ScaleTo);
     static GameObject* CreateBackgroundSprite(std::string strBackgroundPath, sf::Vector2f Position, sf::Vector2f ScaleTo);

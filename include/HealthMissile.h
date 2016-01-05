@@ -21,4 +21,5 @@ public:
     static IComponent* Deserialize(SerializeNode* pNode);
 private:
     GameObject* m_pOwner;
+    bool m_bSomethingHitted;
 };

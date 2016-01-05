@@ -5,6 +5,7 @@
 #include "HealthExplosion.h"
 #include "ObjectManager.h"
 #include "CollisionManager.h"
+#include "Game.h"
 
 HealthExplosion::HealthExplosion(float fHealth)
 {
@@ -32,7 +33,7 @@ void HealthExplosion::Damage(float fDamage)
 
 void HealthExplosion::OnFrameUpdate(sf::Time DeltaTime)
 {
-    this->Damage(1);
+    this->Damage(1.f / Game::m_iFrameRate);
 }
 
 IComponent* HealthExplosion::Deserialize(SerializeNode *pNode)

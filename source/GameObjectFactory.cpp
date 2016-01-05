@@ -15,6 +15,7 @@ Copyright (c) MultiMediaTechnology, 2015
 #include "HealthShip.h"
 #include "HealthMissile.h"
 #include "HealthAsteroid.h"
+#include "HealthExplosion.h"
 #include "CircleCollision.h"
 #include "BoxCollision.h"
 
@@ -120,6 +121,24 @@ GameObject* GameObjectFactory::CreateBackgroundStar(sf::Vector2f Position)
     pStarBackground->SetComponent(pSprite);
     
     return pStarBackground;
+}
+
+GameObject* GameObjectFactory::CreateExplosion(sf::Vector2f Position)
+{
+    const int iAmountInXAxis = 6;
+    const int iAmountInYAxis = 3;
+    
+    GameObject* pExplosion = new GameObject("effects");
+    pExplosion->SetTemporaryState(true); // Never save explosion´s in save-game´s
+    
+    pExplosion->SetComponent(new PixelPosition(Position, sf::Vector2f()));
+    pExplosion->SetComponent(new HealthExplosion(((iAmountInXAxis * iAmountInYAxis) / (float)Game::m_iFrameRate * 20)));
+    SpriteDrawing* pSpriteDrawing = new SpriteDrawing("assets/lilee/explosion.png");
+    pSpriteDrawing->SetUpdateFrameRate(20);
+    pSpriteDrawing->GenerateTextureAreas(iAmountInXAxis, iAmountInYAxis);
+    pExplosion->SetComponent(pSpriteDrawing);
+    
+    return pExplosion;
 }
 
 GameObject* GameObjectFactory::CreateFontText(sf::Vector2f Position, std::string strFontPath, std::string strText, int iCharSize)
