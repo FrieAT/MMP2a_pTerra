@@ -60,6 +60,8 @@ public:
         this->IComponent::Serialize(pParentNode);
         pParentNode->AddElement(new SerializeNode("Health", ESerializeNodeType::Property, std::to_string(m_fHealth)));
         pParentNode->AddElement(new SerializeNode("Shield", ESerializeNodeType::Property, std::to_string(m_fShield)));
+        pParentNode->AddElement(new SerializeNode("ShieldCooldown", ESerializeNodeType::Property, std::to_string(m_fShieldCooldown)));
+        pParentNode->AddElement(new SerializeNode("ShieldActive", ESerializeNodeType::Property, std::to_string(m_bShieldActive)));
     }
     static void Deserialize(SerializeNode* pNode, IHealth* pParentComponent)
     {
@@ -68,6 +70,14 @@ public:
         
         float fShield = stof((pNode->GetNode("Shield"))->GetValue());
         pParentComponent->m_fShield = fShield;
+        
+        int iShieldCooldown = stoi((pNode->GetNode("ShieldCooldown"))->GetValue());
+        pParentComponent->m_fShieldCooldown = iShieldCooldown;
+        
+        int iShieldActive = stoi((pNode->GetNode("ShieldActive"))->GetValue());
+        pParentComponent->m_bShieldActive = (iShieldActive ? true : false);
+        
+        pParentComponent->DrawShield(pParentComponent->m_bShieldActive, true);
     }
     virtual std::string GetComponentName() { return std::string("IHealth"); }
 protected:
