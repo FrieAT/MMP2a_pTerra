@@ -14,6 +14,11 @@ Copyright (c) MultiMediaTechnology, 2015
 #include "TextureFactory.h"
 #include "ClassRegistry.h"
 
+#include "GameStateIntro.h"
+#include "GameStatePlay.h"
+#include "GameStateGameOver.h"
+#include "GameStatePause.h"
+
 Game* Game::m_pEngine = nullptr;
 
 Game::Game()
@@ -21,12 +26,15 @@ Game::Game()
     if(m_pEngine != nullptr) delete m_pEngine;
     m_pEngine = this;
     m_pCurrentState = nullptr;
+
+	// Initialize ClassRegistry
+	ClassRegistry::GetInstance().Init();
     
     // Create the main window
 	m_pWindow = new sf::RenderWindow(sf::VideoMode(Game::m_iWindowWidth, Game::m_iWindowHeight), "pTerra");//, sf::Style::Fullscreen);
 
 	// Initialize Intro-screen
-	m_pEngine->ChangeState(new GameStateIntro());
+	m_pEngine->ChangeState(EGameState::GameStateIntro);
 	m_pEngine->Start();
 
     // ====== Below decprecated method to create things ======
@@ -49,6 +57,17 @@ Game::~Game()
         m_States.pop_back();
     }
 
+	auto itr = m_mGameStateStorage.begin();
+	while (itr != m_mGameStateStorage.end())
+	{
+		if (itr->second != nullptr)
+		{
+			delete itr->second;
+			itr->second = nullptr;
+		}
+	}
+	m_mGameStateStorage.clear();
+
 	FrameManager::GetInstance().Clear();
 	InputManager::GetInstance().Clear();
 	ObjectManager::GetInstance().Clear();
@@ -60,9 +79,7 @@ Game::~Game()
 }
 
 void Game::Start()
-{
-    ClassRegistry::GetInstance().Init();
-    
+{    
     IGameState* pGameState;
 	sf::Clock DeltaClock;
 
@@ -89,24 +106,34 @@ void Game::Start()
         
         if(pGameState != m_pCurrentState)
         {
-            if(m_pCurrentState != nullptr && m_pCurrentState->ClearOnGameStateChange())
+            if(m_pCurrentState != nullptr && m_pCurrentState->bClearOnGameStateChange)
             {
+				// Set to nullptr in GameStateStorage
+				for (auto itr = m_mGameStateStorage.begin(); itr != m_mGameStateStorage.end(); ++itr)
+				{
+					if (itr->second == m_pCurrentState)
+					{
+						itr->second == nullptr;
+						break;
+					}
+				}
+
+				// Only clear for GameStatePlay
+				if (m_mGameStateStorage[EGameState::GameStatePlay] == m_pCurrentState)
+				{
+					ObjectManager::GetInstance().Clear();
+					WorldManager::GetInstance().Clear();
+					FrameManager::GetInstance().Clear();
+					InputManager::GetInstance().Clear();
+					CollisionManager::GetInstance().Clear();
+				}
+
+				// Delete the GameState
                 delete m_pCurrentState;
-                
-                ObjectManager::GetInstance().Clear();
-                WorldManager::GetInstance().Clear();
-                FrameManager::GetInstance().Clear();
-                InputManager::GetInstance().Clear();
-                ObjectManager::GetInstance().Clear();
-                CollisionManager::GetInstance().Clear();
+				m_pCurrentState = nullptr;
             }
             
             m_pCurrentState = pGameState;
-
-			if (m_pCurrentState->IsInitialized() == false)
-			{
-				m_pCurrentState->Init(m_pWindow);
-			}
         }
 
 		// Update the state (Updates & Rendering)
@@ -117,10 +144,49 @@ void Game::Start()
 	}
 }
 
-void Game::ChangeState(IGameState* pState)
+void Game::StoreCurrentState()
 {
-	// create new state
+	m_pCurrentState->bClearOnGameStateChange = false;
+}
 
+bool Game::IsInitialized(EGameState GameState)
+{
+	return m_mGameStateStorage[GameState] != nullptr;
+}
+
+void Game::ChangeState(EGameState GameState)
+{
+	IGameState* pState;
+
+	if (m_mGameStateStorage[GameState] == nullptr)
+	{
+		switch (GameState)
+		{
+		case EGameState::GameStateIntro:
+			pState = new GameStateIntro();
+			break;
+		case EGameState::GameStatePlay:
+			pState = new GameStatePlay();
+			break;
+		case EGameState::GameStateGameOver:
+			pState = new GameStateGameOver();
+			break;
+		case EGameState::GameStatePause:
+			pState = new GameStatePause();
+			break;
+		default:
+			throw std::invalid_argument("Unknown GameState in Game::ChangeState(EGameState GameState)!");
+			break;
+		}
+
+		pState->Init(m_pWindow);
+
+		m_mGameStateStorage[GameState] = pState;
+	}
+	else
+	{
+		pState = m_mGameStateStorage[GameState];
+	}
 
     // cleanup the current state
     if ( !m_States.empty())

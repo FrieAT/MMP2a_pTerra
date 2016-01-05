@@ -162,6 +162,9 @@
     <ClCompile Include="source\XMLWriteVisitor.cpp">
       <Filter>Source Files\GameObject\Serializer</Filter>
     </ClCompile>
+    <ClCompile Include="source\GameStatePause.cpp">
+      <Filter>Source Files\Managers\GameStateManager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\IComponent.h">
@@ -322,6 +325,12 @@
     </ClInclude>
     <ClInclude Include="include\rapidxml\rapidxml_utils.hpp">
       <Filter>Source Files\External Frameworks\rapidxml</Filter>
+    </ClInclude>
+    <ClInclude Include="include\EGameState.h">
+      <Filter>Source Files\Managers\GameStateManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GameStatePause.h">
+      <Filter>Source Files\Managers\GameStateManager</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

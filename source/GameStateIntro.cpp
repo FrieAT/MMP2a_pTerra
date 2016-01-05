@@ -50,22 +50,26 @@ void GameStateIntro::Init(sf::RenderWindow* pWindow)
 
 	// Startbutton
 	tgui::Button::Ptr button = theme->load("Button"); // Verwenden von Theme für Button
-	button->setText("--- Start Game ---");
+	Game::m_pEngine->IsInitialized(EGameState::GameStatePlay) ? button->setText("Continue Game") : button->setText("Start Game");
 	button->setTextSize(28);
 	button->setPosition(Game::m_iWindowWidth / 2 - tgui::bindWidth(button) / 2, 200.f);
-	button->connect("clicked", []() { Game::m_pEngine->ChangeState(new GameStatePlay()); });
+	button->connect("clicked", []() { Game::m_pEngine->ChangeState(EGameState::GameStatePlay); });
 	m_Gui.add(button, "button");
 
-    InputManager::GetInstance().RegisterEventObserver(this);
-
-	// Finish initialization
-	m_bIsInitialized = true;
+    //InputManager::GetInstance().RegisterEventObserver(this);
 }
 
 void GameStateIntro::Update(sf::Time DeltaTime, sf::RenderWindow* pWindow)
 {
 	// Manager updates
-	InputManager::GetInstance().Update(pWindow, &m_Gui);
+	//InputManager::GetInstance().Update(pWindow, &m_Gui);
+
+	// No managers, give Events directly to Gui
+	sf::Event Event;
+	while (pWindow->pollEvent(Event))
+	{
+		m_Gui.handleEvent(Event);
+	}
 
 	// Drawing
 	m_Gui.draw();
@@ -73,7 +77,7 @@ void GameStateIntro::Update(sf::Time DeltaTime, sf::RenderWindow* pWindow)
 
 void GameStateIntro::OnInputUpdate(std::string strEvent)
 {
-    std::size_t iDelimiterPos = strEvent.find('_');
+    /*std::size_t iDelimiterPos = strEvent.find('_');
 	if (iDelimiterPos == std::string::npos)
 	{
 		return;
@@ -86,5 +90,5 @@ void GameStateIntro::OnInputUpdate(std::string strEvent)
         // Prevent of double changing states.
         m_bKeyPressed = true;
 		Game::m_pEngine->ChangeState(new GameStatePlay());
-    }
+    }*/
 }

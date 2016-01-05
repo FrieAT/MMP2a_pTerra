@@ -157,6 +157,7 @@
     <ClCompile Include="source\GameObjectFactory.cpp" />
     <ClCompile Include="source\GameStateGameOver.cpp" />
     <ClCompile Include="source\GameStateIntro.cpp" />
+    <ClCompile Include="source\GameStatePause.cpp" />
     <ClCompile Include="source\GameStatePlay.cpp" />
     <ClCompile Include="source\HealthAsteroid.cpp" />
     <ClCompile Include="source\HealthMissile.cpp" />
@@ -185,6 +186,7 @@
     <ClInclude Include="include\ClassRegistry.h" />
     <ClInclude Include="include\CollisionManager.h" />
     <ClInclude Include="include\EComponentType.h" />
+    <ClInclude Include="include\EGameState.h" />
     <ClInclude Include="include\EQuadrantPos.h" />
     <ClInclude Include="include\ESerializeNodeType.h" />
     <ClInclude Include="include\EWorldObjectType.h" />
@@ -195,6 +197,7 @@
     <ClInclude Include="include\GameObjectFactory.h" />
     <ClInclude Include="include\GameStateGameOver.h" />
     <ClInclude Include="include\GameStateIntro.h" />
+    <ClInclude Include="include\GameStatePause.h" />
     <ClInclude Include="include\GameStatePlay.h" />
     <ClInclude Include="include\HealthAsteroid.h" />
     <ClInclude Include="include\HealthMissile.h" />

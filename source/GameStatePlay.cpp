@@ -48,9 +48,6 @@ void GameStatePlay::Init(sf::RenderWindow* pWindow)
 	m_Gui.setFont("assets/Starjedi.ttf");
 	auto theme = std::make_shared<tgui::Theme>("Theme.cfg");
 
-	// Finish initialization
-	m_bIsInitialized = true;
-
     // ====== Below decprecated method to create things ======
     
     // Load a music to play

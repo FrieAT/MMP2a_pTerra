@@ -31,9 +31,6 @@ void GameStateGameOver::Init(sf::RenderWindow* pWindow)
 	auto theme = std::make_shared<tgui::Theme>("Theme.cfg");
 
     InputManager::GetInstance().RegisterEventObserver(this);
-
-	// Finish initialization
-	m_bIsInitialized = true;
 }
 
 void GameStateGameOver::Update(sf::Time DeltaTime, sf::RenderWindow* pWindow)
@@ -43,7 +40,7 @@ void GameStateGameOver::Update(sf::Time DeltaTime, sf::RenderWindow* pWindow)
 
 void GameStateGameOver::OnInputUpdate(std::string strEvent)
 {
-    std::size_t iDelimiterPos = strEvent.find('_');
+    /*std::size_t iDelimiterPos = strEvent.find('_');
     if (iDelimiterPos == std::string::npos)
     {
         return;
@@ -58,5 +55,5 @@ void GameStateGameOver::OnInputUpdate(std::string strEvent)
         GameStatePlay* pGameState = new GameStatePlay();
         pGameState->SetLoadGame("savegame.txt");
         Game::m_pEngine->ChangeState(pGameState);
-    }
+    }*/
 }
