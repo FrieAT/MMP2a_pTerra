@@ -28,7 +28,7 @@ public:
 	float m_fSpeed;
 	float m_fMaxSpeed;
 	float m_fFirerate;
-	float m_fWeaponcoolDown;
+	float m_fWeaponcoolDown = 0.f;
 
 private:
 	sf::Vector2f m_Direction;
