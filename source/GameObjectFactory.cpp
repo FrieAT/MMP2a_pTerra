@@ -165,10 +165,15 @@ GameObject* GameObjectFactory::CreateSpaceStation(sf::Vector2f Position)
 
 GameObject* GameObjectFactory::CreatePlanet(sf::Vector2f Position)
 {
+    std::vector<std::string> SpaceStationsRes;
+    SpaceStationsRes.push_back("assets/lilee/planet_earth.png");
+    SpaceStationsRes.push_back("assets/lilee/planet_ice.png");
+    SpaceStationsRes.push_back("assets/lilee/planet_sand.png");
+    
     GameObject* pPlanet = new GameObject(std::string("planet"));
     
-    pPlanet->SetComponent(new PixelPosition(Position, sf::Vector2f(0.f, 0.f)));
-    pPlanet->SetComponent(new SpriteDrawing("assets/planet.png"));
+    pPlanet->SetComponent(new PixelPosition(Position, sf::Vector2f(1000.f, 1000.f)));
+    pPlanet->SetComponent(new SpriteDrawing(SpaceStationsRes[rand() % SpaceStationsRes.size()]));
     
     return pPlanet;
 }

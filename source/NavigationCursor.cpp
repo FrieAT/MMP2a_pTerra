@@ -74,7 +74,6 @@ void NavigationCursor::OnFrameUpdate(sf::Time DeltaTime)
     {
         fAngleDegrees += 360.f;
     }
-    std::cout << "NavigationRadius: " << m_NavigationPoint.x << " / " << m_NavigationPoint.y << std::endl;
     IPosition* pPositionComponent = static_cast<IPosition*>(GetAssignedGameObject()->GetComponent(EComponentType::Position));
     if(pPositionComponent != nullptr)
     {

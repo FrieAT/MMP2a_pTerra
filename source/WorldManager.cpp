@@ -72,7 +72,7 @@ void WorldManager::AddQuadrant(Quadrant *Quadrant, bool bIgnoreGenerationBehavio
     // Only generate dynamic things, if it is allowed to (not allowed, if loading from a savegame)
     if(!bIgnoreGenerationBehavior)
     {
-        const int MaxAsteroidRandItems = 2;
+        const int MaxAsteroidRandItems = 1;
         
         for(int i = 0; i < MaxAsteroidRandItems; i++)
         {
@@ -226,15 +226,16 @@ void WorldManager::GenerateWorld()
     }
     
     std::vector<LongRect> Spaces;
-    Spaces.push_back(LongRect(std::numeric_limits<int>::min() + 1l, std::numeric_limits<int>::min() + 1l, std::numeric_limits<int>::max() * 2l - 1l, std::numeric_limits<int>::max() * 2l - 1l));
-    std::map<EWorldObjectType, unsigned long> ObjectsSize;
-    ObjectsSize[EWorldObjectType::Planet] = 10000000000ul;
-    ObjectsSize[EWorldObjectType::SpaceStation] = 100000000ul;
+    // Spaces.push_back(LongRect(std::numeric_limits<int>::min() + 1l, std::numeric_limits<int>::min() + 1l, std::numeric_limits<int>::max() * 2l - 1l, std::numeric_limits<int>::max() * 2l - 1l));
+    // Spaces.push_back(LongRect((std::numeric_limits<int>::min()) / 128, (std::numeric_limits<int>::min()) / 128, (std::numeric_limits<int>::max()) / 64, (std::numeric_limits<int>::max()) / 64));
+    Spaces.push_back(LongRect(-300000, -300000, 600000, 600000)); // Above tries were a childish thought.
+    std::map<EWorldObjectType, int> ObjectsSize;
+    ObjectsSize[EWorldObjectType::Planet] = 700;
+    ObjectsSize[EWorldObjectType::SpaceStation] = 500;
     
     EWorldObjectType eTryingToCreate = EWorldObjectType::SpaceStation;
     int iRandX, iRandY;
-    long iSize = ObjectsSize[eTryingToCreate];
-    bool bFirstIteration = true;
+    int iSize = ObjectsSize[eTryingToCreate];
     
     const std::vector<std::string> PlanetRes;
     const std::vector<std::string> SpaceStationRes;
@@ -246,23 +247,21 @@ void WorldManager::GenerateWorld()
         LongRect coord = Spaces.back();
         Spaces.pop_back();
         
-        // Calculate a random position for current space.
-        if(bFirstIteration)
+        if(coord.m_Width <= iSize || coord.m_Height <= iSize)
         {
-            iRandX = -250;
-            iRandY = -250;
-            bFirstIteration = false;
+            continue;
         }
-        else
-        {
-            iRandX = static_cast<int>(coord.m_Left + static_cast<long>(rand()) % coord.m_Width);
-            iRandY = static_cast<int>(coord.m_Top + static_cast<long>(rand()) % coord.m_Height);
-        }
+        
+        int iRandWidth = static_cast<int>(((rand() % 100) / 100.f) * (coord.m_Width - iSize));
+        int iRandHeight = static_cast<int>(((rand() % 100) / 100.f) * (coord.m_Height - iSize));
+        iRandX = coord.m_Left + iSize + iRandWidth;
+        iRandY = coord.m_Top + iSize + iRandHeight;
         
         // Insert Object into m_WorldInfo
         std::pair<int, int> quadrant_idx = GetQuadrantIndexAtPos(GetQuadrantCorrectedPos(sf::Vector2f(static_cast<float>(iRandX), static_cast<float>(iRandY))));
         std::pair<std::pair<int, int>, EWorldObjectType> worldinfo_idx(quadrant_idx, eTryingToCreate);
-        m_WorldInfo[worldinfo_idx].push_back(WorldObjectInformation(eTryingToCreate, sf::Vector2f(static_cast<float>(iRandX), static_cast<float>(iRandY)), iSize));
+        sf::Vector2f CreatePosition(iRandX, iRandY);
+        m_WorldInfo[worldinfo_idx].push_back(WorldObjectInformation(eTryingToCreate, CreatePosition, iSize));
         
         // Build Spaces for top & bottom & left & right
         LongRect LeftRectangle(coord.m_Left, coord.m_Top, (iRandX - coord.m_Left), coord.m_Height);
@@ -271,50 +270,58 @@ void WorldManager::GenerateWorld()
         LongRect BottomRectangle(coord.m_Left, (iRandY + iSize), coord.m_Width, (coord.m_Height - TopRectangle.m_Height - iSize));
         
         // Decide wether left & right or top & bottom is bigger.
-        long AreaFromLeftAndRight = (LeftRectangle.m_Width * LeftRectangle.m_Height + RightRectangle.m_Width * RightRectangle.m_Height);
-        long AreaFromTopAndBottom = (TopRectangle.m_Width * TopRectangle.m_Height + BottomRectangle.m_Width * BottomRectangle.m_Height);
+        long AreaFromLeftAndRight = (LeftRectangle.m_Width + LeftRectangle.m_Height + RightRectangle.m_Width + RightRectangle.m_Height);
+        long AreaFromTopAndBottom = (TopRectangle.m_Width + TopRectangle.m_Height + BottomRectangle.m_Width + BottomRectangle.m_Height);
         if(AreaFromLeftAndRight > AreaFromTopAndBottom)
         {
+            // NOTE: this is deprecated, as the width here gets always to iSize and won´t be further used.
             // left & right area is bigger.
             // so resize the area from top & bottom
+            /*
             TopRectangle.m_Left += LeftRectangle.m_Width;
             TopRectangle.m_Width -= (LeftRectangle.m_Width + RightRectangle.m_Width);
             BottomRectangle.m_Left = TopRectangle.m_Left;
             BottomRectangle.m_Width = TopRectangle.m_Width;
+            */
+            // push the 2 spaces to stack.
+            // but only, if next size fits into area.
+            if(RightRectangle.m_Width > 0 && RightRectangle.m_Height > 0 && RightRectangle.m_Width > iSize && RightRectangle.m_Height > iSize)
+            {
+                Spaces.push_back(RightRectangle);
+            }
+            if(LeftRectangle.m_Width > 0 && LeftRectangle.m_Height > 0 && LeftRectangle.m_Width > iSize && LeftRectangle.m_Height > iSize)
+            {
+                Spaces.push_back(LeftRectangle);
+            }
         }
         else
         {
+            // NOTE: this is deprecated, as the height here gets always to iSize and won´t be further used.
             // top & bottom area is bigger.
             // so resize the area from left & right
+            /*
             LeftRectangle.m_Top += TopRectangle.m_Height;
             LeftRectangle.m_Height -= (TopRectangle.m_Height + BottomRectangle.m_Height);
             RightRectangle.m_Top = LeftRectangle.m_Top;
             RightRectangle.m_Height = LeftRectangle.m_Height;
+            */
+            // push the 2 spaces to stack.
+            // but only, if next size fits into area.
+            if(TopRectangle.m_Width > 0 && TopRectangle.m_Height > 0 && TopRectangle.m_Width > iSize && TopRectangle.m_Height > iSize)
+            {
+                Spaces.push_back(TopRectangle);
+            }
+            if(BottomRectangle.m_Width > 0 && BottomRectangle.m_Height > 0 && BottomRectangle.m_Width > iSize && BottomRectangle.m_Height > iSize)
+            {
+                Spaces.push_back(BottomRectangle);
+            }
         }
         
         // set size for next element
         eTryingToCreate = (EWorldObjectType)(rand() % (int)EWorldObjectType::MaxItem);
         iSize = ObjectsSize[eTryingToCreate];
-        
-        // push the 4 spaces to stack.
-        // but only, if next size fits into area.
-        if(TopRectangle.m_Width > 0 && TopRectangle.m_Height > 0 && TopRectangle.m_Width * TopRectangle.m_Height >= iSize * iSize)
-        {
-            Spaces.push_back(TopRectangle);
-        }
-        if(RightRectangle.m_Width > 0 && RightRectangle.m_Height > 0 && RightRectangle.m_Width * RightRectangle.m_Height >= iSize * iSize)
-        {
-            Spaces.push_back(RightRectangle);
-        }
-        if(BottomRectangle.m_Width > 0 && BottomRectangle.m_Height > 0 && BottomRectangle.m_Width * BottomRectangle.m_Height >= iSize * iSize)
-        {
-            Spaces.push_back(BottomRectangle);
-        }
-        if(LeftRectangle.m_Width > 0 && LeftRectangle.m_Height > 0 && LeftRectangle.m_Width * LeftRectangle.m_Height >= iSize * iSize)
-        {
-            Spaces.push_back(LeftRectangle);
-        }
     }
+    std::cout << "Finished :D" << std::endl;
     // std::cout << "[WorldManager]: Generated " << m_WorldInfo[EWorldObjectType::Planet].size() << " Planets and " << m_WorldInfo[EWorldObjectType::SpaceStation].size() << " SpaceStations." << std::endl;
 }
 
@@ -383,7 +390,10 @@ void WorldManager::SaveGame(std::string strPath)
 sf::Vector2f WorldManager::GetNextNearestObjectPos(sf::Vector2f Position, EWorldObjectType eType)
 {
     sf::Vector2f NearestPos(FLT_MAX, FLT_MAX);
-    bool bSomethingFound = false;
+    int iSomethingFound = 0;
+    std::vector<sf::Vector2f> LastPositions;
+    LastPositions.push_back(NearestPos);
+    LastPositions.push_back(NearestPos);
     
     auto it = m_WorldInfo.begin();
     while(it != m_WorldInfo.end())
@@ -402,15 +412,27 @@ sf::Vector2f WorldManager::GetNextNearestObjectPos(sf::Vector2f Position, EWorld
             float fQuadrLength = NearestPos.x * NearestPos.x + NearestPos.y * NearestPos.y;
             float fOtherQuadrLength = Difference.x * Difference.x + Difference.y * Difference.y;
             
-            if(!bSomethingFound || fOtherQuadrLength < fQuadrLength)
+            if(iSomethingFound == 0 || fOtherQuadrLength < fQuadrLength)
             {
                 NearestPos = it_objects->GetPosition();
-                bSomethingFound = true;
+                iSomethingFound++;
+                LastPositions[1] = LastPositions[0];
+                LastPositions[0] = NearestPos;
             }
             
             it_objects++;
         }
         it++;
+    }
+    
+    // Take second nearest Position when avialable.
+    if(iSomethingFound >= 2)
+    {
+        NearestPos = LastPositions[1];
+    }
+    else
+    {
+        NearestPos = LastPositions[0];
     }
     
     return NearestPos;

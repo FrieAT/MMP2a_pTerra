@@ -7,7 +7,7 @@
 class LongRect
 {
 public:
-    LongRect(long Left, long Top, long Width, long Height)
+    LongRect(int Left, int Top, int Width, int Height)
     : m_Left(Left)
     , m_Top(Top)
     , m_Width(Width)
@@ -15,8 +15,8 @@ public:
     {
         
     }
-    long m_Left;
-    long m_Top;
-    long m_Width;
-    long m_Height;
+    int m_Left;
+    int m_Top;
+    int m_Width;
+    int m_Height;
 };
