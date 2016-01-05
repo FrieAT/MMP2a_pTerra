@@ -6,8 +6,7 @@ Copyright (c) MultiMediaTechnology, 2015
 #include "ObjectManager.h"
 #include "CollisionManager.h"
 #include "GameObjectFactory.h"
-#include "INavigation.h"
-#include "WorldManager.h"
+#include "IScore.h"
 
 HealthMissile::HealthMissile(float fHealth, GameObject* pOwner)
 : IHealth()
@@ -15,6 +14,7 @@ HealthMissile::HealthMissile(float fHealth, GameObject* pOwner)
 	this->m_fHealth = fHealth;
     this->m_pOwner = pOwner;
     this->m_bSomethingHitted = false;
+    this->m_bMadeAction = false;
 }
 
 HealthMissile::~HealthMissile()
@@ -72,24 +72,24 @@ void HealthMissile::OnCollisionEvent(GameObject* pOther, sf::Vector2f ImpulseImp
         GameObjectFactory::CreateExplosion(pPositionComponent->GetPosition());
     }
     
+    // Get for the Owner of the Missile the ResearchPoints from the Victim
+    if(m_pOwner != nullptr && !m_bMadeAction)
+    {
+        IScore* pScoreVictim = static_cast<IScore*>(pOther->GetComponent(EComponentType::Score));
+        IScore* pScoreOwner = static_cast<IScore*>(m_pOwner->GetComponent(EComponentType::Score));
+        if(pScoreOwner != nullptr && pScoreVictim != nullptr)
+        {
+            pScoreOwner->AddScore(pScoreVictim->GetScore());
+        }
+    }
+
     IHealth* pOtherHealth = static_cast<IHealth*>(pOther->GetComponent(EComponentType::Health));
     if(pOtherHealth != nullptr)
     {
         pOtherHealth->Damage(90001.f); // What does the scouter say to his power level?
-        
-        // Only set Navigation point to next nearest space station, if something with Health is destroyed.
-        if(m_pOwner != nullptr)
-        {
-            IPosition* pPositionOwner = static_cast<IPosition*>(m_pOwner->GetComponent(EComponentType::Position));
-            INavigation* pNavigationOwner = static_cast<INavigation*>(m_pOwner->GetComponent(EComponentType::Navigation));
-            if(pNavigationOwner != nullptr)
-            {
-                sf::Vector2f NextCoords = WorldManager::GetInstance().GetNextNearestObjectPos(pPositionOwner->GetPosition());
-                pNavigationOwner->SetNavigationPoint(NextCoords);
-                pNavigationOwner->SetNavigationActive(true);
-            }
-        }
     }
+    
+    m_bMadeAction = true;
 }
 
 IComponent* HealthMissile::Deserialize(SerializeNode *pNode)

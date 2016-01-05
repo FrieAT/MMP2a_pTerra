@@ -22,4 +22,5 @@ public:
 private:
     GameObject* m_pOwner;
     bool m_bSomethingHitted;
+    bool m_bMadeAction;
 };

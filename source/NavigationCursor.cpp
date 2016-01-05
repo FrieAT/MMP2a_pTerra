@@ -9,6 +9,7 @@
 #include "ObjectManager.h"
 #include "PixelPosition.h"
 #include "SpriteDrawing.h"
+#include "IScore.h"
 
 NavigationCursor::NavigationCursor()
 : INavigation()
@@ -88,6 +89,22 @@ void NavigationCursor::OnFrameUpdate(sf::Time DeltaTime)
     if(fLength < 1000.f)
     {
         // TODO: Mögliche GUI Ausgabe für Ziel erreicht.
+        
+        // Gebe dem GameObject ResearchPoints für das erreichen des Ziels.
+        IScore* pScoreComponent = static_cast<IScore*>(GetAssignedGameObject()->GetComponent(EComponentType::Score));
+        if(pScoreComponent != nullptr)
+        {
+            if(pScoreComponent->GetScore() >= pScoreComponent->GetScoreLimit())
+            {
+                // TODO: GameOver - Game finished :D
+                pScoreComponent->SetScore(9000); // Give him nine thousand points!!!!!
+            }
+            else
+            {
+                pScoreComponent->AddScore(75);
+            }
+        }
+        
         SetNavigationActive(false);
     }
 }

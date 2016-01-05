@@ -12,6 +12,7 @@
 #include "GameObjectFactory.h"
 #include "GameStateIntro.h"
 #include "Game.h"
+#include "IScore.h"
 
 HealthAsteroid::HealthAsteroid(float fHealth)
 : IHealth()
@@ -60,10 +61,15 @@ void HealthAsteroid::OnFrameUpdate(sf::Time DeltaTime)
     IPosition* pPositionTextComponent = static_cast<IPosition*>(m_pHealthDebug->GetComponent(EComponentType::Position));
     IPosition* pPositionShipComponent = static_cast<IPosition*>(GetAssignedGameObject()->GetComponent(EComponentType::Position));
     IDrawing* pDrawingTextComponent = static_cast<IDrawing*>(m_pHealthDebug->GetComponent(EComponentType::Drawing));
+    IScore* pScore = static_cast<IScore*>(GetAssignedGameObject()->GetComponent(EComponentType::Score));
     
     sf::Vector2f ship_pos = pPositionShipComponent->GetPosition() + sf::Vector2f(-30.f, 50.f);
     std::stringstream health_text;
     health_text << "Health: " << m_fHealth << "\nPosition: (" << round(pPositionShipComponent->GetPosition().x) << " / " << round(pPositionShipComponent->GetPosition().y) << ")";
+    if(pScore != nullptr)
+    {
+        health_text << "\nScore: " << pScore->GetScore();
+    }
     pPositionTextComponent->SetPosition(ship_pos);
     pDrawingTextComponent->SetText(health_text.str());
 }

@@ -12,6 +12,7 @@ Copyright (c) MultiMediaTechnology, 2015
 #include "GameStateGameOver.h"
 #include "Game.h"
 #include "INavigation.h"
+#include "IScore.h"
 
 HealthShip::HealthShip(float fHealth)
 : IHealth()
@@ -64,6 +65,7 @@ void HealthShip::OnFrameUpdate(sf::Time DeltaTime)
     IPosition* pPositionShipComponent = static_cast<IPosition*>(GetAssignedGameObject()->GetComponent(EComponentType::Position));
     IDrawing* pDrawingTextComponent = static_cast<IDrawing*>(m_pHealthDebug->GetComponent(EComponentType::Drawing));
     INavigation* pNavigation = static_cast<INavigation*>(GetAssignedGameObject()->GetComponent(EComponentType::Navigation));
+    IScore* pScore = static_cast<IScore*>(GetAssignedGameObject()->GetComponent(EComponentType::Score));
     
     sf::Vector2f ship_pos = pPositionShipComponent->GetPosition() + sf::Vector2f(-30.f, 50.f);
     std::stringstream health_text;
@@ -75,6 +77,10 @@ void HealthShip::OnFrameUpdate(sf::Time DeltaTime)
     if(pNavigation != nullptr && pNavigation->IsNavigationActive())
     {
         health_text << "\nNavi: " << pNavigation->GetDistanceToPoint() << " Meters";
+    }
+    if(pScore != nullptr)
+    {
+        health_text << "\nScore: " << pScore->GetScore() << " / " << pScore->GetScoreLimit();
     }
     pPositionTextComponent->SetPosition(ship_pos);
     pDrawingTextComponent->SetText(health_text.str());

@@ -92,7 +92,7 @@ void WorldManager::AddQuadrant(Quadrant *Quadrant, bool bIgnoreGenerationBehavio
                     case EWorldObjectType::SpaceStation:
                         GameObjectFactory::CreateSpaceStation(it_world_info->GetPosition());
                         break;
-                    default:
+                    default: // yes and ignore Terra too, Terra should be only on need created.
                         break;
                 }
                 it_world_info++;
@@ -228,18 +228,17 @@ void WorldManager::GenerateWorld()
     std::vector<LongRect> Spaces;
     // Spaces.push_back(LongRect(std::numeric_limits<int>::min() + 1l, std::numeric_limits<int>::min() + 1l, std::numeric_limits<int>::max() * 2l - 1l, std::numeric_limits<int>::max() * 2l - 1l));
     // Spaces.push_back(LongRect((std::numeric_limits<int>::min()) / 128, (std::numeric_limits<int>::min()) / 128, (std::numeric_limits<int>::max()) / 64, (std::numeric_limits<int>::max()) / 64));
-    Spaces.push_back(LongRect(-300000, -300000, 600000, 600000)); // Above tries were a childish thought.
+    Spaces.push_back(LongRect(-600000, -600000, 1200000, 1200000)); // Above tries were a childish thought.
     std::map<EWorldObjectType, int> ObjectsSize;
     ObjectsSize[EWorldObjectType::Planet] = 700;
     ObjectsSize[EWorldObjectType::SpaceStation] = 500;
+    ObjectsSize[EWorldObjectType::Terra] = 30000;
     
-    EWorldObjectType eTryingToCreate = EWorldObjectType::SpaceStation;
+    int iMaxWorldObjects = ((int)EWorldObjectType::MaxItem - 1);
+    
+    EWorldObjectType eTryingToCreate = EWorldObjectType::Terra;
     int iRandX, iRandY;
     int iSize = ObjectsSize[eTryingToCreate];
-    
-    const std::vector<std::string> PlanetRes;
-    const std::vector<std::string> SpaceStationRes;
-    // const std::vector<std::string> BlackHoleRes;
     
     while(!Spaces.empty())
     {
@@ -318,7 +317,7 @@ void WorldManager::GenerateWorld()
         }
         
         // set size for next element
-        eTryingToCreate = (EWorldObjectType)(rand() % (int)EWorldObjectType::MaxItem);
+        eTryingToCreate = (EWorldObjectType)(rand() % iMaxWorldObjects);
         iSize = ObjectsSize[eTryingToCreate];
     }
     std::cout << "Finished :D" << std::endl;
@@ -390,10 +389,6 @@ void WorldManager::SaveGame(std::string strPath)
 sf::Vector2f WorldManager::GetNextNearestObjectPos(sf::Vector2f Position, EWorldObjectType eType)
 {
     sf::Vector2f NearestPos(FLT_MAX, FLT_MAX);
-    int iSomethingFound = 0;
-    std::vector<sf::Vector2f> LastPositions;
-    LastPositions.push_back(NearestPos);
-    LastPositions.push_back(NearestPos);
     
     auto it = m_WorldInfo.begin();
     while(it != m_WorldInfo.end())
@@ -412,27 +407,14 @@ sf::Vector2f WorldManager::GetNextNearestObjectPos(sf::Vector2f Position, EWorld
             float fQuadrLength = NearestPos.x * NearestPos.x + NearestPos.y * NearestPos.y;
             float fOtherQuadrLength = Difference.x * Difference.x + Difference.y * Difference.y;
             
-            if(iSomethingFound == 0 || fOtherQuadrLength < fQuadrLength)
+            if(fOtherQuadrLength >= 3000.f && fOtherQuadrLength < fQuadrLength)
             {
                 NearestPos = it_objects->GetPosition();
-                iSomethingFound++;
-                LastPositions[1] = LastPositions[0];
-                LastPositions[0] = NearestPos;
             }
             
             it_objects++;
         }
         it++;
-    }
-    
-    // Take second nearest Position when avialable.
-    if(iSomethingFound >= 2)
-    {
-        NearestPos = LastPositions[1];
-    }
-    else
-    {
-        NearestPos = LastPositions[0];
     }
     
     return NearestPos;

@@ -19,6 +19,7 @@ Copyright (c) MultiMediaTechnology, 2015
 #include "CircleCollision.h"
 #include "BoxCollision.h"
 #include "NavigationCursor.h"
+#include "ResearchScore.h"
 
 GameObject* GameObjectFactory::CreatePlayerShip(sf::Vector2f Position, char cPlayer)
 {
@@ -34,6 +35,7 @@ GameObject* GameObjectFactory::CreatePlayerShip(sf::Vector2f Position, char cPla
 	pShip->SetComponent(new BoxCollision(64, 100));
     pShip->SetComponent(new HealthShip(100.f));
     pShip->SetComponent(new NavigationCursor());
+    pShip->SetComponent(new ResearchScore(100, 10));
 
 	return pShip;
 }
@@ -68,6 +70,9 @@ GameObject* GameObjectFactory::CreateAsteroid(sf::Vector2f vPosition, float fRot
 	//pAsteroid->SetComponent(new CircleCollision(40.f, pos));
 	pAsteroid->SetComponent(new BoxCollision(80, 80));
     pAsteroid->SetComponent(new HealthAsteroid(200.f));
+    ResearchScore* pScoreComponent = new ResearchScore(9999999, 9999999);
+    pScoreComponent->SetScore(rand() % 5);
+    pAsteroid->SetComponent(pScoreComponent);
 	return pAsteroid;
 }
 
@@ -163,12 +168,17 @@ GameObject* GameObjectFactory::CreateSpaceStation(sf::Vector2f Position)
     return pSpaceStation;
 }
 
-GameObject* GameObjectFactory::CreatePlanet(sf::Vector2f Position)
+GameObject* GameObjectFactory::CreatePlanet(sf::Vector2f Position, EWorldObjectType eType)
 {
     std::vector<std::string> SpaceStationsRes;
-    SpaceStationsRes.push_back("assets/lilee/planet_earth.png");
     SpaceStationsRes.push_back("assets/lilee/planet_ice.png");
     SpaceStationsRes.push_back("assets/lilee/planet_sand.png");
+    
+    if(eType == EWorldObjectType::Terra)
+    {
+        SpaceStationsRes.clear();
+        SpaceStationsRes.push_back("assets/lilee/planet_earth.png");
+    }
     
     GameObject* pPlanet = new GameObject(std::string("planet"));
     
