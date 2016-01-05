@@ -39,8 +39,8 @@ Game::Game()
         throw std::runtime_error("Unable to load assets/icon.png");
     }
     m_pWindow->setIcon(m_Icon.getSize().x, m_Icon.getSize().y, m_Icon.getPixelsPtr());
-	//set framerate to 60
-	m_pWindow->setFramerateLimit(60);
+	//set framerate
+	m_pWindow->setFramerateLimit(m_iFrameRate);
 }
 
 Game::~Game()
