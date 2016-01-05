@@ -48,11 +48,7 @@ void HealthShip::Damage(float fDamage)
 
 void HealthShip::OnFrameDraw(sf::RenderWindow* pWindow)
 {
-    IDrawing* pHealthDebugDrawing = static_cast<IDrawing*>(m_pHealthDebug->GetComponent(EComponentType::Drawing));
-    if(pHealthDebugDrawing != nullptr)
-    {
-        pHealthDebugDrawing->Draw(pWindow);
-    }
+
 }
 
 void HealthShip::OnFrameUpdate(sf::Time DeltaTime)
