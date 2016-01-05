@@ -49,18 +49,46 @@ void GameStateIntro::Init(sf::RenderWindow* pWindow)
 	m_Gui.add(title, "title");*/
 
 	// Startbutton
-	tgui::Button::Ptr button = theme->load("Button"); // Verwenden von Theme für Button
-	Game::m_pEngine->IsInitialized(EGameState::GameStatePlay) ? button->setText("Continue Game") : button->setText("Start Game");
-	button->setTextSize(28);
-	button->setPosition(Game::m_iWindowWidth / 2 - tgui::bindWidth(button) / 2, 200.f);
-	button->connect("clicked", []() { Game::m_pEngine->ChangeState(EGameState::GameStatePlay); });
-	m_Gui.add(button, "button");
+	tgui::Button::Ptr buttonStart = theme->load("Button"); // Verwenden von Theme für Button
+	if (Game::m_pEngine->IsInitialized(EGameState::GameStatePlay))
+	{
+		buttonStart->setText("Continue Game");
+		buttonStart->connect("clicked", []() {
+			Game::m_pEngine->ChangeState(EGameState::GameStatePause);
+		});
+	}
+	else
+	{
+		buttonStart->setText("Start Game");
+		buttonStart->connect("clicked", []() {
+			Game::m_pEngine->ChangeState(EGameState::GameStatePlay);
+		});
+	}
+	buttonStart->setTextSize(28);
+	buttonStart->setPosition(Game::m_iWindowWidth / 2 - tgui::bindWidth(buttonStart) / 2, 200.f);
+	m_Gui.add(buttonStart, "buttonStart");
+
+	// Exit button
+	tgui::Button::Ptr buttonExit = theme->load("Button"); // Verwenden von Theme für Button
+	buttonExit->setText("Exit");
+	buttonExit->connect("clicked", [this]() {
+		m_bExit = true;
+	});
+	buttonExit->setTextSize(28);
+	buttonExit->setPosition(Game::m_iWindowWidth / 2 - tgui::bindWidth(buttonExit) / 2, 400.f);
+	m_Gui.add(buttonExit, "buttonExit");
 
     //InputManager::GetInstance().RegisterEventObserver(this);
 }
 
 void GameStateIntro::Update(sf::Time DeltaTime, sf::RenderWindow* pWindow)
 {
+	// Check for exit
+	if (m_bExit)
+	{
+		pWindow->close();
+	}
+
 	// Manager updates
 	//InputManager::GetInstance().Update(pWindow, &m_Gui);
 

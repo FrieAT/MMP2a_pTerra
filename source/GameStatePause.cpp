@@ -15,7 +15,7 @@ Copyright (c) MultiMediaTechnology, 2015
 
 GameStatePause::~GameStatePause()
 {
-	
+	m_Gui.removeAllWidgets();
 }
 
 void GameStatePause::Init(sf::RenderWindow* pWindow)

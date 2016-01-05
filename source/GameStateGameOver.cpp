@@ -14,6 +14,7 @@
 
 GameStateGameOver::~GameStateGameOver()
 {
+	m_Gui.removeAllWidgets();
     InputManager::GetInstance().UnregisterEventObserver(this);
 }
 

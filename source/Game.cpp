@@ -44,6 +44,7 @@ Game::Game()
         throw std::runtime_error("Unable to load assets/icon.png");
     }
     m_pWindow->setIcon(m_Icon.getSize().x, m_Icon.getSize().y, m_Icon.getPixelsPtr());
+	
 	//set framerate to 60
 	m_pWindow->setFramerateLimit(60);
 }
@@ -65,6 +66,7 @@ Game::~Game()
 			delete itr->second;
 			itr->second = nullptr;
 		}
+		++itr;
 	}
 	m_mGameStateStorage.clear();
 
@@ -113,7 +115,7 @@ void Game::Start()
 				{
 					if (itr->second == m_pCurrentState)
 					{
-						itr->second == nullptr;
+						itr->second = nullptr;
 						break;
 					}
 				}
@@ -141,6 +143,16 @@ void Game::Start()
 
 		// Update the window
         m_pWindow->display();
+	}
+
+	// Before exit set nullptr in GameStateStorage
+	for (auto itr = m_mGameStateStorage.begin(); itr != m_mGameStateStorage.end(); ++itr)
+	{
+		if (itr->second == m_pCurrentState)
+		{
+			itr->second = nullptr;
+			break;
+		}
 	}
 }
 
