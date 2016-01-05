@@ -28,6 +28,7 @@ GameObject* GameObjectFactory::CreatePlayerShip(sf::Vector2f Position, char cPla
 	pShip->SetComponent(new QuadrantPosition(sf::Vector2f(Position), sf::Vector2f(32.f, 51.f)));
 	pShip->SetComponent(new ShipMovement(cPlayer));
     SpriteDrawing* pSpriteComponent = new SpriteDrawing(std::string("assets/lilee/ship_player.png"), sf::Vector2f(192.f, 128.f));
+    pSpriteComponent->SetUpdateFrameRate(20);
     pSpriteComponent->SetTextureArea(sf::FloatRect(0.f, 0.f, 64.f, 102.f));
     pShip->SetComponent(pSpriteComponent);
     pShip->SetComponent(new DynamicView(sf::FloatRect(0, 0, static_cast<float>(Game::m_iWindowWidth), static_cast<float>(Game::m_iWindowHeight)), sf::Vector2f(1920.f - static_cast<float>(Game::m_iWindowWidth), 0), 20.f));
