@@ -110,16 +110,6 @@ void Game::Start()
         {
             if(m_pCurrentState != nullptr && m_pCurrentState->bClearOnGameStateChange)
             {
-				// Set to nullptr in GameStateStorage
-				for (auto itr = m_mGameStateStorage.begin(); itr != m_mGameStateStorage.end(); ++itr)
-				{
-					if (itr->second == m_pCurrentState)
-					{
-						itr->second = nullptr;
-						break;
-					}
-				}
-
 				// Only clear for GameStatePlay
 				if (m_mGameStateStorage[EGameState::GameStatePlay] == m_pCurrentState)
 				{
@@ -128,6 +118,16 @@ void Game::Start()
 					FrameManager::GetInstance().Clear();
 					InputManager::GetInstance().Clear();
 					CollisionManager::GetInstance().Clear();
+				}
+
+				// Set to nullptr in GameStateStorage
+				for (auto itr = m_mGameStateStorage.begin(); itr != m_mGameStateStorage.end(); ++itr)
+				{
+					if (itr->second == m_pCurrentState)
+					{
+						itr->second = nullptr;
+						break;
+					}
 				}
 
 				// Delete the GameState
