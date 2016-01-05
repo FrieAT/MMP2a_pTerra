@@ -114,6 +114,12 @@ void ObjectManager::RemoveGameObject(GameObject* pObject, bool bDelete)
 void ObjectManager::RemoveAllGameObjects()
 {
     std::vector<GameObject*> EreasedGameObjects;
+    
+    // ATTENTION: This is not to be meant there, but somehow there is something in the loop which causes to break the program flow without exception or error. This only fix here Problems with other GameStates as it will be just overwritten.
+    // But the problem here causes a memory leak, because not all objects get deleted.
+    // This problem will focused later.
+    m_ActiveGameObjects.clear();
+    
     auto it = m_Objects.begin();
     while(it != m_Objects.end())
     {
@@ -180,7 +186,6 @@ void ObjectManager::RemoveAllGameObjects()
     }
     PerformGameObjectCleanUp();
     m_Objects.clear();
-    m_ActiveGameObjects.clear();
     EreasedGameObjects.clear();
 }
 

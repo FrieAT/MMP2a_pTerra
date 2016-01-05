@@ -96,7 +96,6 @@ void Game::Start()
                 WorldManager::GetInstance().Clear();
                 FrameManager::GetInstance().Clear();
                 InputManager::GetInstance().Clear();
-                ObjectManager::GetInstance().Clear();
                 CollisionManager::GetInstance().Clear();
             }
             
@@ -107,8 +106,8 @@ void Game::Start()
         // Manager updates
         FrameManager::GetInstance().Update(deltaTime);
         InputManager::GetInstance().Update(m_pWindow);
+        CollisionManager::GetInstance().Update(deltaTime); 
         ObjectManager::GetInstance().Update(deltaTime);
-        CollisionManager::GetInstance().Update(deltaTime);
         
 		// Rendering
         FrameManager::GetInstance().Draw(m_pWindow);
