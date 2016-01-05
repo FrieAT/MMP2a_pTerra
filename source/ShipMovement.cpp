@@ -5,6 +5,7 @@ Copyright (c) MultiMediaTechnology, 2015
 #include "ShipMovement.h"
 #include "GameObjectFactory.h"
 #include "ObjectManager.h"
+#include "SpriteDrawing.h"
 
 ShipMovement::ShipMovement(char cPlayer)
 {
@@ -16,6 +17,7 @@ ShipMovement::ShipMovement(char cPlayer)
 	m_fSpeed = 1000.f;
 	m_fMaxSpeed = 2000;
 	m_fFirerate = 0.5f;
+    m_fWeaponcoolDown = 0.f;
 }
 
 ShipMovement::~ShipMovement()
@@ -113,8 +115,6 @@ void ShipMovement::UpdateMovement(sf::Time DeltaTime)
         m_fWeaponcoolDown -= 1.f * DeltaTime.asSeconds();
     }
 
-
-
 	//if (fSpeed >= m_fMaxSpeed)
 	//{
 	//	m_Impulses[0] = m_Impulses[0] * 0.99f;
@@ -152,6 +152,22 @@ void ShipMovement::OnFrameUpdate(sf::Time DeltaTime)
 
 	pPositionComponent->SetPosition(pPositionComponent->GetPosition() + velocity * DeltaTime.asSeconds());
 
+    // Set Animation for thrusters
+    SpriteDrawing* pSpriteComponent = static_cast<SpriteDrawing*>(GetAssignedGameObject()->GetComponent(EComponentType::Drawing));
+    if(pSpriteComponent != nullptr)
+    {
+        if(m_Direction.y != 0)
+        {
+            pSpriteComponent->GenerateTextureAreas(0, 0);
+            pSpriteComponent->SetTextureArea(sf::FloatRect(64.f, 0.f, 64.f, 102.f));
+            pSpriteComponent->SetTextureArea(sf::FloatRect(128.f, 0.f, 64.f, 102.f));
+        }
+        else
+        {
+            pSpriteComponent->GenerateTextureAreas(0, 0);
+            pSpriteComponent->SetTextureArea(sf::FloatRect(0.f, 0.f, 64.f, 102.f));
+        }
+    }
 }
 
 void ShipMovement::Serialize(SerializeNode *pParentNode)

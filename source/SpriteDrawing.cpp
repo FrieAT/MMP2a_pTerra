@@ -6,12 +6,13 @@ Copyright (c) MultiMediaTechnology, 2015
 #include "GameObject.h"
 #include "IPosition.h"
 #include "TextureFactory.h"
+#include "Game.h"
 
 SpriteDrawing::SpriteDrawing(std::string strRessourcePath)
 : m_strResPath(strRessourcePath)
 , m_ScaleToSize(sf::Vector2f(0.f, 0.f))
 , m_iTextureRectsCount(0)
-, m_iTextureFrameUpdateCount(50)
+, m_iTextureFrameUpdateCount(Game::m_iFrameRate)
 , m_iCurrentFrameCount(0)
 {
     m_pTexture = TextureFactory::GetInstance().GetTexture(strRessourcePath);
@@ -84,6 +85,24 @@ sf::FloatRect SpriteDrawing::GetTextureArea()
 void SpriteDrawing::SetTextureArea(sf::FloatRect Area)
 {
     m_TextureRects.push_back(sf::IntRect(Area));
+}
+
+void SpriteDrawing::GenerateTextureAreas(int iAmountInX, int iAmountInY)
+{
+    m_TextureRects.clear(); // Clear existing Texture-Area´s
+    if(iAmountInX == 0 || iAmountInY == 0)
+    {
+        return;
+    }
+    sf::Vector2u TextureSize = m_pTexture->getSize();
+    sf::Vector2u AssetSize(TextureSize.x / iAmountInX, TextureSize.y / iAmountInY);
+    for(int y = 0; y < iAmountInY; y++)
+    {
+        for(int x = 0; x < iAmountInX; x++)
+        {
+            SetTextureArea(sf::FloatRect((x * AssetSize.x), (y * AssetSize.y), AssetSize.x, AssetSize.y));
+        }
+    }
 }
 
 void SpriteDrawing::Serialize(SerializeNode *pParentNode)

@@ -30,8 +30,11 @@ public:
     static GameObject* Deserialize(SerializeNode* pNode);
     void SetTemporaryState(bool bTemporary) { m_bTemporaryCreated = bTemporary; }
     bool GetTemporaryState() { return m_bTemporaryCreated; }
+    void SetAssistedState(bool bAssisted) { m_bAssistedCreated = bAssisted; }
+    bool GetAssistedState() { return m_bAssistedCreated; }
 private:
 	std::string m_strID;
 	std::map<EComponentType, IComponent*> m_Components;
     bool m_bTemporaryCreated;
+    bool m_bAssistedCreated;
 };

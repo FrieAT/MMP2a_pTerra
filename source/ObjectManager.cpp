@@ -8,7 +8,7 @@ Copyright (c) MultiMediaTechnology, 2015
 
 ObjectManager::ObjectManager()
 {
-	m_DrawOrder = std::vector<std::string> { "background", "planet", "asteroid", "missile", "ship", "space_station", "text" };
+	m_DrawOrder = std::vector<std::string> { "background", "planet", "asteroid", "missile", "ship", "space_station", "text", "effect" };
 }
 
 std::pair<std::string, Quadrant*> ObjectManager::GetKeyFromGameObject(GameObject *pGameObject)
@@ -65,6 +65,15 @@ void ObjectManager::RemoveGameObject(GameObject* pObject, bool bDelete)
     {
         throw std::runtime_error("Given GameObject-object has a null-pointer-reference.");
     }
+    if(bDelete && pObject->GetAssistedState())
+    {
+        // Ignore Deletion, if it is a assisted game object.
+        // This can be caused, if GameState-Changes or GameWindow closes
+        // If so, it may be possible that AssistedGameObject will be deleted before the Owner from this Object
+        // when this occurs, the destructor in the Owner will try to delete the AssistedGameObject again
+        // and a BAD_ACCESS_EXCEPTION occurs.
+        return;
+    }
     auto key = GetKeyFromGameObject(pObject);
     auto i = m_Objects[key].begin();
     while(i != m_Objects[key].end())
@@ -105,6 +114,12 @@ void ObjectManager::RemoveGameObject(GameObject* pObject, bool bDelete)
 void ObjectManager::RemoveAllGameObjects()
 {
     std::vector<GameObject*> EreasedGameObjects;
+    
+    // ATTENTION: This is not to be meant there, but somehow there is something in the loop which causes to break the program flow without exception or error. This only fix here Problems with other GameStates as it will be just overwritten.
+    // But the problem here causes a memory leak, because not all objects get deleted.
+    // This problem will focused later.
+    m_ActiveGameObjects.clear();
+    
     auto it = m_Objects.begin();
     while(it != m_Objects.end())
     {
@@ -122,6 +137,15 @@ void ObjectManager::RemoveAllGameObjects()
 				vec_it++;
 				continue;
 			}
+            if((*vec_it)->GetAssistedState())
+            {
+                // Ignore Deletion, if it is a assisted game object.
+                // This can be caused, if GameState-Changes or GameWindow closes
+                // If so, it may be possible that AssistedGameObject will be deleted before the Owner from this Object
+                // when this occurs, the destructor in the Owner will try to delete the AssistedGameObject again
+                // and a BAD_ACCESS_EXCEPTION occurs.
+                return;
+            }
             bool already_ereased = false;
             auto check_it = EreasedGameObjects.begin();
             while(check_it != EreasedGameObjects.end())
@@ -162,7 +186,6 @@ void ObjectManager::RemoveAllGameObjects()
     }
     PerformGameObjectCleanUp();
     m_Objects.clear();
-    m_ActiveGameObjects.clear();
     EreasedGameObjects.clear();
 }
 

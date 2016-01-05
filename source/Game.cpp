@@ -39,8 +39,8 @@ Game::Game()
         throw std::runtime_error("Unable to load assets/icon.png");
     }
     m_pWindow->setIcon(m_Icon.getSize().x, m_Icon.getSize().y, m_Icon.getPixelsPtr());
-	//set framerate to 60
-	m_pWindow->setFramerateLimit(60);
+	//set framerate
+	m_pWindow->setFramerateLimit(m_iFrameRate);
 }
 
 Game::~Game()
@@ -96,7 +96,6 @@ void Game::Start()
                 WorldManager::GetInstance().Clear();
                 FrameManager::GetInstance().Clear();
                 InputManager::GetInstance().Clear();
-                ObjectManager::GetInstance().Clear();
                 CollisionManager::GetInstance().Clear();
             }
             
@@ -107,8 +106,8 @@ void Game::Start()
         // Manager updates
         FrameManager::GetInstance().Update(deltaTime);
         InputManager::GetInstance().Update(m_pWindow);
+        CollisionManager::GetInstance().Update(deltaTime); 
         ObjectManager::GetInstance().Update(deltaTime);
-        CollisionManager::GetInstance().Update(deltaTime);
         
 		// Rendering
         FrameManager::GetInstance().Draw(m_pWindow);

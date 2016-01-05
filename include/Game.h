@@ -20,6 +20,7 @@ public:
     static Game* m_pEngine;
     static const int m_iWindowWidth = 800;
     static const int m_iWindowHeight = 600;
+    static const int m_iFrameRate = 60;
 protected:
     sf::RenderWindow* m_pWindow;
     IGameState* m_pCurrentState;

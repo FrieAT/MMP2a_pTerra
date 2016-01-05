@@ -13,6 +13,7 @@ GameObject::GameObject(std::string strID)
 {
 	this->m_strID = strID;
     this->m_bTemporaryCreated = false;
+    this->m_bAssistedCreated = false;
 }
 
 GameObject::~GameObject()

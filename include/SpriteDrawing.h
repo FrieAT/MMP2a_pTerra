@@ -17,6 +17,8 @@ public:
     void Update();
 	void Draw(sf::RenderWindow* pWindow);
     void SetTextureArea(sf::FloatRect Area);
+    void SetUpdateFrameRate(int iFrameRate) { m_iTextureFrameUpdateCount = iFrameRate; }
+    void GenerateTextureAreas(int iAmountInX, int iAmountInY);
     sf::FloatRect GetTextureArea();
     void Serialize(SerializeNode* pParentNode);
     static IComponent* Deserialize(SerializeNode* pNode);
