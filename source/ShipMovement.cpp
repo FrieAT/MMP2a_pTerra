@@ -16,6 +16,7 @@ ShipMovement::ShipMovement(char cPlayer)
 	m_fSpeed = 1000.f;
 	m_fMaxSpeed = 2000;
 	m_fFirerate = 0.5f;
+    m_fWeaponcoolDown = 0.f;
 }
 
 ShipMovement::~ShipMovement()
