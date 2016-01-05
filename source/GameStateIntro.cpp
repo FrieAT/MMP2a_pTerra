@@ -1,4 +1,4 @@
-/*=================================================================
+﻿/*=================================================================
 Copyright (c) MultiMediaTechnology, 2015
 =================================================================*/
 
@@ -20,15 +20,11 @@ GameStateIntro::~GameStateIntro()
 void GameStateIntro::Init(sf::RenderWindow* pWindow)
 {
     m_bKeyPressed = false;
-    
-    GameObjectFactory::CreateBackgroundSprite("assets/intro-bg.jpg", sf::Vector2f(static_cast<float>(Game::m_iWindowWidth), static_cast<float>(Game::m_iWindowHeight)));
-    GameObjectFactory::CreateFontText(sf::Vector2f(280.f, 100.f), "assets/Starjedi.ttf", "The Space Game", 24);
-    GameObjectFactory::CreateFontText(sf::Vector2f(230.f, 500.f), "assets/Starjedi.ttf", "-- Press Space-Key to start game --", 16);
-    
+
 	// Initialize GUI
 	m_Gui.setWindow(*pWindow);
 	m_Gui.setFont("assets/Starjedi.ttf");
-	auto theme = std::make_shared<tgui::Theme>("Black.txt");
+	auto theme = std::make_shared<tgui::Theme>("Theme.cfg");
 
 	// Create GUI for this GameState
 	// Background
@@ -37,16 +33,23 @@ void GameStateIntro::Init(sf::RenderWindow* pWindow)
 	m_Gui.add(background);
 	background->moveToBack();
 
+	// Logo
+	auto logo = std::make_shared<tgui::Picture>("assets/logo.png");
+	logo->scale(0.4f, 0.4f);
+	logo->setPosition(Game::m_iWindowWidth / 2 - tgui::bindWidth(logo) / 2, 80.f);
+	logo->setSmooth();
+	m_Gui.add(logo);
+
 	// Title
-	auto title = std::make_shared<tgui::Label>();
-	title->setText("The Space Game");
+	/*auto title = std::make_shared<tgui::Label>();
+	title->setText("Terra");
 	title->setTextSize(42);
 	title->setPosition(Game::m_iWindowWidth / 2 - tgui::bindWidth(title) / 2, 80.f);
 	title->setTextColor(sf::Color::White);
-	m_Gui.add(title, "title");
+	m_Gui.add(title, "title");*/
 
 	// Startbutton
-	tgui::Button::Ptr button = theme->load("Button"); // Verwenden von Theme f�r Button
+	tgui::Button::Ptr button = theme->load("Button"); // Verwenden von Theme für Button
 	button->setText("--- Start Game ---");
 	button->setTextSize(28);
 	button->setPosition(Game::m_iWindowWidth / 2 - tgui::bindWidth(button) / 2, 200.f);
@@ -54,6 +57,9 @@ void GameStateIntro::Init(sf::RenderWindow* pWindow)
 	m_Gui.add(button, "button");
 
     InputManager::GetInstance().RegisterEventObserver(this);
+
+	// Finish initialization
+	m_bIsInitialized = true;
 }
 
 void GameStateIntro::Update(sf::Time DeltaTime, sf::RenderWindow* pWindow)

@@ -23,7 +23,7 @@ Game::Game()
     m_pCurrentState = nullptr;
     
     // Create the main window
-    m_pWindow = new sf::RenderWindow(sf::VideoMode(Game::m_iWindowWidth, Game::m_iWindowHeight), "SFML window");
+	m_pWindow = new sf::RenderWindow(sf::VideoMode(Game::m_iWindowWidth, Game::m_iWindowHeight), "pTerra");//, sf::Style::Fullscreen);
 
 	// Initialize Intro-screen
 	m_pEngine->ChangeState(new GameStateIntro());
@@ -65,6 +65,10 @@ void Game::Start()
     
     IGameState* pGameState;
 	sf::Clock DeltaClock;
+
+	// Set view (Otherwise Debug build won't properly display on start-up)
+	sf::View view(sf::FloatRect(0.f, 0.f, Game::m_iWindowWidth, Game::m_iWindowHeight));
+	m_pWindow->setView(view);
     
 	// Start the game loop
     while (m_pWindow->isOpen())
@@ -85,7 +89,7 @@ void Game::Start()
         
         if(pGameState != m_pCurrentState)
         {
-            if(m_pCurrentState != nullptr)
+            if(m_pCurrentState != nullptr && m_pCurrentState->ClearOnGameStateChange())
             {
                 delete m_pCurrentState;
                 
@@ -98,7 +102,11 @@ void Game::Start()
             }
             
             m_pCurrentState = pGameState;
-            m_pCurrentState->Init(m_pWindow);
+
+			if (m_pCurrentState->IsInitialized() == false)
+			{
+				m_pCurrentState->Init(m_pWindow);
+			}
         }
 
 		// Update the state (Updates & Rendering)
@@ -111,11 +119,15 @@ void Game::Start()
 
 void Game::ChangeState(IGameState* pState)
 {
+	// create new state
+
+
     // cleanup the current state
     if ( !m_States.empty())
     {
         m_States.pop_back();
     }
+
     // store and init the new state
     m_States.push_back(pState);
 }
