@@ -6,6 +6,7 @@
 #include <stack>
 #include <fstream>
 #include <sstream>
+#include <cfloat>
 
 #include "WorldManager.h"
 #include "ObjectManager.h"
@@ -377,4 +378,40 @@ void WorldManager::SaveGame(std::string strPath)
         it_game_objects++;
     }
     delete pXMLVisitor;
+}
+
+sf::Vector2f WorldManager::GetNextNearestObjectPos(sf::Vector2f Position, EWorldObjectType eType)
+{
+    sf::Vector2f NearestPos(FLT_MAX, FLT_MAX);
+    bool bSomethingFound = false;
+    
+    auto it = m_WorldInfo.begin();
+    while(it != m_WorldInfo.end())
+    {
+        // If otherwise then Null-Type, then skip all other Object-Types.
+        if(eType != EWorldObjectType::Null && it->first.second != eType)
+        {
+            it++;
+            continue;
+        }
+        auto it_objects = it->second.begin();
+        while(it_objects != it->second.end())
+        {
+            sf::Vector2f Difference = it_objects->GetPosition() - Position;
+            
+            float fQuadrLength = NearestPos.x * NearestPos.x + NearestPos.y * NearestPos.y;
+            float fOtherQuadrLength = Difference.x * Difference.x + Difference.y * Difference.y;
+            
+            if(!bSomethingFound || fOtherQuadrLength < fQuadrLength)
+            {
+                NearestPos = it_objects->GetPosition();
+                bSomethingFound = true;
+            }
+            
+            it_objects++;
+        }
+        it++;
+    }
+    
+    return NearestPos;
 }

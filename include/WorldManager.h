@@ -36,6 +36,7 @@ public:
     void SaveGame(std::string strPath);
     void LoadGame(std::string strPath);
     int GetSeed() { return m_iSeed; }
+    sf::Vector2f GetNextNearestObjectPos(sf::Vector2f Position, EWorldObjectType eType = EWorldObjectType::Null);
 private:
     WorldManager(sf::Vector2f ChunkSize, unsigned long MaxRandomCoordinates, char iChunkDepth);
     WorldManager(const WorldManager&) = delete;

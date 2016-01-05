@@ -11,6 +11,7 @@ Copyright (c) MultiMediaTechnology, 2015
 #include "GameObjectFactory.h"
 #include "GameStateGameOver.h"
 #include "Game.h"
+#include "INavigation.h"
 
 HealthShip::HealthShip(float fHealth)
 {
@@ -56,10 +57,19 @@ void HealthShip::OnFrameUpdate(sf::Time DeltaTime)
     IPosition* pPositionTextComponent = static_cast<IPosition*>(m_pHealthDebug->GetComponent(EComponentType::Position));
     IPosition* pPositionShipComponent = static_cast<IPosition*>(GetAssignedGameObject()->GetComponent(EComponentType::Position));
     IDrawing* pDrawingTextComponent = static_cast<IDrawing*>(m_pHealthDebug->GetComponent(EComponentType::Drawing));
+    INavigation* pNavigation = static_cast<INavigation*>(GetAssignedGameObject()->GetComponent(EComponentType::Navigation));
     
     sf::Vector2f ship_pos = pPositionShipComponent->GetPosition() + sf::Vector2f(-30.f, 50.f);
     std::stringstream health_text;
-    health_text << "Health: " << m_fHealth << "\nPosition: (" << round(pPositionShipComponent->GetPosition().x) << " / " << round(pPositionShipComponent->GetPosition().y) << ")";
+    health_text << "Health: " << m_fHealth;
+    if(pPositionShipComponent != nullptr)
+    {
+        health_text << "\nPosition: (" << round(pPositionShipComponent->GetPosition().x) << " / " << round(pPositionShipComponent->GetPosition().y) << ")";
+    }
+    if(pNavigation != nullptr && pNavigation->IsNavigationActive())
+    {
+        health_text << "\nNavi: " << pNavigation->GetDistanceToPoint() << " Meters";
+    }
     pPositionTextComponent->SetPosition(ship_pos);
     pDrawingTextComponent->SetText(health_text.str());
 }

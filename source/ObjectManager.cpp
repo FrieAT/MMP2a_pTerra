@@ -8,7 +8,7 @@ Copyright (c) MultiMediaTechnology, 2015
 
 ObjectManager::ObjectManager()
 {
-	m_DrawOrder = std::vector<std::string> { "background", "planet", "asteroid", "missile", "ship", "space_station", "text", "effects" };
+	m_DrawOrder = std::vector<std::string> { "background", "planet", "asteroid", "missile", "ship", "space_station", "text", "effect" };
 }
 
 std::pair<std::string, Quadrant*> ObjectManager::GetKeyFromGameObject(GameObject *pGameObject)

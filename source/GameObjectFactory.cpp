@@ -18,6 +18,7 @@ Copyright (c) MultiMediaTechnology, 2015
 #include "HealthExplosion.h"
 #include "CircleCollision.h"
 #include "BoxCollision.h"
+#include "NavigationCursor.h"
 
 GameObject* GameObjectFactory::CreatePlayerShip(sf::Vector2f Position, char cPlayer)
 {
@@ -32,6 +33,7 @@ GameObject* GameObjectFactory::CreatePlayerShip(sf::Vector2f Position, char cPla
     //pShip->SetComponent(new CircleCollision(30.f,pos));
 	pShip->SetComponent(new BoxCollision(64, 100));
     pShip->SetComponent(new HealthShip(100.f));
+    pShip->SetComponent(new NavigationCursor());
 
 	return pShip;
 }
@@ -128,7 +130,7 @@ GameObject* GameObjectFactory::CreateExplosion(sf::Vector2f Position)
     const int iAmountInXAxis = 6;
     const int iAmountInYAxis = 3;
     
-    GameObject* pExplosion = new GameObject("effects");
+    GameObject* pExplosion = new GameObject("effect");
     pExplosion->SetTemporaryState(true); // Never save explosion´s in save-game´s
     
     pExplosion->SetComponent(new PixelPosition(Position, sf::Vector2f()));

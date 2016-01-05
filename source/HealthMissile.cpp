@@ -6,6 +6,8 @@ Copyright (c) MultiMediaTechnology, 2015
 #include "ObjectManager.h"
 #include "CollisionManager.h"
 #include "GameObjectFactory.h"
+#include "INavigation.h"
+#include "WorldManager.h"
 
 HealthMissile::HealthMissile(float fHealth, GameObject* pOwner)
 {
@@ -72,6 +74,19 @@ void HealthMissile::OnCollisionEvent(GameObject* pOther, sf::Vector2f ImpulseImp
     if(pOtherHealth != nullptr)
     {
         pOtherHealth->Damage(90001.f); // What does the scouter say to his power level?
+        
+        // Only set Navigation point to next nearest space station, if something with Health is destroyed.
+        if(m_pOwner != nullptr)
+        {
+            IPosition* pPositionOwner = static_cast<IPosition*>(m_pOwner->GetComponent(EComponentType::Position));
+            INavigation* pNavigationOwner = static_cast<INavigation*>(m_pOwner->GetComponent(EComponentType::Navigation));
+            if(pNavigationOwner != nullptr)
+            {
+                sf::Vector2f NextCoords = WorldManager::GetInstance().GetNextNearestObjectPos(pPositionOwner->GetPosition());
+                pNavigationOwner->SetNavigationPoint(NextCoords);
+                pNavigationOwner->SetNavigationActive(true);
+            }
+        }
     }
 }
 
