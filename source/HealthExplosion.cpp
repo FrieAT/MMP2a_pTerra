@@ -8,6 +8,7 @@
 #include "Game.h"
 
 HealthExplosion::HealthExplosion(float fHealth)
+: IHealth()
 {
     this->m_fHealth = fHealth;
 }
@@ -19,13 +20,14 @@ HealthExplosion::~HealthExplosion()
 
 void HealthExplosion::Init()
 {
+    IHealth::Init();
     FrameManager::GetInstance().RegisterEventObserver(this);
 }
 
 void HealthExplosion::Damage(float fDamage)
 {
-    m_fHealth -= fDamage;
-    if (m_fHealth < 0)
+    IHealth::Damage(fDamage);
+    if (m_fHealth <= 0.f)
     {
         ObjectManager::GetInstance().RemoveGameObject(GetAssignedGameObject());
     }

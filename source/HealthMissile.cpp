@@ -10,6 +10,7 @@ Copyright (c) MultiMediaTechnology, 2015
 #include "WorldManager.h"
 
 HealthMissile::HealthMissile(float fHealth, GameObject* pOwner)
+: IHealth()
 {
 	this->m_fHealth = fHealth;
     this->m_pOwner = pOwner;
@@ -24,14 +25,15 @@ HealthMissile::~HealthMissile()
 
 void HealthMissile::Init()
 {
+    IHealth::Init();
     FrameManager::GetInstance().RegisterEventObserver(this);
     CollisionManager::GetInstance().RegisterCollisionEvent(this, GetAssignedGameObject());
 }
 
 void HealthMissile::Damage(float fDamage)
 {
-	m_fHealth -= fDamage;
-	if (m_fHealth < 0)
+	IHealth::Damage(fDamage);
+	if (m_fHealth <= 0.f)
 	{
         // Generate Explosion if a IPosition exists and hasn´t hitted anything.
         if(!m_bSomethingHitted)

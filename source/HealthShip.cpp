@@ -14,6 +14,7 @@ Copyright (c) MultiMediaTechnology, 2015
 #include "INavigation.h"
 
 HealthShip::HealthShip(float fHealth)
+: IHealth()
 {
 	this->m_fHealth = fHealth;
     m_pHealthDebug = GameObjectFactory::CreateFontText(sf::Vector2f(0.f,0.f), "assets/Starjedi.ttf", "", 8);
@@ -22,6 +23,7 @@ HealthShip::HealthShip(float fHealth)
 
 void HealthShip::Init()
 {
+    IHealth::Init();
     FrameManager::GetInstance().RegisterEventObserver(this);
     CollisionManager::GetInstance().RegisterCollisionEvent(this, GetAssignedGameObject());
 }
@@ -37,8 +39,8 @@ HealthShip::~HealthShip()
 
 void HealthShip::Damage(float fDamage)
 {
-	m_fHealth -= fDamage;
-	if (m_fHealth < 0)
+    IHealth::Damage(fDamage);
+	if (m_fHealth <= 0.f)
 	{
 		// Hier wird das Schiff nicht zerstört, weil es sowieso einen GameState-Switch auslöst.
 		// ObjectManager::GetInstance().RemoveGameObject(GetAssignedGameObject());
@@ -54,6 +56,8 @@ void HealthShip::OnFrameDraw(sf::RenderWindow* pWindow)
 
 void HealthShip::OnFrameUpdate(sf::Time DeltaTime)
 {
+    IHealth::RegenerateShield(DeltaTime);
+    
     IPosition* pPositionTextComponent = static_cast<IPosition*>(m_pHealthDebug->GetComponent(EComponentType::Position));
     IPosition* pPositionShipComponent = static_cast<IPosition*>(GetAssignedGameObject()->GetComponent(EComponentType::Position));
     IDrawing* pDrawingTextComponent = static_cast<IDrawing*>(m_pHealthDebug->GetComponent(EComponentType::Drawing));
@@ -61,7 +65,7 @@ void HealthShip::OnFrameUpdate(sf::Time DeltaTime)
     
     sf::Vector2f ship_pos = pPositionShipComponent->GetPosition() + sf::Vector2f(-30.f, 50.f);
     std::stringstream health_text;
-    health_text << "Health: " << m_fHealth;
+    health_text << "Health: " << m_fHealth << "\nShield: " << m_fShield;
     if(pPositionShipComponent != nullptr)
     {
         health_text << "\nPosition: (" << round(pPositionShipComponent->GetPosition().x) << " / " << round(pPositionShipComponent->GetPosition().y) << ")";

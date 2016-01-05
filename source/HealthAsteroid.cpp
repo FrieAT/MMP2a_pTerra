@@ -14,6 +14,7 @@
 #include "Game.h"
 
 HealthAsteroid::HealthAsteroid(float fHealth)
+: IHealth()
 {
     this->m_fHealth = fHealth;
     m_pHealthDebug = GameObjectFactory::CreateFontText(sf::Vector2f(0.f,0.f), "assets/Starjedi.ttf", "", 8);
@@ -30,14 +31,15 @@ HealthAsteroid::~HealthAsteroid()
 
 void HealthAsteroid::Init()
 {
+    IHealth::Init();
     FrameManager::GetInstance().RegisterEventObserver(this);
     CollisionManager::GetInstance().RegisterCollisionEvent(this, GetAssignedGameObject());
 }
 
 void HealthAsteroid::Damage(float fDamage)
 {
-    m_fHealth -= fDamage;
-    if (m_fHealth < 0)
+    IHealth::Damage(fDamage);
+    if (m_fHealth <= 0.f)
     {
         WorldManager::GetInstance().SaveGame("savegame.txt"); // DEBUG: For testing purpose create savegame every-time when asteroid will be deleted.
         
