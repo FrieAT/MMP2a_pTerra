@@ -2,6 +2,8 @@
 Copyright (c) MultiMediaTechnology, 2015
 =================================================================*/
 
+#include <cmath>
+
 #include "PixelPosition.h"
 #include "WorldManager.h"
 #include "ObjectManager.h"

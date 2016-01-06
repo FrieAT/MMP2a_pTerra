@@ -25,5 +25,5 @@ private:
     sf::Vector2f m_MoveVector = sf::Vector2f(0.f, 0.f);
     sf::Vector2f m_CurrentMovePosition = sf::Vector2f(0.f, 0.f);
     float m_zoom = 1.f;
-    sf::View* m_pView;
+    sf::View m_pView;
 };
