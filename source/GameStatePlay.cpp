@@ -76,7 +76,7 @@ void GameStatePlay::Update(sf::Time DeltaTime, sf::RenderWindow* pWindow)
 	CollisionManager::GetInstance().Update(DeltaTime);
 
 	// Rendering
-	FrameManager::GetInstance().Draw(pWindow);
 	ObjectManager::GetInstance().Draw(pWindow);
+    FrameManager::GetInstance().Draw(pWindow);
 	//WorldManager::GetInstance().Draw(pWindow); DEBUG
 }
