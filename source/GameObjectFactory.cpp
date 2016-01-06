@@ -17,6 +17,7 @@ Copyright (c) MultiMediaTechnology, 2015
 #include "HealthAsteroid.h"
 #include "CircleCollision.h"
 #include "BoxCollision.h"
+#include "PatrolKI.h"
 
 GameObject* GameObjectFactory::CreatePlayerShip(sf::Vector2f Position, char cPlayer)
 {
@@ -31,6 +32,23 @@ GameObject* GameObjectFactory::CreatePlayerShip(sf::Vector2f Position, char cPla
     //pShip->SetComponent(new CircleCollision(30.f,pos));
 	pShip->SetComponent(new BoxCollision(64, 100));
     pShip->SetComponent(new HealthShip(100.f));
+
+	return pShip;
+}
+
+GameObject * GameObjectFactory::CreateEnemyShip(sf::Vector2f Position)
+{
+	GameObject* pShip = new GameObject(std::string("enemyship"));
+	pShip->SetComponent(new PixelPosition(sf::Vector2f(Position), sf::Vector2f(32.f, 51.f)));
+	pShip->SetComponent(new ShipMovement('E'));
+	SpriteDrawing* pSpriteComponent = new SpriteDrawing(std::string("assets/lilee/ship_player.png"), sf::Vector2f(192.f, 128.f));
+	pSpriteComponent->SetTextureArea(sf::FloatRect(0.f, 0.f, 64.f, 102.f));
+	pShip->SetComponent(pSpriteComponent);
+	//pShip->SetComponent(new DynamicView(sf::FloatRect(0, 0, static_cast<float>(Game::m_iWindowWidth), static_cast<float>(Game::m_iWindowHeight)), sf::Vector2f(1920.f - static_cast<float>(Game::m_iWindowWidth), 0), 20.f));
+	//pShip->SetComponent(new CircleCollision(30.f,pos));
+	pShip->SetComponent(new PatrolKI());
+	pShip->SetComponent(new BoxCollision(64, 100));
+	pShip->SetComponent(new HealthShip(100.f));
 
 	return pShip;
 }

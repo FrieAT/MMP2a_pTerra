@@ -22,6 +22,8 @@ public:
     void Serialize(SerializeNode* pParentNode);
     static IComponent* Deserialize(SerializeNode* pNode);
     std::string GetComponentName() { return std::string("ShipMovement"); }
+	void setShipState(int State, bool value);
+	bool getShipState(int State);
 
 	char m_cPlayer;	//player id for multiple playercontrolled ships
 

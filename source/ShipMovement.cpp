@@ -106,7 +106,7 @@ void ShipMovement::UpdateMovement(sf::Time DeltaTime)
 		m_fWeaponcoolDown = m_fFirerate;
 		GameObject* pMissile = GameObjectFactory::CreateMissile(GetAssignedGameObject(), pPositionComponent, velocity); //shoot rockets
         pMissile->SetTemporaryState(true);
-		std::cout << velocity.x << " "<<velocity.y << std::endl;
+		//std::cout << velocity.x << " "<<velocity.y << std::endl;
 	}
 	if (m_fWeaponcoolDown > 0.f)
     {
@@ -208,4 +208,14 @@ IComponent* ShipMovement::Deserialize(SerializeNode* pNode)
     } while(pNodeShipStates != nullptr);
     
     return pComponent;
+}
+
+void ShipMovement::setShipState(int State, bool value)
+{
+	m_ShipState[State] = value;
+}
+
+bool ShipMovement::getShipState(int State)
+{
+	return m_ShipState[State];
 }

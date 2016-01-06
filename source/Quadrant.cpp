@@ -14,7 +14,7 @@ Quadrant::Quadrant(sf::Vector2f TopLeftPosition)
     m_bCurrentlyVisited = 0;
     m_TopLeftPosition = TopLeftPosition;
     m_Index = WorldManager::GetInstance().GetQuadrantIndexAtPos(TopLeftPosition);
-    std::cout << "Draw Quadrant at Position: (" << TopLeftPosition.x << " / " << TopLeftPosition.y << ")" << std::endl;
+    //std::cout << "Draw Quadrant at Position: (" << TopLeftPosition.x << " / " << TopLeftPosition.y << ")" << std::endl;
 }
 
 std::pair<int,int> Quadrant::GetIndex()
@@ -75,7 +75,7 @@ Quadrant* Quadrant::GetNeighbour(EQuadrantPos eChunkPosition, bool bActive, int 
     }
     while((uChunkDepth--) > 0)
     {
-        std::cout << "Search in Chunk Depth: " << uChunkDepth << std::endl;
+        //std::cout << "Search in Chunk Depth: " << uChunkDepth << std::endl;
         for(int i = 0; i < (int)EQuadrantPos::MaxDirections; i++)
         {
             FoundQuadrant->GetNeighbour((EQuadrantPos)i, bActive, uChunkDepth);

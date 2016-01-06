@@ -12,6 +12,7 @@ Copyright (c) MultiMediaTechnology, 2015
 #include "InputManager.h"
 #include "ObjectManager.h"
 #include "WorldManager.h"
+#include "KIManager.h"
 #include "CollisionManager.h"
 #include "GameStateIntro.h"
 #include "TextureFactory.h"
@@ -56,6 +57,7 @@ Game::~Game()
 	InputManager::GetInstance().Clear();
 	ObjectManager::GetInstance().Clear();
 	CollisionManager::GetInstance().Clear();
+	KIManager::GetInstance().Clear();
     TextureFactory::GetInstance().Clear();
 
 	delete m_pWindow;
@@ -98,6 +100,7 @@ void Game::Start()
                 InputManager::GetInstance().Clear();
                 ObjectManager::GetInstance().Clear();
                 CollisionManager::GetInstance().Clear();
+				KIManager::GetInstance().Clear();
             }
             
             m_pCurrentState = pGameState;
@@ -109,10 +112,13 @@ void Game::Start()
         InputManager::GetInstance().Update(m_pWindow);
         ObjectManager::GetInstance().Update(deltaTime);
         CollisionManager::GetInstance().Update(deltaTime);
+		KIManager::GetInstance().Update(deltaTime);
         
 		// Rendering
         FrameManager::GetInstance().Draw(m_pWindow);
         ObjectManager::GetInstance().Draw(m_pWindow);
+		FrameManager::GetInstance().Draw(m_pWindow);
+
 		//WorldManager::GetInstance().Draw(m_pWindow); DEBUG
 
 		// Update the window

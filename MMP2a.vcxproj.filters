@@ -67,6 +67,12 @@
     <Filter Include="Source Files\External Frameworks\rapidxml">
       <UniqueIdentifier>{6a55d646-3d2c-4481-8ee9-ad9df2b41855}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Managers\KIManager">
+      <UniqueIdentifier>{d66c2349-8f27-448c-842c-fe264dad4eed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Components\IKI">
+      <UniqueIdentifier>{59d9dc2e-efa0-438d-b05b-13e41064b327}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\main.cpp">
@@ -161,6 +167,12 @@
     </ClCompile>
     <ClCompile Include="source\XMLWriteVisitor.cpp">
       <Filter>Source Files\GameObject\Serializer</Filter>
+    </ClCompile>
+    <ClCompile Include="source\KIManager.cpp">
+      <Filter>Source Files\Managers\KIManager</Filter>
+    </ClCompile>
+    <ClCompile Include="source\PatrolKI.cpp">
+      <Filter>Source Files\Components\IKI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -322,6 +334,18 @@
     </ClInclude>
     <ClInclude Include="include\rapidxml\rapidxml_utils.hpp">
       <Filter>Source Files\External Frameworks\rapidxml</Filter>
+    </ClInclude>
+    <ClInclude Include="include\KIManager.h">
+      <Filter>Source Files\Managers\KIManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\IKI.h">
+      <Filter>Source Files\Components\IKI</Filter>
+    </ClInclude>
+    <ClInclude Include="include\IKIObserver.h">
+      <Filter>Source Files\Managers\KIManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PatrolKI.h">
+      <Filter>Source Files\Components\IKI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

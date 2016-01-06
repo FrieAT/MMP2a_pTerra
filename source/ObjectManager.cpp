@@ -8,7 +8,7 @@ Copyright (c) MultiMediaTechnology, 2015
 
 ObjectManager::ObjectManager()
 {
-	m_DrawOrder = std::vector<std::string> { "background", "planet", "asteroid", "missile", "ship", "space_station", "text" };
+	m_DrawOrder = std::vector<std::string> { "background", "planet", "asteroid", "missile","enemyship", "ship", "space_station", "text" };
 }
 
 std::pair<std::string, Quadrant*> ObjectManager::GetKeyFromGameObject(GameObject *pGameObject)
@@ -241,7 +241,7 @@ void ObjectManager::Draw(sf::RenderWindow* pWindow)
                     }
                     if((*objects_it) == nullptr || (pPosition != nullptr && pPosition->GetQuadrant() != quadrant_it->second))
                     {
-                        std::cout << "Removing (" << (objects_it - m_Objects[key].begin()) << ") " << (*objects_it)->GetID() << " from ListQuadrant " << (quadrant_it->second->GetIndex()).first << " / " << (quadrant_it->second->GetIndex()).second << std::endl;
+                        //std::cout << "Removing (" << (objects_it - m_Objects[key].begin()) << ") " << (*objects_it)->GetID() << " from ListQuadrant " << (quadrant_it->second->GetIndex()).first << " / " << (quadrant_it->second->GetIndex()).second << std::endl;
                         auto value = std::pair<std::pair<std::string, Quadrant*>, int>(key, objects_it - m_Objects[key].begin());
                         RemoveGameObjectsFromList.push_back(value);
                         objects_it++;

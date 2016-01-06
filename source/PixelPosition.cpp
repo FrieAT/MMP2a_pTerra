@@ -35,7 +35,7 @@ sf::Vector2f PixelPosition::GetCenter()
 
 float PixelPosition::GetRotation()
 {
-	return m_fRotation;
+	return fmod(m_fRotation, 360);
 }
 
 void PixelPosition::SetOrigin(sf::Vector2f Origin)

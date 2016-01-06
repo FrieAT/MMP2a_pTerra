@@ -38,7 +38,9 @@ void GameStatePlay::Init()
         
         // GameObjectFactory::CreatePlayerShip(sf::Vector2f(50,30),'2');
         GameObjectFactory::CreatePlayerShip(sf::Vector2f(0.f, 0.f), '2');
-        GameObjectFactory::CreateAsteroid(sf::Vector2f(50,150),-120,50);
+        
+		GameObjectFactory::CreateEnemyShip(sf::Vector2f(0, -200));
+		//GameObjectFactory::CreateAsteroid(sf::Vector2f(50,150),-120,50);
     }
 
     // ====== Below decprecated method to create things ======
