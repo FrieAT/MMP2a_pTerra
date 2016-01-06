@@ -59,11 +59,11 @@ void SpriteDrawing::Update()
     {
         m_iCurrentFrameCount = 0;
         m_iTextureRectsCount++;
-        if(m_iTextureRectsCount >= iTextureAreasSize)
-        {
-            m_iTextureRectsCount = 0;
-        }
     }
+	if (m_iTextureRectsCount >= iTextureAreasSize)
+	{
+		m_iTextureRectsCount = 0;
+	}
     if(iTextureAreasSize > 0)
     {
         m_pSprite->setTextureRect(m_TextureRects[m_iTextureRectsCount]);
