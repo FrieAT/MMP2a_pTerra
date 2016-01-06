@@ -70,6 +70,9 @@ void GameStatePlay::SetLoadGame(std::string strLoadGame)
 
 void GameStatePlay::Update(sf::Time DeltaTime, sf::RenderWindow* pWindow)
 {
+	// Reset keep in GameStateStorage
+	bClearOnGameStateChange = true;
+
 	// Manager updates
 	FrameManager::GetInstance().Update(DeltaTime);
 	InputManager::GetInstance().Update(pWindow, &m_Gui);

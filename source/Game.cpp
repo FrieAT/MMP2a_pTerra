@@ -35,7 +35,7 @@ Game::Game()
 	ClassRegistry::GetInstance().Init();
     
     // Create the main window
-	m_pWindow = new sf::RenderWindow(sf::VideoMode(Game::m_iWindowWidth, Game::m_iWindowHeight), "pTerra");//, sf::Style::Fullscreen);
+	m_pWindow = new sf::RenderWindow(sf::VideoMode(Game::m_iWindowWidth, Game::m_iWindowHeight), "pTerra", sf::Style::Fullscreen);
 
 	// Initialize Intro-screen
 	m_pEngine->ChangeState(EGameState::GameStateIntro);
