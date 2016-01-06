@@ -20,7 +20,7 @@ Copyright (c) MultiMediaTechnology, 2015
 #include "BoxCollision.h"
 #include "NavigationCursor.h"
 #include "ResearchScore.h"
-#include "PatrolKI.h"
+#include "PatrolAI.h"
 
 GameObject* GameObjectFactory::CreatePlayerShip(sf::Vector2f Position, char cPlayer)
 {
@@ -52,9 +52,10 @@ GameObject * GameObjectFactory::CreateEnemyShip(sf::Vector2f Position)
 	pShip->SetComponent(pSpriteComponent);
 	//pShip->SetComponent(new DynamicView(sf::FloatRect(0, 0, static_cast<float>(Game::m_iWindowWidth), static_cast<float>(Game::m_iWindowHeight)), sf::Vector2f(1920.f - static_cast<float>(Game::m_iWindowWidth), 0), 20.f));
 	//pShip->SetComponent(new CircleCollision(30.f,pos));
-	pShip->SetComponent(new PatrolKI());
+	pShip->SetComponent(new PatrolAI());
 	pShip->SetComponent(new BoxCollision(64, 100));
-	pShip->SetComponent(new HealthShip(100.f));
+	//pShip->SetComponent(new HealthShip(100.f));
+	pShip->SetComponent(new HealthAsteroid(200.f));
 
 	return pShip;
 }

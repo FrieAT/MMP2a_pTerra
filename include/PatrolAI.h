@@ -2,18 +2,18 @@
 
 #include <SFML/Graphics.hpp>
 
-#include "IKI.h"
+#include "IAI.h"
 #include "IInputObserver.h"
-#include "IKIObserver.h"
-#include "KIManager.h"
+#include "IAIObserver.h"
+#include "AIManager.h"
 
-class PatrolKI : public IKI, public IKIObserver
+class PatrolAI : public IAI, public IAIObserver
 {
 public:
 	//   LinearMovement(float fRotation, sf::Vector2f ShipSpeed);
 	//LinearMovement(float fRotation, float fSpeed);
-	PatrolKI();
-	~PatrolKI();
+	PatrolAI();
+	~PatrolAI();
 	void Init();
 	void Update();
 	void Serialize(SerializeNode* pParentNode);

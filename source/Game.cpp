@@ -12,7 +12,7 @@ Copyright (c) MultiMediaTechnology, 2015
 #include "InputManager.h"
 #include "ObjectManager.h"
 #include "WorldManager.h"
-#include "KIManager.h"
+#include "AIManager.h"
 #include "CollisionManager.h"
 #include "GameStateIntro.h"
 #include "TextureFactory.h"
@@ -77,7 +77,7 @@ Game::~Game()
 	InputManager::GetInstance().Clear();
 	ObjectManager::GetInstance().Clear();
 	CollisionManager::GetInstance().Clear();
-	KIManager::GetInstance().Clear();
+	AIManager::GetInstance().Clear();
     TextureFactory::GetInstance().Clear();
 
 	delete m_pWindow;
@@ -122,7 +122,7 @@ void Game::Start()
 					FrameManager::GetInstance().Clear();
 					InputManager::GetInstance().Clear();
 					CollisionManager::GetInstance().Clear();
-					KIManager::GetInstance().Clear();
+					AIManager::GetInstance().Clear();
 				}
 
 				// Set to nullptr in GameStateStorage

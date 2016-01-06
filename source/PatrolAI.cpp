@@ -1,22 +1,23 @@
-#include "PatrolKI.h"
+#include "PatrolAI.h"
 #include "IPosition.h"
 #include "ShipMovement.h"
 #include "ObjectManager.h"
 
-PatrolKI::PatrolKI()
+PatrolAI::PatrolAI()
 {
 }
 
-PatrolKI::~PatrolKI()
+PatrolAI::~PatrolAI()
 {
+	AIManager::GetInstance().UnregisterKIObserver(this);
 }
 
-void PatrolKI::Init()
+void PatrolAI::Init()
 {
-	KIManager::GetInstance().RegisterKIObserver(this);
+	AIManager::GetInstance().RegisterKIObserver(this);
 }
 
-void PatrolKI::Update()
+void PatrolAI::Update()
 {
 	IPosition* pPos = static_cast<IPosition*>(GetAssignedGameObject()->GetComponent(EComponentType::Position));
 	//pPos->SetPosition(pPos->GetPosition() + sf::Vector2f(0, 1));
@@ -43,7 +44,7 @@ void PatrolKI::Update()
 	//}
 
 	if(m_Timer>0){
-		pmov->setShipState(2, true);
+		pmov->setShipState(2, false);
 		pmov->setShipState(3, false);
 		pmov->setShipState(0, false);
 
@@ -62,11 +63,11 @@ void PatrolKI::Update()
 	m_Timer--;
 }
 
-void PatrolKI::Serialize(SerializeNode * pParentNode)
+void PatrolAI::Serialize(SerializeNode * pParentNode)
 {
 }
 
-IComponent * PatrolKI::Deserialize(SerializeNode * pNode)
+IComponent * PatrolAI::Deserialize(SerializeNode * pNode)
 {
 	return nullptr;
 }

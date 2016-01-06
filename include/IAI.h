@@ -6,11 +6,11 @@ Copyright (c) MultiMediaTechnology, 2015
 
 #include "IComponent.h"
 
-class IKI : public IComponent
+class IAI : public IComponent
 {
 public:
-	IKI() { }
-	virtual ~IKI() { }
+	IAI() { }
+	virtual ~IAI() { }
 	virtual std::string GetComponentName() { return std::string("IKI"); }
 
 	virtual void Serialize(SerializeNode* pParentNode)
@@ -19,7 +19,7 @@ public:
 		//pParentNode->AddElement(new SerializeNode("Has_KI", ESerializeNodeType::Property, std::to_string(m_bPhysicsApplyable)));
 	}
 
-	virtual void Deserialize(SerializeNode* pNode, IKI* pParentComponent) { }
+	virtual void Deserialize(SerializeNode* pNode, IAI* pParentComponent) { }
 
 	//virtual void Serialize(SerializeNode* pParentNode)
 	//{

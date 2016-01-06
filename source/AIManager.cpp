@@ -1,12 +1,12 @@
-#include "KIManager.h"
+#include "AIManager.h"
 
 
-void KIManager::RegisterKIObserver(IKIObserver* pObserver)
+void AIManager::RegisterKIObserver(IAIObserver* pObserver)
 {
 	m_Observers.push_back(pObserver);
 }
 
-void KIManager::UnregisterKIObserver(IKIObserver* pObserver)
+void AIManager::UnregisterKIObserver(IAIObserver* pObserver)
 {
 	for (unsigned int i = 0; i < m_Observers.size(); i++)
 	{
@@ -16,7 +16,7 @@ void KIManager::UnregisterKIObserver(IKIObserver* pObserver)
 	}
 }
 
-void KIManager::Update(sf::Time DeltaTime)
+void AIManager::Update(sf::Time DeltaTime)
 {
 	for (unsigned int i = 0; i < m_Observers.size(); i++)
 	{
@@ -24,7 +24,7 @@ void KIManager::Update(sf::Time DeltaTime)
 	}
 }
 
-void KIManager::Clear()
+void AIManager::Clear()
 {
 	m_Observers.clear();
 	m_Observers.shrink_to_fit();

@@ -12,7 +12,7 @@ Copyright (c) MultiMediaTechnology, 2015
 #include "WorldManager.h"
 #include "CollisionManager.h"
 #include "FrameManager.h"
-#include "KIManager.h"
+#include "AIManager.h"
 
 GameStatePlay::~GameStatePlay()
 {
@@ -26,6 +26,9 @@ void GameStatePlay::Init(sf::RenderWindow* pWindow)
     
     // GameObjectFactory::CreatePlayerShip(sf::Vector2f(50,30),'2');
     GameObjectFactory::CreatePlayerShip(sf::Vector2f(0.f, 0.f), '2');
+	// For testing!!!
+	GameObjectFactory::CreateEnemyShip(sf::Vector2f(0.f, 200.f));
+	// For testing!!!
     GameObjectFactory::CreateAsteroid(sf::Vector2f(50,150),-120,50);
 
 	// Initialize GUI
@@ -72,7 +75,7 @@ void GameStatePlay::Update(sf::Time DeltaTime, sf::RenderWindow* pWindow)
 	InputManager::GetInstance().Update(pWindow, &m_Gui);
 	ObjectManager::GetInstance().Update(DeltaTime);
 	CollisionManager::GetInstance().Update(DeltaTime);
-	KIManager::GetInstance().Update(DeltaTime);
+	AIManager::GetInstance().Update(DeltaTime);
 
 	// Rendering
 	ObjectManager::GetInstance().Draw(pWindow);

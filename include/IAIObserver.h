@@ -6,9 +6,9 @@ Copyright (c) MultiMediaTechnology, 2015
 
 #include <SFML/Graphics.hpp>
 
-class IKIObserver
+class IAIObserver
 {
 public:
-	~IKIObserver() { }
+	~IAIObserver() { }
 	virtual void Update() = 0;
 };

@@ -57,12 +57,12 @@ void GameStateIntro::Init(sf::RenderWindow* pWindow)
 	{
 		buttonStart->setText("Continue Game");
 		buttonStart->connect("clicked", []() {
-			Game::m_pEngine->ChangeState(EGameState::GameStatePause);
+			Game::m_pEngine->ChangeState(EGameState::GameStatePlay);
 		});
 	}
 	else
 	{
-		buttonStart->setText("Start Game");
+		buttonStart->setText("New Game");
 		buttonStart->connect("clicked", []() {
 			Game::m_pEngine->ChangeState(EGameState::GameStatePlay);
 		});

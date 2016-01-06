@@ -69,15 +69,15 @@
     </Filter>
     <Filter Include="Source Files\Components\IScore">
       <UniqueIdentifier>{4588d409-b870-4474-9055-c71377e6012e}</UniqueIdentifier>
-    </Filter>    
-    <Filter Include="Source Files\Managers\KIManager">
-      <UniqueIdentifier>{d66c2349-8f27-448c-842c-fe264dad4eed}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Components\INavigation">
       <UniqueIdentifier>{a13417ff-5e25-4fc9-9a24-7863e714be61}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Components\IKI">
+    <Filter Include="Source Files\Components\IAI">
       <UniqueIdentifier>{59d9dc2e-efa0-438d-b05b-13e41064b327}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Managers\AIManager">
+      <UniqueIdentifier>{d66c2349-8f27-448c-842c-fe264dad4eed}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -177,9 +177,6 @@
     <ClCompile Include="source\ResearchScore.cpp">
       <Filter>Source Files\Components\IScore</Filter>
     </ClCompile>
-    <ClCompile Include="source\KIManager.cpp">
-      <Filter>Source Files\Managers\KIManager</Filter>
-    </ClCompile>
     <ClCompile Include="source\NavigationCursor.cpp">
       <Filter>Source Files\Components\INavigation</Filter>
     </ClCompile>
@@ -188,9 +185,12 @@
     </ClCompile>
     <ClCompile Include="source\GameStatePause.cpp">
       <Filter>Source Files\Managers\GameStateManager</Filter>
-    </ClCompile>    
-    <ClCompile Include="source\PatrolKI.cpp">
-      <Filter>Source Files\Components\IKI</Filter>
+    </ClCompile>
+    <ClCompile Include="source\PatrolAI.cpp">
+      <Filter>Source Files\Components\IAI</Filter>
+    </ClCompile>
+    <ClCompile Include="source\AIManager.cpp">
+      <Filter>Source Files\Managers\AIManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -359,20 +359,11 @@
     <ClInclude Include="include\EGameState.h">
       <Filter>Source Files\Managers\GameStateManager</Filter>
     </ClInclude>
-    <ClInclude Include="include\KIManager.h">
-      <Filter>Source Files\Managers\KIManager</Filter>
-    </ClInclude>
     <ClInclude Include="include\ResearchScore.h">
       <Filter>Source Files\Components\IScore</Filter>
     </ClInclude>
-    <ClInclude Include="include\IKI.h">
-      <Filter>Source Files\Components\IKI</Filter>
-    </ClInclude>
     <ClInclude Include="include\INavigation.h">
       <Filter>Source Files\Components\INavigation</Filter>
-    </ClInclude>
-    <ClInclude Include="include\IKIObserver.h">
-      <Filter>Source Files\Managers\KIManager</Filter>
     </ClInclude>
     <ClInclude Include="include\NavigationCursor.h">
       <Filter>Source Files\Components\INavigation</Filter>
@@ -383,8 +374,17 @@
     <ClInclude Include="include\GameStatePause.h">
       <Filter>Source Files\Managers\GameStateManager</Filter>
     </ClInclude>
-    <ClInclude Include="include\PatrolKI.h">
-      <Filter>Source Files\Components\IKI</Filter>
+    <ClInclude Include="include\IAI.h">
+      <Filter>Source Files\Components\IAI</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PatrolAI.h">
+      <Filter>Source Files\Components\IAI</Filter>
+    </ClInclude>
+    <ClInclude Include="include\AIManager.h">
+      <Filter>Source Files\Managers\AIManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\IAIObserver.h">
+      <Filter>Source Files\Managers\AIManager</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
