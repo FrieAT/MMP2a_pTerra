@@ -220,7 +220,8 @@ IComponent* ShipMovement::Deserialize(SerializeNode* pNode)
             pNodeShipStates = nullptr;
             continue;
         }
-        pComponent->m_ShipState.push_back(stoi(pCurrentNode->GetValue()));
+		int iShipState = stoi(pCurrentNode->GetValue());
+        pComponent->m_ShipState.push_back((iShipState ? true : false));
     } while(pNodeShipStates != nullptr);
     
     return pComponent;

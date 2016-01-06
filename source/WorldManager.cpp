@@ -259,7 +259,7 @@ void WorldManager::GenerateWorld()
         // Insert Object into m_WorldInfo
         std::pair<int, int> quadrant_idx = GetQuadrantIndexAtPos(GetQuadrantCorrectedPos(sf::Vector2f(static_cast<float>(iRandX), static_cast<float>(iRandY))));
         std::pair<std::pair<int, int>, EWorldObjectType> worldinfo_idx(quadrant_idx, eTryingToCreate);
-        sf::Vector2f CreatePosition(iRandX, iRandY);
+        sf::Vector2f CreatePosition(static_cast<float>(iRandX), static_cast<float>(iRandY));
         m_WorldInfo[worldinfo_idx].push_back(WorldObjectInformation(eTryingToCreate, CreatePosition, iSize));
         
         // Build Spaces for top & bottom & left & right

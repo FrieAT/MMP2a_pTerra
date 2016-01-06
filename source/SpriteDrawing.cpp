@@ -100,7 +100,11 @@ void SpriteDrawing::GenerateTextureAreas(int iAmountInX, int iAmountInY)
     {
         for(int x = 0; x < iAmountInX; x++)
         {
-            SetTextureArea(sf::FloatRect((x * AssetSize.x), (y * AssetSize.y), AssetSize.x, AssetSize.y));
+			float fLeft = static_cast<float>(x * AssetSize.x);
+			float fTop = static_cast<float>(y * AssetSize.y);
+			float fWidth = static_cast<float>(AssetSize.x);
+			float fHeight = static_cast<float>(AssetSize.y);
+            SetTextureArea(sf::FloatRect(fLeft, fTop, fWidth, fHeight));
         }
     }
 }

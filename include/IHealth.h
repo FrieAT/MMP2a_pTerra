@@ -34,8 +34,8 @@ public:
 	{
 		return EComponentType::Health;
 	}
-    virtual void GetHealth() { return m_fHealth; }
-    virtual void GetShield() { return m_fShield; }
+    virtual float GetHealth() { return m_fHealth; }
+    virtual float GetShield() { return m_fShield; }
 	virtual void Damage(float fDamage)
     {
         if(m_fShield > 0.f)
@@ -72,8 +72,8 @@ public:
         float fShield = stof((pNode->GetNode("Shield"))->GetValue());
         pParentComponent->m_fShield = fShield;
         
-        int iShieldCooldown = stoi((pNode->GetNode("ShieldCooldown"))->GetValue());
-        pParentComponent->m_fShieldCooldown = iShieldCooldown;
+        float fShieldCooldown = stof((pNode->GetNode("ShieldCooldown"))->GetValue());
+        pParentComponent->m_fShieldCooldown = fShieldCooldown;
         
         int iShieldActive = stoi((pNode->GetNode("ShieldActive"))->GetValue());
         pParentComponent->m_bShieldActive = (iShieldActive ? true : false);
