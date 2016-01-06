@@ -13,6 +13,8 @@ enum class EComponentType
     View,
 	Health,
 	Collision,
+    	Navigation,
+    	Score,
 	KI,
 	// ... add here more Component-Types
 

@@ -128,10 +128,10 @@ IComponent* BoxCollision::Deserialize(SerializeNode* pNode)
 {
     float fWidth = stof((pNode->GetNode("Width"))->GetValue());
     float fHeight = stof((pNode->GetNode("Height"))->GetValue());
-    bool bHit = stoi((pNode->GetNode("Hit"))->GetValue());
+    int iHit = stoi((pNode->GetNode("Hit"))->GetValue());
     
     BoxCollision* pComponent = new BoxCollision(fWidth, fHeight);
-    pComponent->m_bHit = bHit;
+    pComponent->m_bHit = (iHit ? true : false);
     
     return pComponent;
 }

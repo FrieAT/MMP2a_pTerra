@@ -20,6 +20,8 @@
 #include "QuadrantPosition.h"
 #include "LinearMovement.h"
 #include "ShipMovement.h"
+#include "NavigationCursor.h"
+#include "ResearchScore.h"
 #include "PatrolKI.h"
 
 #define REGISTER_COMPONENT(ComponentName) \
@@ -51,7 +53,9 @@ public:
         REGISTER_COMPONENT(QuadrantPosition);
         REGISTER_COMPONENT(LinearMovement);
         REGISTER_COMPONENT(ShipMovement);
-		REGISTER_COMPONENT(PatrolKI);
+        REGISTER_COMPONENT(NavigationCursor);
+        REGISTER_COMPONENT(ResearchScore);
+	REGISTER_COMPONENT(PatrolKI);
     }
     void RegisterComponent(std::string strClassName, IComponent* (*ComponentConstructor)(SerializeNode* pNode))
     {

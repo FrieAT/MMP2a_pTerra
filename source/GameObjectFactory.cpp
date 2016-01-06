@@ -15,8 +15,11 @@ Copyright (c) MultiMediaTechnology, 2015
 #include "HealthShip.h"
 #include "HealthMissile.h"
 #include "HealthAsteroid.h"
+#include "HealthExplosion.h"
 #include "CircleCollision.h"
 #include "BoxCollision.h"
+#include "NavigationCursor.h"
+#include "ResearchScore.h"
 #include "PatrolKI.h"
 
 GameObject* GameObjectFactory::CreatePlayerShip(sf::Vector2f Position, char cPlayer)
@@ -26,12 +29,15 @@ GameObject* GameObjectFactory::CreatePlayerShip(sf::Vector2f Position, char cPla
 	pShip->SetComponent(new QuadrantPosition(sf::Vector2f(Position), sf::Vector2f(32.f, 51.f)));
 	pShip->SetComponent(new ShipMovement(cPlayer));
     SpriteDrawing* pSpriteComponent = new SpriteDrawing(std::string("assets/lilee/ship_player.png"), sf::Vector2f(192.f, 128.f));
+    pSpriteComponent->SetUpdateFrameRate(20);
     pSpriteComponent->SetTextureArea(sf::FloatRect(0.f, 0.f, 64.f, 102.f));
     pShip->SetComponent(pSpriteComponent);
     pShip->SetComponent(new DynamicView(sf::FloatRect(0, 0, static_cast<float>(Game::m_iWindowWidth), static_cast<float>(Game::m_iWindowHeight)), sf::Vector2f(1920.f - static_cast<float>(Game::m_iWindowWidth), 0), 20.f));
     //pShip->SetComponent(new CircleCollision(30.f,pos));
 	pShip->SetComponent(new BoxCollision(64, 100));
     pShip->SetComponent(new HealthShip(100.f));
+    pShip->SetComponent(new NavigationCursor());
+    pShip->SetComponent(new ResearchScore(100, 10));
 
 	return pShip;
 }
@@ -83,6 +89,9 @@ GameObject* GameObjectFactory::CreateAsteroid(sf::Vector2f vPosition, float fRot
 	//pAsteroid->SetComponent(new CircleCollision(40.f, pos));
 	pAsteroid->SetComponent(new BoxCollision(80, 80));
     pAsteroid->SetComponent(new HealthAsteroid(200.f));
+    ResearchScore* pScoreComponent = new ResearchScore(9999999, 9999999);
+    pScoreComponent->SetScore(rand() % 5);
+    pAsteroid->SetComponent(pScoreComponent);
 	return pAsteroid;
 }
 
@@ -140,6 +149,24 @@ GameObject* GameObjectFactory::CreateBackgroundStar(sf::Vector2f Position)
     return pStarBackground;
 }
 
+GameObject* GameObjectFactory::CreateExplosion(sf::Vector2f Position)
+{
+    const int iAmountInXAxis = 6;
+    const int iAmountInYAxis = 3;
+    
+    GameObject* pExplosion = new GameObject("effect");
+    pExplosion->SetTemporaryState(true); // Never save explosion´s in save-game´s
+    
+    pExplosion->SetComponent(new PixelPosition(Position, sf::Vector2f()));
+    pExplosion->SetComponent(new HealthExplosion(((iAmountInXAxis * iAmountInYAxis) / (float)Game::m_iFrameRate * 20)));
+    SpriteDrawing* pSpriteDrawing = new SpriteDrawing("assets/lilee/explosion.png");
+    pSpriteDrawing->SetUpdateFrameRate(20);
+    pSpriteDrawing->GenerateTextureAreas(iAmountInXAxis, iAmountInYAxis);
+    pExplosion->SetComponent(pSpriteDrawing);
+    
+    return pExplosion;
+}
+
 GameObject* GameObjectFactory::CreateFontText(sf::Vector2f Position, std::string strFontPath, std::string strText, int iCharSize)
 {
     GameObject* pFontText = new GameObject(std::string("text"));
@@ -160,12 +187,22 @@ GameObject* GameObjectFactory::CreateSpaceStation(sf::Vector2f Position)
     return pSpaceStation;
 }
 
-GameObject* GameObjectFactory::CreatePlanet(sf::Vector2f Position)
+GameObject* GameObjectFactory::CreatePlanet(sf::Vector2f Position, EWorldObjectType eType)
 {
+    std::vector<std::string> SpaceStationsRes;
+    SpaceStationsRes.push_back("assets/lilee/planet_ice.png");
+    SpaceStationsRes.push_back("assets/lilee/planet_sand.png");
+    
+    if(eType == EWorldObjectType::Terra)
+    {
+        SpaceStationsRes.clear();
+        SpaceStationsRes.push_back("assets/lilee/planet_earth.png");
+    }
+    
     GameObject* pPlanet = new GameObject(std::string("planet"));
     
-    pPlanet->SetComponent(new PixelPosition(Position, sf::Vector2f(0.f, 0.f)));
-    pPlanet->SetComponent(new SpriteDrawing("assets/planet.png"));
+    pPlanet->SetComponent(new PixelPosition(Position, sf::Vector2f(1000.f, 1000.f)));
+    pPlanet->SetComponent(new SpriteDrawing(SpaceStationsRes[rand() % SpaceStationsRes.size()]));
     
     return pPlanet;
 }

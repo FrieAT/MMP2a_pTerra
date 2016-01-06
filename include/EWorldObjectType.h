@@ -8,6 +8,7 @@ enum class EWorldObjectType
 {
     Planet,
     SpaceStation,
+    Terra,
     MaxItem,
     Null,
 };

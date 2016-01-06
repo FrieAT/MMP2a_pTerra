@@ -67,8 +67,14 @@
     <Filter Include="Source Files\External Frameworks\rapidxml">
       <UniqueIdentifier>{6a55d646-3d2c-4481-8ee9-ad9df2b41855}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Components\IScore">
+      <UniqueIdentifier>{4588d409-b870-4474-9055-c71377e6012e}</UniqueIdentifier>
+    </Filter>    
     <Filter Include="Source Files\Managers\KIManager">
       <UniqueIdentifier>{d66c2349-8f27-448c-842c-fe264dad4eed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Components\INavigation">
+      <UniqueIdentifier>{a13417ff-5e25-4fc9-9a24-7863e714be61}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Components\IKI">
       <UniqueIdentifier>{59d9dc2e-efa0-438d-b05b-13e41064b327}</UniqueIdentifier>
@@ -168,9 +174,18 @@
     <ClCompile Include="source\XMLWriteVisitor.cpp">
       <Filter>Source Files\GameObject\Serializer</Filter>
     </ClCompile>
+    <ClCompile Include="source\ResearchScore.cpp">
+      <Filter>Source Files\Components\IScore</Filter>
+    </ClCompile>
     <ClCompile Include="source\KIManager.cpp">
       <Filter>Source Files\Managers\KIManager</Filter>
     </ClCompile>
+    <ClCompile Include="source\NavigationCursor.cpp">
+      <Filter>Source Files\Components\INavigation</Filter>
+    </ClCompile>
+    <ClCompile Include="source\HealthExplosion.cpp">
+      <Filter>Source Files\Components\IHealth</Filter>
+    </ClCompile>    
     <ClCompile Include="source\PatrolKI.cpp">
       <Filter>Source Files\Components\IKI</Filter>
     </ClCompile>
@@ -335,15 +350,30 @@
     <ClInclude Include="include\rapidxml\rapidxml_utils.hpp">
       <Filter>Source Files\External Frameworks\rapidxml</Filter>
     </ClInclude>
+    <ClInclude Include="include\IScore.h">
+      <Filter>Source Files\Components\IScore</Filter>
+    </ClCompile>
     <ClInclude Include="include\KIManager.h">
       <Filter>Source Files\Managers\KIManager</Filter>
     </ClInclude>
+    <ClInclude Include="include\ResearchScore.h">
+      <Filter>Source Files\Components\IScore</Filter>
+    </ClCompile>
     <ClInclude Include="include\IKI.h">
       <Filter>Source Files\Components\IKI</Filter>
     </ClInclude>
+    <ClInclude Include="include\INavigation.h">
+      <Filter>Source Files\Components\INavigation</Filter>
+    </ClCompile>
     <ClInclude Include="include\IKIObserver.h">
       <Filter>Source Files\Managers\KIManager</Filter>
     </ClInclude>
+    <ClInclude Include="include\NavigationCursor.h">
+      <Filter>Source Files\Components\INavigation</Filter>
+    </ClInclude>
+    <ClInclude Include="include\HealthExplosion.h">
+      <Filter>Source Files\Components\IHealth</Filter>
+    </ClCompile>
     <ClInclude Include="include\PatrolKI.h">
       <Filter>Source Files\Components\IKI</Filter>
     </ClInclude>
