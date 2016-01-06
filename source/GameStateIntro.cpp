@@ -2,14 +2,15 @@
 Copyright (c) MultiMediaTechnology, 2015
 =================================================================*/
 
-#include "GameStateIntro.h"
+#include <fstream>
 
+#include "GameStateIntro.h"
 #include "Game.h"
 #include "InputManager.h"
 #include "ObjectManager.h"
 #include "GameStatePlay.h"
 #include "GameObjectFactory.h"
-#include "WorldManager.h"
+// #include "WorldManager.h"
 
 GameStateIntro::~GameStateIntro()
 {
@@ -48,6 +49,8 @@ void GameStateIntro::Init(sf::RenderWindow* pWindow)
 	title->setTextColor(sf::Color::White);
 	m_Gui.add(title, "title");*/
 
+    float fCurrentHeight = 200.f;
+    
 	// Startbutton
 	tgui::Button::Ptr buttonStart = theme->load("Button"); // Verwenden von Theme für Button
 	if (Game::m_pEngine->IsInitialized(EGameState::GameStatePlay))
@@ -65,9 +68,27 @@ void GameStateIntro::Init(sf::RenderWindow* pWindow)
 		});
 	}
 	buttonStart->setTextSize(28);
-	buttonStart->setPosition(Game::m_iWindowWidth / 2 - tgui::bindWidth(buttonStart) / 2, 200.f);
+	buttonStart->setPosition(Game::m_iWindowWidth / 2 - tgui::bindWidth(buttonStart) / 2, fCurrentHeight);
 	m_Gui.add(buttonStart, "buttonStart");
+    fCurrentHeight += 200.f;
 
+    // Load Last SaveGame, but only show if a savegame exists.
+    std::ifstream ifile("savegame.txt");
+    if(ifile)
+    {
+        tgui::Button::Ptr buttonLoad = theme->load("Button"); // Verwenden von Theme für Button
+        buttonLoad->setText("Load Last Game");
+        buttonLoad->connect("clicked", []() {
+            Game::m_pEngine->ChangeState(EGameState::GameStatePlay);
+            GameStatePlay* pNewState = static_cast<GameStatePlay*>(Game::m_pEngine->GetCurrentState());
+            pNewState->SetLoadGame("savegame.txt");
+        });
+        buttonLoad->setTextSize(28);
+        buttonLoad->setPosition(Game::m_iWindowWidth / 2 - tgui::bindWidth(buttonLoad) / 2, fCurrentHeight);
+        m_Gui.add(buttonLoad, "buttonLoad");
+        fCurrentHeight += 200.f;
+    }
+    
 	// Exit button
 	tgui::Button::Ptr buttonExit = theme->load("Button"); // Verwenden von Theme für Button
 	buttonExit->setText("Exit");
@@ -75,8 +96,9 @@ void GameStateIntro::Init(sf::RenderWindow* pWindow)
 		m_bExit = true;
 	});
 	buttonExit->setTextSize(28);
-	buttonExit->setPosition(Game::m_iWindowWidth / 2 - tgui::bindWidth(buttonExit) / 2, 400.f);
+	buttonExit->setPosition(Game::m_iWindowWidth / 2 - tgui::bindWidth(buttonExit) / 2, fCurrentHeight);
 	m_Gui.add(buttonExit, "buttonExit");
+    fCurrentHeight += 200.f;
 
     //InputManager::GetInstance().RegisterEventObserver(this);
 }

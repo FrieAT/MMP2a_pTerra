@@ -20,28 +20,12 @@ GameStatePlay::~GameStatePlay()
 
 void GameStatePlay::Init(sf::RenderWindow* pWindow)
 {
-    // Check if there is setted a load-file and it really exists.
-    std::ifstream ifile(m_strLoadGame);
-    if(m_strLoadGame.length() > 0 && ifile)
-    {
-        // Close dummy check if file exists.
-        ifile.close();
-        
-        // Load the save-game
-        WorldManager::GetInstance().LoadGame(m_strLoadGame);
-        
-        // Refresh cache for generating world upon seed from save-game.
-        WorldManager::GetInstance().GenerateWorld();
-    }
-    else
-    {
-        // Generate new World :D
-        WorldManager::GetInstance().GenerateWorld();
-        
-        // GameObjectFactory::CreatePlayerShip(sf::Vector2f(50,30),'2');
-        GameObjectFactory::CreatePlayerShip(sf::Vector2f(0.f, 0.f), '2');
-        GameObjectFactory::CreateAsteroid(sf::Vector2f(50,150),-120,50);
-    }
+    // Generate new World :D
+    WorldManager::GetInstance().GenerateWorld();
+    
+    // GameObjectFactory::CreatePlayerShip(sf::Vector2f(50,30),'2');
+    GameObjectFactory::CreatePlayerShip(sf::Vector2f(0.f, 0.f), '2');
+    GameObjectFactory::CreateAsteroid(sf::Vector2f(50,150),-120,50);
 
 	// Initialize GUI
 	m_Gui.setWindow(*pWindow);
@@ -65,6 +49,19 @@ void GameStatePlay::Init(sf::RenderWindow* pWindow)
 void GameStatePlay::SetLoadGame(std::string strLoadGame)
 {
     m_strLoadGame = strLoadGame;
+    
+    // Clear everything.
+    ObjectManager::GetInstance().Clear();
+    WorldManager::GetInstance().Clear();
+    FrameManager::GetInstance().Clear();
+    InputManager::GetInstance().Clear();
+    CollisionManager::GetInstance().Clear();
+    
+    // Load the save-game
+    WorldManager::GetInstance().LoadGame(m_strLoadGame);
+    
+    // Refresh cache for generating world upon seed from save-game.
+    WorldManager::GetInstance().GenerateWorld();
 }
 
 void GameStatePlay::Update(sf::Time DeltaTime, sf::RenderWindow* pWindow)

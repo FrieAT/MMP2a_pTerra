@@ -23,6 +23,7 @@ public:
 	void StoreCurrentState();
     void ChangeState(EGameState GameState);
 	bool IsInitialized(EGameState GameState);
+    IGameState* GetCurrentState() { return m_pCurrentState; }
     
     static Game* m_pEngine;
     static const int m_iWindowWidth = 1920;
