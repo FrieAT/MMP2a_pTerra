@@ -111,7 +111,7 @@ void BoxCollision::OnFrameDraw(sf::RenderWindow* pWindow)
     else test.setFillColor(sf::Color::Blue);
     test.setPosition(pos->GetPosition() - sf::Vector2f(m_fWidth/2, m_fHeight/2));
 
-    pWindow->draw(test);
+    // pWindow->draw(test);
 }
 
 void BoxCollision::Serialize(SerializeNode *pParentNode)

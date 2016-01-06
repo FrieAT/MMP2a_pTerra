@@ -1,6 +1,6 @@
 /*=================================================================
-Copyright (c) MultiMediaTechnology, 2015
-=================================================================*/
+ Copyright (c) MultiMediaTechnology, 2015
+ =================================================================*/
 
 #include <math.h>
 
@@ -11,15 +11,18 @@ Copyright (c) MultiMediaTechnology, 2015
 #include "FrameManager.h"
 
 DynamicView::DynamicView(sf::FloatRect ViewSize, sf::Vector2f MoveVector)
-{    
+{
     m_CurrentMovePosition = sf::Vector2f(0.f, 0.f);
     m_MoveVector = MoveVector;
-	m_zoom = 1.f;
+    m_zoom = 1.f;
+    m_pView = new sf::View(ViewSize);
 }
 
 DynamicView::~DynamicView()
 {
     FrameManager::GetInstance().UnregisterEventObserver(this);
+    
+    delete m_pView;
 }
 
 void DynamicView::Init()
@@ -29,26 +32,16 @@ void DynamicView::Init()
 
 sf::FloatRect DynamicView::GetViewport()
 {
-    return m_pView.getViewport();
+    return m_pView->getViewport();
 }
 
 void DynamicView::OnFrameUpdate(sf::Time DeltaTime)
 {
-
-}
-
-void DynamicView::OnFrameDraw(sf::RenderWindow* pWindow)
-{
-    m_pView = pWindow->getView();
-    m_pView.setCenter(0, 0);
-    
     // Set camera to center of screen
     IPosition* pPositionComponent = static_cast<IPosition*>(GetAssignedGameObject()->GetComponent(EComponentType::Position));
     if (pPositionComponent != nullptr)
     {
-        sf::Vector2f CurrentPos = pPositionComponent->GetPosition();
-        sf::Vector2f CenterScreen(Game::m_iWindowWidth / 2.f, Game::m_iWindowHeight / 2.f);
-        m_pView.move(CurrentPos.x - CenterScreen.x, CurrentPos.y - CenterScreen.y);
+        m_pView->setCenter(pPositionComponent->GetCenter());
     }
     
     // Set zoom based on player ship speed
@@ -68,14 +61,23 @@ void DynamicView::OnFrameDraw(sf::RenderWindow* pWindow)
     m_zoom = m_zoom >= 1.0f ? 1.0f
     : m_zoom <= 0.5f ? 0.5f
     : m_zoom;
-    
-	// m_pView->setSize(sf::Vector2f(pWindow->getSize()) / m_zoom);
-    pWindow->setView(m_pView);
+}
+
+void DynamicView::OnFrameDraw(sf::RenderWindow* pWindow)
+{
+    m_pView->setSize(sf::Vector2f(pWindow->getSize()) / m_zoom);
+    pWindow->setView(*m_pView);
 }
 
 void DynamicView::Serialize(SerializeNode *pParentNode)
 {
     IView::Serialize(pParentNode);
+    pParentNode->AddElement(new SerializeNode("ViewSizeX", ESerializeNodeType::Property, std::to_string((m_pView->getViewport()).left)));
+    pParentNode->AddElement(new SerializeNode("ViewSizeY", ESerializeNodeType::Property, std::to_string((m_pView->getViewport()).top)));
+    pParentNode->AddElement(new SerializeNode("ViewSizeWidth", ESerializeNodeType::Property, std::to_string((m_pView->getViewport()).width)));
+    pParentNode->AddElement(new SerializeNode("ViewSizeHeight", ESerializeNodeType::Property, std::to_string((m_pView->getViewport()).height)));
+    pParentNode->AddElement(new SerializeNode("MoveVectorX", ESerializeNodeType::Property, std::to_string(m_MoveVector.x)));
+    pParentNode->AddElement(new SerializeNode("MoveVectorY", ESerializeNodeType::Property, std::to_string(m_MoveVector.y)));
 }
 
 IComponent* DynamicView::Deserialize(SerializeNode *pNode)
@@ -83,6 +85,18 @@ IComponent* DynamicView::Deserialize(SerializeNode *pNode)
     DynamicView* pComponent = new DynamicView(sf::FloatRect(), sf::Vector2f());
     
     IView::Deserialize(pNode, pComponent);
+    
+    sf::FloatRect ViewSize;
+    ViewSize.left = stof((pNode->GetNode("ViewSizeX"))->GetValue());
+    ViewSize.top = stof((pNode->GetNode("ViewSizeY"))->GetValue());
+    ViewSize.width = stof((pNode->GetNode("ViewSizeWidth"))->GetValue());
+    ViewSize.height = stof((pNode->GetNode("ViewSizeHeight"))->GetValue());
+    pComponent->m_pView = new sf::View(ViewSize);
+    
+    sf::Vector2f MoveVector;
+    MoveVector.x = stof((pNode->GetNode("MoveVectorX"))->GetValue());
+    MoveVector.y = stof((pNode->GetNode("MoveVectorY"))->GetValue());
+    pComponent->m_MoveVector = MoveVector;
     
     return pComponent;
 }
