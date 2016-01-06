@@ -72,6 +72,8 @@ void WorldManager::AddQuadrant(Quadrant *Quadrant, bool bIgnoreGenerationBehavio
     // Only generate dynamic things, if it is allowed to (not allowed, if loading from a savegame)
     if(!bIgnoreGenerationBehavior)
     {
+        const int MaxEnemyShipsNearPlanet = 3;
+        const int MaxEnemyShipNearStation = 1;
         const int MaxAsteroidRandItems = 4;
         
         for(int i = 0; i < MaxAsteroidRandItems; i++)
@@ -88,9 +90,21 @@ void WorldManager::AddQuadrant(Quadrant *Quadrant, bool bIgnoreGenerationBehavio
                 switch ((EWorldObjectType)i) {
                     case EWorldObjectType::Planet:
                         GameObjectFactory::CreatePlanet(it_world_info->GetPosition());
+                        
+                        for(int i = 0; i < MaxEnemyShipsNearPlanet; i++)
+                        {
+                            GameObjectFactory::CreateEnemyShip(GetRandomChunkPositionFromChunk(Quadrant));
+                        }
+                        
                         break;
                     case EWorldObjectType::SpaceStation:
                         GameObjectFactory::CreateSpaceStation(it_world_info->GetPosition());
+                        
+                        for(int i = 0; i < MaxEnemyShipNearStation; i++)
+                        {
+                            GameObjectFactory::CreateEnemyShip(GetRandomChunkPositionFromChunk(Quadrant));
+                        }
+                        
                         break;
                     default: // yes and ignore Terra too, Terra should be only on need created.
                         break;

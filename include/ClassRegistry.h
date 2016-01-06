@@ -55,7 +55,7 @@ public:
         REGISTER_COMPONENT(ShipMovement);
         REGISTER_COMPONENT(NavigationCursor);
         REGISTER_COMPONENT(ResearchScore);
-	REGISTER_COMPONENT(PatrolAI);
+        REGISTER_COMPONENT(PatrolAI);
     }
     void RegisterComponent(std::string strClassName, IComponent* (*ComponentConstructor)(SerializeNode* pNode))
     {

@@ -19,7 +19,7 @@ public:
 	void Update();
 	void Serialize(SerializeNode* pParentNode);
 	static IComponent* Deserialize(SerializeNode* pNode);
-	std::string GetComponentName() { return std::string("PatrolKI"); }
+	std::string GetComponentName() { return std::string("PatrolAI"); }
 
 private:
 	int m_Timer = 25;
