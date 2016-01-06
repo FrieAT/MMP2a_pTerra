@@ -52,8 +52,7 @@ void HealthAsteroid::Damage(float fDamage)
 
 void HealthAsteroid::OnFrameDraw(sf::RenderWindow* pWindow)
 {
-    IDrawing* pHealthDebugDrawing = static_cast<IDrawing*>(m_pHealthDebug->GetComponent(EComponentType::Drawing));
-    pHealthDebugDrawing->Draw(pWindow);
+
 }
 
 void HealthAsteroid::OnFrameUpdate(sf::Time DeltaTime)
