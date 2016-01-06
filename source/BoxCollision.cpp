@@ -105,14 +105,13 @@ bool BoxCollision::colliding(ICollision* pCollisionBody)
 
 void BoxCollision::OnFrameDraw(sf::RenderWindow* pWindow)
 {
-    /*
-     sf::RectangleShape test(sf::Vector2f(m_fWidth,m_fHeight));
-     if (hit) test.setFillColor(sf::Color::Magenta);
-     else test.setFillColor(sf::Color::Blue);
-     test.setPosition(pos->GetPosition() - sf::Vector2f(m_fWidth/2, m_fHeight/2));
-     
-     pWindow->draw(test);
-     */
+    IPosition* pos = static_cast<IPosition*>(GetAssignedGameObject()->GetComponent(EComponentType::Position));
+    sf::RectangleShape test(sf::Vector2f(m_fWidth,m_fHeight));
+    if (m_bHit) test.setFillColor(sf::Color::Magenta);
+    else test.setFillColor(sf::Color::Blue);
+    test.setPosition(pos->GetPosition() - sf::Vector2f(m_fWidth/2, m_fHeight/2));
+
+    // pWindow->draw(test);
 }
 
 void BoxCollision::Serialize(SerializeNode *pParentNode)
