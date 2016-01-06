@@ -56,8 +56,8 @@ void HealthMissile::OnFrameUpdate(sf::Time DeltaTime)
 
 void HealthMissile::OnCollisionEvent(GameObject* pOther, sf::Vector2f ImpulseImpact)
 {
-    // Ignore Collision with Owner-Ship.
-    if(pOther == m_pOwner)
+	// Ignore Collision with Owner-Ship.
+	if (pOther == m_pOwner || m_bMadeAction)
     {
         return;
     }
@@ -73,7 +73,7 @@ void HealthMissile::OnCollisionEvent(GameObject* pOther, sf::Vector2f ImpulseImp
     }
     
     // Get for the Owner of the Missile the ResearchPoints from the Victim
-    if(m_pOwner != nullptr && !m_bMadeAction)
+    if(m_pOwner != nullptr)
     {
         IScore* pScoreVictim = static_cast<IScore*>(pOther->GetComponent(EComponentType::Score));
         IScore* pScoreOwner = static_cast<IScore*>(m_pOwner->GetComponent(EComponentType::Score));

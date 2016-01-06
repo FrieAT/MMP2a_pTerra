@@ -10,11 +10,10 @@ Copyright (c) MultiMediaTechnology, 2015
 #include "DynamicView.h"
 #include "FrameManager.h"
 
-DynamicView::DynamicView(sf::FloatRect ViewSize, sf::Vector2f MoveVector, float fSpeed)
+DynamicView::DynamicView(sf::FloatRect ViewSize, sf::Vector2f MoveVector)
 {    
     m_CurrentMovePosition = sf::Vector2f(0.f, 0.f);
     m_MoveVector = MoveVector;
-	m_fSpeed = fSpeed;
 	m_zoom = 1.f;
 	m_pView = new sf::View(ViewSize);
 }
@@ -49,7 +48,14 @@ void DynamicView::OnFrameUpdate(sf::Time DeltaTime)
 	IMovement* pMovementComponent = static_cast<IMovement*>(GetAssignedGameObject()->GetComponent(EComponentType::Movement));
 	sf::Vector2f moveVector = pMovementComponent->GetVelocity();
 
-    m_zoom = 1.0f / (sqrt(moveVector.x * moveVector.x + moveVector.y * moveVector.y) / 200);
+	if (moveVector.x != 0 || moveVector.y != 0)
+	{
+		m_zoom = 1.0f / (sqrt(moveVector.x * moveVector.x + moveVector.y * moveVector.y) / 200);
+	}
+	else
+	{
+		m_zoom = 1.0f;
+	}
 
 	// Clamp value
 	m_zoom = m_zoom >= 1.0f ? 1.0f
@@ -72,12 +78,11 @@ void DynamicView::Serialize(SerializeNode *pParentNode)
     pParentNode->AddElement(new SerializeNode("ViewSizeHeight", ESerializeNodeType::Property, std::to_string((m_pView->getViewport()).height)));
     pParentNode->AddElement(new SerializeNode("MoveVectorX", ESerializeNodeType::Property, std::to_string(m_MoveVector.x)));
     pParentNode->AddElement(new SerializeNode("MoveVectorY", ESerializeNodeType::Property, std::to_string(m_MoveVector.y)));
-    pParentNode->AddElement(new SerializeNode("Speed", ESerializeNodeType::Property, std::to_string(m_fSpeed)));
 }
 
 IComponent* DynamicView::Deserialize(SerializeNode *pNode)
 {
-    DynamicView* pComponent = new DynamicView(sf::FloatRect(), sf::Vector2f(), 0.f);
+    DynamicView* pComponent = new DynamicView(sf::FloatRect(), sf::Vector2f());
     
     IView::Deserialize(pNode, pComponent);
     
@@ -92,8 +97,6 @@ IComponent* DynamicView::Deserialize(SerializeNode *pNode)
     MoveVector.x = stof((pNode->GetNode("MoveVectorX"))->GetValue());
     MoveVector.y = stof((pNode->GetNode("MoveVectorY"))->GetValue());
     pComponent->m_MoveVector = MoveVector;
-    
-    pComponent->m_fSpeed = stof((pNode->GetNode("Speed"))->GetValue());
     
     return pComponent;
 }

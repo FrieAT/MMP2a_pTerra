@@ -185,6 +185,9 @@
     </ClCompile>
     <ClCompile Include="source\HealthExplosion.cpp">
       <Filter>Source Files\Components\IHealth</Filter>
+    </ClCompile>
+    <ClCompile Include="source\GameStatePause.cpp">
+      <Filter>Source Files\Managers\GameStateManager</Filter>
     </ClCompile>    
     <ClCompile Include="source\PatrolKI.cpp">
       <Filter>Source Files\Components\IKI</Filter>
@@ -352,19 +355,22 @@
     </ClInclude>
     <ClInclude Include="include\IScore.h">
       <Filter>Source Files\Components\IScore</Filter>
-    </ClCompile>
+    </ClInclude>
+    <ClInclude Include="include\EGameState.h">
+      <Filter>Source Files\Managers\GameStateManager</Filter>
+    </ClInclude>
     <ClInclude Include="include\KIManager.h">
       <Filter>Source Files\Managers\KIManager</Filter>
     </ClInclude>
     <ClInclude Include="include\ResearchScore.h">
       <Filter>Source Files\Components\IScore</Filter>
-    </ClCompile>
+    </ClInclude>
     <ClInclude Include="include\IKI.h">
       <Filter>Source Files\Components\IKI</Filter>
     </ClInclude>
     <ClInclude Include="include\INavigation.h">
       <Filter>Source Files\Components\INavigation</Filter>
-    </ClCompile>
+    </ClInclude>
     <ClInclude Include="include\IKIObserver.h">
       <Filter>Source Files\Managers\KIManager</Filter>
     </ClInclude>
@@ -373,7 +379,10 @@
     </ClInclude>
     <ClInclude Include="include\HealthExplosion.h">
       <Filter>Source Files\Components\IHealth</Filter>
-    </ClCompile>
+    </ClInclude>
+    <ClInclude Include="include\GameStatePause.h">
+      <Filter>Source Files\Managers\GameStateManager</Filter>
+    </ClInclude>
     <ClInclude Include="include\PatrolKI.h">
       <Filter>Source Files\Components\IKI</Filter>
     </ClInclude>

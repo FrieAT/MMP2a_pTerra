@@ -5,6 +5,7 @@ Copyright (c) MultiMediaTechnology, 2015
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include <TGUI/TGUI.hpp>
 
 #include "IInputObserver.h"
 
@@ -16,7 +17,7 @@ public:
 		static InputManager g_Instance;
 		return g_Instance;
 	}
-	void Update(sf::RenderWindow* pWindow);
+	void Update(sf::RenderWindow* pWindow, tgui::Gui* pGui);
 	void RegisterEventObserver(IInputObserver* pObserver);
 	void UnregisterEventObserver(IInputObserver* pObserver);
 	void Clear();

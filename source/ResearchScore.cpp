@@ -40,7 +40,7 @@ void ResearchScore::AddScore(int iScore)
         // Check if game object has a INavigation and set a new waypoint to next planet if it isn´t active.
         INavigation* pNavigationComponent = static_cast<INavigation*>(GetAssignedGameObject()->GetComponent(EComponentType::Navigation));
         IPosition* pPositionOwner = static_cast<IPosition*>(GetAssignedGameObject()->GetComponent(EComponentType::Position));
-        if(pPositionOwner != nullptr && pNavigationComponent != nullptr && m_iCurrentLevel >= m_iLevelLimit)
+        if(pPositionOwner != nullptr && pNavigationComponent != nullptr && GetScore() >= GetScoreLimit())
         {
             // Get the holy Position of Terra
             sf::Vector2f NextCoords = WorldManager::GetInstance().GetNextNearestObjectPos(pPositionOwner->GetPosition(), EWorldObjectType::Terra);

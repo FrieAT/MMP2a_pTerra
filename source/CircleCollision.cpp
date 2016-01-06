@@ -63,14 +63,13 @@ bool CircleCollision::colliding(ICollision* pCollisionBody)
 
 void CircleCollision::OnFrameDraw(sf::RenderWindow* pWindow)
 {
-    /*
-	sf::CircleShape test(radius);
-	if(hit) test.setFillColor(sf::Color::Magenta);
+    IPosition* pos = static_cast<IPosition*>(GetAssignedGameObject()->GetComponent(EComponentType::Position));
+	sf::CircleShape test(m_fRadius);
+	if(m_bHit) test.setFillColor(sf::Color::Magenta);
 	else test.setFillColor(sf::Color::Blue);
-	test.setPosition(pos->GetPosition()- sf::Vector2f(radius, radius));
+	test.setPosition(pos->GetPosition()- sf::Vector2f(m_fRadius, m_fRadius));
 	
-	//pWindow->draw(test);
-     */
+	// pWindow->draw(test);
 }
 
 void CircleCollision::Serialize(SerializeNode *pParentNode)
