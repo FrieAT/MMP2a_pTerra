@@ -13,7 +13,8 @@ class GameStateGameOver : public IGameState, public IInputObserver
 {
 public:
     ~GameStateGameOver();
-    void Init();
+    void Init(sf::RenderWindow* pWindow);
+	void Update(sf::Time DeltaTime, sf::RenderWindow* pWindow);
     void OnInputUpdate(std::string strEvent);
 protected:
     bool m_bKeyPressed;

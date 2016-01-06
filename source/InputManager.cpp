@@ -3,23 +3,31 @@ Copyright (c) MultiMediaTechnology, 2015
 =================================================================*/
 
 #include "InputManager.h"
+#include "Game.h"
+
 #include <iostream>
 
-void InputManager::Update(sf::RenderWindow* pWindow)
+void InputManager::Update(sf::RenderWindow* pWindow, tgui::Gui* pGui)
 {
 	sf::Event Event;
 	while (pWindow->pollEvent(Event))
 	{
+		pGui->handleEvent(Event);
+
 		std::string strMovement = "";
 
-		// Escape pressed: exit
+		// Escape pressed: Pause
 		if (Event.key.code == sf::Keyboard::Escape)
 		{
-			pWindow->close();//TODO call game exit
+			Game::m_pEngine->StoreCurrentState();
+			Game::m_pEngine->ChangeState(EGameState::GameStatePause);
+			//pWindow->close(); //TODO call game exit
 		}
+
+		// Window closed: Exit
 		if (Event.type == sf::Event::Closed)
 		{
-			pWindow->close();//TODO call game exit
+			pWindow->close(); //TODO call game exit
 		}
 
 		//Left

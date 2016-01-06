@@ -11,7 +11,7 @@ Copyright (c) MultiMediaTechnology, 2015
 class DynamicView : public IView, public IFrameObserver
 {
 public:
-    DynamicView(sf::FloatRect ViewSize, sf::Vector2f MoveVector, float fSpeed);
+    DynamicView(sf::FloatRect ViewSize, sf::Vector2f MoveVector);
     ~DynamicView();
     void Init();
     void OnFrameUpdate(sf::Time DeltaTime);
@@ -22,9 +22,8 @@ public:
     
     sf::FloatRect GetViewport();
 private:
-    sf::Vector2f m_MoveVector;
-    sf::Vector2f m_CurrentMovePosition;
-    float m_zoom;
-    float m_fSpeed;
+    sf::Vector2f m_MoveVector = sf::Vector2f(0.f, 0.f);
+    sf::Vector2f m_CurrentMovePosition = sf::Vector2f(0.f, 0.f);
+    float m_zoom = 1.f;
     sf::View* m_pView;
 };

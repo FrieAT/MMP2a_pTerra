@@ -177,6 +177,9 @@
     <ClCompile Include="source\HealthExplosion.cpp">
       <Filter>Source Files\Components\IHealth</Filter>
     </ClCompile>
+    <ClCompile Include="source\GameStatePause.cpp">
+      <Filter>Source Files\Managers\GameStateManager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\IComponent.h">
@@ -340,6 +343,9 @@
     </ClInclude>
     <ClInclude Include="include\IScore.h">
       <Filter>Source Files\Components\IScore</Filter>
+	</ClInclude>
+    <ClInclude Include="include\EGameState.h">
+      <Filter>Source Files\Managers\GameStateManager</Filter>
     </ClInclude>
     <ClInclude Include="include\ResearchScore.h">
       <Filter>Source Files\Components\IScore</Filter>
@@ -352,6 +358,9 @@
     </ClInclude>
     <ClInclude Include="include\HealthExplosion.h">
       <Filter>Source Files\Components\IHealth</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GameStatePause.h">
+      <Filter>Source Files\Managers\GameStateManager</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

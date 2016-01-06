@@ -1,4 +1,4 @@
-/*=================================================================
+﻿/*=================================================================
 Copyright (c) MultiMediaTechnology, 2015
 =================================================================*/
 
@@ -13,23 +13,99 @@ Copyright (c) MultiMediaTechnology, 2015
 
 GameStateIntro::~GameStateIntro()
 {
+	m_Gui.removeAllWidgets();
     InputManager::GetInstance().UnregisterEventObserver(this);
 }
 
-void GameStateIntro::Init()
+void GameStateIntro::Init(sf::RenderWindow* pWindow)
 {
     m_bKeyPressed = false;
-    
-    GameObjectFactory::CreateBackgroundSprite("assets/intro-bg.jpg", sf::Vector2f(static_cast<float>(Game::m_iWindowWidth), static_cast<float>(Game::m_iWindowHeight)));
-    GameObjectFactory::CreateFontText(sf::Vector2f(280.f, 100.f), "assets/Starjedi.ttf", "The Space Game", 24);
-    GameObjectFactory::CreateFontText(sf::Vector2f(230.f, 500.f), "assets/Starjedi.ttf", "-- Press Space-Key to start game --", 16);
-    
-    InputManager::GetInstance().RegisterEventObserver(this);
+
+	// Initialize GUI
+	m_Gui.setWindow(*pWindow);
+	m_Gui.setFont("assets/Starjedi.ttf");
+	auto theme = std::make_shared<tgui::Theme>("Theme.cfg");
+
+	// Create GUI for this GameState
+	// Background
+	auto background = std::make_shared<tgui::Picture>("assets/intro-bg.jpg");
+	background->setSize(Game::m_iWindowWidth, Game::m_iWindowHeight);
+	m_Gui.add(background);
+	background->moveToBack();
+
+	// Logo
+	auto logo = std::make_shared<tgui::Picture>("assets/logo.png");
+	logo->scale(0.4f, 0.4f);
+	logo->setPosition(Game::m_iWindowWidth / 2 - tgui::bindWidth(logo) / 2, 80.f);
+	logo->setSmooth();
+	m_Gui.add(logo);
+
+	// Title
+	/*auto title = std::make_shared<tgui::Label>();
+	title->setText("Terra");
+	title->setTextSize(42);
+	title->setPosition(Game::m_iWindowWidth / 2 - tgui::bindWidth(title) / 2, 80.f);
+	title->setTextColor(sf::Color::White);
+	m_Gui.add(title, "title");*/
+
+	// Startbutton
+	tgui::Button::Ptr buttonStart = theme->load("Button"); // Verwenden von Theme für Button
+	if (Game::m_pEngine->IsInitialized(EGameState::GameStatePlay))
+	{
+		buttonStart->setText("Continue Game");
+		buttonStart->connect("clicked", []() {
+			Game::m_pEngine->ChangeState(EGameState::GameStatePause);
+		});
+	}
+	else
+	{
+		buttonStart->setText("Start Game");
+		buttonStart->connect("clicked", []() {
+			Game::m_pEngine->ChangeState(EGameState::GameStatePlay);
+		});
+	}
+	buttonStart->setTextSize(28);
+	buttonStart->setPosition(Game::m_iWindowWidth / 2 - tgui::bindWidth(buttonStart) / 2, 200.f);
+	m_Gui.add(buttonStart, "buttonStart");
+
+	// Exit button
+	tgui::Button::Ptr buttonExit = theme->load("Button"); // Verwenden von Theme für Button
+	buttonExit->setText("Exit");
+	buttonExit->connect("clicked", [this]() {
+		m_bExit = true;
+	});
+	buttonExit->setTextSize(28);
+	buttonExit->setPosition(Game::m_iWindowWidth / 2 - tgui::bindWidth(buttonExit) / 2, 400.f);
+	m_Gui.add(buttonExit, "buttonExit");
+
+    //InputManager::GetInstance().RegisterEventObserver(this);
+}
+
+void GameStateIntro::Update(sf::Time DeltaTime, sf::RenderWindow* pWindow)
+{
+	// Check for exit
+	if (m_bExit)
+	{
+		pWindow->close();
+	}
+
+	// Manager updates
+	//InputManager::GetInstance().Update(pWindow, &m_Gui);
+
+	// No managers, give Events directly to Gui
+	sf::Event Event;
+	while (pWindow->pollEvent(Event))
+	{
+		m_Gui.handleEvent(Event);
+	}
+
+	// Drawing
+	m_Gui.draw();
 }
 
 void GameStateIntro::OnInputUpdate(std::string strEvent)
 {
-    std::size_t iDelimiterPos = strEvent.find('_');
+    /*std::size_t iDelimiterPos = strEvent.find('_');
 	if (iDelimiterPos == std::string::npos)
 	{
 		return;
@@ -41,6 +117,6 @@ void GameStateIntro::OnInputUpdate(std::string strEvent)
     {
         // Prevent of double changing states.
         m_bKeyPressed = true;
-        Game::m_pEngine->ChangeState(new GameStatePlay());
-    }
+		Game::m_pEngine->ChangeState(new GameStatePlay());
+    }*/
 }

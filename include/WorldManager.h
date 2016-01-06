@@ -19,7 +19,7 @@ public:
     
     static WorldManager& GetInstance()
     {
-        static WorldManager g_Instance(sf::Vector2f(1000.f, 1000.f), 10000, 1);
+        static WorldManager g_Instance(sf::Vector2f(2000.f, 2000.f), 10000, 1);
         return g_Instance;
     }
     void AddQuadrant(Quadrant* Quadrant, bool bIgnoreGenerationBehavior = false);

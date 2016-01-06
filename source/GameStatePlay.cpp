@@ -10,13 +10,15 @@ Copyright (c) MultiMediaTechnology, 2015
 #include "ObjectManager.h"
 #include "InputManager.h"
 #include "WorldManager.h"
+#include "CollisionManager.h"
+#include "FrameManager.h"
 
 GameStatePlay::~GameStatePlay()
 {
     // delete m_pMusic;
 }
 
-void GameStatePlay::Init()
+void GameStatePlay::Init(sf::RenderWindow* pWindow)
 {
     // Check if there is setted a load-file and it really exists.
     std::ifstream ifile(m_strLoadGame);
@@ -41,6 +43,11 @@ void GameStatePlay::Init()
         GameObjectFactory::CreateAsteroid(sf::Vector2f(50,150),-120,50);
     }
 
+	// Initialize GUI
+	m_Gui.setWindow(*pWindow);
+	m_Gui.setFont("assets/Starjedi.ttf");
+	auto theme = std::make_shared<tgui::Theme>("Theme.cfg");
+
     // ====== Below decprecated method to create things ======
     
     // Load a music to play
@@ -58,4 +65,18 @@ void GameStatePlay::Init()
 void GameStatePlay::SetLoadGame(std::string strLoadGame)
 {
     m_strLoadGame = strLoadGame;
+}
+
+void GameStatePlay::Update(sf::Time DeltaTime, sf::RenderWindow* pWindow)
+{
+	// Manager updates
+	FrameManager::GetInstance().Update(DeltaTime);
+	InputManager::GetInstance().Update(pWindow, &m_Gui);
+	ObjectManager::GetInstance().Update(DeltaTime);
+	CollisionManager::GetInstance().Update(DeltaTime);
+
+	// Rendering
+	FrameManager::GetInstance().Draw(pWindow);
+	ObjectManager::GetInstance().Draw(pWindow);
+	//WorldManager::GetInstance().Draw(pWindow); DEBUG
 }
