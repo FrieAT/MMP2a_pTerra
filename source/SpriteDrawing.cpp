@@ -23,20 +23,7 @@ SpriteDrawing::SpriteDrawing(std::string strRessourcePath, sf::Vector2f ScaleToS
 {
     m_ScaleToSize = ScaleToSize;
     
-	// Get Texture Size
-    sf::Vector2f TextureSize = static_cast<sf::Vector2f>(m_pTexture->getSize());
-    
-    // If given scaleTo-size is zero, then dont scale!
-	if (ScaleToSize.x == 0)
-	{
-		ScaleToSize.x = TextureSize.x;
-	}
-	if (ScaleToSize.y == 0)
-	{
-		ScaleToSize.y = TextureSize.y;
-	}
-    // Set scale expects a ratio (Default: 1.f / 1.f)
-    m_pSprite->setScale((ScaleToSize.x / TextureSize.x), (ScaleToSize.y / TextureSize.y));
+	SetScale(ScaleToSize);
 }
 
 SpriteDrawing::~SpriteDrawing()
@@ -74,6 +61,24 @@ void SpriteDrawing::Draw(sf::RenderWindow* pWindow)
 {
 	Update();
 	pWindow->draw(*m_pSprite);
+}
+
+void SpriteDrawing::SetScale(sf::Vector2f ScaleToSize)
+{
+	// Get Texture Size
+	sf::Vector2f TextureSize = static_cast<sf::Vector2f>(m_pTexture->getSize());
+
+	// If given scaleTo-size is zero, then dont scale!
+	if (ScaleToSize.x == 0)
+	{
+		ScaleToSize.x = TextureSize.x;
+	}
+	if (ScaleToSize.y == 0)
+	{
+		ScaleToSize.y = TextureSize.y;
+	}
+	// Set scale expects a ratio (Default: 1.f / 1.f)
+	m_pSprite->setScale((ScaleToSize.x / TextureSize.x), (ScaleToSize.y / TextureSize.y));
 }
 
 sf::FloatRect SpriteDrawing::GetTextureArea()
