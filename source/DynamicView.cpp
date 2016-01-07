@@ -56,6 +56,8 @@ void DynamicView::OnFrameUpdate(sf::Time DeltaTime)
 		IPosition* pVignettPosition = static_cast<IPosition*>(m_pVignett->GetComponent(EComponentType::Position));
 		if (pVignettPosition != nullptr)
 		{
+            // sf::Vector2f CurrentSize = m_pView->getSize();
+            // pVignettPosition->SetOrigin(sf::Vector2f(CurrentSize.x / 2.f, CurrentSize.y / 2.f));
 			pVignettPosition->SetPosition(pPositionComponent->GetPosition());
 		}
     }
@@ -86,7 +88,7 @@ void DynamicView::OnFrameDraw(sf::RenderWindow* pWindow)
 	IDrawing* pVignettDrawing = static_cast<IDrawing*>(m_pVignett->GetComponent(EComponentType::Drawing));
 	if (pVignettDrawing != nullptr)
 	{
-		pVignettDrawing->SetScale(NewSize);
+		pVignettDrawing->SetScale(NewSize * 1.25f);
 	}
 
     m_pView->setSize(NewSize);
