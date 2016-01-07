@@ -26,4 +26,5 @@ private:
     sf::Vector2f m_CurrentMovePosition = sf::Vector2f(0.f, 0.f);
     float m_zoom = 1.f;
     sf::View* m_pView;
+	GameObject* m_pVignett;
 };

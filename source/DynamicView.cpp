@@ -9,6 +9,9 @@
 #include "IMovement.h"
 #include "DynamicView.h"
 #include "FrameManager.h"
+#include "PixelPosition.h"
+#include "SpriteDrawing.h"
+#include "ObjectManager.h"
 
 DynamicView::DynamicView(sf::FloatRect ViewSize, sf::Vector2f MoveVector)
 {
@@ -16,13 +19,20 @@ DynamicView::DynamicView(sf::FloatRect ViewSize, sf::Vector2f MoveVector)
     m_MoveVector = MoveVector;
     m_zoom = 1.f;
     m_pView = new sf::View(ViewSize);
+
+	m_pVignett = new GameObject("screen");
+	m_pVignett->SetTemporaryState(true);
+	m_pVignett->SetAssistedState(true);
+	m_pVignett->SetComponent(new PixelPosition(sf::Vector2f(), sf::Vector2f(Game::m_iWindowWidth / 2.f, Game::m_iWindowHeight / 2.f)));
+	m_pVignett->SetComponent(new SpriteDrawing("assets/lilee/FG_vignette.png", sf::Vector2f(Game::m_iWindowWidth, Game::m_iWindowHeight)));
 }
 
 DynamicView::~DynamicView()
 {
     FrameManager::GetInstance().UnregisterEventObserver(this);
-    
     delete m_pView;
+	m_pVignett->SetAssistedState(true);
+	ObjectManager::GetInstance().RemoveGameObject(m_pVignett);
 }
 
 void DynamicView::Init()
@@ -42,6 +52,12 @@ void DynamicView::OnFrameUpdate(sf::Time DeltaTime)
     if (pPositionComponent != nullptr)
     {
         m_pView->setCenter(pPositionComponent->GetCenter());
+		
+		IPosition* pVignettPosition = static_cast<IPosition*>(m_pVignett->GetComponent(EComponentType::Position));
+		if (pVignettPosition != nullptr)
+		{
+			pVignettPosition->SetPosition(pPositionComponent->GetPosition());
+		}
     }
     
     // Set zoom based on player ship speed
@@ -65,7 +81,15 @@ void DynamicView::OnFrameUpdate(sf::Time DeltaTime)
 
 void DynamicView::OnFrameDraw(sf::RenderWindow* pWindow)
 {
-    m_pView->setSize(sf::Vector2f(pWindow->getSize()) / m_zoom);
+	sf::Vector2f NewSize(sf::Vector2f(pWindow->getSize()) / m_zoom);
+
+	IDrawing* pVignettDrawing = static_cast<IDrawing*>(m_pVignett->GetComponent(EComponentType::Drawing));
+	if (pVignettDrawing != nullptr)
+	{
+		pVignettDrawing->SetScale(NewSize);
+	}
+
+    m_pView->setSize(NewSize);
     pWindow->setView(*m_pView);
 }
 
