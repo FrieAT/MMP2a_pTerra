@@ -11,12 +11,12 @@ class IAI : public IComponent
 public:
 	IAI() { }
 	virtual ~IAI() { }
-	virtual std::string GetComponentName() { return std::string("IKI"); }
+	virtual std::string GetComponentName() { return std::string("IAI"); }
 
 	virtual void Serialize(SerializeNode* pParentNode)
 	{
 		//this->IComponent::Serialize(pParentNode);
-		//pParentNode->AddElement(new SerializeNode("Has_KI", ESerializeNodeType::Property, std::to_string(m_bPhysicsApplyable)));
+		//pParentNode->AddElement(new SerializeNode("Has_AI", ESerializeNodeType::Property, std::to_string(m_bPhysicsApplyable)));
 	}
 
 	virtual void Deserialize(SerializeNode* pNode, IAI* pParentComponent) { }
@@ -35,6 +35,6 @@ public:
 
 	EComponentType GetComponentType()
 	{
-		return EComponentType::KI;
+		return EComponentType::AI;
 	}
 };
