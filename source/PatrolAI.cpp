@@ -9,12 +9,12 @@ PatrolAI::PatrolAI()
 
 PatrolAI::~PatrolAI()
 {
-	AIManager::GetInstance().UnregisterKIObserver(this);
+	AIManager::GetInstance().UnregisterAIObserver(this);
 }
 
 void PatrolAI::Init()
 {
-	AIManager::GetInstance().RegisterKIObserver(this);
+	AIManager::GetInstance().RegisterAIObserver(this);
 }
 
 void PatrolAI::Update()

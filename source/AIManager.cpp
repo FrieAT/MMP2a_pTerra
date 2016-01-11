@@ -1,12 +1,12 @@
 #include "AIManager.h"
 
 
-void AIManager::RegisterKIObserver(IAIObserver* pObserver)
+void AIManager::RegisterAIObserver(IAIObserver* pObserver)
 {
 	m_Observers.push_back(pObserver);
 }
 
-void AIManager::UnregisterKIObserver(IAIObserver* pObserver)
+void AIManager::UnregisterAIObserver(IAIObserver* pObserver)
 {
 	for (unsigned int i = 0; i < m_Observers.size(); i++)
 	{

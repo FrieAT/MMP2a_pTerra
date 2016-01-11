@@ -17,8 +17,8 @@ public:
 		return g_Instance;
 	}
 	void Update(sf::Time DeltaTime);
-	void RegisterKIObserver(IAIObserver* pObserver);
-	void UnregisterKIObserver(IAIObserver* pObserver);
+	void RegisterAIObserver(IAIObserver* pObserver);
+	void UnregisterAIObserver(IAIObserver* pObserver);
 	void Clear();
 private:
 	AIManager() { }
