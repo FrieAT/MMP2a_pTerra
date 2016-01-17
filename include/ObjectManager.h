@@ -24,7 +24,7 @@ public:
     void AddQuadrant(Quadrant* pChunk);
     void RemoveQuadrant(Quadrant* pChunk);
     void RemoveAllQuadrants();
-    std::vector<GameObject*> GetActiveGameObjects();
+    const std::vector<GameObject*>& GetActiveGameObjects();
 	void Update(sf::Time DeltaTime);
 	void Draw(sf::RenderWindow* pWindow);
 	void Clear();
