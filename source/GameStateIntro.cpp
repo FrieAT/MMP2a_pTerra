@@ -80,7 +80,7 @@ void GameStateIntro::Init(sf::RenderWindow* pWindow)
         buttonLoad->setText("Load Last Game");
         buttonLoad->connect("clicked", []() {
             Game::m_pEngine->ChangeState(EGameState::GameStatePlay);
-            GameStatePlay* pNewState = static_cast<GameStatePlay*>(Game::m_pEngine->GetCurrentState());
+            GameStatePlay* pNewState = static_cast<GameStatePlay*>(Game::m_pEngine->GetLastState());
             pNewState->SetLoadGame("savegame.txt");
         });
         buttonLoad->setTextSize(28);

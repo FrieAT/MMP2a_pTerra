@@ -24,7 +24,7 @@ public:
     void ChangeState(EGameState GameState);
 	bool IsInitialized(EGameState GameState);
     IGameState* GetCurrentState() { return m_pCurrentState; }
-    
+	IGameState* GetLastState() { return m_States.back(); }
     static Game* m_pEngine;
     static int m_iWindowWidth;
     static int m_iWindowHeight;
