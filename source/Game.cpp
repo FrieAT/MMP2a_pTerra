@@ -24,6 +24,9 @@ Copyright (c) MultiMediaTechnology, 2015
 #include "GameStatePause.h"
 
 Game* Game::m_pEngine = nullptr;
+int Game::m_iWindowWidth = 1024;
+int Game::m_iWindowHeight = 768;
+int Game::m_iFrameRate = 60;
 
 Game::Game()
 {
@@ -35,7 +38,7 @@ Game::Game()
 	ClassRegistry::GetInstance().Init();
     
     // Create the main window
-	m_pWindow = new sf::RenderWindow(sf::VideoMode(Game::m_iWindowWidth, Game::m_iWindowHeight), "pTerra", sf::Style::Fullscreen);
+	m_pWindow = new sf::RenderWindow(sf::VideoMode(Game::m_iWindowWidth, Game::m_iWindowHeight), "pTerra"); // sf::Style::Fullscreen
 
 	// Initialize Intro-screen
 	m_pEngine->ChangeState(EGameState::GameStateIntro);

@@ -26,9 +26,9 @@ public:
     IGameState* GetCurrentState() { return m_pCurrentState; }
     
     static Game* m_pEngine;
-    static const int m_iWindowWidth = 1920;
-    static const int m_iWindowHeight = 1080;
-    static const int m_iFrameRate = 60;
+    static int m_iWindowWidth;
+    static int m_iWindowHeight;
+    static int m_iFrameRate;
 protected:
     sf::RenderWindow* m_pWindow;
     IGameState* m_pCurrentState;
