@@ -20,12 +20,6 @@ void CollisionManager::Update(sf::Time DeltaTime)
 			{
 				continue;
 			}
-
-            // Check if Observer is a IComponent and check from GameObject within, if it is in a Freezed-State.
-            if(CurrentGameObjects[ship]->IsInFreezedState())
-            {
-                continue;
-            }
             
             ICollision* pCollisionComponent = static_cast<ICollision*>(CurrentGameObjects[ship]->GetComponent(EComponentType::Collision));
 			if(pCollisionComponent != nullptr)
@@ -36,7 +30,7 @@ void CollisionManager::Update(sf::Time DeltaTime)
                     continue;
                 }
                 
-                for (unsigned int i = 0; i < CurrentGameObjects.size(); i++)
+                for (unsigned int i = (ship + 1); i < CurrentGameObjects.size(); i++)
                 {
 					if (CurrentGameObjects[i] == nullptr)
 					{
@@ -54,12 +48,6 @@ void CollisionManager::Update(sf::Time DeltaTime)
                         
                         // Check if other GameObject is a observer from CollisionManager
                         if(!m_Colliders[pCollisionComponentOther])
-                        {
-                            continue;
-                        }
-                        
-                        // Check if Observer is a IComponent and check from GameObject within, if it is in a Freezed-State.
-                        if(CurrentGameObjects[i]->IsInFreezedState())
                         {
                             continue;
                         }
