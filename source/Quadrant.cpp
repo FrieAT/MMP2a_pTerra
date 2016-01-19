@@ -10,7 +10,7 @@
 
 Quadrant::Quadrant(sf::Vector2f TopLeftPosition)
 {
-    m_bFreezed = false;
+    m_bFreezed = true;
     m_bCurrentlyVisited = 0;
     m_TopLeftPosition = TopLeftPosition;
     m_Index = WorldManager::GetInstance().GetQuadrantIndexAtPos(TopLeftPosition);

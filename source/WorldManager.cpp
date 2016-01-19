@@ -74,7 +74,7 @@ void WorldManager::AddQuadrant(Quadrant *Quadrant, bool bIgnoreGenerationBehavio
     {
         const int MaxEnemyShipsNearPlanet = 3;
         const int MaxEnemyShipNearStation = 1;
-        const int MaxAsteroidRandItems = 4;
+        const int MaxAsteroidRandItems = 1;
         
         for(int i = 0; i < MaxAsteroidRandItems; i++)
         {
