@@ -319,7 +319,7 @@ void ObjectManager::Clear()
     RemoveAllQuadrants(); 
 }
 
-std::vector<GameObject*> ObjectManager::GetActiveGameObjects()
+const std::vector<GameObject*>& ObjectManager::GetActiveGameObjects()
 {
     return m_ActiveGameObjects;
 }
