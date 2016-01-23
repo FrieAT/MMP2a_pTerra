@@ -68,9 +68,9 @@ void WorldManager::AddQuadrant(Quadrant *Quadrant, bool bIgnoreGenerationBehavio
     // Only generate dynamic things, if it is allowed to (not allowed, if loading from a savegame)
     if(!bIgnoreGenerationBehavior)
     {
-        const int MaxEnemyShipsNearPlanet = 1;
+        const int MaxEnemyShipsNearPlanet = 3;
         const int MaxEnemyShipNearStation = 1;
-        const int MaxAsteroidRandItems = 1;
+        const int MaxAsteroidRandItems = 3;
         
         for(int i = 0; i < MaxAsteroidRandItems; i++)
         {
