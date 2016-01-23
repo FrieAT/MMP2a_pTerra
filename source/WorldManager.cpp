@@ -74,7 +74,7 @@ void WorldManager::AddQuadrant(Quadrant *Quadrant, bool bIgnoreGenerationBehavio
         
         for(int i = 0; i < MaxAsteroidRandItems; i++)
         {
-            GameObjectFactory::CreateAsteroid(GetRandomChunkPositionFromChunk(Quadrant), static_cast<float>(rand() % 360), static_cast<float>(rand() % 10));
+            GameObjectFactory::CreateAsteroid(GetRandomChunkPositionFromChunk(Quadrant), static_cast<float>(rand() % 360), static_cast<float>(rand() % 150));
         }
         
         for(int i = 0; i < (int)EWorldObjectType::MaxItem; i++)

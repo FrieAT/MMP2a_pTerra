@@ -68,16 +68,16 @@ void DynamicView::OnFrameUpdate(sf::Time DeltaTime)
     
     if (moveVector.x != 0 || moveVector.y != 0)
     {
-        m_zoom = 1.0f / (sqrt(moveVector.x * moveVector.x + moveVector.y * moveVector.y) / 200);
+        m_zoom = 0.95f - (sqrt(moveVector.x * moveVector.x + moveVector.y * moveVector.y) / 1200);
     }
     else
     {
-        m_zoom = 1.0f;
+        m_zoom = 0.95f;
     }
     
     // Clamp value
-    m_zoom = m_zoom >= 1.0f ? 1.0f
-    : m_zoom <= 0.5f ? 0.5f
+    m_zoom = m_zoom >= 0.95f ? 0.95f
+    : m_zoom <= 0.58f ? 0.58f
     : m_zoom;
 }
 

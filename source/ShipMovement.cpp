@@ -16,9 +16,9 @@ ShipMovement::ShipMovement(char cPlayer)
 	invMass = 1 / mass;
 
 	m_ShipState = std::vector<bool>(5, false);
-	m_fSpeed = 1000.f;
-	m_fMaxSpeed = 2000;
-	m_fFirerate = 0.5f;
+	m_fSpeed = 2100.f;
+	m_fMaxSpeed = 1200;
+	m_fFirerate = 0.4f;
     m_fWeaponcoolDown = 0.f;
 }
 
