@@ -10,8 +10,8 @@
 
 ResearchScore::ResearchScore(int iLevelLimit, int iLevelUpCostFactor)
 : IScore()
-, m_iLevelLimit(iLevelLimit)
-, m_iLevelUpCostFactor(iLevelUpCostFactor)
+, m_iLevelLimit(1)
+, m_iLevelUpCostFactor(1)
 , m_iCurrentLevel(0)
 {
     

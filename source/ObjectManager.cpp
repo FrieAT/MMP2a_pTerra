@@ -46,15 +46,16 @@ void ObjectManager::AddGameObject(GameObject* pObject)
 	// Check if game object already exists in this quadrant
 	// NOTE: Yes it only checks the given quadrant from the game object. if the game object is added twice to a quadrant, to which it isn´t defined
 	// so the ObjectManager will erase the wrong entry in the draw-cycle.
-    auto objects_it = m_Objects[key].begin();
-    while(objects_it != m_Objects[key].end())
-    {
-        if((*objects_it) == pObject)
-        {
-            throw std::runtime_error("GameObject already in List.");
-        }
-        objects_it++;
-    }
+
+    //auto objects_it = m_Objects[key].begin();
+    //while(objects_it != m_Objects[key].end())
+    //{
+    //    if((*objects_it) == pObject)
+    //    {
+    //        throw std::runtime_error("GameObject already in List.");
+    //    }
+    //    objects_it++;
+    //}
 	
     m_Objects[key].push_back(pObject);
 }
