@@ -41,7 +41,7 @@ public:
             m_fShield -= fDamage;
             if(m_fShield < 0.f)
             {
-                fDamage += m_fShield;
+                fDamage = m_fShield;
                 m_fShield = 0.f;
             }
             else
