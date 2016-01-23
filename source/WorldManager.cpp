@@ -240,14 +240,17 @@ void WorldManager::GenerateWorld()
     // Spaces.push_back(LongRect((std::numeric_limits<int>::min()) / 128, (std::numeric_limits<int>::min()) / 128, (std::numeric_limits<int>::max()) / 64, (std::numeric_limits<int>::max()) / 64));
     Spaces.push_back(LongRect(-600000, -600000, 1200000, 1200000)); // Above tries were a childish thought.
     std::map<EWorldObjectType, int> ObjectsSize;
-    ObjectsSize[EWorldObjectType::Planet] = 700;
-    ObjectsSize[EWorldObjectType::SpaceStation] = 500;
-    ObjectsSize[EWorldObjectType::Terra] = 30000;
+    //ObjectsSize[EWorldObjectType::Planet] = 700;
+    //ObjectsSize[EWorldObjectType::SpaceStation] = 500;
+    //ObjectsSize[EWorldObjectType::Terra] = 30000;
+	ObjectsSize[EWorldObjectType::Planet] = 300;
+	ObjectsSize[EWorldObjectType::SpaceStation] = 200;
+	ObjectsSize[EWorldObjectType::Terra] = 300;
     
     int iMaxWorldObjects = ((int)EWorldObjectType::MaxItem - 1);
     
     EWorldObjectType eTryingToCreate = EWorldObjectType::Terra;
-    int iRandX, iRandY;
+    int iRandX = -1, iRandY;
     int iSize = ObjectsSize[eTryingToCreate];
     
     while(!Spaces.empty())
@@ -263,8 +266,17 @@ void WorldManager::GenerateWorld()
         
         int iRandWidth = static_cast<int>(((rand() % 100) / 100.f) * (coord.m_Width - iSize));
         int iRandHeight = static_cast<int>(((rand() % 100) / 100.f) * (coord.m_Height - iSize));
-        iRandX = coord.m_Left + iSize + iRandWidth;
-        iRandY = coord.m_Top + iSize + iRandHeight;
+        
+		if (iRandX == -1)
+		{
+			iRandX = 0;
+			iRandY = 0;
+		}
+		else
+		{
+			iRandX = coord.m_Left + iSize + iRandWidth;
+			iRandY = coord.m_Top + iSize + iRandHeight;
+		}
         
         // Insert Object into m_WorldInfo
         std::pair<int, int> quadrant_idx = GetQuadrantIndexAtPos(GetQuadrantCorrectedPos(sf::Vector2f(static_cast<float>(iRandX), static_cast<float>(iRandY))));
@@ -379,20 +391,29 @@ void WorldManager::LoadGame(std::string strPath)
 void WorldManager::SaveGame(std::string strPath)
 {
     auto pXMLVisitor = new XMLWriteVisitor(strPath, m_iSeed);
-    auto game_objects = ObjectManager::GetInstance().GetActiveGameObjects();
-    auto it_game_objects = game_objects.begin();
-    while(it_game_objects != game_objects.end())
-    {
-        if((*it_game_objects) == nullptr || (*it_game_objects)->GetTemporaryState())
-        {
-            it_game_objects++;
-            continue;
-        }
-        SerializeNode* pRootNode = (*it_game_objects)->Serialize();
-        pRootNode->Accept(pXMLVisitor);
-        delete pRootNode;
-        it_game_objects++;
-    }
+    auto game_objects = ObjectManager::GetInstance().GetAllGameObjects();
+	auto it_quadrants = game_objects.begin();
+	while (it_quadrants != game_objects.end())
+	{
+		auto it_game_objects = it_quadrants->second.begin();
+		while (it_game_objects != it_quadrants->second.end())
+		{
+			if ((*it_game_objects) == nullptr || (*it_game_objects)->GetTemporaryState())
+			{
+				it_game_objects++;
+				continue;
+			}
+			if ((*it_game_objects)->GetID() == "planet")
+			{
+				std::cout << "Saving a planet" << std::endl;
+			}
+			SerializeNode* pRootNode = (*it_game_objects)->Serialize();
+			pRootNode->Accept(pXMLVisitor);
+			delete pRootNode;
+			it_game_objects++;
+		}
+		it_quadrants++;
+	}
     delete pXMLVisitor;
 }
 

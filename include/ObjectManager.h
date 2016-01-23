@@ -23,6 +23,7 @@ public:
     void RemoveQuadrant(Quadrant* pChunk);
     void RemoveAllQuadrants();
     const std::vector<GameObject*>& GetActiveGameObjects();
+	const std::unordered_map<std::pair<std::string, Quadrant*>, std::vector<GameObject*>, pairhash>& GetAllGameObjects() { return m_Objects; }
 	void Update(sf::Time DeltaTime);
 	void Draw(sf::RenderWindow* pWindow);
 	void Clear();
