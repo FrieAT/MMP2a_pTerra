@@ -42,7 +42,7 @@ void HealthAsteroid::Damage(float fDamage)
     IHealth::Damage(fDamage);
     if (m_fHealth <= 0.f)
     {
-        WorldManager::GetInstance().SaveGame("savegame.txt"); // DEBUG: For testing purpose create savegame every-time when asteroid will be deleted.
+        // WorldManager::GetInstance().SaveGame("savegame.txt"); // DEBUG: For testing purpose create savegame every-time when asteroid will be deleted.
         
         //TODO destroy Ship and remove end game
         ObjectManager::GetInstance().RemoveGameObject(GetAssignedGameObject());

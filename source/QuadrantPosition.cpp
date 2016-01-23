@@ -81,7 +81,7 @@ sf::Vector2f QuadrantPosition::GetPosition()
 
 float QuadrantPosition::GetRotation()
 {
-	return fmod(m_fRotation, 360);
+	return fmodf(m_fRotation, 360);
 }
 
 void QuadrantPosition::SetOrigin(sf::Vector2f Origin)

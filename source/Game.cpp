@@ -32,7 +32,7 @@ Game::Game()
 	ClassRegistry::GetInstance().Init();
     
     // Create the main window
-	m_pWindow = new sf::RenderWindow(sf::VideoMode(Game::m_iWindowWidth, Game::m_iWindowHeight), "pTerra");//, sf::Style::Fullscreen);
+	m_pWindow = new sf::RenderWindow(sf::VideoMode(Game::m_iWindowWidth, Game::m_iWindowHeight), "pTerra", sf::Style::Fullscreen);
 
 	// Initialize Intro-screen
 	m_pEngine->ChangeState(EGameState::GameStateIntro);
@@ -87,7 +87,7 @@ void Game::Start()
 	sf::Clock DeltaClock;
 
 	// Set view (Otherwise Debug build won't properly display on start-up)
-	sf::View view(sf::FloatRect(0.f, 0.f, Game::m_iWindowWidth, Game::m_iWindowHeight));
+	sf::View view(sf::FloatRect(0.f, 0.f, static_cast<float>(Game::m_iWindowWidth), static_cast<float>(Game::m_iWindowHeight)));
 	m_pWindow->setView(view);
     
 	// Start the game loop

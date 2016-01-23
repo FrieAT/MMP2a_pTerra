@@ -30,7 +30,7 @@ void GameStateIntro::Init(sf::RenderWindow* pWindow)
 	// Create GUI for this GameState
 	// Background
 	auto background = std::make_shared<tgui::Picture>("assets/intro-bg.jpg");
-	background->setSize(Game::m_iWindowWidth, Game::m_iWindowHeight);
+	background->setSize(static_cast<float>(Game::m_iWindowWidth), static_cast<float>(Game::m_iWindowHeight));
 	m_Gui.add(background);
 	background->moveToBack();
 

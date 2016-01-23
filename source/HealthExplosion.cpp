@@ -42,7 +42,7 @@ void HealthExplosion::OnFrameUpdate(sf::Time DeltaTime)
 
 IComponent* HealthExplosion::Deserialize(SerializeNode *pNode)
 {
-    // TODO: Don´t create missile after Savegame-Load, cuz Reference to its owner is loss.
+    // NOTE: Don´t create missile after Savegame-Load, cuz Reference to its owner is loss.
     HealthExplosion* pComponent = new HealthExplosion(0.f); // Only properties from own class, should be handled in Deserialize!
     
     IHealth::Deserialize(pNode, pComponent);

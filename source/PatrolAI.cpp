@@ -58,7 +58,7 @@ void PatrolAI::Update()
 		pmov->setShipState(0, true);
 
 		if (pPos->GetRotation() > fmod(m_FacingAngle-5,360) && pPos->GetRotation() < fmod(m_FacingAngle + 5, 360)) {
-			m_FacingAngle = fmod(m_FacingAngle + 90, 360);
+			m_FacingAngle = static_cast<int>(fmodf(m_FacingAngle + 90.f, 360.f));
 			m_Timer = 25;
 		}
 	}

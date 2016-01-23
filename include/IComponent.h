@@ -4,6 +4,8 @@ Copyright (c) MultiMediaTechnology, 2015
 
 #pragma once
 
+#include "stdafx.h"
+
 #include "EComponentType.h"
 #include "GameObject.h"
 #include "SerializeNode.h"
