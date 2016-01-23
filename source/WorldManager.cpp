@@ -403,10 +403,6 @@ void WorldManager::SaveGame(std::string strPath)
 				it_game_objects++;
 				continue;
 			}
-			if ((*it_game_objects)->GetID() == "planet")
-			{
-				std::cout << "Saving a planet" << std::endl;
-			}
 			SerializeNode* pRootNode = (*it_game_objects)->Serialize();
 			pRootNode->Accept(pXMLVisitor);
 			delete pRootNode;
