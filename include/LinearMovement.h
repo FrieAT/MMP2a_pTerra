@@ -18,9 +18,6 @@ public:
     void Serialize(SerializeNode* pParentNode);
     static IComponent* Deserialize(SerializeNode* pNode);
     std::string GetComponentName() { return std::string("LinearMovement"); }
-	float m_fSpeed = 0.f;
-	float m_fMaxSpeed = 0.f;
-
 private:
 	sf::Vector2f m_Direction;
 	float m_fRotation = 0.f;

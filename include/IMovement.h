@@ -14,7 +14,8 @@ public:
     
 	virtual sf::Vector2f GetVelocity() { return velocity; };
 	virtual void AddForce(sf::Vector2f force) { impulses.push_back(force); };
-
+	virtual float GetSpeed() { return m_fSpeed; }
+	virtual float GetMaxSpeed() { return m_fMaxSpeed; }
 	EComponentType GetComponentType()
 	{
 		return EComponentType::Movement;
@@ -78,6 +79,8 @@ public:
     }
     virtual std::string GetComponentName() { return std::string("IMovement"); }
 protected:
+	float m_fSpeed;
+	float m_fMaxSpeed;
 	sf::Clock m_DeltaClock;
 	std::list<sf::Vector2f> impulses;
 	sf::Vector2f acceleration;

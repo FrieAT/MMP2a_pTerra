@@ -22,15 +22,10 @@ public:
     std::string GetComponentName() { return std::string("ShipMovement"); }
 	void setShipState(int State, bool value);
 	bool getShipState(int State);
-
+private:
 	char m_cPlayer;	//player id for multiple playercontrolled ships
-
-	float m_fSpeed;
-	float m_fMaxSpeed;
 	float m_fFirerate;
 	float m_fWeaponcoolDown = 0.f;
-
-private:
 	sf::Vector2f m_Direction;
 	std::vector<bool> m_ShipState;
 };
