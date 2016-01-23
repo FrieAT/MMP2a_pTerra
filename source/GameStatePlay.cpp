@@ -13,6 +13,11 @@ Copyright (c) MultiMediaTechnology, 2015
 #include "CollisionManager.h"
 #include "FrameManager.h"
 #include "AIManager.h"
+#include "GUIManager.h"
+
+#include "eventbus\EventBus.hpp"
+#include "GUIPlayerStatus.h"
+#include "PlayerDamageEvent.h"
 
 GameStatePlay::~GameStatePlay()
 {
@@ -35,6 +40,12 @@ void GameStatePlay::Init(sf::RenderWindow* pWindow)
 	m_Gui.setWindow(*pWindow);
 	m_Gui.setFont("assets/Starjedi.ttf");
 	auto theme = std::make_shared<tgui::Theme>("Theme.cfg");
+
+	GUIPlayerStatus* playerStatus = new GUIPlayerStatus(m_Gui);
+	EventBus::AddHandler<PlayerDamageEvent>(playerStatus);
+	EventBus::AddHandler<PlayerShieldRegenerationEvent>(playerStatus);
+	EventBus::AddHandler<ScoreEvent>(playerStatus);
+	GUIManager::GetInstance().AddGUI(playerStatus);
 
     // ====== Below decprecated method to create things ======
     
@@ -60,6 +71,7 @@ void GameStatePlay::SetLoadGame(std::string strLoadGame)
     FrameManager::GetInstance().Clear();
     InputManager::GetInstance().Clear();
     CollisionManager::GetInstance().Clear();
+	GUIManager::GetInstance().Clear();
     
     // Load the save-game
     WorldManager::GetInstance().LoadGame(m_strLoadGame);
@@ -79,9 +91,11 @@ void GameStatePlay::Update(sf::Time DeltaTime, sf::RenderWindow* pWindow)
 	ObjectManager::GetInstance().Update(DeltaTime);
 	CollisionManager::GetInstance().Update(DeltaTime);
 	AIManager::GetInstance().Update(DeltaTime);
+	GUIManager::GetInstance().Update(DeltaTime);
 
 	// Rendering
 	ObjectManager::GetInstance().Draw(pWindow);
     FrameManager::GetInstance().Draw(pWindow);
+	m_Gui.draw();
 	//WorldManager::GetInstance().Draw(pWindow); DEBUG
 }

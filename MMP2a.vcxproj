@@ -154,18 +154,25 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="include\eventbus\EventBus.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="source\BoxCollision.cpp" />
     <ClCompile Include="source\CircleCollision.cpp" />
     <ClCompile Include="source\CollisionManager.cpp" />
     <ClCompile Include="source\FontDrawing.cpp" />
     <ClCompile Include="source\FrameManager.cpp" />
     <ClCompile Include="source\Game.cpp" />
-    <ClCompile Include="source\GameObject.cpp" />
+    <ClCompile Include="source\GameObject.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="source\GameObjectFactory.cpp" />
     <ClCompile Include="source\GameStateGameOver.cpp" />
     <ClCompile Include="source\GameStateIntro.cpp" />
     <ClCompile Include="source\GameStatePause.cpp" />
     <ClCompile Include="source\GameStatePlay.cpp" />
+    <ClCompile Include="source\GUIManager.cpp" />
+    <ClCompile Include="source\GUIPlayerStatus.cpp" />
     <ClCompile Include="source\HealthAsteroid.cpp" />
     <ClCompile Include="source\HealthExplosion.cpp" />
     <ClCompile Include="source\HealthMissile.cpp" />
@@ -202,6 +209,11 @@
     <ClInclude Include="include\EGameState.h" />
     <ClInclude Include="include\EQuadrantPos.h" />
     <ClInclude Include="include\ESerializeNodeType.h" />
+    <ClInclude Include="include\eventbus\Event.hpp" />
+    <ClInclude Include="include\eventbus\EventBus.hpp" />
+    <ClInclude Include="include\eventbus\EventHandler.hpp" />
+    <ClInclude Include="include\eventbus\HandlerRegistration.hpp" />
+    <ClInclude Include="include\eventbus\Object.hpp" />
     <ClInclude Include="include\EWorldObjectType.h" />
     <ClInclude Include="include\FontDrawing.h" />
     <ClInclude Include="include\FrameManager.h" />
@@ -212,6 +224,8 @@
     <ClInclude Include="include\GameStateIntro.h" />
     <ClInclude Include="include\GameStatePause.h" />
     <ClInclude Include="include\GameStatePlay.h" />
+    <ClInclude Include="include\GUIManager.h" />
+    <ClInclude Include="include\GUIPlayerStatus.h" />
     <ClInclude Include="include\HealthAsteroid.h" />
     <ClInclude Include="include\HealthExplosion.h" />
     <ClInclude Include="include\HealthMissile.h" />
@@ -221,6 +235,7 @@
     <ClInclude Include="include\IDrawing.h" />
     <ClInclude Include="include\IFrameObserver.h" />
     <ClInclude Include="include\IGameState.h" />
+    <ClInclude Include="include\IGUI.h" />
     <ClInclude Include="include\IHealth.h" />
     <ClInclude Include="include\IInputObserver.h" />
     <ClInclude Include="include\IAI.h" />
@@ -241,6 +256,8 @@
     <ClInclude Include="include\PatrolAI.h" />
     <ClInclude Include="include\PixelPosition.h" />
     <ClInclude Include="include\DynamicView.h" />
+    <ClInclude Include="include\PlayerDamageEvent.h" />
+    <ClInclude Include="include\PlayerShieldRegenerationEvent.h" />
     <ClInclude Include="include\Quadrant.h" />
     <ClInclude Include="include\QuadrantPosition.h" />
     <ClInclude Include="include\rapidxml\rapidxml.hpp" />
@@ -248,6 +265,7 @@
     <ClInclude Include="include\rapidxml\rapidxml_print.hpp" />
     <ClInclude Include="include\rapidxml\rapidxml_utils.hpp" />
     <ClInclude Include="include\ResearchScore.h" />
+    <ClInclude Include="include\ScoreEvent.h" />
     <ClInclude Include="include\SerializeNode.h" />
     <ClInclude Include="include\ShipMovement.h" />
     <ClInclude Include="include\SpriteDrawing.h" />
