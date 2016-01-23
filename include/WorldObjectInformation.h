@@ -4,8 +4,6 @@
 
 #pragma once
 
-#include <SFML/Graphics.hpp>
-
 #include "EWorldObjectType.h"
 
 class WorldObjectInformation

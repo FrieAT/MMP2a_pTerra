@@ -4,9 +4,6 @@
 
 #pragma once
 
-#include <map>
-#include <string>
-
 #include "BoxCollision.h"
 #include "CircleCollision.h"
 #include "HealthShip.h"

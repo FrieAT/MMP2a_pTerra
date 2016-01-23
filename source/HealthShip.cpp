@@ -2,8 +2,7 @@
 Copyright (c) MultiMediaTechnology, 2015
 =================================================================*/
 
-#include <math.h>
-#include <sstream>
+#include "stdafx.h"
 
 #include "HealthShip.h"
 #include "ObjectManager.h"

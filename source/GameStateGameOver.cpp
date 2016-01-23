@@ -2,8 +2,9 @@
  Copyright (c) MultiMediaTechnology, 2015
  =================================================================*/
 
-#include "GameStateGameOver.h"
+#include "stdafx.h"
 
+#include "GameStateGameOver.h"
 #include "Game.h"
 #include "InputManager.h"
 #include "ObjectManager.h"

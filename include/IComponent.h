@@ -4,8 +4,6 @@ Copyright (c) MultiMediaTechnology, 2015
 
 #pragma once
 
-#include <SFML/Graphics.hpp>
-
 #include "EComponentType.h"
 #include "GameObject.h"
 #include "SerializeNode.h"

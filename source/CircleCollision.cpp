@@ -2,10 +2,10 @@
 Copyright (c) MultiMediaTechnology, 2015
 =================================================================*/
 
+#include "stdafx.h"
+
 #include "CircleCollision.h"
 #include "CollisionManager.h"
-
-#include <iostream>
 
 CircleCollision::CircleCollision(float fRadius)
 : m_fRadius(fRadius)

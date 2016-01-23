@@ -4,8 +4,6 @@ Copyright (c) MultiMediaTechnology, 2015
 
 #pragma once
 
-#include <math.h>
-
 #include "IComponent.h"
 #include "PixelPosition.h"
 #include "SpriteDrawing.h"

@@ -2,6 +2,8 @@
 Copyright (c) MultiMediaTechnology, 2015
 =================================================================*/
 
+#include "stdafx.h"
+
 #include "GameObjectFactory.h"
 #include "Game.h"
 #include "LinearMovement.h"

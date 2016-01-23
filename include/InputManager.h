@@ -4,9 +4,6 @@ Copyright (c) MultiMediaTechnology, 2015
 
 #pragma once
 
-#include <SFML/Graphics.hpp>
-#include <TGUI/TGUI.hpp>
-
 #include "IInputObserver.h"
 
 class InputManager

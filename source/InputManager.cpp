@@ -2,10 +2,10 @@
 Copyright (c) MultiMediaTechnology, 2015
 =================================================================*/
 
+#include "stdafx.h"
+
 #include "InputManager.h"
 #include "Game.h"
-
-#include <iostream>
 
 void InputManager::Update(sf::RenderWindow* pWindow, tgui::Gui* pGui)
 {

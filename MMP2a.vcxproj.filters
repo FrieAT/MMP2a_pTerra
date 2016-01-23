@@ -192,6 +192,9 @@
     <ClCompile Include="source\AIManager.cpp">
       <Filter>Source Files\Managers\AIManager</Filter>
     </ClCompile>
+    <ClCompile Include="source\stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\IComponent.h">
@@ -385,6 +388,9 @@
     </ClInclude>
     <ClInclude Include="include\IAIObserver.h">
       <Filter>Source Files\Managers\AIManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\stdafx.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

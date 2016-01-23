@@ -1,5 +1,7 @@
-#include "AIManager.h"
 
+#include "stdafx.h"
+
+#include "AIManager.h"
 
 void AIManager::RegisterAIObserver(IAIObserver* pObserver)
 {

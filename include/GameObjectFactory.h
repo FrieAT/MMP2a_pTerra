@@ -5,7 +5,6 @@ Copyright (c) MultiMediaTechnology, 2015
 #pragma once
 
 #include "GameObject.h"
-
 #include "IPosition.h"
 #include "IMovement.h"
 #include "IDrawing.h"

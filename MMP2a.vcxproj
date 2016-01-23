@@ -97,7 +97,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(TGUIROOT)/include;$(SFMLROOT)/include;$(SolutionDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <IntrinsicFunctions>false</IntrinsicFunctions>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeader>Create</PrecompiledHeader>
       <BrowseInformation>true</BrowseInformation>
     </ClCompile>
     <Link>
@@ -116,6 +116,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -129,7 +130,7 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(TGUIROOT)/include;$(SFMLROOT)/include;$(SolutionDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -142,6 +143,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -181,6 +183,7 @@
     <ClCompile Include="source\ShipMovement.cpp" />
     <ClCompile Include="source\SpriteDrawing.cpp" />
     <ClCompile Include="source\StaticView.cpp" />
+    <ClCompile Include="source\stdafx.cpp" />
     <ClCompile Include="source\TextureFactory.cpp" />
     <ClCompile Include="source\WorldManager.cpp" />
     <ClCompile Include="source\WorldObjectInformation.cpp" />
@@ -247,6 +250,7 @@
     <ClInclude Include="include\SpriteDrawing.h" />
     <ClInclude Include="include\ICollision.h" />
     <ClInclude Include="include\StaticView.h" />
+    <ClInclude Include="include\stdafx.h" />
     <ClInclude Include="include\TextureFactory.h" />
     <ClInclude Include="include\WorldManager.h" />
     <ClInclude Include="include\WorldObjectInformation.h" />

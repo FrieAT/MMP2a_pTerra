@@ -2,7 +2,7 @@
  Copyright (c) MultiMediaTechnology, 2015
  =================================================================*/
 
-#include <math.h>
+#include "stdafx.h"
 
 #include "Quadrant.h"
 #include "WorldManager.h"

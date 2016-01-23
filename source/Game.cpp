@@ -1,13 +1,10 @@
 /*=================================================================
 Copyright (c) MultiMediaTechnology, 2015
 =================================================================*/
+
+#include "stdafx.h"
+
 #include "Game.h"
-
-#include <iostream>
-
-#include <SFML/Audio.hpp>
-#include <SFML/Graphics.hpp>
-
 #include "FrameManager.h"
 #include "InputManager.h"
 #include "ObjectManager.h"

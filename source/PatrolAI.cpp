@@ -1,3 +1,6 @@
+
+#include "stdafx.h"
+
 #include "PatrolAI.h"
 #include "IPosition.h"
 #include "ShipMovement.h"

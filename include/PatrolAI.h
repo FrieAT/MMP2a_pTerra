@@ -1,8 +1,5 @@
 #pragma once
 
-#include <cmath>
-#include <SFML/Graphics.hpp>
-
 #include "IAI.h"
 #include "IInputObserver.h"
 #include "IAIObserver.h"

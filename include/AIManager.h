@@ -4,7 +4,6 @@ Copyright (c) MultiMediaTechnology, 2015
 
 #pragma once
 
-#include <SFML/Graphics.hpp>
 #include "IAI.h"
 #include "IAIObserver.h"
 

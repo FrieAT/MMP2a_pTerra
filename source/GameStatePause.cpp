@@ -2,7 +2,7 @@
 Copyright (c) MultiMediaTechnology, 2015
 =================================================================*/
 
-#include <fstream>
+#include "stdafx.h"
 
 #include "Game.h"
 #include "GameStatePause.h"

@@ -4,8 +4,6 @@ Copyright (c) MultiMediaTechnology, 2015
 
 #pragma once
 
-#include <TGUI/TGUI.hpp>
-
 class IGameState
 {
 public:

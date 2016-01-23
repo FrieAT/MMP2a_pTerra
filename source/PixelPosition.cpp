@@ -2,7 +2,7 @@
 Copyright (c) MultiMediaTechnology, 2015
 =================================================================*/
 
-#include <cmath>
+#include "stdafx.h"
 
 #include "PixelPosition.h"
 #include "WorldManager.h"

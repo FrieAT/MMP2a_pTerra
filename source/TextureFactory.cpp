@@ -2,6 +2,8 @@
  Copyright (c) MultiMediaTechnology, 2015
  =================================================================*/
 
+#include "stdafx.h"
+
 #include "TextureFactory.h"
 
 sf::Texture* TextureFactory::GetTexture(std::string resource_path)

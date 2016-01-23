@@ -2,7 +2,7 @@
 Copyright (c) MultiMediaTechnology, 2015
 =================================================================*/
 
-#include <fstream>
+#include "stdafx.h"
 
 #include "GameStateIntro.h"
 #include "Game.h"

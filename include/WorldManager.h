@@ -4,8 +4,6 @@
 
 #pragma once
 
-#include <SFML/Graphics.hpp>
-
 #include "IQuadrantObserver.h"
 #include "Quadrant.h"
 #include "WorldObjectInformation.h"
@@ -42,7 +40,7 @@ private:
     WorldManager(const WorldManager&) = delete;
     void operator= (const WorldManager&) = delete;
     std::vector<IQuadrantObserver*> m_Observers;
-    std::map<std::pair<int, int>, Quadrant*> m_Quadrants;
+    std::unordered_map<std::pair<int, int>, Quadrant*, pairhash> m_Quadrants;
     std::vector<sf::Vector2f> m_RandomCoordinates;
     std::map<std::pair<std::pair<int, int>, EWorldObjectType>, std::vector<WorldObjectInformation>> m_WorldInfo;
     unsigned long m_IndexRandomCoordinates;

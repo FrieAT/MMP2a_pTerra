@@ -5,7 +5,6 @@
 #pragma once
 
 #include "IView.h"
-
 #include "IFrameObserver.h"
 
 class StaticView : public IView, public IFrameObserver

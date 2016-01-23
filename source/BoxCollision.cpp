@@ -2,8 +2,7 @@
  Copyright (c) MultiMediaTechnology, 2015
  =================================================================*/
 
-#include <iostream>
-#include <math.h>
+#include "stdafx.h"
 
 #include "BoxCollision.h"
 #include "CollisionManager.h"

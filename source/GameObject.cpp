@@ -2,6 +2,8 @@
 Copyright (c) MultiMediaTechnology, 2015
 =================================================================*/
 
+#include "stdafx.h"
+
 #include "GameObject.h"
 #include "IComponent.h"
 #include "IPosition.h"

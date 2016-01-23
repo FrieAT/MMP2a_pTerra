@@ -2,6 +2,8 @@
  Copyright (c) MultiMediaTechnology, 2015
  =================================================================*/
 
+#include "stdafx.h"
+
 #include "WorldObjectInformation.h"
 
 WorldObjectInformation::WorldObjectInformation(EWorldObjectType eType, sf::Vector2f Position, long Size)

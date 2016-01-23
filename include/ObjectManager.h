@@ -4,8 +4,6 @@ Copyright (c) MultiMediaTechnology, 2015
 
 #pragma once
 
-#include <vector>
-
 #include "IDrawing.h"
 #include "GameObject.h"
 #include "Quadrant.h"

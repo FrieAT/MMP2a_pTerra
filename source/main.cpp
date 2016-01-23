@@ -2,9 +2,7 @@
 Copyright (c) MultiMediaTechnology, 2015
 =================================================================*/
 
-#include <iostream>
-
-#include "TGUI/TGUI.hpp"
+#include "stdafx.h"
 
 #include "Game.h"
 

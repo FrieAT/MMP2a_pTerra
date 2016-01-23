@@ -2,6 +2,8 @@
 Copyright (c) MultiMediaTechnology, 2015
 =================================================================*/
 
+#include "stdafx.h"
+
 #include "FrameManager.h"
 #include "IComponent.h"
 #include "ObjectManager.h"

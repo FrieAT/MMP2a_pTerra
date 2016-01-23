@@ -4,11 +4,6 @@ Copyright (c) MultiMediaTechnology, 2015
 
 #pragma once
 
-#include <iostream>
-#include <map>
-#include <string>
-#include <exception>
-
 #include "EComponentType.h"
 #include "SerializeNode.h"
 

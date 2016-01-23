@@ -2,11 +2,7 @@
  Copyright (c) MultiMediaTechnology, 2015
  =================================================================*/
 
-#ifndef M_PI
-#define M_PI 3.14159265358979323846f
-#endif
-
-#include <math.h>
+#include "stdafx.h"
 
 #include "NavigationCursor.h"
 #include "FrameManager.h"

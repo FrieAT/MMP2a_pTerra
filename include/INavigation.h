@@ -4,8 +4,6 @@
 
 #pragma once
 
-#include <SFML/Graphics.hpp>
-
 #include "IComponent.h"
 
 class INavigation : public IComponent

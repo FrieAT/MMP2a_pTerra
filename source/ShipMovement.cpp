@@ -2,6 +2,8 @@
 Copyright (c) MultiMediaTechnology, 2015
 =================================================================*/
 
+#include "stdafx.h"
+
 #include "ShipMovement.h"
 #include "GameObjectFactory.h"
 #include "ObjectManager.h"

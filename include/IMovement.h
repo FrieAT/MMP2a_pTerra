@@ -5,7 +5,6 @@ Copyright (c) MultiMediaTechnology, 2015
 #pragma once
 
 #include "IComponent.h"
-#include <list>
 
 class IMovement : public IComponent
 {

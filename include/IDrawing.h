@@ -4,8 +4,6 @@ Copyright (c) MultiMediaTechnology, 2015
 
 #pragma once
 
-#include <SFML/Graphics.hpp>
-
 #include "IComponent.h"
 #include "IFrameObserver.h"
 

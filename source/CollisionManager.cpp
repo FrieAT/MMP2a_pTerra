@@ -2,7 +2,7 @@
 Copyright (c) MultiMediaTechnology, 2015
 =================================================================*/
 
-#include <math.h>
+#include "stdafx.h"
 
 #include "CollisionManager.h"
 #include "IMovement.h"

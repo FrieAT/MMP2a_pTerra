@@ -4,11 +4,6 @@
 
 #pragma once
 
-#include <string>
-#include <sstream>
-#include <fstream>
-#include <vector>
-
 #include "INodeVisitor.h"
 #include "rapidxml/rapidxml.hpp"
 

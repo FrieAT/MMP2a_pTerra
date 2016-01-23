@@ -2,11 +2,7 @@
  Copyright (c) MultiMediaTechnology, 2015
  =================================================================*/
 
-#include <math.h>
-#include <stack>
-#include <fstream>
-#include <sstream>
-#include <cfloat>
+#include "stdafx.h"
 
 #include "WorldManager.h"
 #include "ObjectManager.h"

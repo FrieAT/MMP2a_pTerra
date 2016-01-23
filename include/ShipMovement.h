@@ -1,7 +1,5 @@
 #pragma once
 
-#include <SFML/Graphics.hpp>
-
 #include "IMovement.h"
 #include "InputManager.h"
 #include "FrameManager.h"

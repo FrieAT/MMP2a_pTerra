@@ -2,7 +2,7 @@
 Copyright (c) MultiMediaTechnology, 2015
 =================================================================*/
 
-#include <math.h>
+#include "stdafx.h"
 
 #include "LinearMovement.h"
 #include "GameObject.h"

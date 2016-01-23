@@ -5,7 +5,6 @@
 #pragma once
 
 #include "IView.h"
-
 #include "IFrameObserver.h"
 
 class DynamicView : public IView, public IFrameObserver

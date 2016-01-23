@@ -4,9 +4,6 @@
 
 #pragma once
 
-#include <string>
-#include <fstream>
-
 #include "INodeVisitor.h"
 
 class XMLWriteVisitor : public INodeVisitor

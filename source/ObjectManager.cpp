@@ -2,6 +2,8 @@
 Copyright (c) MultiMediaTechnology, 2015
 =================================================================*/
 
+#include "stdafx.h"
+
 #include "ObjectManager.h"
 #include "IPosition.h"
 #include "WorldManager.h"

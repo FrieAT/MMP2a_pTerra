@@ -4,10 +4,8 @@ Copyright (c) MultiMediaTechnology, 2015
 
 #pragma once
 
-#include <SFML/Graphics.hpp>
 #include "ICollision.h"
 #include "ICollisionEventObserver.h"
-#include <stack>
 
 class CollisionManager
 {
