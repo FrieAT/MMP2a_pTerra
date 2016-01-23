@@ -117,7 +117,11 @@ GameObject* GameObject::Deserialize(SerializeNode *pNode)
     while(pComponentNode != nullptr)
     {
         IComponent* pComponent = ClassRegistry::GetInstance().CreateComponent(pComponentNode->GetName(), pComponentNode);
-        pGameObject->SetComponent(pComponent);
+		// Sometimes a programmer is to lazy to make a correct Deserialize
+		if (pComponent != nullptr)
+		{
+			pGameObject->SetComponent(pComponent);
+		}
         pComponentNode = pNode->GetNode(iCount++);
     }
     
