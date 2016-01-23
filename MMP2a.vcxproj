@@ -154,18 +154,24 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="include\eventbus\EventBus.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="source\BoxCollision.cpp" />
     <ClCompile Include="source\CircleCollision.cpp" />
     <ClCompile Include="source\CollisionManager.cpp" />
     <ClCompile Include="source\FontDrawing.cpp" />
     <ClCompile Include="source\FrameManager.cpp" />
     <ClCompile Include="source\Game.cpp" />
-    <ClCompile Include="source\GameObject.cpp" />
+    <ClCompile Include="source\GameObject.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="source\GameObjectFactory.cpp" />
     <ClCompile Include="source\GameStateGameOver.cpp" />
     <ClCompile Include="source\GameStateIntro.cpp" />
     <ClCompile Include="source\GameStatePause.cpp" />
     <ClCompile Include="source\GameStatePlay.cpp" />
+    <ClCompile Include="source\GUIPlayerStatus.cpp" />
     <ClCompile Include="source\HealthAsteroid.cpp" />
     <ClCompile Include="source\HealthExplosion.cpp" />
     <ClCompile Include="source\HealthMissile.cpp" />
@@ -194,6 +200,7 @@
     <ClCompile Include="source\XMLWriteVisitor.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="PlayerDamageEvent.h" />
     <ClInclude Include="include\BoxCollision.h" />
     <ClInclude Include="include\CircleCollision.h" />
     <ClInclude Include="include\ClassRegistry.h" />
@@ -202,6 +209,11 @@
     <ClInclude Include="include\EGameState.h" />
     <ClInclude Include="include\EQuadrantPos.h" />
     <ClInclude Include="include\ESerializeNodeType.h" />
+    <ClInclude Include="include\eventbus\Event.hpp" />
+    <ClInclude Include="include\eventbus\EventBus.hpp" />
+    <ClInclude Include="include\eventbus\EventHandler.hpp" />
+    <ClInclude Include="include\eventbus\HandlerRegistration.hpp" />
+    <ClInclude Include="include\eventbus\Object.hpp" />
     <ClInclude Include="include\EWorldObjectType.h" />
     <ClInclude Include="include\FontDrawing.h" />
     <ClInclude Include="include\FrameManager.h" />
@@ -212,6 +224,7 @@
     <ClInclude Include="include\GameStateIntro.h" />
     <ClInclude Include="include\GameStatePause.h" />
     <ClInclude Include="include\GameStatePlay.h" />
+    <ClInclude Include="include\GUIPlayerStatus.h" />
     <ClInclude Include="include\HealthAsteroid.h" />
     <ClInclude Include="include\HealthExplosion.h" />
     <ClInclude Include="include\HealthMissile.h" />

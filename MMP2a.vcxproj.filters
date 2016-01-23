@@ -79,6 +79,15 @@
     <Filter Include="Source Files\Managers\AIManager">
       <UniqueIdentifier>{d66c2349-8f27-448c-842c-fe264dad4eed}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\External Frameworks\eventbus">
+      <UniqueIdentifier>{66fc46a0-dc70-4195-85e6-dd74879cc219}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GUI">
+      <UniqueIdentifier>{874a639f-b645-42b5-8cae-672f8498b0fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Events">
+      <UniqueIdentifier>{677c3114-b726-4103-8a16-380dc778282c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\main.cpp">
@@ -194,6 +203,12 @@
     </ClCompile>
     <ClCompile Include="source\stdafx.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="include\eventbus\EventBus.cpp">
+      <Filter>Source Files\External Frameworks\eventbus</Filter>
+    </ClCompile>
+    <ClCompile Include="source\GUIPlayerStatus.cpp">
+      <Filter>Source Files\GUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -391,6 +406,27 @@
     </ClInclude>
     <ClInclude Include="include\stdafx.h">
       <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\eventbus\Event.hpp">
+      <Filter>Source Files\External Frameworks\eventbus</Filter>
+    </ClInclude>
+    <ClInclude Include="include\eventbus\EventBus.hpp">
+      <Filter>Source Files\External Frameworks\eventbus</Filter>
+    </ClInclude>
+    <ClInclude Include="include\eventbus\EventHandler.hpp">
+      <Filter>Source Files\External Frameworks\eventbus</Filter>
+    </ClInclude>
+    <ClInclude Include="include\eventbus\HandlerRegistration.hpp">
+      <Filter>Source Files\External Frameworks\eventbus</Filter>
+    </ClInclude>
+    <ClInclude Include="include\eventbus\Object.hpp">
+      <Filter>Source Files\External Frameworks\eventbus</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GUIPlayerStatus.h">
+      <Filter>Source Files\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerDamageEvent.h">
+      <Filter>Source Files\Events</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
