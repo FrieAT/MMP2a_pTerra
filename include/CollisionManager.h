@@ -27,7 +27,7 @@ private:
 	CollisionManager() { }
 	CollisionManager(const CollisionManager&) = delete;
 	void operator= (const CollisionManager&) = delete;
-	std::map<ICollision*, bool> m_Colliders;
-    std::map<GameObject*, bool> m_ActiveGameObjects;
-    std::map<GameObject*, std::vector<ICollisionEventObserver*>> m_CollisionEventObservers;
+	std::unordered_map<ICollision*, bool> m_Colliders;
+    std::unordered_map<GameObject*, bool> m_ActiveGameObjects;
+    std::unordered_map<GameObject*, std::vector<ICollisionEventObserver*>> m_CollisionEventObservers;
 };
