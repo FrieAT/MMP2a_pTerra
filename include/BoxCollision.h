@@ -16,11 +16,13 @@ public:
 	~BoxCollision();
     void Init();
 	bool colliding(ICollision* pCollisionBody);
-	float m_fWidth;
-	float m_fHeight;
-	bool m_bHit;
 	void OnFrameDraw(sf::RenderWindow* pWindow);
     void Serialize(SerializeNode* pParentNode);
     static IComponent* Deserialize(SerializeNode* pNode);
     std::string GetComponentName() { return std::string("BoxCollision"); }
+private:
+	float m_fWidth;
+	float m_fHeight;
+	bool m_bHit;
+	sf::FloatRect m_CollisionBox;
 };

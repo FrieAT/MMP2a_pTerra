@@ -38,24 +38,37 @@ bool BoxCollision::colliding(ICollision* pCollisionBody)
         m_bHit = false;
         return false;
     }
+
+	const float degree_to_rad = ((M_PI) / 180.f);
+	float shrink_factor_a = fabs(sin(pPositionComponent->GetRotation() * degree_to_rad));
+	float shrink_factor_b = fabs(sin(pPositionOtherComponent->GetRotation() * degree_to_rad));
+
+	sf::Vector2f pos_a = pPositionComponent->GetPosition();
+	sf::Vector2f size_a = sf::Vector2f(m_fWidth, m_fHeight);
+	sf::Vector2f pos_b = pPositionOtherComponent->GetPosition();
+	sf::Vector2f size_b = sf::Vector2f(pOther->m_fWidth, pOther->m_fHeight);
+
+	pos_a.x -= (size_a.x / 4.f) * shrink_factor_a + (size_a.x / 2.f);
+	pos_a.y += (size_a.y / 4.f) * shrink_factor_a - (size_a.y / 2.f);
+	size_a.x += (size_a.x / 2.f) * shrink_factor_a;
+	size_a.y -= (size_a.y / 2.f) * shrink_factor_a;
+	m_CollisionBox = sf::FloatRect(pos_a, size_a);
+
+	pos_b.x -= (size_b.x / 4.f) * shrink_factor_b + (size_b.x / 2.f);
+	pos_b.y += (size_b.y / 4.f) * shrink_factor_b - (size_b.y / 2.f);
+	size_b.x += (size_b.x / 2.f) * shrink_factor_b;
+	size_b.y -= (size_b.y / 2.f) * shrink_factor_b;
+	pOther->m_CollisionBox = sf::FloatRect(pos_b, size_b);
     
-    sf::FloatRect a = sf::FloatRect(pPositionComponent->GetPosition(),sf::Vector2f(m_fWidth,m_fHeight));
-    sf::FloatRect b = sf::FloatRect();
-    
-    auto getCenter = [](const sf::FloatRect& rect) -> sf::Vector2f
-    {
-        return sf::Vector2f(rect.left, rect.top) + 0.5f * sf::Vector2f(rect.width, rect.height);
-    };
-    
-    sf::Vector2f n = pPositionOtherComponent->GetPosition() - pPositionComponent->GetPosition();		// Vector from A to B
-    float a_extent = m_fWidth * 0.5f;			    // Calculate half extents along x axis
-    float b_extent = pOther->m_fWidth * 0.5f;
+    sf::Vector2f n = pos_b - pos_a;		// Vector from A to B
+    float a_extent = size_a.x * 0.5f;			    // Calculate half extents along x axis
+    float b_extent = size_b.x * 0.5f;
     float x_overlap = a_extent + b_extent - fabs(n.x);		// Calculate overlap on x axis
     // SAT test on x axis
     if (x_overlap > 0)
     {
-        float a_extent = m_fHeight * 0.5f;		// Calculate half extents along y axis
-        float b_extent = pOther->m_fHeight * 0.5f;
+        float a_extent = size_a.y * 0.5f;		// Calculate half extents along y axis
+        float b_extent = size_b.y * 0.5f;
         float y_overlap = a_extent + b_extent - fabs(n.y);	// Calculate overlap on y axis
         
         CollisionEvent col_ev;
@@ -104,13 +117,14 @@ bool BoxCollision::colliding(ICollision* pCollisionBody)
 
 void BoxCollision::OnFrameDraw(sf::RenderWindow* pWindow)
 {
-    IPosition* pos = static_cast<IPosition*>(GetAssignedGameObject()->GetComponent(EComponentType::Position));
-    sf::RectangleShape test(sf::Vector2f(m_fWidth,m_fHeight));
+	/*
+    sf::RectangleShape test(sf::Vector2f(m_CollisionBox.width, m_CollisionBox.height));
     if (m_bHit) test.setFillColor(sf::Color::Magenta);
     else test.setFillColor(sf::Color::Blue);
-    test.setPosition(pos->GetPosition() - sf::Vector2f(m_fWidth/2, m_fHeight/2));
+    test.setPosition(sf::Vector2f(m_CollisionBox.left, m_CollisionBox.top));
 
-    // pWindow->draw(test);
+    pWindow->draw(test);
+	*/
 }
 
 void BoxCollision::Serialize(SerializeNode *pParentNode)
