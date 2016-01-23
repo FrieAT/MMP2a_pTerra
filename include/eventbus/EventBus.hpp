@@ -32,6 +32,8 @@
 #include <typeinfo>
 #include <unordered_map>
 
+#include "../IComponent.h"
+
 
 /**
  * \brief An Event system that allows decoupling of code through synchronous events
@@ -79,7 +81,7 @@ public:
 	 * @return An EventRegistration pointer which can be used to unregister the event handler
 	 */
 	template <class T>
-	static HandlerRegistration* const AddHandler(EventHandler<T>* const handler, Object* const sender) {
+	static HandlerRegistration* const AddHandler(EventHandler<T>* const handler, IComponent* const sender) {
 		EventBus* instance = GetInstance();
 
 		// Fetch the list of event pairs unique to this event type
@@ -166,7 +168,7 @@ private:
 		 * @param registrations The handler collection for this event type
 		 * @param sender The registered sender object
 		 */
-		EventRegistration(void * const handler, Registrations * const registrations, Object * const sender ) :
+		EventRegistration(void * const handler, Registrations * const registrations, IComponent * const sender ) :
 			handler(handler),
 			registrations(registrations),
 			sender(sender),
@@ -195,7 +197,7 @@ private:
 		 *
 		 * @return The registered sender object
 		 */
-		Object* const getSender() {
+		IComponent* const getSender() {
 			return sender;
 		}
 
@@ -215,7 +217,7 @@ private:
 	private:
 		void * const handler;
 		Registrations* const registrations;
-		Object* const sender;
+		IComponent* const sender;
 
 		bool registered;
 	};

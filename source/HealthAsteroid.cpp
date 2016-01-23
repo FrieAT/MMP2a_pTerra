@@ -56,7 +56,9 @@ void HealthAsteroid::OnFrameDraw(sf::RenderWindow* pWindow)
 
 void HealthAsteroid::OnFrameUpdate(sf::Time DeltaTime)
 {
-    IPosition* pPositionTextComponent = static_cast<IPosition*>(m_pHealthDebug->GetComponent(EComponentType::Position));
+	/// Wastes a lot of performance based on profiler, all code here is for debugging anyway
+	/*
+	IPosition* pPositionTextComponent = static_cast<IPosition*>(m_pHealthDebug->GetComponent(EComponentType::Position));
     IPosition* pPositionShipComponent = static_cast<IPosition*>(GetAssignedGameObject()->GetComponent(EComponentType::Position));
     IDrawing* pDrawingTextComponent = static_cast<IDrawing*>(m_pHealthDebug->GetComponent(EComponentType::Drawing));
     IScore* pScore = static_cast<IScore*>(GetAssignedGameObject()->GetComponent(EComponentType::Score));
@@ -70,6 +72,7 @@ void HealthAsteroid::OnFrameUpdate(sf::Time DeltaTime)
     }
     pPositionTextComponent->SetPosition(ship_pos);
     pDrawingTextComponent->SetText(health_text.str());
+	*/
 }
 
 void HealthAsteroid::OnCollisionEvent(GameObject* pOther, sf::Vector2f ImpulseImpact)

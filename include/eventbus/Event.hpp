@@ -25,6 +25,8 @@
 
 #include "Object.hpp"
 
+#include "../IComponent.h"
+
 #include <typeindex>
 #include <typeinfo>
 #include <vector>
@@ -42,7 +44,7 @@ public:
 	 * @param typeIndex The type ID of the inherited class
 	 * @param sender The sender of the event
 	 */
-	Event(Object* const sender) :
+	Event(IComponent* const sender) :
 		sender(sender),
 		canceled(false) {
 
@@ -64,7 +66,7 @@ public:
 	 *
 	 * @return The event sender
 	 */
-	Object* const getSender() {
+	IComponent* const getSender() {
 		return sender;
 	}
 
@@ -89,7 +91,7 @@ public:
 	}
 
 private:
-	Object* const sender;
+	IComponent* const sender;
 	bool canceled;
 
 };

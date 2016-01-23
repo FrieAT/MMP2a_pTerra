@@ -9,6 +9,7 @@ Copyright (c) MultiMediaTechnology, 2015
 #include "CollisionManager.h"
 #include "GameObjectFactory.h"
 #include "IScore.h"
+#include "ScoreEvent.h"
 
 HealthMissile::HealthMissile(float fHealth, GameObject* pOwner)
 : IHealth()
@@ -82,6 +83,7 @@ void HealthMissile::OnCollisionEvent(GameObject* pOther, sf::Vector2f ImpulseImp
         if(pScoreOwner != nullptr && pScoreVictim != nullptr)
         {
             pScoreOwner->AddScore(pScoreVictim->GetScore());
+			EventBus::FireEvent(ScoreEvent(this, pScoreVictim->GetScore(), m_pOwner, pOther));
         }
     }
 

@@ -82,11 +82,11 @@
     <Filter Include="Source Files\External Frameworks\eventbus">
       <UniqueIdentifier>{66fc46a0-dc70-4195-85e6-dd74879cc219}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\GUI">
-      <UniqueIdentifier>{874a639f-b645-42b5-8cae-672f8498b0fe}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Events">
       <UniqueIdentifier>{677c3114-b726-4103-8a16-380dc778282c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Managers\GUIManager">
+      <UniqueIdentifier>{485b9d44-3770-4306-b412-4bbdd9c42172}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -207,8 +207,11 @@
     <ClCompile Include="include\eventbus\EventBus.cpp">
       <Filter>Source Files\External Frameworks\eventbus</Filter>
     </ClCompile>
+    <ClCompile Include="source\GUIManager.cpp">
+      <Filter>Source Files\Managers\GUIManager</Filter>
+    </ClCompile>
     <ClCompile Include="source\GUIPlayerStatus.cpp">
-      <Filter>Source Files\GUI</Filter>
+      <Filter>Source Files\Managers\GUIManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -422,10 +425,22 @@
     <ClInclude Include="include\eventbus\Object.hpp">
       <Filter>Source Files\External Frameworks\eventbus</Filter>
     </ClInclude>
-    <ClInclude Include="include\GUIPlayerStatus.h">
-      <Filter>Source Files\GUI</Filter>
+    <ClInclude Include="include\PlayerDamageEvent.h">
+      <Filter>Source Files\Events</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerDamageEvent.h">
+    <ClInclude Include="include\GUIManager.h">
+      <Filter>Source Files\Managers\GUIManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\IGUI.h">
+      <Filter>Source Files\Managers\GUIManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GUIPlayerStatus.h">
+      <Filter>Source Files\Managers\GUIManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PlayerShieldRegenerationEvent.h">
+      <Filter>Source Files\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ScoreEvent.h">
       <Filter>Source Files\Events</Filter>
     </ClInclude>
   </ItemGroup>

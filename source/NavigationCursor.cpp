@@ -10,6 +10,8 @@
 #include "PixelPosition.h"
 #include "SpriteDrawing.h"
 #include "IScore.h"
+#include "eventbus\EventBus.hpp"
+#include "ScoreEvent.h"
 
 NavigationCursor::NavigationCursor()
 : INavigation()
@@ -101,7 +103,9 @@ void NavigationCursor::OnFrameUpdate(sf::Time DeltaTime)
             }
             else
             {
-                pScoreComponent->AddScore(75);
+				int addScore = 300;
+                pScoreComponent->AddScore(addScore);
+				EventBus::FireEvent(ScoreEvent(this, addScore, GetAssignedGameObject(), nullptr));
             }
         }
         
