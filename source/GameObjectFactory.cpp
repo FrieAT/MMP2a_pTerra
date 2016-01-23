@@ -36,7 +36,7 @@ GameObject* GameObjectFactory::CreatePlayerShip(sf::Vector2f Position, char cPla
     pShip->SetComponent(pSpriteComponent);
     pShip->SetComponent(new DynamicView(sf::FloatRect(0, 0, static_cast<float>(Game::m_iWindowWidth), static_cast<float>(Game::m_iWindowHeight)), sf::Vector2f(1920.f - static_cast<float>(Game::m_iWindowWidth), 0)));
     //pShip->SetComponent(new CircleCollision(30.f,pos));
-	pShip->SetComponent(new BoxCollision(64, 100));
+	pShip->SetComponent(new BoxCollision(64.f, 102.f));
     pShip->SetComponent(new HealthShip(100.f));
     pShip->SetComponent(new NavigationCursor());
     pShip->SetComponent(new ResearchScore(100, 10));
@@ -55,7 +55,7 @@ GameObject * GameObjectFactory::CreateEnemyShip(sf::Vector2f Position)
 	//pShip->SetComponent(new DynamicView(sf::FloatRect(0, 0, static_cast<float>(Game::m_iWindowWidth), static_cast<float>(Game::m_iWindowHeight)), sf::Vector2f(1920.f - static_cast<float>(Game::m_iWindowWidth), 0), 20.f));
 	//pShip->SetComponent(new CircleCollision(30.f,pos));
 	pShip->SetComponent(new PatrolAI());
-	pShip->SetComponent(new BoxCollision(64, 100));
+	pShip->SetComponent(new BoxCollision(64.f, 102.f));
 	//pShip->SetComponent(new HealthShip(100.f));
 	pShip->SetComponent(new HealthAsteroid(200.f));
 
@@ -86,11 +86,11 @@ GameObject* GameObjectFactory::CreateAsteroid(sf::Vector2f vPosition, float fRot
 {
 	// TODO: Make it possible to change component values / change the whole factory
 	GameObject* pAsteroid = new GameObject(std::string("asteroid"));
-	pAsteroid->SetComponent(new PixelPosition(vPosition, sf::Vector2f(83.f, 66.5f)));
+	pAsteroid->SetComponent(new PixelPosition(vPosition, sf::Vector2f(35.f, 30.f)));
 	pAsteroid->SetComponent(new LinearMovement(fRotation, fSpeed,15));
-	pAsteroid->SetComponent(new SpriteDrawing(std::string("assets/lilee/asteroid.png"),sf::Vector2f(83.f, 66.5f)));
+	pAsteroid->SetComponent(new SpriteDrawing(std::string("assets/lilee/asteroid.png")));
 	//pAsteroid->SetComponent(new CircleCollision(40.f, pos));
-	pAsteroid->SetComponent(new BoxCollision(80, 80));
+	pAsteroid->SetComponent(new BoxCollision(63.f, 110.f));
     pAsteroid->SetComponent(new HealthAsteroid(200.f));
     ResearchScore* pScoreComponent = new ResearchScore(9999999, 9999999);
     pScoreComponent->SetScore(rand() % 5);
