@@ -29,7 +29,7 @@ public:
     bool GetAssistedState() { return m_bAssistedCreated; }
 private:
 	std::string m_strID;
-	std::map<EComponentType, IComponent*> m_Components;
+	std::unordered_map<EComponentType, IComponent*> m_Components;
     bool m_bTemporaryCreated;
     bool m_bAssistedCreated;
 };
