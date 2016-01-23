@@ -30,11 +30,11 @@ private:
 	ObjectManager();
 	ObjectManager(const ObjectManager&) = delete;
 	void operator= (const ObjectManager&) = delete;
-    std::map<std::pair<std::string, Quadrant*>, std::vector<GameObject*>> m_Objects;
+    std::unordered_map<std::pair<std::string, Quadrant*>, std::vector<GameObject*>, pairhash> m_Objects;
 	std::vector<GameObject*> m_CleanUp;
     std::vector<GameObject*> m_ActiveGameObjects;
 	std::vector<std::string> m_DrawOrder;
-    std::map<std::pair<int,int>, Quadrant*> m_Quadrants;
+    std::unordered_map<std::pair<int,int>, Quadrant*, pairhash> m_Quadrants;
     std::pair<std::string, Quadrant*> GetKeyFromGameObject(GameObject* pGameObject);
     std::pair<std::string, Quadrant*> GetKeyFromIDAndQuadrant(std::string object_id, Quadrant* pQuadrant);
     void PerformGameObjectCleanUp();
