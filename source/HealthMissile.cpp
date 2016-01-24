@@ -65,19 +65,19 @@ void HealthMissile::OnCollisionEvent(GameObject* pOther, sf::Vector2f ImpulseImp
         return;
     }
     
-    m_bSomethingHitted = true;
-    this->Damage(m_fHealth);
-    
-    // Generate Explosion, if other gameobject has a IPosition (i know, what a question).
-    IPosition* pPositionComponent = static_cast<IPosition*>(pOther->GetComponent(EComponentType::Position));
-    if(pPositionComponent != nullptr)
-    {
-        GameObjectFactory::CreateExplosion(pPositionComponent->GetPosition());
-    }
-    
     IHealth* pOtherHealth = static_cast<IHealth*>(pOther->GetComponent(EComponentType::Health));
     if(pOtherHealth != nullptr)
     {
+		m_bSomethingHitted = true;
+		this->Damage(m_fHealth);
+
+		// Generate Explosion, if other gameobject has a IPosition (i know, what a question).
+		IPosition* pPositionComponent = static_cast<IPosition*>(pOther->GetComponent(EComponentType::Position));
+		if (pPositionComponent != nullptr)
+		{
+			GameObjectFactory::CreateExplosion(pPositionComponent->GetPosition());
+		}
+
         pOtherHealth->Damage(300.f);
     
 		// Get for the Owner of the Missile the ResearchPoints from the Victim if he's destroyed
