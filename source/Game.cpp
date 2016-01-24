@@ -78,6 +78,7 @@ Game::~Game()
 	AIManager::GetInstance().Clear();
     TextureFactory::GetInstance().Clear();
 	GUIManager::GetInstance().Clear();
+	EventBus::Clear();
 
 	delete m_pWindow;
     m_pEngine = nullptr;
@@ -123,6 +124,7 @@ void Game::Start()
 					CollisionManager::GetInstance().Clear();
 					AIManager::GetInstance().Clear();
 					GUIManager::GetInstance().Clear();
+					EventBus::Clear();
 				}
 
 				// Set to nullptr in GameStateStorage
@@ -161,9 +163,16 @@ void Game::Start()
 	}
 }
 
-void Game::StoreCurrentState()
+void Game::StoreCurrentState(bool value)
 {
-	m_pCurrentState->bClearOnGameStateChange = false;
+	if (value)
+	{
+		m_pCurrentState->bClearOnGameStateChange = false;
+	}
+	else
+	{
+		m_pCurrentState->bClearOnGameStateChange = true;
+	}
 }
 
 bool Game::IsInitialized(EGameState GameState)

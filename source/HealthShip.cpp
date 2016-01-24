@@ -50,7 +50,7 @@ void HealthShip::Damage(float fDamage)
 	{
 		// Hier wird das Schiff nicht zerstört, weil es sowieso einen GameState-Switch auslöst.
 		// ObjectManager::GetInstance().RemoveGameObject(GetAssignedGameObject());
-        
+		Game::m_pEngine->StoreCurrentState(false);
         Game::m_pEngine->ChangeState(EGameState::GameStateGameOver);
 	}
 }

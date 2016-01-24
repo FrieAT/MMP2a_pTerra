@@ -14,7 +14,7 @@ public:
     ~Game();
     
     void Start();
-	void StoreCurrentState();
+	void StoreCurrentState(bool value = true);
     void ChangeState(EGameState GameState);
 	bool IsInitialized(EGameState GameState);
     IGameState* GetCurrentState() { return m_pCurrentState; }

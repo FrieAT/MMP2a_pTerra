@@ -22,6 +22,9 @@ GameStateGameOver::~GameStateGameOver()
 
 void GameStateGameOver::Init(sf::RenderWindow* pWindow)
 {
+	// Remove the savegame
+	std::remove("savegame.txt");
+
 	GameObject* pPlayer = ObjectManager::GetInstance().GetPlayer();
 
     m_bKeyPressed = false;

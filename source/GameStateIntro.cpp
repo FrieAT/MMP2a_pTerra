@@ -58,6 +58,7 @@ void GameStateIntro::Init(sf::RenderWindow* pWindow)
 		buttonStart->setText("Continue Game");
 		buttonStart->connect("clicked", []() {
 			Game::m_pEngine->ChangeState(EGameState::GameStatePlay);
+			std::remove("savegame.txt");
 		});
 	}
 	else
@@ -65,6 +66,7 @@ void GameStateIntro::Init(sf::RenderWindow* pWindow)
 		buttonStart->setText("New Game");
 		buttonStart->connect("clicked", []() {
 			Game::m_pEngine->ChangeState(EGameState::GameStatePlay);
+			std::remove("savegame.txt");
 		});
 	}
 	buttonStart->setTextSize(28);

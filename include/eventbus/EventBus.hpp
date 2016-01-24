@@ -144,6 +144,21 @@ public:
 		}
 	}
 
+	static void Clear()
+	{
+		EventBus* instance = GetInstance();
+
+		for (auto itr = instance->handlers.begin(); itr != instance->handlers.end(); itr++)
+		{
+			for (auto itrList = itr->second->begin(); itrList != itr->second->end(); itrList++)
+			{
+				delete *itrList;
+			}
+			itr->second->clear();
+		}
+		instance->handlers.clear();
+	}
+
 
 private:
 	// Singleton class instance

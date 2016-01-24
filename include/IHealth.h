@@ -95,18 +95,27 @@ protected:
 		IEngine* pEngine = static_cast<IEngine*>(GetAssignedGameObject()->GetComponent(EComponentType::Engine));
 		if (pEngine != nullptr)
 		{
-			if ((pEngine->GetFuel() / pEngine->GetMaxFuel()) < 0.8f)
+			if (m_fShield < 100.f)
 			{
 				if (m_fShield <= 0.f)
 				{
 					DrawShield(false);
 				}
-			}
-			else if (m_fShield < 100.f)
-			{
-				DrawShield(true);
-				m_fShield += 5.f * DeltaTime.asSeconds();
-				EventBus::FireEvent(PlayerShieldRegenerationEvent(this, GetAssignedGameObject(), m_fShield));
+				else
+				{
+					DrawShield(true);
+				}
+
+				// Only recharge shield when Energy is over 80%
+				if ((pEngine->GetFuel() / pEngine->GetMaxFuel()) >= 0.8f)
+				{
+					m_fShield += 5.f * DeltaTime.asSeconds();
+					if (m_fShield > 100.f)
+					{
+						m_fShield = 100.f;
+					}
+					EventBus::FireEvent(PlayerShieldRegenerationEvent(this, GetAssignedGameObject(), m_fShield));
+				}
 			}
 			else
 			{
