@@ -73,7 +73,6 @@ void GameStatePlay::SetLoadGame(std::string strLoadGame)
     FrameManager::GetInstance().Clear();
     InputManager::GetInstance().Clear();
     CollisionManager::GetInstance().Clear();
-	GUIManager::GetInstance().Clear();
     
     // Load the save-game
     WorldManager::GetInstance().LoadGame(m_strLoadGame);
