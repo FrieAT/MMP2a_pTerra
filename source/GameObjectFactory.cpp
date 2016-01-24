@@ -25,6 +25,7 @@ Copyright (c) MultiMediaTechnology, 2015
 #include "SimpleAI.h"
 #include "LogicScore.h"
 #include "LogicTime.h"
+#include "EngineEnergy.h"
 
 GameObject* GameObjectFactory::CreatePlayerShip(sf::Vector2f Position, char cPlayer)
 {
@@ -43,6 +44,7 @@ GameObject* GameObjectFactory::CreatePlayerShip(sf::Vector2f Position, char cPla
     pShip->SetComponent(new NavigationCursor());
     pShip->SetComponent(new ResearchScore(100, 10));
 	pShip->SetComponent(new LogicTime(15 * 60)); // 15 Minuten GameTime
+	pShip->SetComponent(new EngineEnergy(100.f, 40.f));
 	ObjectManager::GetInstance().SetPlayer(pShip);
 	return pShip;
 }
@@ -64,6 +66,7 @@ GameObject * GameObjectFactory::CreateEnemyShip(sf::Vector2f Position)
 	pShip->SetComponent(new HealthAsteroid(800.f));
 	ResearchScore* pScoreComponent = new ResearchScore(9999999, 9999999);
 	pScoreComponent->SetScore(250 % 100);
+	pShip->SetComponent(new EngineEnergy(100.f, 100.f));
 	pShip->SetComponent(pScoreComponent);
 	return pShip;
 }

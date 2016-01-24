@@ -91,6 +91,9 @@
     <Filter Include="Source Files\Components\ILogic">
       <UniqueIdentifier>{343fe177-11da-4656-9d22-28c6241a59e5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Components\IEngine">
+      <UniqueIdentifier>{9e5c51ca-a49e-4344-a421-2305358b7e2f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\main.cpp">
@@ -230,6 +233,9 @@
     </ClCompile>
     <ClCompile Include="source\LogicTime.cpp">
       <Filter>Source Files\Components\ILogic</Filter>
+    </ClCompile>
+    <ClCompile Include="source\EngineEnergy.cpp">
+      <Filter>Source Files\Components\IEngine</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -484,6 +490,12 @@
     </ClInclude>
     <ClInclude Include="include\LogicTime.h">
       <Filter>Source Files\Components\ILogic</Filter>
+    </ClInclude>
+    <ClInclude Include="include\IEngine.h">
+      <Filter>Source Files\Components\IEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="include\EngineEnergy.h">
+      <Filter>Source Files\Components\IEngine</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

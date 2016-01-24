@@ -13,7 +13,7 @@ public:
 	LogicTime(int iTimelimitSeconds);
 	~LogicTime();
 	void Init();
-	int GetRemainingTime() { return m_fRemainingTime; }
+	int GetRemainingTime() { return static_cast<int>(m_fRemainingTime); }
 	void Action(GameObject* pPossibleOther = nullptr);
 	void OnFrameUpdate(sf::Time DeltaTime);
 	ELogicType GetLogicType() { return ELogicType::Time; }

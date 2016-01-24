@@ -163,6 +163,7 @@
     <ClCompile Include="source\BoxCollision.cpp" />
     <ClCompile Include="source\CircleCollision.cpp" />
     <ClCompile Include="source\CollisionManager.cpp" />
+    <ClCompile Include="source\EngineEnergy.cpp" />
     <ClCompile Include="source\FontDrawing.cpp" />
     <ClCompile Include="source\FrameManager.cpp" />
     <ClCompile Include="source\Game.cpp" />
@@ -216,6 +217,7 @@
     <ClInclude Include="include\EComponentType.h" />
     <ClInclude Include="include\EGameState.h" />
     <ClInclude Include="include\ELogicType.h" />
+    <ClInclude Include="include\EngineEnergy.h" />
     <ClInclude Include="include\EQuadrantPos.h" />
     <ClInclude Include="include\ESerializeNodeType.h" />
     <ClInclude Include="include\eventbus\Event.hpp" />
@@ -243,6 +245,7 @@
     <ClInclude Include="include\ICollisionEventObserver.h" />
     <ClInclude Include="include\IComponent.h" />
     <ClInclude Include="include\IDrawing.h" />
+    <ClInclude Include="include\IEngine.h" />
     <ClInclude Include="include\IFrameObserver.h" />
     <ClInclude Include="include\IGameState.h" />
     <ClInclude Include="include\IGUI.h" />

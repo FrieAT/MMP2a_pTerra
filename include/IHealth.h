@@ -8,14 +8,14 @@ Copyright (c) MultiMediaTechnology, 2015
 #include "PixelPosition.h"
 #include "SpriteDrawing.h"
 #include "ObjectManager.h"
-
+#include "IEngine.h"
 #include "eventbus\EventBus.hpp"
 #include "PlayerShieldRegenerationEvent.h"
 
 class IHealth : public IComponent
 {
 public:
-    IHealth() : m_fHealth(0.f), m_fShield(0.f), m_fShieldCooldown(0.f), m_bShieldActive(false)
+    IHealth() : m_fHealth(0.f), m_fShield(0.f), m_bShieldActive(false)
     {
         m_pShieldAsset = new GameObject("effect");
         m_pShieldAsset->SetTemporaryState(true);
@@ -51,7 +51,6 @@ public:
             {
                 fDamage = 0.f;
             }
-            m_fShieldCooldown = 3; // seconds
         }
         m_fHealth -= fDamage;
         
@@ -62,7 +61,6 @@ public:
         this->IComponent::Serialize(pParentNode);
         pParentNode->AddElement(new SerializeNode("Health", ESerializeNodeType::Property, std::to_string(m_fHealth)));
         pParentNode->AddElement(new SerializeNode("Shield", ESerializeNodeType::Property, std::to_string(m_fShield)));
-        pParentNode->AddElement(new SerializeNode("ShieldCooldown", ESerializeNodeType::Property, std::to_string(m_fShieldCooldown)));
         pParentNode->AddElement(new SerializeNode("ShieldActive", ESerializeNodeType::Property, std::to_string(m_bShieldActive)));
     }
     static void Deserialize(SerializeNode* pNode, IHealth* pParentComponent)
@@ -73,9 +71,6 @@ public:
         float fShield = stof((pNode->GetNode("Shield"))->GetValue());
         pParentComponent->m_fShield = fShield;
         
-        float fShieldCooldown = stof((pNode->GetNode("ShieldCooldown"))->GetValue());
-        pParentComponent->m_fShieldCooldown = fShieldCooldown;
-        
         int iShieldActive = stoi((pNode->GetNode("ShieldActive"))->GetValue());
         pParentComponent->m_bShieldActive = (iShieldActive ? true : false);
         
@@ -85,7 +80,6 @@ public:
 protected:
     float m_fHealth;
     float m_fShield;
-    float m_fShieldCooldown;
     bool m_bShieldActive;
     GameObject* m_pShieldAsset;
     virtual void RegenerateShield(sf::Time DeltaTime)
@@ -98,25 +92,28 @@ protected:
             pPositionShield->SetRotation(pPositionObject->GetRotation());
         }
         
-        if(m_fShieldCooldown > 0.f)
-        {
-            if(m_fShield <= 0.f)
-            {
-                DrawShield(false);
-            }
-            m_fShieldCooldown -= 1 * DeltaTime.asSeconds();
-        }
-        else if(m_fShield < 100.f)
-        {
-			DrawShield(true);
-            m_fShield += 5.f * DeltaTime.asSeconds();
-			EventBus::FireEvent(PlayerShieldRegenerationEvent(this, GetAssignedGameObject(), m_fShield));
-        }
-        else
-        {
-            DrawShield(true);
-            m_fShield = 100.f;
-        }
+		IEngine* pEngine = static_cast<IEngine*>(GetAssignedGameObject()->GetComponent(EComponentType::Engine));
+		if (pEngine != nullptr)
+		{
+			if ((pEngine->GetFuel() / pEngine->GetMaxFuel()) < 0.8f)
+			{
+				if (m_fShield <= 0.f)
+				{
+					DrawShield(false);
+				}
+			}
+			else if (m_fShield < 100.f)
+			{
+				DrawShield(true);
+				m_fShield += 5.f * DeltaTime.asSeconds();
+				EventBus::FireEvent(PlayerShieldRegenerationEvent(this, GetAssignedGameObject(), m_fShield));
+			}
+			else
+			{
+				DrawShield(true);
+				m_fShield = 100.f;
+			}
+		}
     }
     void DrawShield(bool bQuestion, bool bForce = false)
     {

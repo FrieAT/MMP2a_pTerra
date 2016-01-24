@@ -8,6 +8,7 @@ Copyright (c) MultiMediaTechnology, 2015
 #include "GameObjectFactory.h"
 #include "ObjectManager.h"
 #include "SpriteDrawing.h"
+#include "IEngine.h"
 
 ShipMovement::ShipMovement(char cPlayer)
 {
@@ -99,18 +100,50 @@ void ShipMovement::UpdateMovement(sf::Time DeltaTime)
 {
 	IPosition* pPositionComponent = static_cast<IPosition*>(GetAssignedGameObject()->GetComponent(EComponentType::Position));
 
+	const float fFuelDrainForForward = .8f * DeltaTime.asSeconds();
+	const float fFuelDrainForBackward = 1.f * DeltaTime.asSeconds();
+	const float fFuelDrainForMissile = 7.f;
 
 	if(m_ShipState[0]) pPositionComponent->SetRotation(pPositionComponent->GetRotation() + 120*DeltaTime.asSeconds());	//rotate right
 	if (m_ShipState[1]) pPositionComponent->SetRotation(pPositionComponent->GetRotation() - 120*DeltaTime.asSeconds()); //rotate left
-	if (m_ShipState[2]) m_Direction = sf::Vector2f(0.f, -0.8f); //move forward
-	if (m_ShipState[3]) m_Direction = sf::Vector2f(0.f, 0.6f); //move backward
+	if (m_ShipState[2])
+	{
+		IEngine* pEngine = static_cast<IEngine*>(GetAssignedGameObject()->GetComponent(EComponentType::Engine));
+		if (pEngine != nullptr && pEngine->GetFuel() >= fFuelDrainForForward)
+		{
+			pEngine->AddFuel(-fFuelDrainForForward);
+			m_Direction = sf::Vector2f(0.f, -0.8f); //move forward
+		}
+		else
+		{
+			m_ShipState[2] = false;
+		}
+	}
+	if (m_ShipState[3])
+	{
+		IEngine* pEngine = static_cast<IEngine*>(GetAssignedGameObject()->GetComponent(EComponentType::Engine));
+		if (pEngine != nullptr && pEngine->GetFuel() >= fFuelDrainForBackward)
+		{
+			pEngine->AddFuel(-fFuelDrainForBackward);
+			m_Direction = sf::Vector2f(0.f, 0.6f); //move backward
+		}
+		else
+		{
+			m_ShipState[3] = false;
+		}
+	}
 	if (!m_ShipState[2]&& !m_ShipState[3]) m_Direction = sf::Vector2f(0.f, 0.f); //turn off thruster
 	if (m_ShipState[4] && m_fWeaponcoolDown <= 0.f)		//fire
 	{
-		m_fWeaponcoolDown = m_fFirerate;
-		GameObject* pMissile = GameObjectFactory::CreateMissile(GetAssignedGameObject(), pPositionComponent, velocity); //shoot rockets
-        pMissile->SetTemporaryState(true);
-		//std::cout << velocity.x << " "<<velocity.y << std::endl;
+		IEngine* pEngine = static_cast<IEngine*>(GetAssignedGameObject()->GetComponent(EComponentType::Engine));
+		if (pEngine != nullptr && pEngine->GetFuel() >= fFuelDrainForMissile)
+		{
+			pEngine->AddFuel(-fFuelDrainForMissile);
+			m_fWeaponcoolDown = m_fFirerate;
+			GameObject* pMissile = GameObjectFactory::CreateMissile(GetAssignedGameObject(), pPositionComponent, velocity); //shoot rockets
+			pMissile->SetTemporaryState(true);
+			//std::cout << velocity.x << " "<<velocity.y << std::endl;
+		}
 	}
 	if (m_fWeaponcoolDown > 0.f)
     {

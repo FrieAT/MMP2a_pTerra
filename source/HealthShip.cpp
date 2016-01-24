@@ -15,6 +15,7 @@ Copyright (c) MultiMediaTechnology, 2015
 #include "LogicTime.h"
 #include "eventbus\EventBus.hpp"
 #include "PlayerDamageEvent.h"
+#include "IEngine.h"
 
 HealthShip::HealthShip(float fHealth)
 : IHealth()
@@ -69,6 +70,7 @@ void HealthShip::OnFrameUpdate(sf::Time DeltaTime)
     INavigation* pNavigation = static_cast<INavigation*>(GetAssignedGameObject()->GetComponent(EComponentType::Navigation));
     IScore* pScore = static_cast<IScore*>(GetAssignedGameObject()->GetComponent(EComponentType::Score));
 	LogicTime* pTime = dynamic_cast<LogicTime*>(GetAssignedGameObject()->GetComponent(EComponentType::Logic));
+	IEngine* pEngine = static_cast<IEngine*>(GetAssignedGameObject()->GetComponent(EComponentType::Engine));
 
     sf::Vector2f ship_pos = pPositionShipComponent->GetPosition() + sf::Vector2f(-30.f, 50.f);
     std::stringstream health_text;
@@ -88,6 +90,10 @@ void HealthShip::OnFrameUpdate(sf::Time DeltaTime)
 	if (pTime != nullptr)
 	{
 		health_text << "\nLeftTime: " << pTime->GetRemainingTime() << " Seconds";
+	}
+	if (pEngine != nullptr)
+	{
+		health_text << "\nFuel: " << pEngine->GetFuel() << " / " << pEngine->GetMaxFuel();
 	}
     pPositionTextComponent->SetPosition(ship_pos);
     pDrawingTextComponent->SetText(health_text.str());
