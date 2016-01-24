@@ -32,11 +32,6 @@ std::pair<std::string, Quadrant*> ObjectManager::GetKeyFromGameObject(GameObject
     return std::pair<std::string, Quadrant*>(strGameObjectID, pQuadrantFromObject);
 }
 
-std::pair<std::string, Quadrant*> ObjectManager::GetKeyFromIDAndQuadrant(std::string object_id, Quadrant* pQuadrant)
-{
-    return std::pair<std::string, Quadrant*>(object_id, pQuadrant);
-}
-
 void ObjectManager::AddGameObject(GameObject* pObject)
 {
     if(pObject == nullptr)
@@ -228,6 +223,16 @@ void ObjectManager::PerformGameObjectCleanUp()
     m_CleanUp.clear();
 }
 
+GameObject * ObjectManager::GetPlayer()
+{
+	return m_PlayerShip;
+}
+
+void ObjectManager::SetPlayer(GameObject * Player)
+{
+	m_PlayerShip = Player;
+}
+
 void ObjectManager::Update(sf::Time DeltaTime)
 {
     PerformGameObjectCleanUp();
@@ -254,7 +259,7 @@ void ObjectManager::Draw(sf::RenderWindow* pWindow)
             if(!quadrant_it->second->GetFreezedState())
             {
                 // Iterate now through all GameObjects with given GameObjectID and Quadrant-Position.
-                auto key = GetKeyFromIDAndQuadrant((*draw_order_it), (quadrant_it->second));
+				auto key = std::pair<std::string, Quadrant*>{ *draw_order_it, quadrant_it->second };
                 auto objects_it = m_Objects[key].begin();
                 while(objects_it != m_Objects[key].end())
                 {

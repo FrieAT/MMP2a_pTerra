@@ -103,9 +103,9 @@ void ShipMovement::UpdateMovement(sf::Time DeltaTime)
 	if(m_ShipState[0]) pPositionComponent->SetRotation(pPositionComponent->GetRotation() + 120*DeltaTime.asSeconds());	//rotate right
 	if (m_ShipState[1]) pPositionComponent->SetRotation(pPositionComponent->GetRotation() - 120*DeltaTime.asSeconds()); //rotate left
 	if (m_ShipState[2]) m_Direction = sf::Vector2f(0.f, -0.8f); //move forward
-	if (m_ShipState[3]) m_Direction = sf::Vector2f(0.f, 0.6f); //move forward
+	if (m_ShipState[3]) m_Direction = sf::Vector2f(0.f, 0.6f); //move backward
 	if (!m_ShipState[2]&& !m_ShipState[3]) m_Direction = sf::Vector2f(0.f, 0.f); //turn off thruster
-	if (m_ShipState[4] && m_fWeaponcoolDown <= 0.f)
+	if (m_ShipState[4] && m_fWeaponcoolDown <= 0.f)		//fire
 	{
 		m_fWeaponcoolDown = m_fFirerate;
 		GameObject* pMissile = GameObjectFactory::CreateMissile(GetAssignedGameObject(), pPositionComponent, velocity); //shoot rockets
@@ -237,4 +237,10 @@ void ShipMovement::setShipState(int State, bool value)
 bool ShipMovement::getShipState(int State)
 {
 	return m_ShipState[State];
+}
+
+void ShipMovement::SetMass(float mass) {
+	this->mass = mass;
+	this->invMass = 1 / mass;
+
 }

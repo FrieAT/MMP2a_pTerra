@@ -79,6 +79,15 @@
     <Filter Include="Source Files\Managers\AIManager">
       <UniqueIdentifier>{d66c2349-8f27-448c-842c-fe264dad4eed}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\External Frameworks\eventbus">
+      <UniqueIdentifier>{66fc46a0-dc70-4195-85e6-dd74879cc219}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Events">
+      <UniqueIdentifier>{677c3114-b726-4103-8a16-380dc778282c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Managers\GUIManager">
+      <UniqueIdentifier>{485b9d44-3770-4306-b412-4bbdd9c42172}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\main.cpp">
@@ -186,14 +195,32 @@
     <ClCompile Include="source\GameStatePause.cpp">
       <Filter>Source Files\Managers\GameStateManager</Filter>
     </ClCompile>
-    <ClCompile Include="source\PatrolAI.cpp">
-      <Filter>Source Files\Components\IAI</Filter>
-    </ClCompile>
     <ClCompile Include="source\AIManager.cpp">
       <Filter>Source Files\Managers\AIManager</Filter>
     </ClCompile>
     <ClCompile Include="source\stdafx.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="include\eventbus\EventBus.cpp">
+      <Filter>Source Files\External Frameworks\eventbus</Filter>
+    </ClCompile>
+    <ClCompile Include="source\GUIManager.cpp">
+      <Filter>Source Files\Managers\GUIManager</Filter>
+    </ClCompile>
+    <ClCompile Include="source\GUIPlayerStatus.cpp">
+      <Filter>Source Files\Managers\GUIManager</Filter>
+    </ClCompile>
+    <ClCompile Include="source\AIStateFlee.cpp">
+      <Filter>Source Files\Components\IAI</Filter>
+    </ClCompile>
+    <ClCompile Include="source\AIStateRam.cpp">
+      <Filter>Source Files\Components\IAI</Filter>
+    </ClCompile>
+    <ClCompile Include="source\SimpleAI.cpp">
+      <Filter>Source Files\Components\IAI</Filter>
+    </ClCompile>
+    <ClCompile Include="source\AIStatePatrol.cpp">
+      <Filter>Source Files\Components\IAI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -380,9 +407,6 @@
     <ClInclude Include="include\IAI.h">
       <Filter>Source Files\Components\IAI</Filter>
     </ClInclude>
-    <ClInclude Include="include\PatrolAI.h">
-      <Filter>Source Files\Components\IAI</Filter>
-    </ClInclude>
     <ClInclude Include="include\AIManager.h">
       <Filter>Source Files\Managers\AIManager</Filter>
     </ClInclude>
@@ -391,6 +415,54 @@
     </ClInclude>
     <ClInclude Include="include\stdafx.h">
       <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\eventbus\Event.hpp">
+      <Filter>Source Files\External Frameworks\eventbus</Filter>
+    </ClInclude>
+    <ClInclude Include="include\eventbus\EventBus.hpp">
+      <Filter>Source Files\External Frameworks\eventbus</Filter>
+    </ClInclude>
+    <ClInclude Include="include\eventbus\EventHandler.hpp">
+      <Filter>Source Files\External Frameworks\eventbus</Filter>
+    </ClInclude>
+    <ClInclude Include="include\eventbus\HandlerRegistration.hpp">
+      <Filter>Source Files\External Frameworks\eventbus</Filter>
+    </ClInclude>
+    <ClInclude Include="include\eventbus\Object.hpp">
+      <Filter>Source Files\External Frameworks\eventbus</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PlayerDamageEvent.h">
+      <Filter>Source Files\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GUIManager.h">
+      <Filter>Source Files\Managers\GUIManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\IGUI.h">
+      <Filter>Source Files\Managers\GUIManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GUIPlayerStatus.h">
+      <Filter>Source Files\Managers\GUIManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PlayerShieldRegenerationEvent.h">
+      <Filter>Source Files\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ScoreEvent.h">
+      <Filter>Source Files\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="include\AIStateFlee.h">
+      <Filter>Source Files\Components\IAI</Filter>
+    </ClInclude>
+    <ClInclude Include="include\AIStateRam.h">
+      <Filter>Source Files\Components\IAI</Filter>
+    </ClInclude>
+    <ClInclude Include="include\IAIState.h">
+      <Filter>Source Files\Components\IAI</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SimpleAI.h">
+      <Filter>Source Files\Components\IAI</Filter>
+    </ClInclude>
+    <ClInclude Include="include\AIStatePatrol.h">
+      <Filter>Source Files\Components\IAI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

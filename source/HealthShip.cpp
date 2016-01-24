@@ -13,6 +13,9 @@ Copyright (c) MultiMediaTechnology, 2015
 #include "INavigation.h"
 #include "IScore.h"
 
+#include "eventbus\EventBus.hpp"
+#include "PlayerDamageEvent.h"
+
 HealthShip::HealthShip(float fHealth)
 : IHealth()
 {
@@ -37,11 +40,11 @@ HealthShip::~HealthShip()
     ObjectManager::GetInstance().RemoveGameObject(m_pHealthDebug);
 }
 
-
-
 void HealthShip::Damage(float fDamage)
 {
     IHealth::Damage(fDamage);
+	EventBus::FireEvent(PlayerDamageEvent(this, GetAssignedGameObject(), m_fHealth, m_fShield));
+
 	if (m_fHealth <= 0.f)
 	{
 		// Hier wird das Schiff nicht zerstört, weil es sowieso einen GameState-Switch auslöst.

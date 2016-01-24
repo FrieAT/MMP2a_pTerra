@@ -22,7 +22,8 @@ Copyright (c) MultiMediaTechnology, 2015
 #include "BoxCollision.h"
 #include "NavigationCursor.h"
 #include "ResearchScore.h"
-#include "PatrolAI.h"
+#include "SimpleAI.h"
+#include "LogicScore.h"
 
 GameObject* GameObjectFactory::CreatePlayerShip(sf::Vector2f Position, char cPlayer)
 {
@@ -40,7 +41,7 @@ GameObject* GameObjectFactory::CreatePlayerShip(sf::Vector2f Position, char cPla
     pShip->SetComponent(new HealthShip(100.f));
     pShip->SetComponent(new NavigationCursor());
     pShip->SetComponent(new ResearchScore(100, 10));
-
+	ObjectManager::GetInstance().SetPlayer(pShip);
 	return pShip;
 }
 
@@ -48,17 +49,20 @@ GameObject * GameObjectFactory::CreateEnemyShip(sf::Vector2f Position)
 {
 	GameObject* pShip = new GameObject(std::string("enemyship"));
 	pShip->SetComponent(new PixelPosition(sf::Vector2f(Position), sf::Vector2f(32.f, 51.f)));
-	pShip->SetComponent(new ShipMovement('E'));
+	ShipMovement* aimove = new ShipMovement('E');
+	aimove->SetMass(6);
+	pShip->SetComponent(aimove);
 	SpriteDrawing* pSpriteComponent = new SpriteDrawing(std::string("assets/lilee/ship_regierung.png"), sf::Vector2f(192.f, 128.f));
 	pSpriteComponent->SetTextureArea(sf::FloatRect(0.f, 0.f, 64.f, 102.f));
 	pShip->SetComponent(pSpriteComponent);
 	//pShip->SetComponent(new DynamicView(sf::FloatRect(0, 0, static_cast<float>(Game::m_iWindowWidth), static_cast<float>(Game::m_iWindowHeight)), sf::Vector2f(1920.f - static_cast<float>(Game::m_iWindowWidth), 0), 20.f));
 	//pShip->SetComponent(new CircleCollision(30.f,pos));
-	pShip->SetComponent(new PatrolAI());
-	pShip->SetComponent(new BoxCollision(64.f, 102.f));
-	//pShip->SetComponent(new HealthShip(100.f));
-	pShip->SetComponent(new HealthAsteroid(200.f));
-
+	pShip->SetComponent(new SimpleAI());
+	pShip->SetComponent(new BoxCollision(64, 100));
+	pShip->SetComponent(new HealthAsteroid(800.f));
+	ResearchScore* pScoreComponent = new ResearchScore(9999999, 9999999);
+	pScoreComponent->SetScore(250 % 100);
+	pShip->SetComponent(pScoreComponent);
 	return pShip;
 }
 
@@ -72,7 +76,7 @@ GameObject* GameObjectFactory::CreateMissile(GameObject* pOwner, IPosition* pPos
     
 	pMissile->SetComponent(new HealthMissile(1000, pOwner));
 	pMissile->SetComponent(new PixelPosition(pPosition->GetPosition(), sf::Vector2f(160.f, 320.f)));
-	pMissile->SetComponent(new LinearMovement(pPosition->GetRotation(),300.f,1,ShipSpeed,true));
+	pMissile->SetComponent(new LinearMovement(pPosition->GetRotation(), 800.f, 1.f, ShipSpeed, true));
     SpriteDrawing* pSpriteComponent = new SpriteDrawing(std::string("assets/lilee/rakete_player.png"),sf::Vector2f(30,60));
     pSpriteComponent->SetTextureArea(sf::FloatRect(96.f, 0.f, 96.f, 899.f));
     pSpriteComponent->SetTextureArea(sf::FloatRect(192.f, 0.f, 96.f, 899.f));
@@ -91,9 +95,9 @@ GameObject* GameObjectFactory::CreateAsteroid(sf::Vector2f vPosition, float fRot
 	pAsteroid->SetComponent(new SpriteDrawing(std::string("assets/lilee/asteroid.png")));
 	//pAsteroid->SetComponent(new CircleCollision(40.f, pos));
 	pAsteroid->SetComponent(new BoxCollision(63.f, 110.f));
-    pAsteroid->SetComponent(new HealthAsteroid(200.f));
+	pAsteroid->SetComponent(new HealthAsteroid(400.f));
     ResearchScore* pScoreComponent = new ResearchScore(9999999, 9999999);
-    pScoreComponent->SetScore(rand() % 5);
+    pScoreComponent->SetScore(rand() % 100);
     pAsteroid->SetComponent(pScoreComponent);
 	return pAsteroid;
 }
@@ -206,6 +210,11 @@ GameObject* GameObjectFactory::CreatePlanet(sf::Vector2f Position, EWorldObjectT
     
     pPlanet->SetComponent(new PixelPosition(Position, sf::Vector2f(1000.f, 1000.f)));
     pPlanet->SetComponent(new SpriteDrawing(SpaceStationsRes[rand() % SpaceStationsRes.size()]));
+	pPlanet->SetComponent(new BoxCollision(2000.f, 2000.f));
+	ResearchScore* pScoreComponent = new ResearchScore(9999999, 9999999);
+	pScoreComponent->SetScore(500 % 100);
+	pPlanet->SetComponent(pScoreComponent);
+	pPlanet->SetComponent(new LogicScore());
     
     return pPlanet;
 }

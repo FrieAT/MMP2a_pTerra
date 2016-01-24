@@ -22,6 +22,7 @@ public:
     std::string GetComponentName() { return std::string("ShipMovement"); }
 	void setShipState(int State, bool value);
 	bool getShipState(int State);
+	void SetMass(float mass);
 private:
 	char m_cPlayer;	//player id for multiple playercontrolled ships
 	float m_fFirerate;

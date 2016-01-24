@@ -9,6 +9,9 @@ Copyright (c) MultiMediaTechnology, 2015
 #include "SpriteDrawing.h"
 #include "ObjectManager.h"
 
+#include "eventbus\EventBus.hpp"
+#include "PlayerShieldRegenerationEvent.h"
+
 class IHealth : public IComponent
 {
 public:
@@ -41,7 +44,7 @@ public:
             m_fShield -= fDamage;
             if(m_fShield < 0.f)
             {
-                fDamage += m_fShield;
+                fDamage = m_fShield;
                 m_fShield = 0.f;
             }
             else
@@ -105,11 +108,9 @@ protected:
         }
         else if(m_fShield < 100.f)
         {
-            if(m_fShield >= 10.f)
-            {
-                DrawShield(true);
-            }
+			DrawShield(true);
             m_fShield += 5.f * DeltaTime.asSeconds();
+			EventBus::FireEvent(PlayerShieldRegenerationEvent(this, GetAssignedGameObject(), m_fShield));
         }
         else
         {
