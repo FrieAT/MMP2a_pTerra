@@ -228,6 +228,16 @@ void ObjectManager::PerformGameObjectCleanUp()
     m_CleanUp.clear();
 }
 
+GameObject * ObjectManager::GetPlayer()
+{
+	return m_PlayerShip;
+}
+
+void ObjectManager::SetPlayer(GameObject * Player)
+{
+	m_PlayerShip = Player;
+}
+
 void ObjectManager::Update(sf::Time DeltaTime)
 {
     PerformGameObjectCleanUp();

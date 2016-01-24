@@ -24,6 +24,8 @@ public:
     void RemoveAllQuadrants();
     const std::vector<GameObject*>& GetActiveGameObjects();
 	const std::unordered_map<std::pair<std::string, Quadrant*>, std::vector<GameObject*>, pairhash>& GetAllGameObjects() { return m_Objects; }
+	GameObject* GetPlayer();
+	void SetPlayer(GameObject* Player);
 	void Update(sf::Time DeltaTime);
 	void Draw(sf::RenderWindow* pWindow);
 	void Clear();
@@ -39,4 +41,5 @@ private:
     std::pair<std::string, Quadrant*> GetKeyFromGameObject(GameObject* pGameObject);
     std::pair<std::string, Quadrant*> GetKeyFromIDAndQuadrant(std::string object_id, Quadrant* pQuadrant);
     void PerformGameObjectCleanUp();
+	GameObject* m_PlayerShip;
 };

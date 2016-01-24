@@ -157,6 +157,9 @@
     <ClCompile Include="include\eventbus\EventBus.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="source\AIStatePatrol.cpp" />
+    <ClCompile Include="source\AIStateFlee.cpp" />
+    <ClCompile Include="source\AIStateRam.cpp" />
     <ClCompile Include="source\BoxCollision.cpp" />
     <ClCompile Include="source\CircleCollision.cpp" />
     <ClCompile Include="source\CollisionManager.cpp" />
@@ -183,7 +186,6 @@
     <ClCompile Include="source\main.cpp" />
     <ClCompile Include="source\NavigationCursor.cpp" />
     <ClCompile Include="source\ObjectManager.cpp" />
-    <ClCompile Include="source\PatrolAI.cpp" />
     <ClCompile Include="source\PixelPosition.cpp" />
     <ClCompile Include="source\DynamicView.cpp" />
     <ClCompile Include="source\Quadrant.cpp" />
@@ -191,6 +193,7 @@
     <ClCompile Include="source\ResearchScore.cpp" />
     <ClCompile Include="source\SerializeNode.cpp" />
     <ClCompile Include="source\ShipMovement.cpp" />
+    <ClCompile Include="source\SimpleAI.cpp" />
     <ClCompile Include="source\SpriteDrawing.cpp" />
     <ClCompile Include="source\StaticView.cpp" />
     <ClCompile Include="source\stdafx.cpp" />
@@ -201,6 +204,9 @@
     <ClCompile Include="source\XMLWriteVisitor.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\AIStatePatrol.h" />
+    <ClInclude Include="include\AIStateFlee.h" />
+    <ClInclude Include="include\AIStateRam.h" />
     <ClInclude Include="include\BoxCollision.h" />
     <ClInclude Include="include\CircleCollision.h" />
     <ClInclude Include="include\ClassRegistry.h" />
@@ -230,6 +236,7 @@
     <ClInclude Include="include\HealthExplosion.h" />
     <ClInclude Include="include\HealthMissile.h" />
     <ClInclude Include="include\HealthShip.h" />
+    <ClInclude Include="include\IAIState.h" />
     <ClInclude Include="include\ICollisionEventObserver.h" />
     <ClInclude Include="include\IComponent.h" />
     <ClInclude Include="include\IDrawing.h" />
@@ -253,7 +260,6 @@
     <ClInclude Include="include\LongRect.h" />
     <ClInclude Include="include\NavigationCursor.h" />
     <ClInclude Include="include\ObjectManager.h" />
-    <ClInclude Include="include\PatrolAI.h" />
     <ClInclude Include="include\PixelPosition.h" />
     <ClInclude Include="include\DynamicView.h" />
     <ClInclude Include="include\PlayerDamageEvent.h" />
@@ -268,6 +274,7 @@
     <ClInclude Include="include\ScoreEvent.h" />
     <ClInclude Include="include\SerializeNode.h" />
     <ClInclude Include="include\ShipMovement.h" />
+    <ClInclude Include="include\SimpleAI.h" />
     <ClInclude Include="include\SpriteDrawing.h" />
     <ClInclude Include="include\ICollision.h" />
     <ClInclude Include="include\StaticView.h" />

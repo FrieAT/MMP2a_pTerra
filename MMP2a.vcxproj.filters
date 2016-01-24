@@ -195,9 +195,6 @@
     <ClCompile Include="source\GameStatePause.cpp">
       <Filter>Source Files\Managers\GameStateManager</Filter>
     </ClCompile>
-    <ClCompile Include="source\PatrolAI.cpp">
-      <Filter>Source Files\Components\IAI</Filter>
-    </ClCompile>
     <ClCompile Include="source\AIManager.cpp">
       <Filter>Source Files\Managers\AIManager</Filter>
     </ClCompile>
@@ -212,6 +209,18 @@
     </ClCompile>
     <ClCompile Include="source\GUIPlayerStatus.cpp">
       <Filter>Source Files\Managers\GUIManager</Filter>
+    </ClCompile>
+    <ClCompile Include="source\AIStateFlee.cpp">
+      <Filter>Source Files\Components\IAI</Filter>
+    </ClCompile>
+    <ClCompile Include="source\AIStateRam.cpp">
+      <Filter>Source Files\Components\IAI</Filter>
+    </ClCompile>
+    <ClCompile Include="source\SimpleAI.cpp">
+      <Filter>Source Files\Components\IAI</Filter>
+    </ClCompile>
+    <ClCompile Include="source\AIStatePatrol.cpp">
+      <Filter>Source Files\Components\IAI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -398,9 +407,6 @@
     <ClInclude Include="include\IAI.h">
       <Filter>Source Files\Components\IAI</Filter>
     </ClInclude>
-    <ClInclude Include="include\PatrolAI.h">
-      <Filter>Source Files\Components\IAI</Filter>
-    </ClInclude>
     <ClInclude Include="include\AIManager.h">
       <Filter>Source Files\Managers\AIManager</Filter>
     </ClInclude>
@@ -442,6 +448,21 @@
     </ClInclude>
     <ClInclude Include="include\ScoreEvent.h">
       <Filter>Source Files\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="include\AIStateFlee.h">
+      <Filter>Source Files\Components\IAI</Filter>
+    </ClInclude>
+    <ClInclude Include="include\AIStateRam.h">
+      <Filter>Source Files\Components\IAI</Filter>
+    </ClInclude>
+    <ClInclude Include="include\IAIState.h">
+      <Filter>Source Files\Components\IAI</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SimpleAI.h">
+      <Filter>Source Files\Components\IAI</Filter>
+    </ClInclude>
+    <ClInclude Include="include\AIStatePatrol.h">
+      <Filter>Source Files\Components\IAI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

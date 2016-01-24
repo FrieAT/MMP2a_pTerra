@@ -22,7 +22,7 @@ Copyright (c) MultiMediaTechnology, 2015
 #include "BoxCollision.h"
 #include "NavigationCursor.h"
 #include "ResearchScore.h"
-#include "PatrolAI.h"
+#include "SimpleAI.h"
 
 GameObject* GameObjectFactory::CreatePlayerShip(sf::Vector2f Position, char cPlayer)
 {
@@ -40,7 +40,7 @@ GameObject* GameObjectFactory::CreatePlayerShip(sf::Vector2f Position, char cPla
     pShip->SetComponent(new HealthShip(100.f));
     pShip->SetComponent(new NavigationCursor());
     pShip->SetComponent(new ResearchScore(100, 10));
-
+	ObjectManager::GetInstance().SetPlayer(pShip);
 	return pShip;
 }
 
@@ -48,17 +48,20 @@ GameObject * GameObjectFactory::CreateEnemyShip(sf::Vector2f Position)
 {
 	GameObject* pShip = new GameObject(std::string("enemyship"));
 	pShip->SetComponent(new PixelPosition(sf::Vector2f(Position), sf::Vector2f(32.f, 51.f)));
-	pShip->SetComponent(new ShipMovement('E'));
+	ShipMovement* aimove = new ShipMovement('E');
+	aimove->SetMass(6);
+	pShip->SetComponent(aimove);
 	SpriteDrawing* pSpriteComponent = new SpriteDrawing(std::string("assets/lilee/ship_regierung.png"), sf::Vector2f(192.f, 128.f));
 	pSpriteComponent->SetTextureArea(sf::FloatRect(0.f, 0.f, 64.f, 102.f));
 	pShip->SetComponent(pSpriteComponent);
 	//pShip->SetComponent(new DynamicView(sf::FloatRect(0, 0, static_cast<float>(Game::m_iWindowWidth), static_cast<float>(Game::m_iWindowHeight)), sf::Vector2f(1920.f - static_cast<float>(Game::m_iWindowWidth), 0), 20.f));
 	//pShip->SetComponent(new CircleCollision(30.f,pos));
-	pShip->SetComponent(new PatrolAI());
+	pShip->SetComponent(new SimpleAI());
 	pShip->SetComponent(new BoxCollision(64, 100));
-	//pShip->SetComponent(new HealthShip(100.f));
-	pShip->SetComponent(new HealthAsteroid(200.f));
-
+	pShip->SetComponent(new HealthAsteroid(800.f));
+	ResearchScore* pScoreComponent = new ResearchScore(9999999, 9999999);
+	pScoreComponent->SetScore(250);
+	pShip->SetComponent(pScoreComponent);
 	return pShip;
 }
 
