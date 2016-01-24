@@ -39,7 +39,6 @@ private:
 	std::vector<std::string> m_DrawOrder;
     std::unordered_map<std::pair<int,int>, Quadrant*, pairhash> m_Quadrants;
     std::pair<std::string, Quadrant*> GetKeyFromGameObject(GameObject* pGameObject);
-    std::pair<std::string, Quadrant*> GetKeyFromIDAndQuadrant(std::string object_id, Quadrant* pQuadrant);
     void PerformGameObjectCleanUp();
 	GameObject* m_PlayerShip;
 };
