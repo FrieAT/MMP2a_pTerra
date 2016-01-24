@@ -14,6 +14,7 @@ Copyright (c) MultiMediaTechnology, 2015
 #include "GameStateIntro.h"
 #include "TextureFactory.h"
 #include "ClassRegistry.h"
+#include "GUIManager.h"
 
 #include "GameStateIntro.h"
 #include "GameStatePlay.h"
@@ -76,6 +77,7 @@ Game::~Game()
 	CollisionManager::GetInstance().Clear();
 	AIManager::GetInstance().Clear();
     TextureFactory::GetInstance().Clear();
+	GUIManager::GetInstance().Clear();
 
 	delete m_pWindow;
     m_pEngine = nullptr;
@@ -120,6 +122,7 @@ void Game::Start()
 					InputManager::GetInstance().Clear();
 					CollisionManager::GetInstance().Clear();
 					AIManager::GetInstance().Clear();
+					GUIManager::GetInstance().Clear();
 				}
 
 				// Set to nullptr in GameStateStorage

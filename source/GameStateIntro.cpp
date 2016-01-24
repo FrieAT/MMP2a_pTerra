@@ -74,7 +74,7 @@ void GameStateIntro::Init(sf::RenderWindow* pWindow)
 
     // Load Last SaveGame, but only show if a savegame exists.
     std::ifstream ifile("savegame.txt");
-    if(ifile)
+    if(ifile && !Game::m_pEngine->IsInitialized(EGameState::GameStatePlay))
     {
         tgui::Button::Ptr buttonLoad = theme->load("Button"); // Verwenden von Theme für Button
         buttonLoad->setText("Load Last Game");
