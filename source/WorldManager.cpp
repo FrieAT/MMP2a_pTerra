@@ -241,14 +241,14 @@ void WorldManager::GenerateWorld()
     // Spaces.push_back(LongRect((std::numeric_limits<int>::min()) / 128, (std::numeric_limits<int>::min()) / 128, (std::numeric_limits<int>::max()) / 64, (std::numeric_limits<int>::max()) / 64));
     Spaces.push_back(LongRect(-600000, -600000, 1200000, 1200000)); // Above tries were a childish thought.
     std::map<EWorldObjectType, int> ObjectsSize;
-	ObjectsSize[EWorldObjectType::Planet] = 30000; // 700
+	ObjectsSize[EWorldObjectType::Planet] = 300; // 700
 	ObjectsSize[EWorldObjectType::SpaceStation] = 200; // 500
 	ObjectsSize[EWorldObjectType::Terra] = 300; // 30000
     
     int iMaxWorldObjects = ((int)EWorldObjectType::MaxItem - 1);
     
-    EWorldObjectType eTryingToCreate = EWorldObjectType::Planet;
-    int iRandX = -1, iRandY;
+    EWorldObjectType eTryingToCreate = EWorldObjectType::Terra;
+    int iRandX, iRandY;
     int iSize = ObjectsSize[eTryingToCreate];
     
     while(!Spaces.empty())
@@ -265,17 +265,8 @@ void WorldManager::GenerateWorld()
         int iRandWidth = static_cast<int>(((rand() % 100) / 100.f) * (coord.m_Width - iSize));
         int iRandHeight = static_cast<int>(((rand() % 100) / 100.f) * (coord.m_Height - iSize));
         
-		if (iRandX == -1)
-		{
-			iRandX = 2000;
-			iRandY = 0;
-		}
-		else
-		{
-			iRandX = coord.m_Left + iSize + iRandWidth;
-			iRandY = coord.m_Top + iSize + iRandHeight;
-		}
-
+		iRandX = coord.m_Left + iSize + iRandWidth;
+		iRandY = coord.m_Top + iSize + iRandHeight;
         
         // Insert Object into m_WorldInfo
         std::pair<int, int> quadrant_idx = GetQuadrantIndexAtPos(GetQuadrantCorrectedPos(sf::Vector2f(static_cast<float>(iRandX), static_cast<float>(iRandY))));
