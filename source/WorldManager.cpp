@@ -94,7 +94,8 @@ void WorldManager::AddQuadrant(Quadrant *Quadrant, bool bIgnoreGenerationBehavio
                         }
                         
                         break;
-                    case EWorldObjectType::SpaceStation:
+                    /*
+					case EWorldObjectType::SpaceStation:
                         GameObjectFactory::CreateSpaceStation(it_world_info->GetPosition());
                         
                         for(int i = 0; i < MaxEnemyShipNearStation; i++)
@@ -103,6 +104,7 @@ void WorldManager::AddQuadrant(Quadrant *Quadrant, bool bIgnoreGenerationBehavio
                         }
                         
                         break;
+					*/
                     default: // yes and ignore Terra too, Terra should be only on need created.
                         break;
                 }
@@ -242,7 +244,7 @@ void WorldManager::GenerateWorld()
     Spaces.push_back(LongRect(-600000, -600000, 1200000, 1200000)); // Above tries were a childish thought.
     std::map<EWorldObjectType, int> ObjectsSize;
 	ObjectsSize[EWorldObjectType::Planet] = 300; // 700
-	ObjectsSize[EWorldObjectType::SpaceStation] = 200; // 500
+	// ObjectsSize[EWorldObjectType::SpaceStation] = 200; // 500
 	ObjectsSize[EWorldObjectType::Terra] = 300; // 30000
     
     int iMaxWorldObjects = ((int)EWorldObjectType::MaxItem - 1);

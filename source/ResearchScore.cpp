@@ -51,11 +51,13 @@ void ResearchScore::AddScore(int iScore)
         }
         else if(pPositionOwner != nullptr && pNavigationComponent != nullptr && !pNavigationComponent->IsNavigationActive())
         {
-            EWorldObjectType SearchObject = EWorldObjectType::SpaceStation;
+            EWorldObjectType SearchObject = EWorldObjectType::Planet;
+			/*
             if(rand() % 100 <= 50)
             {
                 SearchObject = EWorldObjectType::Planet;
             }
+			*/
             
             sf::Vector2f NextCoords = WorldManager::GetInstance().GetNextNearestObjectPos(pPositionOwner->GetPosition(), SearchObject);
             pNavigationComponent->SetNavigationPoint(NextCoords);
