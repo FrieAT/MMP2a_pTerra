@@ -88,6 +88,9 @@
     <Filter Include="Source Files\Managers\GUIManager">
       <UniqueIdentifier>{485b9d44-3770-4306-b412-4bbdd9c42172}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Components\ILogic">
+      <UniqueIdentifier>{343fe177-11da-4656-9d22-28c6241a59e5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\main.cpp">
@@ -221,6 +224,9 @@
     </ClCompile>
     <ClCompile Include="source\AIStatePatrol.cpp">
       <Filter>Source Files\Components\IAI</Filter>
+    </ClCompile>
+    <ClCompile Include="source\LogicScore.cpp">
+      <Filter>Source Files\Components\ILogic</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -463,6 +469,15 @@
     </ClInclude>
     <ClInclude Include="include\AIStatePatrol.h">
       <Filter>Source Files\Components\IAI</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ELogicType.h">
+      <Filter>Source Files\Components\ILogic</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ILogic.h">
+      <Filter>Source Files\Components\ILogic</Filter>
+    </ClInclude>
+    <ClInclude Include="include\LogicScore.h">
+      <Filter>Source Files\Components\ILogic</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

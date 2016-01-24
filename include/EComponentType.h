@@ -16,6 +16,7 @@ enum class EComponentType
     Navigation,
     Score,
 	AI,
+	Logic,
 	// ... add here more Component-Types
 
 	MaxItem, // Do not delete or move this line, because it defines the amount of Components.

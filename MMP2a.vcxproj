@@ -183,6 +183,7 @@
     <ClCompile Include="source\InputManager.cpp" />
     <ClCompile Include="source\AIManager.cpp" />
     <ClCompile Include="source\LinearMovement.cpp" />
+    <ClCompile Include="source\LogicScore.cpp" />
     <ClCompile Include="source\main.cpp" />
     <ClCompile Include="source\NavigationCursor.cpp" />
     <ClCompile Include="source\ObjectManager.cpp" />
@@ -213,6 +214,7 @@
     <ClInclude Include="include\CollisionManager.h" />
     <ClInclude Include="include\EComponentType.h" />
     <ClInclude Include="include\EGameState.h" />
+    <ClInclude Include="include\ELogicType.h" />
     <ClInclude Include="include\EQuadrantPos.h" />
     <ClInclude Include="include\ESerializeNodeType.h" />
     <ClInclude Include="include\eventbus\Event.hpp" />
@@ -247,6 +249,7 @@
     <ClInclude Include="include\IInputObserver.h" />
     <ClInclude Include="include\IAI.h" />
     <ClInclude Include="include\IAIObserver.h" />
+    <ClInclude Include="include\ILogic.h" />
     <ClInclude Include="include\IMovement.h" />
     <ClInclude Include="include\INavigation.h" />
     <ClInclude Include="include\INodeVisitor.h" />
@@ -257,6 +260,7 @@
     <ClInclude Include="include\IView.h" />
     <ClInclude Include="include\AIManager.h" />
     <ClInclude Include="include\LinearMovement.h" />
+    <ClInclude Include="include\LogicScore.h" />
     <ClInclude Include="include\LongRect.h" />
     <ClInclude Include="include\NavigationCursor.h" />
     <ClInclude Include="include\ObjectManager.h" />
