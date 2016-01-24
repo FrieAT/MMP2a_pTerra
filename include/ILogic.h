@@ -16,6 +16,15 @@ public:
 	{
 		return EComponentType::Logic;
 	}
+	virtual void Serialize(SerializeNode* pParentNode)
+	{
+		this->IComponent::Serialize(pParentNode);
+	}
+	static void Deserialize(SerializeNode* pNode, ILogic* pParentComponent)
+	{
+
+	}
+	virtual std::string GetComponentName() { return std::string("ILogic"); }
 private:
 
 };

@@ -73,3 +73,17 @@ void LogicScore::OnCollisionEvent(GameObject * pOther, sf::Vector2f ImpulseImpac
 		Action(pOther);
 	}
 }
+
+void LogicScore::Serialize(SerializeNode* pParentNode)
+{
+	this->IComponent::Serialize(pParentNode);
+}
+
+IComponent* LogicScore::Deserialize(SerializeNode* pNode)
+{
+	LogicScore* pComponent = new LogicScore();
+
+	ILogic::Deserialize(pNode, pComponent);
+
+	return pComponent;
+}

@@ -15,6 +15,9 @@ public:
 	void Action(GameObject* pPossibleOther = nullptr);
 	void OnCollisionEvent(GameObject* pOther, sf::Vector2f ImpulseImpact);
 	ELogicType GetLogicType() { return ELogicType::Score; }
+	void Serialize(SerializeNode* pParentNode);
+	static IComponent* Deserialize(SerializeNode* pNode);
+	std::string GetComponentName() { return std::string("LogicScore"); }
 private:
 
 };

@@ -70,3 +70,19 @@ void SimpleAI::Update()
 
  m_CurrentState->Update(GetAssignedGameObject());
 }
+
+void SimpleAI::Serialize(SerializeNode* pParentNode)
+{
+	IAI::Serialize(pParentNode);
+
+
+}
+
+IComponent* SimpleAI::Deserialize(SerializeNode* pNode)
+{
+	SimpleAI* pComponent = new SimpleAI();
+
+	IAI::Deserialize(pNode, pComponent);
+
+	return pComponent;
+}

@@ -20,6 +20,9 @@
 #include "NavigationCursor.h"
 #include "ResearchScore.h"
 #include "SimpleAI.h"
+#include "EngineEnergy.h"
+#include "LogicScore.h"
+#include "LogicTime.h"
 
 #define REGISTER_COMPONENT(ComponentName) \
     ClassRegistry::GetInstance().RegisterComponent(std::string(""#ComponentName""), ComponentName::Deserialize);
@@ -52,7 +55,10 @@ public:
         REGISTER_COMPONENT(ShipMovement);
         REGISTER_COMPONENT(NavigationCursor);
         REGISTER_COMPONENT(ResearchScore);
-        //REGISTER_COMPONENT(SimpleAI); 
+        REGISTER_COMPONENT(SimpleAI);
+		REGISTER_COMPONENT(EngineEnergy);
+		REGISTER_COMPONENT(LogicScore);
+		REGISTER_COMPONENT(LogicTime);
     }
     void RegisterComponent(std::string strClassName, IComponent* (*ComponentConstructor)(SerializeNode* pNode))
     {

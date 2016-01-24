@@ -12,6 +12,7 @@ Copyright (c) MultiMediaTechnology, 2015
 #include "WorldManager.h"
 #include "CollisionManager.h"
 #include "FrameManager.h"
+#include "GameStatePlay.h"
 
 GameStatePause::~GameStatePause()
 {
@@ -41,7 +42,13 @@ void GameStatePause::Init(sf::RenderWindow* pWindow)
 	buttonMenu->setText("Main Menu");
 	buttonMenu->setTextSize(28);
 	buttonMenu->setPosition(Game::m_iWindowWidth / 2 - tgui::bindWidth(buttonMenu) / 2, 400.f);
-	buttonMenu->connect("clicked", []() { 
+	buttonMenu->connect("clicked", []() {
+		Game::m_pEngine->ChangeState(EGameState::GameStatePlay);
+		GameStatePlay* pPlayState = dynamic_cast<GameStatePlay*>(Game::m_pEngine->GetLastState());
+		if (pPlayState != nullptr)
+		{
+			WorldManager::GetInstance().SaveGame("savegame.txt");
+		}
 		Game::m_pEngine->ChangeState(EGameState::GameStateIntro);
 	});
 	m_Gui.add(buttonMenu, "buttonMenu");

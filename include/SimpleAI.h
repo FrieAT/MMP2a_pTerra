@@ -18,6 +18,8 @@ public:
 	~SimpleAI();
 	void Init();
 	void Update();
+	void Serialize(SerializeNode* pParentNode);
+	static IComponent* Deserialize(SerializeNode* pNode);
 	std::string GetComponentName() { return std::string("SimpleAI"); }
 
 private:

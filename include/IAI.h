@@ -15,11 +15,15 @@ public:
 
 	virtual void Serialize(SerializeNode* pParentNode)
 	{
+		IComponent::Serialize(pParentNode);
 		//this->IComponent::Serialize(pParentNode);
 		//pParentNode->AddElement(new SerializeNode("Has_AI", ESerializeNodeType::Property, std::to_string(m_bPhysicsApplyable)));
 	}
 
-	virtual void Deserialize(SerializeNode* pNode, IAI* pParentComponent) { }
+	static void Deserialize(SerializeNode* pNode, IAI* pParentComponent)
+	{
+
+	}
 
 	//virtual void Serialize(SerializeNode* pParentNode)
 	//{

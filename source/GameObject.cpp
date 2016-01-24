@@ -100,6 +100,10 @@ SerializeNode* GameObject::Serialize()
     auto it_components = m_Components.begin();
     while(it_components != m_Components.end())
     {
+		if (it_components->second->GetComponentName().compare("IComponent") == 0)
+		{
+			std::cout << "Hallo :D" << std::endl;
+		}
         SerializeNode* pNodeComponent = new SerializeNode(it_components->second->GetComponentName(), ESerializeNodeType::Class);
         it_components->second->Serialize(pNodeComponent);
         pNode->AddElement(pNodeComponent);

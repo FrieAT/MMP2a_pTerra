@@ -45,3 +45,21 @@ void LogicTime::OnFrameUpdate(sf::Time DeltaTime)
 		Game::m_pEngine->ChangeState(EGameState::GameStateGameOver);
 	}
 }
+
+void LogicTime::Serialize(SerializeNode* pParentNode)
+{
+	this->IComponent::Serialize(pParentNode);
+
+	pParentNode->AddElement(new SerializeNode("TimeLeft", ESerializeNodeType::Property, std::to_string(m_fRemainingTime)));
+}
+
+IComponent* LogicTime::Deserialize(SerializeNode* pNode)
+{
+	LogicTime* pComponent = new LogicTime(0);
+
+	ILogic::Deserialize(pNode, pComponent);
+
+	pComponent->m_fRemainingTime = stof((pNode->GetNode("TimeLeft"))->GetValue());
+
+	return pComponent;
+}
