@@ -10,9 +10,10 @@ Copyright (c) MultiMediaTechnology, 2015
 #include "PlayerDamageEvent.h"
 #include "PlayerShieldRegenerationEvent.h"
 #include "ScoreEvent.h"
+#include "PlayerFuelEvent.h"
 #include "IDrawing.h"
 
-class GUIPlayerStatus : public IGUI, public EventHandler<PlayerDamageEvent>, public EventHandler<PlayerShieldRegenerationEvent>, public EventHandler<ScoreEvent>
+class GUIPlayerStatus : public IGUI, public EventHandler<PlayerDamageEvent>, public EventHandler<PlayerShieldRegenerationEvent>, public EventHandler<ScoreEvent>, public EventHandler<PlayerFuelEvent>
 {
 public:
 	GUIPlayerStatus(tgui::Gui& gui) : IGUI(gui)
@@ -24,6 +25,7 @@ public:
 	void onEvent(PlayerDamageEvent* e) override;
 	void onEvent(PlayerShieldRegenerationEvent* e) override;
 	void onEvent(ScoreEvent* e) override;
+	void onEvent(PlayerFuelEvent* e) override;
 
 private:
 	std::shared_ptr<tgui::ProgressBar> m_HealthBar;

@@ -21,9 +21,9 @@ HealthShip::HealthShip(float fHealth)
 : IHealth()
 {
 	this->m_fHealth = fHealth;
-    m_pHealthDebug = GameObjectFactory::CreateFontText(sf::Vector2f(0.f,0.f), "assets/Starjedi.ttf", "", 8);
-    m_pHealthDebug->SetTemporaryState(true);
-    m_pHealthDebug->SetAssistedState(true);
+    //m_pHealthDebug = GameObjectFactory::CreateFontText(sf::Vector2f(0.f,0.f), "assets/Starjedi.ttf", "", 8);
+    //m_pHealthDebug->SetTemporaryState(true);
+    //m_pHealthDebug->SetAssistedState(true);
 }
 
 void HealthShip::Init()
@@ -37,8 +37,8 @@ HealthShip::~HealthShip()
 {
 	FrameManager::GetInstance().UnregisterEventObserver(this);
     CollisionManager::GetInstance().UnregisterCollisionEvent(this, GetAssignedGameObject());
-    m_pHealthDebug->SetAssistedState(false);
-    ObjectManager::GetInstance().RemoveGameObject(m_pHealthDebug);
+    //m_pHealthDebug->SetAssistedState(false);
+    //ObjectManager::GetInstance().RemoveGameObject(m_pHealthDebug);
 }
 
 void HealthShip::Damage(float fDamage)
@@ -63,7 +63,7 @@ void HealthShip::OnFrameDraw(sf::RenderWindow* pWindow)
 void HealthShip::OnFrameUpdate(sf::Time DeltaTime)
 {
     IHealth::RegenerateShield(DeltaTime);
-    
+    /*
     IPosition* pPositionTextComponent = static_cast<IPosition*>(m_pHealthDebug->GetComponent(EComponentType::Position));
     IPosition* pPositionShipComponent = static_cast<IPosition*>(GetAssignedGameObject()->GetComponent(EComponentType::Position));
     IDrawing* pDrawingTextComponent = static_cast<IDrawing*>(m_pHealthDebug->GetComponent(EComponentType::Drawing));
@@ -96,7 +96,7 @@ void HealthShip::OnFrameUpdate(sf::Time DeltaTime)
 		health_text << "\nFuel: " << pEngine->GetFuel() << " / " << pEngine->GetMaxFuel();
 	}
     pPositionTextComponent->SetPosition(ship_pos);
-    pDrawingTextComponent->SetText(health_text.str());
+    pDrawingTextComponent->SetText(health_text.str());*/
 }
 
 void HealthShip::OnCollisionEvent(GameObject* pOther, sf::Vector2f ImpulseImpact)

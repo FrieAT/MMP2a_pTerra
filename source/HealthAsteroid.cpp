@@ -17,17 +17,17 @@ HealthAsteroid::HealthAsteroid(float fHealth)
 : IHealth()
 {
     this->m_fHealth = fHealth;
-    m_pHealthDebug = GameObjectFactory::CreateFontText(sf::Vector2f(0.f,0.f), "assets/Starjedi.ttf", "", 8);
+    /*m_pHealthDebug = GameObjectFactory::CreateFontText(sf::Vector2f(0.f,0.f), "assets/Starjedi.ttf", "", 8);
     m_pHealthDebug->SetTemporaryState(true);
-    m_pHealthDebug->SetAssistedState(true);
+    m_pHealthDebug->SetAssistedState(true);*/
 }
 
 HealthAsteroid::~HealthAsteroid()
 {
     FrameManager::GetInstance().UnregisterEventObserver(this);
     CollisionManager::GetInstance().UnregisterCollisionEvent(this, GetAssignedGameObject());
-    m_pHealthDebug->SetAssistedState(false);
-    ObjectManager::GetInstance().RemoveGameObject(m_pHealthDebug);
+    //m_pHealthDebug->SetAssistedState(false);
+    //ObjectManager::GetInstance().RemoveGameObject(m_pHealthDebug);
 }
 
 void HealthAsteroid::Init()

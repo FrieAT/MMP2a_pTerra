@@ -497,5 +497,8 @@
     <ClInclude Include="include\EngineEnergy.h">
       <Filter>Source Files\Components\IEngine</Filter>
     </ClInclude>
+    <ClInclude Include="include\PlayerFuelEvent.h">
+      <Filter>Source Files\Events</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

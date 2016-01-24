@@ -272,6 +272,7 @@
     <ClInclude Include="include\PixelPosition.h" />
     <ClInclude Include="include\DynamicView.h" />
     <ClInclude Include="include\PlayerDamageEvent.h" />
+    <ClInclude Include="include\PlayerFuelEvent.h" />
     <ClInclude Include="include\PlayerShieldRegenerationEvent.h" />
     <ClInclude Include="include\Quadrant.h" />
     <ClInclude Include="include\QuadrantPosition.h" />

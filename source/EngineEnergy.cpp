@@ -6,6 +6,8 @@ Copyright (c) MultiMediaTechnology, 2015
 
 #include "EngineEnergy.h"
 #include "FrameManager.h"
+#include "eventbus\EventBus.hpp"
+#include "PlayerFuelEvent.h"
 
 EngineEnergy::EngineEnergy(float fMaxFuel, float fFuel)
 : m_fEnergy(fFuel)
@@ -37,11 +39,13 @@ float EngineEnergy::GetMaxFuel()
 
 void EngineEnergy::AddFuel(float fAddFuel)
 {
-	if (fAddFuel < 0.f)
+	/*if (fAddFuel < 0.f)
 	{
 		m_LastDrained.restart();
-	}
+	}*/
 	m_fEnergy += fAddFuel;
+	EventBus::FireEvent(PlayerFuelEvent(this, m_fEnergy, this->GetAssignedGameObject()));
+
 	if (m_fEnergy > m_fMaxEnergy)
 	{
 		m_fEnergy = m_fMaxEnergy;
@@ -54,10 +58,10 @@ void EngineEnergy::AddFuel(float fAddFuel)
 
 void EngineEnergy::OnFrameUpdate(sf::Time DeltaTime)
 {
-	if ((m_LastDrained.getElapsedTime()).asSeconds() >= 2.5f)
-	{
-		AddFuel(5.f * DeltaTime.asSeconds());
-	}
+	//if ((m_LastDrained.getElapsedTime()).asSeconds() >= 2.5f)
+	//{
+	AddFuel(20.f * DeltaTime.asSeconds());
+	//}
 }
 
 void EngineEnergy::Serialize(SerializeNode * pParentNode)

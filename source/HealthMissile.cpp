@@ -77,11 +77,12 @@ void HealthMissile::OnCollisionEvent(GameObject* pOther, sf::Vector2f ImpulseImp
 		{
 			GameObjectFactory::CreateExplosion(pPositionComponent->GetPosition());
 		}
-
-        pOtherHealth->Damage(300.f);
+		
+		// Set damage for the explosion
+		float dmg = 300.f;
     
 		// Get for the Owner of the Missile the ResearchPoints from the Victim if he's destroyed
-		if (m_pOwner != nullptr && pOtherHealth->GetHealth() <= 0)
+		if (m_pOwner != nullptr && pOtherHealth->GetHealth() - dmg <= 0)
 		{
 			IScore* pScoreVictim = static_cast<IScore*>(pOther->GetComponent(EComponentType::Score));
 			IScore* pScoreOwner = static_cast<IScore*>(m_pOwner->GetComponent(EComponentType::Score));
@@ -91,6 +92,9 @@ void HealthMissile::OnCollisionEvent(GameObject* pOther, sf::Vector2f ImpulseImp
 				EventBus::FireEvent(ScoreEvent(this, pScoreVictim->GetScore(), m_pOwner, pOther));
 			}
 		}
+
+		// Apply the damage
+		pOtherHealth->Damage(dmg);
 	}
     
     m_bMadeAction = true;

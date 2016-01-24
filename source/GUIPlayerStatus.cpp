@@ -63,8 +63,26 @@ void GUIPlayerStatus::Init()
 	m_gui.add(m_Shield);
 
 	// Create EnergyBar
+	m_EnergyBar = std::make_shared<tgui::ProgressBar>();
+	m_EnergyBar->setPosition(80, Game::m_iWindowHeight - (70 * 1));
+	m_EnergyBar->setFillDirection(tgui::ProgressBar::FillDirection::LeftToRight);
+	m_EnergyBar->showWithEffect(tgui::ShowAnimationType::SlideFromLeft, sf::milliseconds(800));
+	m_EnergyBar->setMinimum(0);
+	m_EnergyBar->setMaximum(100);
+	m_EnergyBar->setValue(100);
+	m_EnergyBar->setSize(tgui::Layout2d(170, 35));
+	auto EnergyBarRenderer = m_EnergyBar->getRenderer();
+	EnergyBarRenderer->setBackgroundColor(sf::Color(255, 255, 255, 40));
+	EnergyBarRenderer->setForegroundColor(sf::Color::Cyan);
+	EnergyBarRenderer->setBorders(0, 0);
+	m_gui.add(m_EnergyBar);
 
 	// Create EnergyLabel
+	m_Energy = std::make_shared<tgui::Label>();
+	m_Energy->setTextColor(sf::Color::Cyan);
+	m_Energy->setText("100");
+	m_Energy->setPosition(24, Game::m_iWindowHeight - (70 * 1) - 4);
+	m_gui.add(m_Energy);
 
 	// Create ScoreLabel
 	m_Score = std::make_shared<tgui::Label>();
@@ -102,4 +120,12 @@ void GUIPlayerStatus::onEvent(ScoreEvent* e)
 	std::stringstream score;
 	score << std::fixed << std::setprecision(0) << currentScore->GetScore();
 	m_Score->setText("Score: " + score.str());
+}
+
+void GUIPlayerStatus::onEvent(PlayerFuelEvent* e)
+{
+	std::stringstream fuel;
+	fuel << std::fixed << std::setprecision(0) << e->GetFuel();
+	m_Energy->setText(fuel.str());
+	m_EnergyBar->setValue((int)e->GetFuel());
 }

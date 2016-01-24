@@ -21,5 +21,5 @@ public:
     std::string GetComponentName() { return std::string("HealthAsteroid"); }
     static IComponent* Deserialize(SerializeNode* pNode);
 private:
-    GameObject* m_pHealthDebug;
+    //GameObject* m_pHealthDebug;
 };

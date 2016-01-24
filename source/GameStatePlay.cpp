@@ -18,6 +18,7 @@ Copyright (c) MultiMediaTechnology, 2015
 #include "eventbus\EventBus.hpp"
 #include "GUIPlayerStatus.h"
 #include "PlayerDamageEvent.h"
+#include "PlayerFuelEvent.h"
 
 GameStatePlay::~GameStatePlay()
 {
@@ -45,6 +46,7 @@ void GameStatePlay::Init(sf::RenderWindow* pWindow)
 	EventBus::AddHandler<PlayerDamageEvent>(playerStatus);
 	EventBus::AddHandler<PlayerShieldRegenerationEvent>(playerStatus);
 	EventBus::AddHandler<ScoreEvent>(playerStatus);
+	EventBus::AddHandler<PlayerFuelEvent>(playerStatus);
 	GUIManager::GetInstance().AddGUI(playerStatus);
 
     // ====== Below decprecated method to create things ======
