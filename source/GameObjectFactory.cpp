@@ -75,7 +75,7 @@ GameObject* GameObjectFactory::CreateMissile(GameObject* pOwner, IPosition* pPos
     
 	pMissile->SetComponent(new HealthMissile(1000, pOwner));
 	pMissile->SetComponent(new PixelPosition(pPosition->GetPosition(), sf::Vector2f(160.f, 320.f)));
-	pMissile->SetComponent(new LinearMovement(pPosition->GetRotation(),800.f, 1.f, ShipSpeed, true));
+	pMissile->SetComponent(new LinearMovement(pPosition->GetRotation(), 800.f, 1.f, ShipSpeed, true));
     SpriteDrawing* pSpriteComponent = new SpriteDrawing(std::string("assets/lilee/rakete_player.png"),sf::Vector2f(30,60));
     pSpriteComponent->SetTextureArea(sf::FloatRect(96.f, 0.f, 96.f, 899.f));
     pSpriteComponent->SetTextureArea(sf::FloatRect(192.f, 0.f, 96.f, 899.f));
@@ -94,7 +94,7 @@ GameObject* GameObjectFactory::CreateAsteroid(sf::Vector2f vPosition, float fRot
 	pAsteroid->SetComponent(new SpriteDrawing(std::string("assets/lilee/asteroid.png"),sf::Vector2f(83.f, 66.5f)));
 	//pAsteroid->SetComponent(new CircleCollision(40.f, pos));
 	pAsteroid->SetComponent(new BoxCollision(80, 80));
-    pAsteroid->SetComponent(new HealthAsteroid(200.f));
+    pAsteroid->SetComponent(new HealthAsteroid(400.f));
     ResearchScore* pScoreComponent = new ResearchScore(9999999, 9999999);
     pScoreComponent->SetScore(rand() % 100);
     pAsteroid->SetComponent(pScoreComponent);

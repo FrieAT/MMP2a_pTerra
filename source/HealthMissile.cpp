@@ -75,23 +75,23 @@ void HealthMissile::OnCollisionEvent(GameObject* pOther, sf::Vector2f ImpulseImp
         GameObjectFactory::CreateExplosion(pPositionComponent->GetPosition());
     }
     
-    // Get for the Owner of the Missile the ResearchPoints from the Victim
-    if(m_pOwner != nullptr)
-    {
-        IScore* pScoreVictim = static_cast<IScore*>(pOther->GetComponent(EComponentType::Score));
-        IScore* pScoreOwner = static_cast<IScore*>(m_pOwner->GetComponent(EComponentType::Score));
-        if(pScoreOwner != nullptr && pScoreVictim != nullptr)
-        {
-            pScoreOwner->AddScore(pScoreVictim->GetScore());
-			EventBus::FireEvent(ScoreEvent(this, pScoreVictim->GetScore(), m_pOwner, pOther));
-        }
-    }
-
     IHealth* pOtherHealth = static_cast<IHealth*>(pOther->GetComponent(EComponentType::Health));
     if(pOtherHealth != nullptr)
     {
-        pOtherHealth->Damage(90001.f); // What does the scouter say to his power level?
+        pOtherHealth->Damage(300.f);
     }
+
+	// Get for the Owner of the Missile the ResearchPoints from the Victim if he's destroyed
+	if (m_pOwner != nullptr && pOtherHealth->GetHealth() <= 0)
+	{
+		IScore* pScoreVictim = static_cast<IScore*>(pOther->GetComponent(EComponentType::Score));
+		IScore* pScoreOwner = static_cast<IScore*>(m_pOwner->GetComponent(EComponentType::Score));
+		if (pScoreOwner != nullptr && pScoreVictim != nullptr)
+		{
+			pScoreOwner->AddScore(pScoreVictim->GetScore());
+			EventBus::FireEvent(ScoreEvent(this, pScoreVictim->GetScore(), m_pOwner, pOther));
+		}
+	}
     
     m_bMadeAction = true;
 }
