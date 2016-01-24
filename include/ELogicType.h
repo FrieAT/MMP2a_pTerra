@@ -7,7 +7,7 @@ Copyright (c) MultiMediaTechnology, 2015
 enum class ELogicType
 {
 	Score,
-	Health,
+	Time,
 
 	// Add here above new logic types.
 	MaxItem,

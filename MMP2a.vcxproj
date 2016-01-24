@@ -184,6 +184,7 @@
     <ClCompile Include="source\AIManager.cpp" />
     <ClCompile Include="source\LinearMovement.cpp" />
     <ClCompile Include="source\LogicScore.cpp" />
+    <ClCompile Include="source\LogicTime.cpp" />
     <ClCompile Include="source\main.cpp" />
     <ClCompile Include="source\NavigationCursor.cpp" />
     <ClCompile Include="source\ObjectManager.cpp" />
@@ -261,6 +262,7 @@
     <ClInclude Include="include\AIManager.h" />
     <ClInclude Include="include\LinearMovement.h" />
     <ClInclude Include="include\LogicScore.h" />
+    <ClInclude Include="include\LogicTime.h" />
     <ClInclude Include="include\LongRect.h" />
     <ClInclude Include="include\NavigationCursor.h" />
     <ClInclude Include="include\ObjectManager.h" />

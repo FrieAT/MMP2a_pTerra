@@ -228,6 +228,9 @@
     <ClCompile Include="source\LogicScore.cpp">
       <Filter>Source Files\Components\ILogic</Filter>
     </ClCompile>
+    <ClCompile Include="source\LogicTime.cpp">
+      <Filter>Source Files\Components\ILogic</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\IComponent.h">
@@ -477,6 +480,9 @@
       <Filter>Source Files\Components\ILogic</Filter>
     </ClInclude>
     <ClInclude Include="include\LogicScore.h">
+      <Filter>Source Files\Components\ILogic</Filter>
+    </ClInclude>
+    <ClInclude Include="include\LogicTime.h">
       <Filter>Source Files\Components\ILogic</Filter>
     </ClInclude>
   </ItemGroup>

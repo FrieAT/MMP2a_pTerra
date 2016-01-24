@@ -12,6 +12,7 @@
 #include "GameObjectFactory.h"
 #include "SpriteDrawing.h"
 #include "WorldManager.h"
+#include "IScore.h"
 
 GameStateGameOver::~GameStateGameOver()
 {
@@ -21,6 +22,8 @@ GameStateGameOver::~GameStateGameOver()
 
 void GameStateGameOver::Init(sf::RenderWindow* pWindow)
 {
+	GameObject* pPlayer = ObjectManager::GetInstance().GetPlayer();
+
     m_bKeyPressed = false;
     
     GameObjectFactory::CreateBackgroundSprite("assets/intro-bg.jpg", sf::Vector2f(static_cast<float>(Game::m_iWindowWidth), static_cast<float>(Game::m_iWindowHeight)));
@@ -40,6 +43,21 @@ void GameStateGameOver::Init(sf::RenderWindow* pWindow)
 	labelGameOver->setPosition(Game::m_iWindowWidth / 2 - tgui::bindWidth(labelGameOver) / 2, 100.f);
 	labelGameOver->setTextColor(sf::Color::White);
 	m_Gui.add(labelGameOver, "labelGameOver");
+
+	// Score label
+	if (pPlayer != nullptr)
+	{
+		IScore* pScore = static_cast<IScore*>(pPlayer->GetComponent(EComponentType::Score));
+		if (pScore != nullptr)
+		{
+			auto labelGameOver = std::make_shared<tgui::Label>();
+			labelGameOver->setText("Score: "+std::to_string(pScore->GetScore())+" Points");
+			labelGameOver->setTextSize(40);
+			labelGameOver->setPosition(Game::m_iWindowWidth / 2 - tgui::bindWidth(labelGameOver) / 2, 300.f);
+			labelGameOver->setTextColor(sf::Color::White);
+			m_Gui.add(labelGameOver, "labelGameOver");
+		}
+	}
 
 	// Menu button
 	tgui::Button::Ptr buttonMenu = theme->load("Button"); // Verwenden von Theme für Button

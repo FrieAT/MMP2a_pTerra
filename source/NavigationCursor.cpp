@@ -12,6 +12,8 @@
 #include "IScore.h"
 #include "eventbus\EventBus.hpp"
 #include "ScoreEvent.h"
+#include "LogicTime.h"
+#include "Game.h"
 
 NavigationCursor::NavigationCursor()
 : INavigation()
@@ -99,7 +101,17 @@ void NavigationCursor::OnFrameUpdate(sf::Time DeltaTime)
             if(pScoreComponent->GetScore() >= pScoreComponent->GetScoreLimit())
             {
                 // TODO: GameOver - Game finished :D
-                pScoreComponent->SetScore(9000); // Give him nine thousand points!!!!!
+                // pScoreComponent->SetScore(9000); // Give him nine thousand points!!!!!
+
+				// Lookup for Remaining Time and give him bonus points with Multiplikator.
+				LogicTime* pTime = dynamic_cast<LogicTime*>(GetAssignedGameObject()->GetComponent(EComponentType::Logic));
+				if (pTime != nullptr)
+				{
+					pScoreComponent->AddScore(pTime->GetRemainingTime() * 100);
+				}
+
+				// Game Over
+				Game::m_pEngine->ChangeState(EGameState::GameStateGameOver);
             }
             else
             {

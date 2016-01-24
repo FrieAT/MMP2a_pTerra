@@ -12,7 +12,7 @@ Copyright (c) MultiMediaTechnology, 2015
 #include "Game.h"
 #include "INavigation.h"
 #include "IScore.h"
-
+#include "LogicTime.h"
 #include "eventbus\EventBus.hpp"
 #include "PlayerDamageEvent.h"
 
@@ -68,7 +68,8 @@ void HealthShip::OnFrameUpdate(sf::Time DeltaTime)
     IDrawing* pDrawingTextComponent = static_cast<IDrawing*>(m_pHealthDebug->GetComponent(EComponentType::Drawing));
     INavigation* pNavigation = static_cast<INavigation*>(GetAssignedGameObject()->GetComponent(EComponentType::Navigation));
     IScore* pScore = static_cast<IScore*>(GetAssignedGameObject()->GetComponent(EComponentType::Score));
-    
+	LogicTime* pTime = dynamic_cast<LogicTime*>(GetAssignedGameObject()->GetComponent(EComponentType::Logic));
+
     sf::Vector2f ship_pos = pPositionShipComponent->GetPosition() + sf::Vector2f(-30.f, 50.f);
     std::stringstream health_text;
     health_text << "Health: " << m_fHealth << "\nShield: " << m_fShield;
@@ -84,6 +85,10 @@ void HealthShip::OnFrameUpdate(sf::Time DeltaTime)
     {
         health_text << "\nScore: " << pScore->GetScore() << " / " << pScore->GetScoreLimit();
     }
+	if (pTime != nullptr)
+	{
+		health_text << "\nLeftTime: " << pTime->GetRemainingTime() << " Seconds";
+	}
     pPositionTextComponent->SetPosition(ship_pos);
     pDrawingTextComponent->SetText(health_text.str());
 }

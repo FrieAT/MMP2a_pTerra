@@ -24,6 +24,7 @@ Copyright (c) MultiMediaTechnology, 2015
 #include "ResearchScore.h"
 #include "SimpleAI.h"
 #include "LogicScore.h"
+#include "LogicTime.h"
 
 GameObject* GameObjectFactory::CreatePlayerShip(sf::Vector2f Position, char cPlayer)
 {
@@ -41,6 +42,7 @@ GameObject* GameObjectFactory::CreatePlayerShip(sf::Vector2f Position, char cPla
     pShip->SetComponent(new HealthShip(100.f));
     pShip->SetComponent(new NavigationCursor());
     pShip->SetComponent(new ResearchScore(100, 10));
+	pShip->SetComponent(new LogicTime(15 * 60)); // 15 Minuten GameTime
 	ObjectManager::GetInstance().SetPlayer(pShip);
 	return pShip;
 }
