@@ -42,7 +42,7 @@ GameObject* GameObjectFactory::CreatePlayerShip(sf::Vector2f Position, char cPla
 	pShip->SetComponent(new BoxCollision(64.f, 102.f));
     pShip->SetComponent(new HealthShip(100.f));
     pShip->SetComponent(new NavigationCursor());
-    pShip->SetComponent(new ResearchScore(100, 10));
+    pShip->SetComponent(new ResearchScore(100, 100));
 	pShip->SetComponent(new LogicTime(15 * 60)); // 15 Minuten GameTime
 	pShip->SetComponent(new EngineEnergy(100.f, 40.f));
 	ObjectManager::GetInstance().SetPlayer(pShip);

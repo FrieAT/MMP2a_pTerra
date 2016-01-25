@@ -104,8 +104,8 @@ void ShipMovement::UpdateMovement(sf::Time DeltaTime)
 	const float fFuelDrainForBackward = 12.0f * DeltaTime.asSeconds();
 	const float fFuelDrainForMissile = 25.f;
 
-	if(m_ShipState[0]) pPositionComponent->SetRotation(pPositionComponent->GetRotation() + 120*DeltaTime.asSeconds());	//rotate right
-	if (m_ShipState[1]) pPositionComponent->SetRotation(pPositionComponent->GetRotation() - 120*DeltaTime.asSeconds()); //rotate left
+	if(m_ShipState[0]) pPositionComponent->SetRotation(pPositionComponent->GetRotation() + 60*DeltaTime.asSeconds());	//rotate right
+	if (m_ShipState[1]) pPositionComponent->SetRotation(pPositionComponent->GetRotation() - 60*DeltaTime.asSeconds()); //rotate left
 	if (m_ShipState[2])
 	{
 		IEngine* pEngine = static_cast<IEngine*>(GetAssignedGameObject()->GetComponent(EComponentType::Engine));

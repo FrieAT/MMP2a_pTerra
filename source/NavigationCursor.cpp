@@ -90,7 +90,7 @@ void NavigationCursor::OnFrameUpdate(sf::Time DeltaTime)
     }
     
     // Wenn das Ziel erreicht worden ist, so deaktiviere wieder die Navigation.
-    if(fLength < 1000.f)
+    if(fLength < 250.f)
     {
         // TODO: Mögliche GUI Ausgabe für Ziel erreicht.
         
@@ -117,7 +117,6 @@ void NavigationCursor::OnFrameUpdate(sf::Time DeltaTime)
             {
 				int addScore = 300;
                 pScoreComponent->AddScore(addScore);
-				EventBus::FireEvent(ScoreEvent(this, addScore, GetAssignedGameObject(), nullptr));
             }
         }
         

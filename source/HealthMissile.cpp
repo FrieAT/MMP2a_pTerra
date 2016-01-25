@@ -89,7 +89,6 @@ void HealthMissile::OnCollisionEvent(GameObject* pOther, sf::Vector2f ImpulseImp
 			if (pScoreOwner != nullptr && pScoreVictim != nullptr)
 			{
 				pScoreOwner->AddScore(pScoreVictim->GetScore());
-				EventBus::FireEvent(ScoreEvent(this, pScoreVictim->GetScore(), m_pOwner, pOther));
 			}
 		}
 

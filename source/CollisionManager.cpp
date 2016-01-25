@@ -124,20 +124,27 @@ void CollisionManager::HandleCollisions()
 			return;
         }
 		
-		auto length2 = [](const sf::Vector2f &vec) -> float { return vec.x * vec.x + vec.y * vec.y; };	//calculate vectorlenght squared
 		sf::Vector2f Impulse = fVelAlongNormal * col_ev.normal*100.f;
         if(body1 != nullptr && PhysicsApplyable)
         {
-			float squaredSpeedLimit = body1->GetMaxSpeed() * body1->GetMaxSpeed();
 			sf::Vector2f addForce = /*body1->GetVelocity()*/-0.5f * Impulse;
+
+			if (Impulse.x > 5000.f || Impulse.y > 5000.f) {
+				addForce = sf::Vector2f(0.f, 0.f);
+			}
+
+			std::cout << "ImpulseX: " << Impulse.x << " / " << Impulse.y << std::endl;
 
 			// Apply impulse
 			body1->AddForce(addForce);
         }
         if(body2 != nullptr && PhysicsApplyable)
         {
-			float squaredSpeedLimit = body2->GetMaxSpeed() * body2->GetMaxSpeed();
 			sf::Vector2f addForce = /*body2->GetVelocity()*/0.5f * Impulse;
+
+			if (Impulse.x > 5000.f || Impulse.y > 5000.f) {
+				addForce = sf::Vector2f(0.f, 0.f);
+			}
 
 			// Apply impulse
 			body2->AddForce(addForce);

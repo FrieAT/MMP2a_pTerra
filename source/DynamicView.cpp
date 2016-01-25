@@ -53,6 +53,7 @@ void DynamicView::OnFrameDraw(sf::RenderWindow* pWindow)
 	if (pPositionComponent != nullptr)
 	{
 		view.setCenter(pPositionComponent->GetCenter());
+		view.setRotation(pPositionComponent->GetRotation());
 
 		IPosition* pVignettPosition = static_cast<IPosition*>(m_pVignett->GetComponent(EComponentType::Position));
 		if (pVignettPosition != nullptr)
@@ -60,6 +61,7 @@ void DynamicView::OnFrameDraw(sf::RenderWindow* pWindow)
 			// sf::Vector2f CurrentSize = m_pView->getSize();
 			// pVignettPosition->SetOrigin(sf::Vector2f(CurrentSize.x / 2.f, CurrentSize.y / 2.f));
 			pVignettPosition->SetPosition(pPositionComponent->GetPosition());
+			pVignettPosition->SetRotation(pPositionComponent->GetRotation());
 		}
 	}
 

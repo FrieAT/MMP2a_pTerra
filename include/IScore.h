@@ -5,14 +5,30 @@
 #pragma once
 
 #include "IComponent.h"
+#include "eventbus\EventBus.hpp"
+#include "ScoreEvent.h"
 
 class IScore : public IComponent
 {
 public:
     IScore() : m_iScore(0) { }
     virtual ~IScore() { }
-    virtual void AddScore(int iScore) { m_iScore += iScore; }
-    virtual void SetScore(int iScore) { m_iScore = iScore; }
+    virtual void AddScore(int iScore)
+	{
+		m_iScore += iScore;
+		if (GetAssignedGameObject() != nullptr)
+		{
+			EventBus::FireEvent(ScoreEvent(this, iScore, GetAssignedGameObject(), nullptr));
+		}
+	}
+    virtual void SetScore(int iScore)
+	{
+		if (GetAssignedGameObject() != nullptr)
+		{
+			EventBus::FireEvent(ScoreEvent(this, iScore - m_iScore, GetAssignedGameObject(), nullptr));
+		}
+		m_iScore = iScore;
+	}
     virtual int GetScore() { return m_iScore; }
     virtual int GetScoreLimit() { return std::numeric_limits<int>::max() - 1; }
     virtual void Serialize(SerializeNode* pParentNode)
