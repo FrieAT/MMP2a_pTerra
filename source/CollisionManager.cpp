@@ -36,7 +36,7 @@ void CollisionManager::Update(sf::Time DeltaTime)
                     continue;
                 }
                 
-                for (unsigned int i = 0; i < CurrentGameObjects.size(); i++)
+                for (unsigned int i = (ship + 1); i < CurrentGameObjects.size(); i++)
                 {
 					if (CurrentGameObjects[i] == nullptr)
 					{
