@@ -23,7 +23,7 @@ Copyright (c) MultiMediaTechnology, 2015
 
 Game* Game::m_pEngine = nullptr;
 
-Game::Game()
+Game::Game(bool bToggleFullScreen)
 {
     if(m_pEngine != nullptr) delete m_pEngine;
     m_pEngine = this;
@@ -33,7 +33,7 @@ Game::Game()
 	ClassRegistry::GetInstance().Init();
     
     // Create the main window
-	m_pWindow = new sf::RenderWindow(sf::VideoMode(Game::m_iWindowWidth, Game::m_iWindowHeight), "pTerra" , sf::Style::Fullscreen);
+	m_pWindow = new sf::RenderWindow(sf::VideoMode(Game::m_iWindowWidth, Game::m_iWindowHeight), "pTerra" , (bToggleFullScreen ? sf::Style::Fullscreen : sf::Style::Default));
 
 	// Initialize Intro-screen
 	m_pEngine->ChangeState(EGameState::GameStateIntro);

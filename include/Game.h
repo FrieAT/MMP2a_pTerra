@@ -10,7 +10,7 @@ Copyright (c) MultiMediaTechnology, 2015
 class Game
 {
 public:
-	Game();
+	Game(bool bToggleFullScreen = true);
     ~Game();
     
     void Start();
