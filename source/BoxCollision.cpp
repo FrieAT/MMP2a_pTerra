@@ -111,7 +111,7 @@ bool BoxCollision::colliding(ICollision* pCollisionBody)
             }
         }
     }
-    m_bHit = false;
+    m_bHit = false; 
     return false;
 }
 

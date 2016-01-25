@@ -75,12 +75,12 @@ GameObject* GameObjectFactory::CreateMissile(GameObject* pOwner, IPosition* pPos
 {
 	// TODO: Make it possible to change component values / change the whole factory
 	GameObject* pMissile = new GameObject(std::string("missile"));
-    BoxCollision* pCollisision = new BoxCollision(96, 120);
+    BoxCollision* pCollisision = new BoxCollision(30, 60);
     
     pCollisision->m_bPhysicsApplyable = false;
     
 	pMissile->SetComponent(new HealthMissile(1000, pOwner));
-	pMissile->SetComponent(new PixelPosition(pPosition->GetPosition(), sf::Vector2f(160.f, 320.f)));
+	pMissile->SetComponent(new PixelPosition(pPosition->GetPosition(), sf::Vector2f(15.f, 30.f)));
 	pMissile->SetComponent(new LinearMovement(pPosition->GetRotation(), 800.f, 1.f, ShipSpeed, true));
     SpriteDrawing* pSpriteComponent = new SpriteDrawing(std::string("assets/lilee/rakete_player.png"),sf::Vector2f(30,60));
     pSpriteComponent->SetTextureArea(sf::FloatRect(96.f, 0.f, 96.f, 899.f));
@@ -97,9 +97,9 @@ GameObject* GameObjectFactory::CreateAsteroid(sf::Vector2f vPosition, float fRot
 	GameObject* pAsteroid = new GameObject(std::string("asteroid"));
 	pAsteroid->SetComponent(new PixelPosition(vPosition, sf::Vector2f(35.f, 30.f)));
 	pAsteroid->SetComponent(new LinearMovement(fRotation, fSpeed,15));
-	pAsteroid->SetComponent(new SpriteDrawing(std::string("assets/lilee/asteroid.png")));
+	pAsteroid->SetComponent(new SpriteDrawing(std::string("assets/lilee/asteroid.png"), sf::Vector2f(70.f, 60.f)));
 	//pAsteroid->SetComponent(new CircleCollision(40.f, pos));
-	pAsteroid->SetComponent(new BoxCollision(63.f, 110.f));
+	pAsteroid->SetComponent(new BoxCollision(70.f, 60.f));
 	pAsteroid->SetComponent(new HealthAsteroid(400.f));
     ResearchScore* pScoreComponent = new ResearchScore(9999999, 9999999);
     pScoreComponent->SetScore(rand() % 100);
