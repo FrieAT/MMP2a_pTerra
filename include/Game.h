@@ -19,6 +19,7 @@ public:
 	bool IsInitialized(EGameState GameState);
     IGameState* GetCurrentState() { return m_pCurrentState; }
 	IGameState* GetLastState() { return m_States.back(); }
+	void SetView(sf::View View) { m_View = View; }
 
     static Game* m_pEngine;
     static const int m_iWindowWidth = 1920;
@@ -30,4 +31,5 @@ protected:
 	std::map<EGameState, IGameState*> m_mGameStateStorage;
     std::vector<IGameState*> m_States;
     sf::Image m_Icon;
+	sf::View m_View;
 };

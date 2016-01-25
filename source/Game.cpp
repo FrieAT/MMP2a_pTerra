@@ -89,9 +89,8 @@ void Game::Start()
     IGameState* pGameState;
 	sf::Clock DeltaClock;
 
-	// Set view (Otherwise Debug build won't properly display on start-up)
-	sf::View view(sf::FloatRect(0.f, 0.f, static_cast<float>(Game::m_iWindowWidth), static_cast<float>(Game::m_iWindowHeight)));
-	m_pWindow->setView(view);
+	m_View = sf::View();
+	m_View.reset(sf::FloatRect(0.f, 0.f, static_cast<float>(Game::m_iWindowWidth), static_cast<float>(Game::m_iWindowHeight)));
     
 	// Start the game loop
     while (m_pWindow->isOpen())
@@ -144,6 +143,9 @@ void Game::Start()
             
             m_pCurrentState = pGameState;
         }
+
+		// Set current View
+		m_pWindow->setView(m_View);
 
 		// Update the state (Updates & Rendering)
 		m_pCurrentState->Update(deltaTime, m_pWindow);

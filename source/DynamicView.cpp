@@ -18,7 +18,7 @@ DynamicView::DynamicView(sf::FloatRect ViewSize, sf::Vector2f MoveVector)
     m_CurrentMovePosition = sf::Vector2f(0.f, 0.f);
     m_MoveVector = MoveVector;
     m_zoom = 1.f;
-    m_pView = new sf::View(ViewSize);
+	m_ViewSize = ViewSize;
 
 	m_pVignett = new GameObject("screen");
 	m_pVignett->SetTemporaryState(true);
@@ -30,7 +30,6 @@ DynamicView::DynamicView(sf::FloatRect ViewSize, sf::Vector2f MoveVector)
 DynamicView::~DynamicView()
 {
     FrameManager::GetInstance().UnregisterEventObserver(this);
-    delete m_pView;
 	m_pVignett->SetAssistedState(true);
 	ObjectManager::GetInstance().RemoveGameObject(m_pVignett);
 }
@@ -42,47 +41,46 @@ void DynamicView::Init()
 
 sf::FloatRect DynamicView::GetViewport()
 {
-    return m_pView->getViewport();
-}
-
-void DynamicView::OnFrameUpdate(sf::Time DeltaTime)
-{
-    // Set camera to center of screen
-    IPosition* pPositionComponent = static_cast<IPosition*>(GetAssignedGameObject()->GetComponent(EComponentType::Position));
-    if (pPositionComponent != nullptr)
-    {
-        m_pView->setCenter(pPositionComponent->GetCenter());
-		
-		IPosition* pVignettPosition = static_cast<IPosition*>(m_pVignett->GetComponent(EComponentType::Position));
-		if (pVignettPosition != nullptr)
-		{
-            // sf::Vector2f CurrentSize = m_pView->getSize();
-            // pVignettPosition->SetOrigin(sf::Vector2f(CurrentSize.x / 2.f, CurrentSize.y / 2.f));
-			pVignettPosition->SetPosition(pPositionComponent->GetPosition());
-		}
-    }
-    
-    // Set zoom based on player ship speed
-    IMovement* pMovementComponent = static_cast<IMovement*>(GetAssignedGameObject()->GetComponent(EComponentType::Movement));
-    sf::Vector2f moveVector = pMovementComponent->GetVelocity();
-    
-    if (moveVector.x != 0 || moveVector.y != 0)
-    {
-        m_zoom = 0.95f - (sqrt(moveVector.x * moveVector.x + moveVector.y * moveVector.y) / 1200);
-    }
-    else
-    {
-        m_zoom = 0.95f;
-    }
-    
-    // Clamp value
-    m_zoom = m_zoom >= 0.95f ? 0.95f
-    : m_zoom <= 0.58f ? 0.58f
-    : m_zoom;
+	return m_ViewSize;
 }
 
 void DynamicView::OnFrameDraw(sf::RenderWindow* pWindow)
 {
+	sf::View view(m_ViewSize);
+
+	// Set camera to center of screen
+	IPosition* pPositionComponent = static_cast<IPosition*>(GetAssignedGameObject()->GetComponent(EComponentType::Position));
+	if (pPositionComponent != nullptr)
+	{
+		view.setCenter(pPositionComponent->GetCenter());
+
+		IPosition* pVignettPosition = static_cast<IPosition*>(m_pVignett->GetComponent(EComponentType::Position));
+		if (pVignettPosition != nullptr)
+		{
+			// sf::Vector2f CurrentSize = m_pView->getSize();
+			// pVignettPosition->SetOrigin(sf::Vector2f(CurrentSize.x / 2.f, CurrentSize.y / 2.f));
+			pVignettPosition->SetPosition(pPositionComponent->GetPosition());
+		}
+	}
+
+	// Set zoom based on player ship speed
+	IMovement* pMovementComponent = static_cast<IMovement*>(GetAssignedGameObject()->GetComponent(EComponentType::Movement));
+	sf::Vector2f moveVector = pMovementComponent->GetVelocity();
+
+	if (moveVector.x != 0 || moveVector.y != 0)
+	{
+		m_zoom = 0.95f - (sqrt(moveVector.x * moveVector.x + moveVector.y * moveVector.y) / 1200);
+	}
+	else
+	{
+		m_zoom = 0.95f;
+	}
+
+	// Clamp value
+	m_zoom = m_zoom >= 0.95f ? 0.95f
+		: m_zoom <= 0.58f ? 0.58f
+		: m_zoom;
+
 	sf::Vector2f NewSize(sf::Vector2f(pWindow->getSize()) / m_zoom);
 
 	IDrawing* pVignettDrawing = static_cast<IDrawing*>(m_pVignett->GetComponent(EComponentType::Drawing));
@@ -91,17 +89,17 @@ void DynamicView::OnFrameDraw(sf::RenderWindow* pWindow)
 		pVignettDrawing->SetScale(NewSize * 1.25f);
 	}
 
-    m_pView->setSize(NewSize);
-    pWindow->setView(*m_pView);
+	view.setSize(NewSize);
+	Game::m_pEngine->SetView(view); // pWindow->setView(m_pView);
 }
 
 void DynamicView::Serialize(SerializeNode *pParentNode)
 {
     IView::Serialize(pParentNode);
-    pParentNode->AddElement(new SerializeNode("ViewSizeX", ESerializeNodeType::Property, std::to_string((m_pView->getViewport()).left)));
-    pParentNode->AddElement(new SerializeNode("ViewSizeY", ESerializeNodeType::Property, std::to_string((m_pView->getViewport()).top)));
-    pParentNode->AddElement(new SerializeNode("ViewSizeWidth", ESerializeNodeType::Property, std::to_string((m_pView->getViewport()).width)));
-    pParentNode->AddElement(new SerializeNode("ViewSizeHeight", ESerializeNodeType::Property, std::to_string((m_pView->getViewport()).height)));
+    pParentNode->AddElement(new SerializeNode("ViewSizeX", ESerializeNodeType::Property, std::to_string(m_ViewSize.left)));
+    pParentNode->AddElement(new SerializeNode("ViewSizeY", ESerializeNodeType::Property, std::to_string(m_ViewSize.top)));
+    pParentNode->AddElement(new SerializeNode("ViewSizeWidth", ESerializeNodeType::Property, std::to_string(m_ViewSize.width)));
+    pParentNode->AddElement(new SerializeNode("ViewSizeHeight", ESerializeNodeType::Property, std::to_string(m_ViewSize.height)));
     pParentNode->AddElement(new SerializeNode("MoveVectorX", ESerializeNodeType::Property, std::to_string(m_MoveVector.x)));
     pParentNode->AddElement(new SerializeNode("MoveVectorY", ESerializeNodeType::Property, std::to_string(m_MoveVector.y)));
 }
@@ -117,7 +115,7 @@ IComponent* DynamicView::Deserialize(SerializeNode *pNode)
     ViewSize.top = stof((pNode->GetNode("ViewSizeY"))->GetValue());
     ViewSize.width = stof((pNode->GetNode("ViewSizeWidth"))->GetValue());
     ViewSize.height = stof((pNode->GetNode("ViewSizeHeight"))->GetValue());
-    pComponent->m_pView = new sf::View(ViewSize);
+    pComponent->m_ViewSize = ViewSize;
     
     sf::Vector2f MoveVector;
     MoveVector.x = stof((pNode->GetNode("MoveVectorX"))->GetValue());
