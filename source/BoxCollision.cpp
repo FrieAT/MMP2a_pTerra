@@ -6,6 +6,7 @@
 
 #include "BoxCollision.h"
 #include "CollisionManager.h"
+#include "IDrawing.h"
 
 BoxCollision::BoxCollision(float fWidth, float fHeight)
 : m_fWidth(fWidth)
@@ -61,6 +62,13 @@ bool BoxCollision::colliding(ICollision* pCollisionBody)
 	pOther->m_CollisionBox = sf::FloatRect(pos_b, size_b);
     
     sf::Vector2f n = pos_b - pos_a;		// Vector from A to B
+
+	float fMaxDistance = 100.f + size_a.x / 2.f + size_a.y / 2.f + size_b.x / 2.f + size_b.y / 2.f;
+	if (fabs(n.x) > fMaxDistance || fabs(n.y) > fMaxDistance)
+	{
+		return false;
+	}
+
     float a_extent = size_a.x * 0.5f;			    // Calculate half extents along x axis
     float b_extent = size_b.x * 0.5f;
     float x_overlap = a_extent + b_extent - fabs(n.x);		// Calculate overlap on x axis
