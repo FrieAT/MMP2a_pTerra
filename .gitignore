@@ -240,5 +240,3 @@ _Pvt_Extensions
 
 # tmp
 /tmp/*
-
-*.vcproj.user

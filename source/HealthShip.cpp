@@ -104,7 +104,11 @@ void HealthShip::OnCollisionEvent(GameObject* pOther, sf::Vector2f ImpulseImpact
     float impulse_length = sqrt(ImpulseImpact.x * ImpulseImpact.x + ImpulseImpact.y * ImpulseImpact.y);
     
     // std::cout << "Detected Collision with a " << pOther->GetID() << " (Impulse: " << impulse_length << ")" << std::endl;
-    Damage(impulse_length / 10000 );
+	float fDamage = impulse_length / 10000.f;
+	if (fDamage > 0.f)
+	{
+		Damage(fDamage);
+	}
 }
 
 IComponent* HealthShip::Deserialize(SerializeNode *pNode)

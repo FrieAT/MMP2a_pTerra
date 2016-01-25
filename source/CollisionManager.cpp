@@ -129,7 +129,8 @@ void CollisionManager::HandleCollisions()
         {
 			sf::Vector2f addForce = /*body1->GetVelocity()*/-0.5f * Impulse;
 
-			if (Impulse.x > 5000.f || Impulse.y > 5000.f) {
+			if (fabs(Impulse.x) > 1000.f || fabs(Impulse.y) > 1000.f)
+			{
 				addForce = sf::Vector2f(0.f, 0.f);
 			}
 
@@ -142,7 +143,8 @@ void CollisionManager::HandleCollisions()
         {
 			sf::Vector2f addForce = /*body2->GetVelocity()*/0.5f * Impulse;
 
-			if (Impulse.x > 5000.f || Impulse.y > 5000.f) {
+			if (fabs(Impulse.x) > 1000.f || fabs(Impulse.y) > 1000.f)
+			{
 				addForce = sf::Vector2f(0.f, 0.f);
 			}
 
