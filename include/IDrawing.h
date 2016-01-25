@@ -16,6 +16,7 @@ public:
 	virtual void SetScale(sf::Vector2f ScaleToSize) { return; }
     virtual void SetTextureArea(sf::FloatRect Area) = 0;
     virtual void SetText(std::string strText) { }
+	virtual void SetColor(sf::Color Color) { }
     virtual sf::FloatRect GetTextureArea() = 0;
 	
     EComponentType GetComponentType()

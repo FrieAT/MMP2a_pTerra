@@ -65,6 +65,11 @@ void SpriteDrawing::Draw(sf::RenderWindow* pWindow)
 	pWindow->draw(*m_pSprite);
 }
 
+void SpriteDrawing::SetColor(sf::Color Color)
+{
+	m_pSprite->setColor(Color);
+}
+
 void SpriteDrawing::SetScale(sf::Vector2f ScaleToSize)
 {
 	// Get Texture Size

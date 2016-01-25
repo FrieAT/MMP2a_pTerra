@@ -97,15 +97,6 @@ protected:
 		{
 			if (m_fShield < 100.f)
 			{
-				if (m_fShield <= 0.f)
-				{
-					DrawShield(false);
-				}
-				else
-				{
-					DrawShield(true);
-				}
-
 				// Only recharge shield when Energy is over 80%
 				if ((pEngine->GetFuel() / pEngine->GetMaxFuel()) >= 0.8f)
 				{
@@ -115,6 +106,21 @@ protected:
 						m_fShield = 100.f;
 					}
 					EventBus::FireEvent(PlayerShieldRegenerationEvent(this, GetAssignedGameObject(), m_fShield));
+				}
+
+				if (m_fShield <= 0.f)
+				{
+					DrawShield(false);
+				}
+				else
+				{
+					DrawShield(true);
+
+					IDrawing* pShieldDrawing = static_cast<IDrawing*>(m_pShieldAsset->GetComponent(EComponentType::Drawing));
+					if (pShieldDrawing != nullptr)
+					{
+						pShieldDrawing->SetColor(sf::Color(255, 255, 255, static_cast<int>(255 * (m_fShield / 100.f))));
+					}
 				}
 			}
 			else

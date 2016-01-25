@@ -14,6 +14,7 @@ public:
     ~SpriteDrawing();
     void Update();
 	void Draw(sf::RenderWindow* pWindow);
+	void SetColor(sf::Color Color);
 	void SetScale(sf::Vector2f ScaleToSize);
     void SetTextureArea(sf::FloatRect Area);
     void SetUpdateFrameRate(int iFrameRate) { m_iTextureFrameUpdateCount = iFrameRate; }
