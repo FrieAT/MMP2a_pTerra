@@ -9,6 +9,7 @@ Copyright (c) MultiMediaTechnology, 2015
 int main(int argc, char const** argv)
 {
 	bool bFullScreen = true;
+	bool bRotateCamera = false;
 
 	// Get Arguments
 	int current_argc = 1;
@@ -27,11 +28,15 @@ int main(int argc, char const** argv)
 		{
 			bFullScreen = (stoi(value) > 0 ? true : false);
 		}
+		else if (key.compare("rotate") == 0)
+		{
+			bRotateCamera = (stoi(value) > 0 ? true : false);
+		}
 	}
 
     // Initialize the "game engine"
 	Game* pGameEngine;
-	pGameEngine = new Game(bFullScreen);
+	pGameEngine = new Game(bFullScreen, bRotateCamera);
 	/*try
 	{
 		pGameEngine = new Game();

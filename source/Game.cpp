@@ -23,7 +23,8 @@ Copyright (c) MultiMediaTechnology, 2015
 
 Game* Game::m_pEngine = nullptr;
 
-Game::Game(bool bToggleFullScreen)
+Game::Game(bool bToggleFullScreen, bool bRotateCamera)
+: m_bRotateCamera(bRotateCamera)
 {
     if(m_pEngine != nullptr) delete m_pEngine;
     m_pEngine = this;
