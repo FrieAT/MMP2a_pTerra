@@ -278,3 +278,8 @@ void ShipMovement::SetMass(float mass) {
 	this->invMass = 1 / mass;
 
 }
+
+void ShipMovement::SetFirerate(float Firerate)
+{
+	m_fFirerate = Firerate;
+}

@@ -54,7 +54,8 @@ GameObject * GameObjectFactory::CreateEnemyShip(sf::Vector2f Position)
 	GameObject* pShip = new GameObject(std::string("enemyship"));
 	pShip->SetComponent(new PixelPosition(sf::Vector2f(Position), sf::Vector2f(32.f, 51.f)));
 	ShipMovement* aimove = new ShipMovement('E');
-	aimove->SetMass(6);
+	aimove->SetMass(8);
+	aimove->SetFirerate(0.7f);
 	pShip->SetComponent(aimove);
 	SpriteDrawing* pSpriteComponent = new SpriteDrawing(std::string("assets/lilee/ship_regierung.png"), sf::Vector2f(192.f, 128.f));
 	pSpriteComponent->SetTextureArea(sf::FloatRect(0.f, 0.f, 64.f, 102.f));
@@ -63,10 +64,10 @@ GameObject * GameObjectFactory::CreateEnemyShip(sf::Vector2f Position)
 	//pShip->SetComponent(new CircleCollision(30.f,pos));
 	pShip->SetComponent(new SimpleAI());
 	pShip->SetComponent(new BoxCollision(64, 100));
-	pShip->SetComponent(new HealthAsteroid(800.f));
+	pShip->SetComponent(new HealthAsteroid(150.f));
 	ResearchScore* pScoreComponent = new ResearchScore(9999999, 9999999);
 	pScoreComponent->SetScore(250 % 100);
-	pShip->SetComponent(new EngineEnergy(100.f, 100.f));
+	pShip->SetComponent(new EngineEnergy(1000.f, 1000.f));
 	pShip->SetComponent(pScoreComponent);
 	return pShip;
 }
@@ -100,7 +101,7 @@ GameObject* GameObjectFactory::CreateAsteroid(sf::Vector2f vPosition, float fRot
 	pAsteroid->SetComponent(new SpriteDrawing(std::string("assets/lilee/asteroid.png"), sf::Vector2f(70.f, 60.f)));
 	//pAsteroid->SetComponent(new CircleCollision(40.f, pos));
 	pAsteroid->SetComponent(new BoxCollision(70.f, 60.f));
-	pAsteroid->SetComponent(new HealthAsteroid(400.f));
+	pAsteroid->SetComponent(new HealthAsteroid(100.f));
     ResearchScore* pScoreComponent = new ResearchScore(9999999, 9999999);
     pScoreComponent->SetScore(rand() % 100);
     pAsteroid->SetComponent(pScoreComponent);

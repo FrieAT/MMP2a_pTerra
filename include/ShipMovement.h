@@ -23,6 +23,7 @@ public:
 	void setShipState(int State, bool value);
 	bool getShipState(int State);
 	void SetMass(float mass);
+	void SetFirerate(float Firerate);
 private:
 	char m_cPlayer;	//player id for multiple playercontrolled ships
 	float m_fFirerate;

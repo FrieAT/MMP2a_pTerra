@@ -52,9 +52,9 @@ void SimpleAI::Update()
 	pmov->setShipState(3, false);
 	pmov->setShipState(4, false);
 
-	if (playerDistance < 2000.f)
+	if (playerDistance < 1500.f)
 	{
-		if (health < 150.f)
+		if (health < 50.f)
 		{
 			m_CurrentState = m_AIStates[0]; //Flee
 		}

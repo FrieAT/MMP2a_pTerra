@@ -79,7 +79,7 @@ void HealthMissile::OnCollisionEvent(GameObject* pOther, sf::Vector2f ImpulseImp
 		}
 		
 		// Set damage for the explosion
-		float dmg = 300.f;
+		float dmg = 60.f;
     
 		// Get for the Owner of the Missile the ResearchPoints from the Victim if he's destroyed
 		if (m_pOwner != nullptr && pOtherHealth->GetHealth() - dmg <= 0)
