@@ -137,7 +137,7 @@ protected:
             m_bShieldActive = bQuestion;
             if(m_bShieldActive)
             {
-                SpriteDrawing* pSpriteComponent = new SpriteDrawing("assets/lilee/shield_player.png");
+                SpriteDrawing* pSpriteComponent = new SpriteDrawing("assets/lilee/shield_player_fixed.png");
                 pSpriteComponent->GenerateTextureAreas(4, 1);
                 pSpriteComponent->SetUpdateFrameRate(20);
                 m_pShieldAsset->SetComponent(pSpriteComponent);
