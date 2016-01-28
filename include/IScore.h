@@ -16,14 +16,14 @@ public:
     virtual void AddScore(int iScore)
 	{
 		m_iScore += iScore;
-		if (GetAssignedGameObject() != nullptr)
+		if (GetAssignedGameObject() != nullptr && GetAssignedGameObject()->GetID().compare("ship") == 0)
 		{
 			EventBus::FireEvent(ScoreEvent(this, iScore, GetAssignedGameObject(), nullptr));
 		}
 	}
     virtual void SetScore(int iScore)
 	{
-		if (GetAssignedGameObject() != nullptr)
+		if (GetAssignedGameObject() != nullptr && GetAssignedGameObject()->GetID().compare("ship") == 0)
 		{
 			EventBus::FireEvent(ScoreEvent(this, iScore - m_iScore, GetAssignedGameObject(), nullptr));
 		}
