@@ -20,6 +20,12 @@ SimpleAI::SimpleAI()
 
 SimpleAI::~SimpleAI()
 {
+	for (auto itr = m_AIStates.begin(); itr != m_AIStates.end(); itr++)
+	{
+		delete *itr;
+	}
+	m_AIStates.clear();
+
 	AIManager::GetInstance().UnregisterAIObserver(this);
 }
 

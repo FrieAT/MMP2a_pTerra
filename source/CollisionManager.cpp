@@ -185,6 +185,11 @@ void CollisionManager::UnregisterCollisionbody(ICollision* pCollisionBody)
     m_ActiveGameObjects.erase(pCollisionBody->GetAssignedGameObject());
 }
 
+bool CollisionManager::IsObjectActive(GameObject* pObject)
+{
+	return m_ActiveGameObjects[pObject];
+}
+
 void CollisionManager::Clear()
 {
 	m_Colliders.clear();

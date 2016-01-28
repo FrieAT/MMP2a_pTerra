@@ -211,9 +211,9 @@ GameObject* GameObjectFactory::CreatePlanet(sf::Vector2f Position, EWorldObjectT
     
     GameObject* pPlanet = new GameObject(std::string("planet"));
     
-    pPlanet->SetComponent(new PixelPosition(Position, sf::Vector2f(1000.f, 1000.f)));
+    pPlanet->SetComponent(new PixelPosition(Position, sf::Vector2f(1500.f, 1500.f)));
     pPlanet->SetComponent(new SpriteDrawing(SpaceStationsRes[rand() % SpaceStationsRes.size()]));
-	pPlanet->SetComponent(new BoxCollision(500.f, 500.f));
+	pPlanet->SetComponent(new BoxCollision(700.f, 700.f));
 	ResearchScore* pScoreComponent = new ResearchScore(9999999, 9999999);
 	pScoreComponent->SetScore(100 + rand() % 500);
 	pPlanet->SetComponent(pScoreComponent);

@@ -21,6 +21,7 @@ public:
 	void UnregisterCollisionbody(ICollision* pCollisionBody);
     void RegisterCollisionEvent(ICollisionEventObserver* pThisComponent, GameObject* pGameObject);
     void UnregisterCollisionEvent(ICollisionEventObserver* pThisComponent, GameObject* pGameObject);
+	bool IsObjectActive(GameObject* pObject);
 	void Clear();
     std::stack<CollisionEvent> m_CollisonEvents;
 private:

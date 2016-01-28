@@ -82,7 +82,7 @@ void HealthMissile::OnCollisionEvent(GameObject* pOther, sf::Vector2f ImpulseImp
 		float dmg = 60.f;
     
 		// Get for the Owner of the Missile the ResearchPoints from the Victim if he's destroyed
-		if (m_pOwner != nullptr && pOtherHealth->GetHealth() - dmg <= 0)
+		if (m_pOwner != nullptr && CollisionManager::GetInstance().IsObjectActive(m_pOwner) && pOtherHealth->GetHealth() - dmg <= 0)
 		{
 			IScore* pScoreVictim = static_cast<IScore*>(pOther->GetComponent(EComponentType::Score));
 			IScore* pScoreOwner = static_cast<IScore*>(m_pOwner->GetComponent(EComponentType::Score));

@@ -127,14 +127,14 @@ bool BoxCollision::colliding(ICollision* pCollisionBody)
 
 void BoxCollision::OnFrameDraw(sf::RenderWindow* pWindow)
 {
-	
+	/*
     sf::RectangleShape test(sf::Vector2f(m_CollisionBox.width, m_CollisionBox.height));
     if (m_bHit) test.setFillColor(sf::Color::Magenta);
     else test.setFillColor(sf::Color::Blue);
     test.setPosition(sf::Vector2f(m_CollisionBox.left, m_CollisionBox.top));
 
     pWindow->draw(test);
-	
+	*/
 }
 
 void BoxCollision::Serialize(SerializeNode *pParentNode)
