@@ -100,7 +100,7 @@ GameObject* GameObjectFactory::CreateAsteroid(sf::Vector2f vPosition, float fRot
 	pAsteroid->SetComponent(new LinearMovement(fRotation, fSpeed,15));
 	pAsteroid->SetComponent(new SpriteDrawing(std::string("assets/lilee/asteroid.png"), sf::Vector2f(70.f, 60.f)));
 	//pAsteroid->SetComponent(new CircleCollision(40.f, pos));
-	pAsteroid->SetComponent(new BoxCollision(70.f, 60.f));
+	pAsteroid->SetComponent(new BoxCollision(70.f, 70.f));
 	pAsteroid->SetComponent(new HealthAsteroid(100.f));
     ResearchScore* pScoreComponent = new ResearchScore(9999999, 9999999);
     pScoreComponent->SetScore(rand() % 100);

@@ -68,7 +68,7 @@ void SoundManager::Update()
 		i++;
 	}
 
-	for (auto itr = m_pCleanup.begin(); itr != m_pCleanup.end(); itr++)
+	for (auto itr = m_pCleanup.rbegin(); itr != m_pCleanup.rend(); itr++)
 	{
 		delete m_pSounds[*itr];
 		m_pSounds.erase(m_pSounds.begin() + *itr);

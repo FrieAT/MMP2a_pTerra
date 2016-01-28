@@ -127,7 +127,6 @@ void Game::Start()
 					CollisionManager::GetInstance().Clear();
 					AIManager::GetInstance().Clear();
 					GUIManager::GetInstance().Clear();
-					SoundManager::GetInstance().Clear();
 					EventBus::Clear();
 				}
 

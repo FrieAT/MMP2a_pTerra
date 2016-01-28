@@ -41,24 +41,26 @@ bool BoxCollision::colliding(ICollision* pCollisionBody)
     }
 
 	const float degree_to_rad = ((M_PI) / 180.f);
-	float shrink_factor_a = fabs(sin(pPositionComponent->GetRotation() * degree_to_rad));
-	float shrink_factor_b = fabs(sin(pPositionOtherComponent->GetRotation() * degree_to_rad));
+	float cosinus_a = fabs(cos(pPositionComponent->GetRotation() * degree_to_rad));
+	float cosinus_b = fabs(cos(pPositionOtherComponent->GetRotation() * degree_to_rad));
 
 	sf::Vector2f pos_a = pPositionComponent->GetPosition();
 	sf::Vector2f size_a = sf::Vector2f(m_fWidth, m_fHeight);
 	sf::Vector2f pos_b = pPositionOtherComponent->GetPosition();
 	sf::Vector2f size_b = sf::Vector2f(pOther->m_fWidth, pOther->m_fHeight);
+	
+	size_a.x = m_fWidth * cosinus_a + m_fHeight * (1 - cosinus_a);
+	size_a.y = m_fHeight * cosinus_a + m_fWidth * (1 - cosinus_a);
+	pos_a.x = pos_a.x - size_a.x / 2.f;
+	pos_a.y = pos_a.y - size_a.y / 2.f;
 
-	pos_a.x -= (size_a.x / 4.f) * shrink_factor_a + (size_a.x / 2.f);
-	pos_a.y += (size_a.y / 4.f) * shrink_factor_a - (size_a.y / 2.f);
-	size_a.x += (size_a.x / 2.f) * shrink_factor_a;
-	size_a.y -= (size_a.y / 2.f) * shrink_factor_a;
 	m_CollisionBox = sf::FloatRect(pos_a, size_a);
-
-	pos_b.x -= (size_b.x / 4.f) * shrink_factor_b + (size_b.x / 2.f);
-	pos_b.y += (size_b.y / 4.f) * shrink_factor_b - (size_b.y / 2.f);
-	size_b.x += (size_b.x / 2.f) * shrink_factor_b;
-	size_b.y -= (size_b.y / 2.f) * shrink_factor_b;
+	
+	size_b.x = pOther->m_fWidth * cosinus_b + pOther->m_fHeight * (1 - cosinus_b);
+	size_b.y = pOther->m_fHeight * cosinus_b + pOther->m_fWidth * (1 - cosinus_b);
+	pos_b.x = pos_b.x - size_b.x / 2.f;
+	pos_b.y = pos_b.y - size_b.y / 2.f;
+	
 	pOther->m_CollisionBox = sf::FloatRect(pos_b, size_b);
     
     sf::Vector2f n = pos_b - pos_a;		// Vector from A to B
@@ -125,14 +127,14 @@ bool BoxCollision::colliding(ICollision* pCollisionBody)
 
 void BoxCollision::OnFrameDraw(sf::RenderWindow* pWindow)
 {
-	/*
+	
     sf::RectangleShape test(sf::Vector2f(m_CollisionBox.width, m_CollisionBox.height));
     if (m_bHit) test.setFillColor(sf::Color::Magenta);
     else test.setFillColor(sf::Color::Blue);
     test.setPosition(sf::Vector2f(m_CollisionBox.left, m_CollisionBox.top));
 
     pWindow->draw(test);
-	*/
+	
 }
 
 void BoxCollision::Serialize(SerializeNode *pParentNode)
