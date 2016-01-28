@@ -107,7 +107,7 @@ void NavigationCursor::OnFrameUpdate(sf::Time DeltaTime)
 				LogicTime* pTime = dynamic_cast<LogicTime*>(GetAssignedGameObject()->GetComponent(EComponentType::Logic));
 				if (pTime != nullptr)
 				{
-					pScoreComponent->AddScore(pTime->GetRemainingTime() * 100);
+					pScoreComponent->AddScore(pTime->GetRemainingTime() * 20);
 				}
 
 				// Game Over

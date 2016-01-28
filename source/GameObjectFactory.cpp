@@ -66,7 +66,7 @@ GameObject * GameObjectFactory::CreateEnemyShip(sf::Vector2f Position)
 	pShip->SetComponent(new BoxCollision(64, 100));
 	pShip->SetComponent(new HealthAsteroid(150.f));
 	ResearchScore* pScoreComponent = new ResearchScore(9999999, 9999999);
-	pScoreComponent->SetScore(250 % 100);
+	pScoreComponent->SetScore(200 + rand() % 300);
 	pShip->SetComponent(new EngineEnergy(1000.f, 1000.f));
 	pShip->SetComponent(pScoreComponent);
 	return pShip;

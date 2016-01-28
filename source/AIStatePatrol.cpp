@@ -26,6 +26,7 @@ void AIStatePatrol::Update(GameObject* obj)
 	// Get current rotation
 	float currentRotation = ppos->GetRotation();
 	sf::Vector2f velocity = pmov->GetVelocity();
+	float velocityLength = sqrt(velocity.x * velocity.x + velocity.y * velocity.y);
 	float reverseVelocityAngle = std::fmodf((std::atan2f(velocity.y, velocity.x) * 180.f / M_PI + 450 + 180), 360.f);
 
 	float diffLeft;
@@ -43,6 +44,7 @@ void AIStatePatrol::Update(GameObject* obj)
 
 	if (diffLeft < diffRight)	//turn left
 	{
+		// avoid jittery behavior with rotation (trying to get exact angle)
 		if (diffLeft < 10)
 		{
 			pmov->setShipState(1, false);
@@ -55,7 +57,8 @@ void AIStatePatrol::Update(GameObject* obj)
 		pmov->setShipState(3, false);	//don't move backward/break
 		pmov->setShipState(4, false);	//don't fire
 
-		if (diffLeft < 20)
+		// Only move forward when in right direction
+		if (diffLeft < 20 && velocityLength > 50.f)
 		{
 			pmov->setShipState(2, true);	// move forward
 		}
@@ -66,7 +69,8 @@ void AIStatePatrol::Update(GameObject* obj)
 	}
 	else	//turn right
 	{
-		if (diffRight < 3)
+		// avoid jittery behavior with rotation (trying to get exact angle)
+		if (diffRight < 10)
 		{
 			pmov->setShipState(0, false);
 		}
@@ -75,11 +79,18 @@ void AIStatePatrol::Update(GameObject* obj)
 			pmov->setShipState(0, true);
 		}
 		pmov->setShipState(1, false);	//don't turn left
-		pmov->setShipState(2, false);	//don't move forward
 		pmov->setShipState(3, false);	//don't move backward/break
 		pmov->setShipState(4, false);	//don't fire
-	}
 
-	
+		// Only move forward when in right direction
+		if (diffRight < 20 && velocityLength > 50.f)
+		{
+			pmov->setShipState(2, true);	// move forward
+		}
+		else
+		{
+			pmov->setShipState(2, false);	// don't move forward
+		}
+	}
 }
 

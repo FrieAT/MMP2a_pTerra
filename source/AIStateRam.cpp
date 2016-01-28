@@ -43,8 +43,9 @@ void AIStateRam::Update(GameObject* obj)
 		diffRight = 360 - currentRotation + diffRotation;
 	}
 
-	if (diffLeft < diffRight)
+	if (diffLeft < diffRight) // turn left
 	{
+		// avoid jittery behavior with rotation (trying to get exact angle)
 		if (diffLeft < 10)
 		{
 			pmov->setShipState(1, false);
@@ -53,20 +54,23 @@ void AIStateRam::Update(GameObject* obj)
 		{
 			pmov->setShipState(1, true);
 		}
-		pmov->setShipState(0, false);
-		pmov->setShipState(2, true);
+		pmov->setShipState(0, false); // don't turn right
 
+		// Only fire when enemy in front of ship
 		if (diffLeft < 20)
 		{
-			pmov->setShipState(4, true);
+			pmov->setShipState(2, true); // move forward
+			pmov->setShipState(4, true); // shoot
 		}
 		else
 		{
-			pmov->setShipState(4, false);
+			pmov->setShipState(2, false); // don't move forward
+			pmov->setShipState(4, false); // don't shoot
 		}
 	}
-	else
+	else // turn right
 	{
+		// avoid jittery behavior with rotation (trying to get exact angle)
 		if (diffRight < 3)
 		{
 			pmov->setShipState(0, false);
@@ -75,16 +79,19 @@ void AIStateRam::Update(GameObject* obj)
 		{
 			pmov->setShipState(0, true);
 		}
-		pmov->setShipState(1, false);
-		pmov->setShipState(2, true);
+		pmov->setShipState(1, false); // turn left
+		pmov->setShipState(2, true); // move forward
 		
+		// Only fire when enemy in front of ship
 		if (diffRight < 20)
 		{
-			pmov->setShipState(4, true);
+			pmov->setShipState(2, true); // move forward
+			pmov->setShipState(4, true); // shoot
 		}
 		else
 		{
-			pmov->setShipState(4, false);
+			pmov->setShipState(2, false); // don't move forward
+			pmov->setShipState(4, false); // don't shoot
 		}
 	}
 }
