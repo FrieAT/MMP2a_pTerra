@@ -34,7 +34,7 @@ private:
 	ObjectManager(const ObjectManager&) = delete;
 	void operator= (const ObjectManager&) = delete;
     std::unordered_map<std::pair<std::string, Quadrant*>, std::vector<GameObject*>, pairhash> m_Objects;
-	std::vector<GameObject*> m_CleanUp;
+	std::unordered_map<GameObject*, GameObject*> m_CleanUp;
     std::vector<GameObject*> m_ActiveGameObjects;
 	std::vector<std::string> m_DrawOrder;
     std::unordered_map<std::pair<int,int>, Quadrant*, pairhash> m_Quadrants;

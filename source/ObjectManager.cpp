@@ -85,7 +85,7 @@ void ObjectManager::RemoveGameObject(GameObject* pObject, bool bDelete)
 		{
 			if (bDelete)
 			{
-				m_CleanUp.push_back((*i));
+				m_CleanUp[(*i)] = (*i);
 			}
 			m_Objects[key].erase(i);
 			break;
@@ -160,16 +160,10 @@ void ObjectManager::RemoveAllGameObjects()
             }
             if(!already_ereased)
             {
-                auto check_cleanup_it = m_CleanUp.begin();
-                while(check_cleanup_it != m_CleanUp.end())
-                {
-                    if((*check_cleanup_it) == (*vec_it))
-                    {
-                        already_ereased = true;
-                        break;
-                    }
-                    check_cleanup_it++;
-                }
+				if (m_CleanUp.find(*vec_it) != m_CleanUp.end())
+				{
+					already_ereased = true;
+				}
             }
             if(!already_ereased)
             {
@@ -219,9 +213,9 @@ void ObjectManager::RemoveAllQuadrants()
 void ObjectManager::PerformGameObjectCleanUp()
 {
     // Get rid of obsolete Gameobjects
-    for (unsigned int i = 0; i < m_CleanUp.size(); i++)
+	for (auto it = m_CleanUp.begin(); it != m_CleanUp.end(); it++)
     {
-        delete m_CleanUp[i];
+        delete it->second;
     }
     m_CleanUp.clear();
 }
@@ -263,22 +257,22 @@ void ObjectManager::Draw(sf::RenderWindow* pWindow)
             {
                 // Iterate now through all GameObjects with given GameObjectID and Quadrant-Position.
 				auto key = std::pair<std::string, Quadrant*>{ *draw_order_it, quadrant_it->second };
-                auto objects_it = m_Objects[key].begin();
-                while(objects_it != m_Objects[key].end())
+				for (auto objects_it = m_Objects[key].begin(); objects_it != m_Objects[key].end(); objects_it++)
                 {
+					// Check if GameObject is valid.
+					if ((*objects_it) == nullptr || m_CleanUp.find((*objects_it)) != m_CleanUp.end())
+					{
+						continue;
+					}
+
                     // Check if GameObject is in right Quadrant
                     // (Could be, if GameObject moved to other Quadrant, and isn´t deleted from List due of inefficient performance)
-                    IPosition* pPosition = nullptr;
-                    if((*objects_it) != nullptr || ((*objects_it)->GetID()).length() > 0)
-                    {
-                        pPosition = static_cast<IPosition*>((*objects_it)->GetComponent(EComponentType::Position));
-                    }
+                    IPosition* pPosition = static_cast<IPosition*>((*objects_it)->GetComponent(EComponentType::Position));
                     if((*objects_it) == nullptr || (pPosition != nullptr && pPosition->GetQuadrant() != quadrant_it->second))
                     {
                         //std::cout << "Removing (" << (objects_it - m_Objects[key].begin()) << ") " << (*objects_it)->GetID() << " from ListQuadrant " << (quadrant_it->second->GetIndex()).first << " / " << (quadrant_it->second->GetIndex()).second << std::endl;
                         auto value = std::pair<std::pair<std::string, Quadrant*>, int>(key, objects_it - m_Objects[key].begin());
                         RemoveGameObjectsFromList.push_back(value);
-                        objects_it++;
                         continue;
                     }
                     
@@ -291,8 +285,6 @@ void ObjectManager::Draw(sf::RenderWindow* pWindow)
                     
                     // Add GameObject to current ActiveGameObject list
                     m_ActiveGameObjects.push_back((*objects_it));
-                    
-                    objects_it++;
                 }
             }
             else
