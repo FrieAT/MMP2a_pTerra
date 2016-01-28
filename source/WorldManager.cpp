@@ -416,7 +416,9 @@ void WorldManager::SaveGame(std::string strPath)
 
 sf::Vector2f WorldManager::GetNextNearestObjectPos(sf::Vector2f Position, EWorldObjectType eType)
 {
-    sf::Vector2f NearestPos(FLT_MAX, FLT_MAX);
+	float fNearestDifference = 1000000000.f;
+	sf::Vector2f NearestPos;
+	bool bSomethingFound = false;
     
     auto it = m_WorldInfo.begin();
     while(it != m_WorldInfo.end())
@@ -432,17 +434,18 @@ sf::Vector2f WorldManager::GetNextNearestObjectPos(sf::Vector2f Position, EWorld
         {
             sf::Vector2f Difference = it_objects->GetPosition() - Position;
             
-            float fQuadrLength = NearestPos.x * NearestPos.x + NearestPos.y * NearestPos.y;
             float fOtherQuadrLength = Difference.x * Difference.x + Difference.y * Difference.y;
             
-            if(fOtherQuadrLength < fQuadrLength)
+            if(fOtherQuadrLength < fNearestDifference)
             {
 				// Check if Quadrant already exists, if so, then Player may already has visited
 				// Object.
 				sf::Vector2f TopLeftPosition = GetQuadrantCorrectedPos(it_objects->GetPosition());
 				if (eType == EWorldObjectType::Terra || eType != EWorldObjectType::Terra &&  GetQuadrant(GetQuadrantIndexAtPos(TopLeftPosition)) == nullptr)
 				{
+					fNearestDifference = fOtherQuadrLength;
 					NearestPos = it_objects->GetPosition();
+					bSomethingFound = true;
 				}
             }
             
@@ -450,6 +453,11 @@ sf::Vector2f WorldManager::GetNextNearestObjectPos(sf::Vector2f Position, EWorld
         }
         it++;
     }
+
+	if (!bSomethingFound)
+	{
+		throw std::runtime_error("No planet has been found!");
+	}
     
     return NearestPos;
 }

@@ -50,16 +50,8 @@ void ResearchScore::AddScore(int iScore)
             pNavigationComponent->SetNavigationActive(true);
         }
         else if(pPositionOwner != nullptr && pNavigationComponent != nullptr && !pNavigationComponent->IsNavigationActive())
-        {
-            EWorldObjectType SearchObject = EWorldObjectType::Planet;
-			/*
-            if(rand() % 100 <= 50)
-            {
-                SearchObject = EWorldObjectType::Planet;
-            }
-			*/
-            
-            sf::Vector2f NextCoords = WorldManager::GetInstance().GetNextNearestObjectPos(pPositionOwner->GetPosition(), SearchObject);
+        {            
+            sf::Vector2f NextCoords = WorldManager::GetInstance().GetNextNearestObjectPos(pPositionOwner->GetPosition(), EWorldObjectType::Planet);
             pNavigationComponent->SetNavigationPoint(NextCoords);
             pNavigationComponent->SetNavigationActive(true);
         }
