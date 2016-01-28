@@ -78,7 +78,8 @@ void CollisionManager::HandleCollisions()
 	while (!m_CollisonEvents.empty())
 	{
 		CollisionEvent col_ev = m_CollisonEvents.top();
-		
+		m_CollisonEvents.pop();
+
         // Check if game object is registered with as a collision object.
         if(!m_ActiveGameObjects[col_ev.Body1] || !m_ActiveGameObjects[col_ev.Body2])
         {
@@ -121,7 +122,7 @@ void CollisionManager::HandleCollisions()
 		// Do not resolve if velocities are separating
 		if (fVelAlongNormal > 0)
         {
-			return;
+			continue;
         }
 		
 		sf::Vector2f Impulse = fVelAlongNormal * col_ev.normal*100.f;
@@ -160,8 +161,6 @@ void CollisionManager::HandleCollisions()
                 (*pCollisionBody2)[i]->OnCollisionEvent(col_ev.Body1, Impulse);
             }
         }
-        
-        m_CollisonEvents.pop();
     }
 
 }
