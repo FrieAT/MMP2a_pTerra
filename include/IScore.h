@@ -7,6 +7,7 @@
 #include "IComponent.h"
 #include "eventbus\EventBus.hpp"
 #include "ScoreEvent.h"
+#include "SoundManager.h"
 
 class IScore : public IComponent
 {
@@ -19,6 +20,7 @@ public:
 		if (GetAssignedGameObject() != nullptr && GetAssignedGameObject()->GetID().compare("ship") == 0)
 		{
 			EventBus::FireEvent(ScoreEvent(this, iScore, GetAssignedGameObject(), nullptr));
+			SoundManager::GetInstance().PlaySoundScore();
 		}
 	}
     virtual void SetScore(int iScore)

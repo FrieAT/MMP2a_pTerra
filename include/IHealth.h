@@ -15,7 +15,7 @@ Copyright (c) MultiMediaTechnology, 2015
 class IHealth : public IComponent
 {
 public:
-    IHealth() : m_fHealth(0.f), m_fShield(100.f), m_bShieldActive(false)
+    IHealth() : m_fHealth(0.f), m_fShield(0.f), m_bShieldActive(false)
     {
         m_pShieldAsset = new GameObject("effect");
         m_pShieldAsset->SetTemporaryState(true);
@@ -37,6 +37,7 @@ public:
 	}
     virtual float GetHealth() { return m_fHealth; }
     virtual float GetShield() { return m_fShield; }
+	virtual float SetShield(float fValue) { m_fShield = fValue; }
 	virtual void Damage(float fDamage)
     {
         if(m_fShield > 0.f)

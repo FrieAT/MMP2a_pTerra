@@ -69,7 +69,7 @@ void HealthMissile::OnCollisionEvent(GameObject* pOther, sf::Vector2f ImpulseImp
     if(pOtherHealth != nullptr)
     {
 		m_bSomethingHitted = true;
-		this->Damage(m_fHealth * 10);
+		this->Damage(m_fHealth);
 
 		// Generate Explosion, if other gameobject has a IPosition (i know, what a question).
 		IPosition* pPositionComponent = static_cast<IPosition*>(pOther->GetComponent(EComponentType::Position));

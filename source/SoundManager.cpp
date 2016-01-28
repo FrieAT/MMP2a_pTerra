@@ -34,6 +34,7 @@ void SoundManager::PlaySoundExplosion()
 {
 	sf::Sound* sound = new sf::Sound();
 	sound->setBuffer(*m_pExplosion);
+	sound->setVolume(90.f);
 	sound->play();
 	m_pSounds.push_back(sound);
 }
@@ -42,6 +43,8 @@ void SoundManager::PlaySoundScore()
 {
 	sf::Sound* sound = new sf::Sound();
 	sound->setBuffer(*m_pScore);
+	sound->setPitch(0.3f);
+	sound->setVolume(70.f);
 	sound->play();
 	m_pSounds.push_back(sound);
 }

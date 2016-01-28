@@ -243,6 +243,9 @@
     <ClCompile Include="source\SoundManager.cpp">
       <Filter>Source Files\Managers\SoundManager</Filter>
     </ClCompile>
+    <ClCompile Include="source\GameStateCredits.cpp">
+      <Filter>Source Files\Managers\GameStateManager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\IComponent.h">
@@ -511,6 +514,9 @@
     </ClInclude>
     <ClInclude Include="include\TimerEvent.h">
       <Filter>Source Files\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GameStateCredits.h">
+      <Filter>Source Files\Managers\GameStateManager</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -10,18 +10,15 @@ Copyright (c) MultiMediaTechnology, 2015
 #include "ObjectManager.h"
 #include "GameStatePlay.h"
 #include "GameObjectFactory.h"
-// #include "WorldManager.h"
+#include "SoundManager.h"
 
 GameStateIntro::~GameStateIntro()
 {
 	m_Gui.removeAllWidgets();
-    InputManager::GetInstance().UnregisterEventObserver(this);
 }
 
 void GameStateIntro::Init(sf::RenderWindow* pWindow)
 {
-    m_bKeyPressed = false;
-
 	// Initialize GUI
 	m_Gui.setWindow(*pWindow);
 	m_Gui.setFont("assets/Starjedi.ttf");
@@ -57,6 +54,7 @@ void GameStateIntro::Init(sf::RenderWindow* pWindow)
 	{
 		buttonStart->setText("Continue Game");
 		buttonStart->connect("clicked", []() {
+			SoundManager::GetInstance().PlaySoundClick();
 			Game::m_pEngine->ChangeState(EGameState::GameStatePlay);
 			std::remove("savegame.txt");
 		});
@@ -65,6 +63,7 @@ void GameStateIntro::Init(sf::RenderWindow* pWindow)
 	{
 		buttonStart->setText("New Game");
 		buttonStart->connect("clicked", []() {
+			SoundManager::GetInstance().PlaySoundClick();
 			Game::m_pEngine->ChangeState(EGameState::GameStatePlay);
 			std::remove("savegame.txt");
 		});
@@ -81,6 +80,7 @@ void GameStateIntro::Init(sf::RenderWindow* pWindow)
         tgui::Button::Ptr buttonLoad = theme->load("Button"); // Verwenden von Theme für Button
         buttonLoad->setText("Load Last Game");
         buttonLoad->connect("clicked", []() {
+			SoundManager::GetInstance().PlaySoundClick();
             Game::m_pEngine->ChangeState(EGameState::GameStatePlay);
             GameStatePlay* pNewState = static_cast<GameStatePlay*>(Game::m_pEngine->GetLastState());
             pNewState->SetLoadGame("savegame.txt");
@@ -91,18 +91,29 @@ void GameStateIntro::Init(sf::RenderWindow* pWindow)
         fCurrentHeight += 200.f;
     }
     
+	// Startbutton
+	tgui::Button::Ptr buttonCredits = theme->load("Button"); // Verwenden von Theme für Button
+		buttonCredits->setText("Credits");
+		buttonCredits->connect("clicked", []() {
+			Game::m_pEngine->ChangeState(EGameState::GameStateCredits);
+			SoundManager::GetInstance().PlaySoundClick();
+		});
+	buttonCredits->setTextSize(28);
+	buttonCredits->setPosition(Game::m_iWindowWidth / 2 - tgui::bindWidth(buttonCredits) / 2, fCurrentHeight);
+	m_Gui.add(buttonCredits, "buttonCredits");
+	fCurrentHeight += 200.f;
+
 	// Exit button
 	tgui::Button::Ptr buttonExit = theme->load("Button"); // Verwenden von Theme für Button
 	buttonExit->setText("Exit");
 	buttonExit->connect("clicked", [this]() {
 		m_bExit = true;
+		SoundManager::GetInstance().PlaySoundClick();
 	});
 	buttonExit->setTextSize(28);
 	buttonExit->setPosition(Game::m_iWindowWidth / 2 - tgui::bindWidth(buttonExit) / 2, fCurrentHeight);
 	m_Gui.add(buttonExit, "buttonExit");
     fCurrentHeight += 200.f;
-
-    //InputManager::GetInstance().RegisterEventObserver(this);
 }
 
 void GameStateIntro::Update(sf::Time DeltaTime, sf::RenderWindow* pWindow)
@@ -125,9 +136,4 @@ void GameStateIntro::Update(sf::Time DeltaTime, sf::RenderWindow* pWindow)
 
 	// Drawing
 	m_Gui.draw();
-}
-
-void GameStateIntro::OnInputUpdate(std::string strEvent)
-{
-    
 }

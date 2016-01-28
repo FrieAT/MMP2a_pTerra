@@ -13,6 +13,7 @@ Copyright (c) MultiMediaTechnology, 2015
 #include "CollisionManager.h"
 #include "FrameManager.h"
 #include "GameStatePlay.h"
+#include "SoundManager.h"
 
 GameStatePause::~GameStatePause()
 {
@@ -33,6 +34,7 @@ void GameStatePause::Init(sf::RenderWindow* pWindow)
 	buttonContinue->setTextSize(28);
 	buttonContinue->setPosition(Game::m_iWindowWidth / 2 - tgui::bindWidth(buttonContinue) / 2, 200.f);
 	buttonContinue->connect("clicked", []() { 
+		SoundManager::GetInstance().PlaySoundClick();
 		Game::m_pEngine->ChangeState(EGameState::GameStatePlay);
 	});
 	m_Gui.add(buttonContinue, "buttonContinue");
@@ -43,6 +45,7 @@ void GameStatePause::Init(sf::RenderWindow* pWindow)
 	buttonMenu->setTextSize(28);
 	buttonMenu->setPosition(Game::m_iWindowWidth / 2 - tgui::bindWidth(buttonMenu) / 2, 400.f);
 	buttonMenu->connect("clicked", []() {
+		SoundManager::GetInstance().PlaySoundClick();
 		Game::m_pEngine->ChangeState(EGameState::GameStatePlay);
 		GameStatePlay* pPlayState = dynamic_cast<GameStatePlay*>(Game::m_pEngine->GetLastState());
 		if (pPlayState != nullptr)

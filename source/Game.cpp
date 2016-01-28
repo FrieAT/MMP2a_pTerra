@@ -21,6 +21,7 @@ Copyright (c) MultiMediaTechnology, 2015
 #include "GameStatePlay.h"
 #include "GameStateGameOver.h"
 #include "GameStatePause.h"
+#include "GameStateCredits.h"
 
 Game* Game::m_pEngine = nullptr;
 
@@ -206,6 +207,9 @@ void Game::ChangeState(EGameState GameState)
 			break;
 		case EGameState::GameStatePause:
 			pState = new GameStatePause();
+			break;
+		case EGameState::GameStateCredits:
+			pState = new GameStateCredits();
 			break;
 		default:
 			throw std::invalid_argument("Unknown GameState in Game::ChangeState(EGameState GameState)!");

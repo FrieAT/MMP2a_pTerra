@@ -15,6 +15,7 @@ Copyright (c) MultiMediaTechnology, 2015
 #include "AIManager.h"
 #include "GUIManager.h"
 #include "SoundManager.h"
+#include "IHealth.h"
 
 #include "eventbus\EventBus.hpp"
 #include "GUIPlayerStatus.h"
@@ -32,7 +33,9 @@ void GameStatePlay::Init(sf::RenderWindow* pWindow)
     WorldManager::GetInstance().GenerateWorld();
     
 	// Generate Player
-    GameObjectFactory::CreatePlayerShip(sf::Vector2f(0.f, 0.f), '2');
+    GameObject* player = GameObjectFactory::CreatePlayerShip(sf::Vector2f(0.f, 0.f), '2');
+	IHealth* playerHealth = static_cast<IHealth*>(player->GetComponent(EComponentType::Health));
+	playerHealth->SetShield(100.f);
 
 	// Initialize GUI
 	m_Gui.setWindow(*pWindow);

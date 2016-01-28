@@ -171,6 +171,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="source\GameObjectFactory.cpp" />
+    <ClCompile Include="source\GameStateCredits.cpp" />
     <ClCompile Include="source\GameStateGameOver.cpp" />
     <ClCompile Include="source\GameStateIntro.cpp" />
     <ClCompile Include="source\GameStatePause.cpp" />
@@ -232,6 +233,7 @@
     <ClInclude Include="include\Game.h" />
     <ClInclude Include="include\GameObject.h" />
     <ClInclude Include="include\GameObjectFactory.h" />
+    <ClInclude Include="include\GameStateCredits.h" />
     <ClInclude Include="include\GameStateGameOver.h" />
     <ClInclude Include="include\GameStateIntro.h" />
     <ClInclude Include="include\GameStatePause.h" />

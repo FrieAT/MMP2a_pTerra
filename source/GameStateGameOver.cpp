@@ -13,11 +13,11 @@
 #include "SpriteDrawing.h"
 #include "WorldManager.h"
 #include "IScore.h"
+#include "SoundManager.h"
 
 GameStateGameOver::~GameStateGameOver()
 {
 	m_Gui.removeAllWidgets();
-    InputManager::GetInstance().UnregisterEventObserver(this);
 }
 
 void GameStateGameOver::Init(sf::RenderWindow* pWindow)
@@ -27,12 +27,6 @@ void GameStateGameOver::Init(sf::RenderWindow* pWindow)
 
 	GameObject* pPlayer = ObjectManager::GetInstance().GetPlayer();
 
-    m_bKeyPressed = false;
-    
-    GameObjectFactory::CreateBackgroundSprite("assets/intro-bg.jpg", sf::Vector2f(static_cast<float>(Game::m_iWindowWidth), static_cast<float>(Game::m_iWindowHeight)));
-    GameObjectFactory::CreateFontText(sf::Vector2f(280.f, 100.f), "assets/Starjedi.ttf", "game over", 24);
-    GameObjectFactory::CreateFontText(sf::Vector2f(230.f, 500.f), "assets/Starjedi.ttf", "-- Press Space-Key to restart game --", 16);
-    
 	// Initialize GUI
 	m_Gui.setWindow(*pWindow);
 	m_Gui.setFont("assets/Starjedi.ttf");
@@ -69,10 +63,9 @@ void GameStateGameOver::Init(sf::RenderWindow* pWindow)
 	buttonMenu->setPosition(Game::m_iWindowWidth / 2 - tgui::bindWidth(buttonMenu) / 2, 500.f);
 	buttonMenu->connect("clicked", []() {
 		Game::m_pEngine->ChangeState(EGameState::GameStateIntro);
+		SoundManager::GetInstance().PlaySoundClick();
 	});
 	m_Gui.add(buttonMenu, "buttonMenu");
-
-    //InputManager::GetInstance().RegisterEventObserver(this);
 }
 
 void GameStateGameOver::Update(sf::Time DeltaTime, sf::RenderWindow* pWindow)
@@ -86,9 +79,4 @@ void GameStateGameOver::Update(sf::Time DeltaTime, sf::RenderWindow* pWindow)
 
 	// Drawing
 	m_Gui.draw();
-}
-
-void GameStateGameOver::OnInputUpdate(std::string strEvent)
-{
-    
 }

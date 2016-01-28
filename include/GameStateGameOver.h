@@ -7,7 +7,7 @@
 #include "IInputObserver.h"
 #include "IGameState.h"
 
-class GameStateGameOver : public IGameState, public IInputObserver
+class GameStateGameOver : public IGameState
 {
 public:
     ~GameStateGameOver();

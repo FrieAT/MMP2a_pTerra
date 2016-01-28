@@ -9,5 +9,6 @@ enum class EGameState
 	GameStateIntro,
 	GameStatePlay,
 	GameStateGameOver,
-	GameStatePause
+	GameStatePause,
+	GameStateCredits
 };
