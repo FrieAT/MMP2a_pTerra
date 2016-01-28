@@ -16,6 +16,7 @@ public:
     void SetNavigationPoint(sf::Vector2f PointPosition);
     sf::Vector2f GetNavigationPoint();
     void SetNavigationActive(bool bActive, bool bForce = false);
+	void SetNavigationCursorColor(sf::Color Color);
     void OnFrameDraw(sf::RenderWindow* pWindow);
     void OnFrameUpdate(sf::Time DeltaTime);
     static IComponent* Deserialize(SerializeNode* pNode);

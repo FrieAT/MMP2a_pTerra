@@ -97,7 +97,7 @@ void ShipMovement::UpdateMovement(sf::Time DeltaTime)
 
 	const float fFuelDrainForForward = 15.0f * DeltaTime.asSeconds();
 	const float fFuelDrainForBackward = 12.0f * DeltaTime.asSeconds();
-	const float fFuelDrainForMissile = 25.f;
+	const float fFuelDrainForMissile = 0.01f;
 
 	if(m_ShipState[0]) pPositionComponent->SetRotation(pPositionComponent->GetRotation() + 60*(Game::m_pEngine->m_bRotateCamera ? 1 : 3)*DeltaTime.asSeconds());	//rotate right
 	if (m_ShipState[1]) pPositionComponent->SetRotation(pPositionComponent->GetRotation() - 60*(Game::m_pEngine->m_bRotateCamera ? 1 : 3)*DeltaTime.asSeconds()); //rotate left
@@ -134,7 +134,7 @@ void ShipMovement::UpdateMovement(sf::Time DeltaTime)
 		if (pEngine != nullptr && pEngine->GetFuel() >= fFuelDrainForMissile)
 		{
 			pEngine->AddFuel(-fFuelDrainForMissile);
-			m_fWeaponcoolDown = m_fFirerate;
+			m_fWeaponcoolDown = 0.f;
 			GameObject* pMissile = GameObjectFactory::CreateMissile(GetAssignedGameObject(), pPositionComponent, velocity); //shoot rockets
 			pMissile->SetTemporaryState(true);
 			//std::cout << velocity.x << " "<<velocity.y << std::endl;

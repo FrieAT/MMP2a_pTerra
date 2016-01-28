@@ -48,6 +48,9 @@ void ResearchScore::AddScore(int iScore)
             // Set Navigation to Terra.
             pNavigationComponent->SetNavigationPoint(NextCoords);
             pNavigationComponent->SetNavigationActive(true);
+
+			// Set Navigation arrow to green
+			pNavigationComponent->SetNavigationCursorColor(sf::Color(0.f, 255.f, 0.f, 170.f));
         }
         else if(pPositionOwner != nullptr && pNavigationComponent != nullptr && !pNavigationComponent->IsNavigationActive())
         {            

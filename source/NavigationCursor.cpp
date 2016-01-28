@@ -62,6 +62,15 @@ void NavigationCursor::SetNavigationActive(bool bActive, bool bForce)
     m_bActive = bActive;
 }
 
+void NavigationCursor::SetNavigationCursorColor(sf::Color Color)
+{
+	IDrawing* pCursorDrawing = static_cast<IDrawing*>(m_pCursor->GetComponent(EComponentType::Drawing));
+	if (pCursorDrawing != nullptr)
+	{
+		pCursorDrawing->SetColor(Color);
+	}
+}
+
 void NavigationCursor::OnFrameUpdate(sf::Time DeltaTime)
 {
     // Ignore Update, if it isn´t active.

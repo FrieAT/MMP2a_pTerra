@@ -13,6 +13,7 @@ public:
     virtual void SetNavigationPoint(sf::Vector2f PointPosition) = 0;
     virtual sf::Vector2f GetNavigationPoint() = 0;
     virtual void SetNavigationActive(bool bActive, bool bForce = false) = 0;
+	virtual void SetNavigationCursorColor(sf::Color Color) = 0;
     virtual bool IsNavigationActive() { return m_bActive; }
     virtual float GetDistanceToPoint() { return m_fDistance; }
     
