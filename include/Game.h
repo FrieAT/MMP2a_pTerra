@@ -33,4 +33,5 @@ protected:
     std::vector<IGameState*> m_States;
     sf::Image m_Icon;
 	sf::View m_View;
+	sf::Music* m_pMusic;
 };
