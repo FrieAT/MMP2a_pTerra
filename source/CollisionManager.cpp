@@ -16,7 +16,7 @@ void CollisionManager::Update(sf::Time DeltaTime)
         std::vector<GameObject*> CurrentGameObjects = ObjectManager::GetInstance().GetActiveGameObjects();
 		for (unsigned int ship = 0; ship < CurrentGameObjects.size(); ship++)
 		{
-			if (CurrentGameObjects[ship] == nullptr)
+			if (CurrentGameObjects[ship] == nullptr || !m_ActiveGameObjects[CurrentGameObjects[ship]])
 			{
 				continue;
 			}
@@ -38,7 +38,7 @@ void CollisionManager::Update(sf::Time DeltaTime)
                 
                 for (unsigned int i = (ship + 1); i < CurrentGameObjects.size(); i++)
                 {
-					if (CurrentGameObjects[i] == nullptr)
+					if (CurrentGameObjects[i] == nullptr || !m_ActiveGameObjects[CurrentGameObjects[i]])
 					{
 						continue;
 					}

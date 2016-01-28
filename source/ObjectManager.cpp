@@ -91,6 +91,11 @@ void ObjectManager::RemoveGameObject(GameObject* pObject, bool bDelete)
 			break;
 		}
 	}
+
+	// It is not possible to erase-Element, because it could destroy the iterator´s which accesses to m_ActiveGameObjects
+	// However if it is set to nullptr, it is only in one frame there. In the next frame it won´t show up again, as it is removed
+	// from m_Objects
+	/*
 	if (!pObject->IsInFreezedState())
 	{
 		auto active_it = m_ActiveGameObjects.begin();
@@ -98,15 +103,13 @@ void ObjectManager::RemoveGameObject(GameObject* pObject, bool bDelete)
 		{
 			if ((*active_it) == pObject)
 			{
-				// It is not possible to erase-Element, because it could destroy the iterator´s which accesses to m_ActiveGameObjects
-				// However if it is set to nullptr, it is only in one frame there. In the next frame it won´t show up again, as it is removed
-				// from m_Objects
 				(*active_it) = nullptr;
 				break;
 			}
 			active_it++;
 		}
 	}
+	*/
 }
 
 void ObjectManager::RemoveAllGameObjects()
