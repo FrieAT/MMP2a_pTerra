@@ -37,7 +37,7 @@ void GameStateCredits::Init(sf::RenderWindow* pWindow)
 
 	// Credits
 	auto labelCredits = std::make_shared<tgui::Label>();
-	labelCredits->setText("Programmers\n\tFriedle Andreas\n\tSchmidt Friedrich\n\tStadlberger Florian\n\nArtists\n\tLilee Neururer\n\nSoundeffects\n\thttp://soundbible.com/1151-Grenade.html\n\tMike Koenig - Attributon 3.0 (Licence)\n\n\thttp://soundbible.com/1950-Button-Push.html\n\tMike Koenig - Attributon 3.0 (Licence)\n\n\thttp://soundbible.com/838-Censor-Beep.html\n\tMike Koenig - Attributon 3.0 (Licence)");
+	labelCredits->setText("Programmers\n\tFriedle Andreas\n\tSchmidt Friedrich\n\tStadlberger Florian\n\nArtists\n\tLilee Neururer\n\nSoundeffects\n\thttp://soundbible.com/1151-Grenade.html\n\tMike Koenig - Attributon 3.0 (Licence)\n\n\thttp://soundbible.com/1950-Button-Push.html\n\tMike Koenig - Attributon 3.0 (Licence)");
 	labelCredits->setTextSize(20);
 	labelCredits->setPosition(Game::m_iWindowWidth / 2 - tgui::bindWidth(labelCredits) / 2, 250.f);
 	labelCredits->setTextColor(sf::Color::White);

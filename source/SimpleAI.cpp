@@ -58,7 +58,7 @@ void SimpleAI::Update()
 	pmov->setShipState(3, false);
 	pmov->setShipState(4, false);
 
-	if (playerDistance < 1500.f)
+	if (playerDistance < 1000.f)
 	{
 		if (health < 50.f)
 		{

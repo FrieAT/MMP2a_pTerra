@@ -37,7 +37,7 @@ public:
 	}
     virtual float GetHealth() { return m_fHealth; }
     virtual float GetShield() { return m_fShield; }
-	virtual float SetShield(float fValue) { m_fShield = fValue; }
+	virtual void SetShield(float fValue) { m_fShield = fValue; }
 	virtual void Damage(float fDamage)
     {
         if(m_fShield > 0.f)

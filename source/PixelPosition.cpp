@@ -37,7 +37,7 @@ sf::Vector2f PixelPosition::GetCenter()
 
 float PixelPosition::GetRotation()
 {
-	return fmodf(m_fRotation, 360.f);
+	return fmodf(m_fRotation + 360.f, 360.f);
 }
 
 void PixelPosition::SetOrigin(sf::Vector2f Origin)
@@ -52,7 +52,7 @@ sf::Vector2f PixelPosition::GetOrigin()
 
 void PixelPosition::SetRotation(float rotation)
 {
-	m_fRotation = rotation;
+	m_fRotation = fmodf(rotation + 360.f, 360.f);
 }
 
 Quadrant* PixelPosition::GetQuadrant()

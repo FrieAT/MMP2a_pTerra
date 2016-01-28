@@ -10,8 +10,6 @@
 #include <math.h>
 
 AIStatePatrol::AIStatePatrol()
-	:m_nextAngle(90),
-	m_Timer(300)
 {
 }
 
@@ -27,59 +25,61 @@ void AIStatePatrol::Update(GameObject* obj)
 
 	// Get current rotation
 	float currentRotation = ppos->GetRotation();
-	m_Timer--;
+	sf::Vector2f velocity = pmov->GetVelocity();
+	float reverseVelocityAngle = std::fmodf((std::atan2f(velocity.y, velocity.x) * 180.f / M_PI + 450 + 180), 360.f);
 
-	if (currentRotation > m_nextAngle - 5 && currentRotation < m_nextAngle + 5) {	//in right direction
-		if (m_Timer < 0) {
-			m_nextAngle = fmod(m_nextAngle + 90, 360);	//change direction
-			m_Timer = 300;
-		}
-		else if (m_Timer>100) {		//accelarate
-			pmov->setShipState(2, true);	//move forward
-			pmov->setShipState(3, false);	//don't move backward
-			pmov->setShipState(0, false);	//don't turn right
-			pmov->setShipState(1, false);	//don't turn left
-			pmov->setShipState(4, false);	//don't fire
-		}
-		else {		//break
-			pmov->setShipState(2, false);	//don't move forward
-			pmov->setShipState(3, true);	//move backward/break
-			pmov->setShipState(0, false);	//don't turn right
-			pmov->setShipState(1, false);	//don't turn left
-			pmov->setShipState(4, false);	//don't fire
-		}
+	float diffLeft;
+	float diffRight;
+	if (currentRotation < reverseVelocityAngle)
+	{
+		diffLeft = currentRotation + 360 - reverseVelocityAngle;
+		diffRight = reverseVelocityAngle - currentRotation;
 	}
-	else {		//in wrong direction
+	else
+	{
+		diffLeft = currentRotation - reverseVelocityAngle;
+		diffRight = 360 - currentRotation + reverseVelocityAngle;
+	}
 
-		float diffLeft;
-		float diffRight;
-		if (currentRotation < m_nextAngle)
+	if (diffLeft < diffRight)	//turn left
+	{
+		if (diffLeft < 10)
 		{
-			diffLeft = currentRotation + 360 - m_nextAngle;
-			diffRight = m_nextAngle - currentRotation;
+			pmov->setShipState(1, false);
 		}
 		else
 		{
-			diffLeft = currentRotation - m_nextAngle;
-			diffRight = 360 - currentRotation + m_nextAngle;
+			pmov->setShipState(1, true);
 		}
+		pmov->setShipState(0, false);	//don't turn right
+		pmov->setShipState(3, false);	//don't move backward/break
+		pmov->setShipState(4, false);	//don't fire
 
-		if (diffLeft < diffRight)	//turn left
+		if (diffLeft < 20)
 		{
-			pmov->setShipState(2, false);	//don't move forward
-			pmov->setShipState(3, false);	//don't move backward/break
-			pmov->setShipState(0, false);	//don't turn right
-			pmov->setShipState(1, true);	//turn left
-			pmov->setShipState(4, false);	//don't fire
+			pmov->setShipState(2, true);	// move forward
 		}
-		else	//turn right
+		else
 		{
-			pmov->setShipState(2, false);	//don't move forward
-			pmov->setShipState(3, false);	//don't move backward/break
-			pmov->setShipState(0, true);	//turn right
-			pmov->setShipState(1, false);	//don't turn left
-			pmov->setShipState(4, false);	//don't fire
+			pmov->setShipState(2, false);	// don't move forward
 		}
 	}
+	else	//turn right
+	{
+		if (diffRight < 3)
+		{
+			pmov->setShipState(0, false);
+		}
+		else
+		{
+			pmov->setShipState(0, true);
+		}
+		pmov->setShipState(1, false);	//don't turn left
+		pmov->setShipState(2, false);	//don't move forward
+		pmov->setShipState(3, false);	//don't move backward/break
+		pmov->setShipState(4, false);	//don't fire
+	}
+
+	
 }
 
