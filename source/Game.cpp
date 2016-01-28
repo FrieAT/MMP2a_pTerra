@@ -39,9 +39,9 @@ Game::Game(bool bToggleFullScreen, bool bRotateCamera)
 	// Play music
 	m_pMusic = new sf::Music();
 	m_pMusic->setLoop(true);
-	if (!m_pMusic->openFromFile("assets/nice_music.ogg"))
+	if (!m_pMusic->openFromFile("assets/music.ogg"))
 	{
-		throw std::runtime_error("Unable to load assets/nice_music.ogg");
+		throw std::runtime_error("Unable to load assets/music.ogg");
 	}
 	m_pMusic->play();
 
