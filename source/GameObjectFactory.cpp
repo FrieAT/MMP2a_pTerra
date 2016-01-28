@@ -80,7 +80,7 @@ GameObject* GameObjectFactory::CreateMissile(GameObject* pOwner, IPosition* pPos
     
     pCollisision->m_bPhysicsApplyable = false;
     
-	pMissile->SetComponent(new HealthMissile(1000, pOwner));
+	pMissile->SetComponent(new HealthMissile(10, pOwner));
 	pMissile->SetComponent(new PixelPosition(pPosition->GetPosition(), sf::Vector2f(15.f, 30.f)));
 	pMissile->SetComponent(new LinearMovement(pPosition->GetRotation(), 800.f, 1.f, ShipSpeed, true));
     SpriteDrawing* pSpriteComponent = new SpriteDrawing(std::string("assets/lilee/rakete_player.png"),sf::Vector2f(30,60));

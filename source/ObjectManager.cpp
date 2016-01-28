@@ -53,7 +53,7 @@ void ObjectManager::AddGameObject(GameObject* pObject)
     //    }
     //    objects_it++;
     //}
-	
+	m_ObjectAlive[pObject] = true;
     m_Objects[key].push_back(pObject);
 }
 
@@ -181,6 +181,7 @@ void ObjectManager::RemoveAllGameObjects()
     }
     PerformGameObjectCleanUp();
     m_Objects.clear();
+	m_ObjectAlive.clear();
     EreasedGameObjects.clear();
 }
 
@@ -215,7 +216,11 @@ void ObjectManager::PerformGameObjectCleanUp()
     // Get rid of obsolete Gameobjects
 	for (auto it = m_CleanUp.begin(); it != m_CleanUp.end(); it++)
     {
-        delete it->second;
+		if (m_ObjectAlive[(it->second)] == true)
+		{
+			m_ObjectAlive.erase(it->second);
+			delete it->second;
+		}
     }
     m_CleanUp.clear();
 }
@@ -260,7 +265,7 @@ void ObjectManager::Draw(sf::RenderWindow* pWindow)
 				for (auto objects_it = m_Objects[key].begin(); objects_it != m_Objects[key].end(); objects_it++)
                 {
 					// Check if GameObject is valid.
-					if ((*objects_it) == nullptr || m_CleanUp.find((*objects_it)) != m_CleanUp.end())
+					if ((*objects_it) == nullptr || m_ObjectAlive[(*objects_it)] == false)
 					{
 						continue;
 					}

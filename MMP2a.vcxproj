@@ -132,7 +132,8 @@
       <AdditionalIncludeDirectories>$(TGUIROOT)/include;$(SFMLROOT)/include;$(SolutionDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PrecompiledHeader>Create</PrecompiledHeader>
-      <Optimization>MaxSpeed</Optimization>
+      <Optimization>Full</Optimization>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>

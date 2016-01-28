@@ -54,7 +54,7 @@ void HealthMissile::Damage(float fDamage)
 
 void HealthMissile::OnFrameUpdate(sf::Time DeltaTime)
 {
-	this->Damage(5);
+	this->Damage(5.f * DeltaTime.asSeconds());
 }
 
 void HealthMissile::OnCollisionEvent(GameObject* pOther, sf::Vector2f ImpulseImpact)
