@@ -509,5 +509,8 @@
     <ClInclude Include="include\SoundManager.h">
       <Filter>Source Files\Managers\SoundManager</Filter>
     </ClInclude>
+    <ClInclude Include="include\TimerEvent.h">
+      <Filter>Source Files\Events</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -129,18 +129,5 @@ void GameStateIntro::Update(sf::Time DeltaTime, sf::RenderWindow* pWindow)
 
 void GameStateIntro::OnInputUpdate(std::string strEvent)
 {
-    /*std::size_t iDelimiterPos = strEvent.find('_');
-	if (iDelimiterPos == std::string::npos)
-	{
-		return;
-	}
-	std::string strKey = strEvent.substr(1, iDelimiterPos-1);
-    std::string strState = strEvent.substr(iDelimiterPos+1, 1);
     
-    if(strState == "P" && strKey == "FIRE" && !m_bKeyPressed)
-    {
-        // Prevent of double changing states.
-        m_bKeyPressed = true;
-		Game::m_pEngine->ChangeState(new GameStatePlay());
-    }*/
 }

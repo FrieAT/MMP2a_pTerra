@@ -15,7 +15,7 @@ Copyright (c) MultiMediaTechnology, 2015
 class IHealth : public IComponent
 {
 public:
-    IHealth() : m_fHealth(0.f), m_fShield(50.f), m_bShieldActive(false)
+    IHealth() : m_fHealth(0.f), m_fShield(100.f), m_bShieldActive(false)
     {
         m_pShieldAsset = new GameObject("effect");
         m_pShieldAsset->SetTemporaryState(true);

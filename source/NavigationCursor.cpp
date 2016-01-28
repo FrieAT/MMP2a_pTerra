@@ -90,7 +90,7 @@ void NavigationCursor::OnFrameUpdate(sf::Time DeltaTime)
     }
     
     // Wenn das Ziel erreicht worden ist, so deaktiviere wieder die Navigation.
-    if(fLength < 250.f)
+    if(fLength < 400.f)
     {
         // TODO: Mögliche GUI Ausgabe für Ziel erreicht.
         

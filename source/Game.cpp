@@ -188,6 +188,7 @@ bool Game::IsInitialized(EGameState GameState)
 
 void Game::ChangeState(EGameState GameState)
 {
+	Game::m_pEngine->m_pWindow->setMouseCursorVisible(true);
 	IGameState* pState;
 
 	if (m_mGameStateStorage[GameState] == nullptr)

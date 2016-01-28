@@ -32,54 +32,34 @@ void InputManager::Update(sf::RenderWindow* pWindow, tgui::Gui* pGui)
 		}
 
 		//Left
-		if (Event.key.code == sf::Keyboard::Left)
+		if (Event.key.code == sf::Keyboard::A || Event.key.code == sf::Keyboard::Left)
 		{
-			strMovement = "1LEFT";
-		}
-		if (Event.key.code == sf::Keyboard::A)
-		{
-			strMovement = "2LEFT";
+			strMovement = "LEFT";
 		}
 
 		//Right
-		if (Event.key.code == sf::Keyboard::Right)
+		if (Event.key.code == sf::Keyboard::D || Event.key.code == sf::Keyboard::Right)
 		{
-			strMovement = "1RIGHT";
-		}
-		if (Event.key.code == sf::Keyboard::D)
-		{
-			strMovement = "2RIGHT";
+			strMovement = "RIGHT";
 		}
 
 		//Up
-		if (Event.key.code == sf::Keyboard::Up)
+		if (Event.key.code == sf::Keyboard::W || Event.key.code == sf::Keyboard::Up)
 		{
-			strMovement = "1UP";
-		}
-		if (Event.key.code == sf::Keyboard::W)
-		{
-			strMovement = "2UP";
+			strMovement = "UP";
 		}
 
 		//Down
-		if (Event.key.code == sf::Keyboard::Down)
+		if (Event.key.code == sf::Keyboard::S || Event.key.code == sf::Keyboard::Down)
 		{
-			strMovement = "1DOWN";
-		}
-		if (Event.key.code == sf::Keyboard::S)
-		{
-			strMovement = "2DOWN";
+			strMovement = "DOWN";
 		}
 
         //Fire
-        if (Event.key.code == sf::Keyboard::Space)
+        if (Event.key.code == sf::Keyboard::Space || Event.key.code == sf::Keyboard::Numpad0)
         {
-            strMovement = "2FIRE";
+            strMovement = "FIRE";
         }
-		if (Event.key.code == sf::Keyboard::Numpad0)
-		{
-			strMovement = "1FIRE";
-		}
 
 		//pressed
 		if (Event.type == sf::Event::KeyPressed)

@@ -39,12 +39,6 @@ void ShipMovement::Init()
 
 void ShipMovement::OnInputUpdate(std::string strEvent)
 {
-	if (strEvent[0] != m_cPlayer)
-	{
-		return;
-	}
-	strEvent = strEvent.substr(1);
-
 	if (strEvent == "RIGHT_P")
 	{
 		m_ShipState[0] = true;

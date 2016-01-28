@@ -292,6 +292,7 @@
     <ClInclude Include="include\StaticView.h" />
     <ClInclude Include="include\stdafx.h" />
     <ClInclude Include="include\TextureFactory.h" />
+    <ClInclude Include="include\TimerEvent.h" />
     <ClInclude Include="include\WorldManager.h" />
     <ClInclude Include="include\WorldObjectInformation.h" />
     <ClInclude Include="include\XMLReadVisitor.h" />

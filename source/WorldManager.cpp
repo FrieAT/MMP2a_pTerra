@@ -69,14 +69,25 @@ void WorldManager::AddQuadrant(Quadrant *Quadrant, bool bIgnoreGenerationBehavio
     // Only generate dynamic things, if it is allowed to (not allowed, if loading from a savegame)
     if(!bIgnoreGenerationBehavior)
     {
-        const int MaxEnemyShipsNearPlanet = 3;
-        const int MaxEnemyShipNearStation = 1;
-        const int MaxAsteroidRandItems = 3;
+        const int MaxEnemyShipsNearPlanet = 5;
+        const int MaxEnemyShipInSpace = 3;
+        const int MaxAsteroidRandItems = 7;
         
+		for (int i = 0; i < MaxEnemyShipInSpace; i++)
+		{
+			if (rand() % 100 <= 5)
+			{
+				GameObjectFactory::CreateEnemyShip(GetRandomChunkPositionFromChunk(Quadrant));
+			}
+		}
+
         for(int i = 0; i < MaxAsteroidRandItems; i++)
         {
-            GameObjectFactory::CreateAsteroid(GetRandomChunkPositionFromChunk(Quadrant), static_cast<float>(rand() % 360), static_cast<float>(rand() % 150));
-        }
+			if (rand() % 100 <= 40)
+			{
+				GameObjectFactory::CreateAsteroid(GetRandomChunkPositionFromChunk(Quadrant), static_cast<float>(rand() % 360), static_cast<float>(rand() % 150));
+			}
+		}
         
         for(int i = 0; i < (int)EWorldObjectType::MaxItem; i++)
         {
@@ -90,7 +101,10 @@ void WorldManager::AddQuadrant(Quadrant *Quadrant, bool bIgnoreGenerationBehavio
                         
                         for(int i = 0; i < MaxEnemyShipsNearPlanet; i++)
                         {
-                            GameObjectFactory::CreateEnemyShip(GetRandomChunkPositionFromChunk(Quadrant));
+							if (rand() % 100 <= 40)
+							{
+								GameObjectFactory::CreateEnemyShip(GetRandomChunkPositionFromChunk(Quadrant));
+							}
                         }
                         
                         break;
@@ -420,6 +434,12 @@ sf::Vector2f WorldManager::GetNextNearestObjectPos(sf::Vector2f Position, EWorld
 	sf::Vector2f NearestPos;
 	bool bSomethingFound = false;
     
+	// If Terra is searched, just return position 0, 0
+	if (eType == EWorldObjectType::Terra)
+	{
+		return sf::Vector2f(0.f, 0.f);
+	}
+
     auto it = m_WorldInfo.begin();
     while(it != m_WorldInfo.end())
     {
@@ -441,7 +461,7 @@ sf::Vector2f WorldManager::GetNextNearestObjectPos(sf::Vector2f Position, EWorld
 				// Check if Quadrant already exists, if so, then Player may already has visited
 				// Object.
 				sf::Vector2f TopLeftPosition = GetQuadrantCorrectedPos(it_objects->GetPosition());
-				if (eType == EWorldObjectType::Terra || eType != EWorldObjectType::Terra &&  GetQuadrant(GetQuadrantIndexAtPos(TopLeftPosition)) == nullptr)
+				if (GetQuadrant(GetQuadrantIndexAtPos(TopLeftPosition)) == nullptr)
 				{
 					fNearestDifference = fOtherQuadrLength;
 					NearestPos = it_objects->GetPosition();

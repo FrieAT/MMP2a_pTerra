@@ -31,12 +31,8 @@ void GameStatePlay::Init(sf::RenderWindow* pWindow)
     // Generate new World :D
     WorldManager::GetInstance().GenerateWorld();
     
-    // GameObjectFactory::CreatePlayerShip(sf::Vector2f(50,30),'2');
+	// Generate Player
     GameObjectFactory::CreatePlayerShip(sf::Vector2f(0.f, 0.f), '2');
-	// For testing!!!
-	 GameObjectFactory::CreateEnemyShip(sf::Vector2f(100.f, 200.f));
-	// For testing!!!
-    // GameObjectFactory::CreateAsteroid(sf::Vector2f(50,150),-120,50);
 
 	// Initialize GUI
 	m_Gui.setWindow(*pWindow);
@@ -48,6 +44,7 @@ void GameStatePlay::Init(sf::RenderWindow* pWindow)
 	EventBus::AddHandler<PlayerShieldRegenerationEvent>(playerStatus);
 	EventBus::AddHandler<ScoreEvent>(playerStatus);
 	EventBus::AddHandler<PlayerFuelEvent>(playerStatus);
+	EventBus::AddHandler<TimerEvent>(playerStatus);
 	GUIManager::GetInstance().AddGUI(playerStatus);
 }
 
@@ -71,6 +68,8 @@ void GameStatePlay::SetLoadGame(std::string strLoadGame)
 
 void GameStatePlay::Update(sf::Time DeltaTime, sf::RenderWindow* pWindow)
 {
+	pWindow->setMouseCursorVisible(false);
+
 	// Reset keep in GameStateStorage
 	bClearOnGameStateChange = true;
 

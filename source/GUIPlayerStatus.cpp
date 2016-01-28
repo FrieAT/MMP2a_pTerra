@@ -47,7 +47,7 @@ void GUIPlayerStatus::Init()
 	m_ShieldBar->showWithEffect(tgui::ShowAnimationType::SlideFromLeft, sf::milliseconds(800));
 	m_ShieldBar->setMinimum(0);
 	m_ShieldBar->setMaximum(100);
-	m_ShieldBar->setValue(0);
+	m_ShieldBar->setValue(100);
 	m_ShieldBar->setSize(tgui::Layout2d(170, 35));
 	auto ShieldBarRenderer = m_ShieldBar->getRenderer();
 	ShieldBarRenderer->setBackgroundColor(sf::Color(255, 255, 255, 40));
@@ -89,8 +89,16 @@ void GUIPlayerStatus::Init()
 	m_Score->setTextColor(sf::Color::White);
 	m_Score->setText("Score: 0");
 	m_Score->setTextSize(30);
-	m_Score->setPosition(Game::m_iWindowWidth - 450, 10);
+	m_Score->setPosition(Game::m_iWindowWidth - 260, 10);
 	m_gui.add(m_Score);
+
+	// Create TimerLabel
+	m_Timer = std::make_shared<tgui::Label>();
+	m_Timer->setTextColor(sf::Color::White);
+	m_Timer->setText("00:00");
+	m_Timer->setTextSize(30);
+	m_Timer->setPosition(Game::m_iWindowWidth / 2 - 77, 10);
+	m_gui.add(m_Timer);
 }
 
 void GUIPlayerStatus::onEvent(PlayerDamageEvent* e)
@@ -128,4 +136,18 @@ void GUIPlayerStatus::onEvent(PlayerFuelEvent* e)
 	fuel << std::fixed << std::setprecision(0) << e->GetFuel();
 	m_Energy->setText(fuel.str());
 	m_EnergyBar->setValue((int)e->GetFuel());
+}
+
+void GUIPlayerStatus::onEvent(TimerEvent* e)
+{
+	int seconds = e->GetSeconds();
+	int minutes = seconds / 60;
+	int restSeconds = seconds % 60;
+
+	std::stringstream timer;
+	timer << std::setw(2) << std::setfill('0') << minutes;
+	timer << ':';
+	timer << std::setw(2) << std::setfill('0') << restSeconds;
+
+	m_Timer->setText(timer.str());
 }

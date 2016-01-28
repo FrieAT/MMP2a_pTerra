@@ -42,8 +42,8 @@ GameObject* GameObjectFactory::CreatePlayerShip(sf::Vector2f Position, char cPla
 	pShip->SetComponent(new BoxCollision(64.f, 102.f));
     pShip->SetComponent(new HealthShip(100.f));
     pShip->SetComponent(new NavigationCursor());
-    pShip->SetComponent(new ResearchScore(100, 100));
-	pShip->SetComponent(new LogicTime(15 * 60)); // 15 Minuten GameTime
+    pShip->SetComponent(new ResearchScore(50, 100));
+	pShip->SetComponent(new LogicTime(10 * 60)); // 10 Minuten GameTime
 	pShip->SetComponent(new EngineEnergy(100.f, 40.f));
 	ObjectManager::GetInstance().SetPlayer(pShip);
 	return pShip;
@@ -170,7 +170,7 @@ GameObject* GameObjectFactory::CreateExplosion(sf::Vector2f Position)
     pExplosion->SetComponent(new PixelPosition(Position, sf::Vector2f()));
     pExplosion->SetComponent(new HealthExplosion(((iAmountInXAxis * iAmountInYAxis) / (float)Game::m_iFrameRate * 20)));
     SpriteDrawing* pSpriteDrawing = new SpriteDrawing("assets/lilee/explosion.png");
-    pSpriteDrawing->SetUpdateFrameRate(20);
+    pSpriteDrawing->SetUpdateFrameRate(Game::m_iFrameRate);
     pSpriteDrawing->GenerateTextureAreas(iAmountInXAxis, iAmountInYAxis);
     pExplosion->SetComponent(pSpriteDrawing);
     
@@ -211,7 +211,7 @@ GameObject* GameObjectFactory::CreatePlanet(sf::Vector2f Position, EWorldObjectT
     
     GameObject* pPlanet = new GameObject(std::string("planet"));
     
-    pPlanet->SetComponent(new PixelPosition(Position, sf::Vector2f(1500.f, 1500.f)));
+    pPlanet->SetComponent(new PixelPosition(Position, sf::Vector2f(1000.f, 1000.f)));
     pPlanet->SetComponent(new SpriteDrawing(SpaceStationsRes[rand() % SpaceStationsRes.size()]));
 	pPlanet->SetComponent(new BoxCollision(700.f, 700.f));
 	ResearchScore* pScoreComponent = new ResearchScore(9999999, 9999999);
