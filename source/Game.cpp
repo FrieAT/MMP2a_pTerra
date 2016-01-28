@@ -36,23 +36,24 @@ Game::Game(bool bToggleFullScreen, bool bRotateCamera)
     // Create the main window
 	m_pWindow = new sf::RenderWindow(sf::VideoMode(Game::m_iWindowWidth, Game::m_iWindowHeight), "pTerra" , (bToggleFullScreen ? sf::Style::Fullscreen : sf::Style::Default));
 
+	// Play music
+	m_pMusic = new sf::Music();
+	m_pMusic->setLoop(true);
+	if (!m_pMusic->openFromFile("assets/nice_music.ogg"))
+	{
+		throw std::runtime_error("Unable to load assets/nice_music.ogg");
+	}
+	m_pMusic->play();
+
 	// Initialize Intro-screen
 	m_pEngine->ChangeState(EGameState::GameStateIntro);
 	m_pEngine->Start();
-
-    // ====== Below decprecated method to create things ======
-    // Set the Icon
-    if (!m_Icon.loadFromFile("assets/icon.png"))
-    {
-        throw std::runtime_error("Unable to load assets/icon.png");
-    }
-    m_pWindow->setIcon(m_Icon.getSize().x, m_Icon.getSize().y, m_Icon.getPixelsPtr());
-	//set framerate
-	m_pWindow->setFramerateLimit(m_iFrameRate);
 }
 
 Game::~Game()
 {
+	delete m_pMusic;
+
     while(!m_States.empty())
     {
         IGameState* pState = m_States.back();

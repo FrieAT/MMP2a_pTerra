@@ -22,7 +22,7 @@ Copyright (c) MultiMediaTechnology, 2015
 
 GameStatePlay::~GameStatePlay()
 {
-    // delete m_pMusic;
+    
 }
 
 void GameStatePlay::Init(sf::RenderWindow* pWindow)
@@ -48,19 +48,6 @@ void GameStatePlay::Init(sf::RenderWindow* pWindow)
 	EventBus::AddHandler<ScoreEvent>(playerStatus);
 	EventBus::AddHandler<PlayerFuelEvent>(playerStatus);
 	GUIManager::GetInstance().AddGUI(playerStatus);
-
-    // ====== Below decprecated method to create things ======
-    
-    // Load a music to play
-    /*
-    m_pMusic = new sf::Music();
-    m_pMusic->setLoop(true);
-    if (!m_pMusic->openFromFile("assets/nice_music.ogg"))
-    {
-        throw std::runtime_error("Unable to load assets/nice_music.ogg");
-    }
-    m_pMusic->play();
-    */
 }
 
 void GameStatePlay::SetLoadGame(std::string strLoadGame)

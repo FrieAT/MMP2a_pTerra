@@ -94,6 +94,9 @@
     <Filter Include="Source Files\Components\IEngine">
       <UniqueIdentifier>{9e5c51ca-a49e-4344-a421-2305358b7e2f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Managers\SoundManager">
+      <UniqueIdentifier>{9dbd80ff-712d-426b-92aa-66d075ad2966}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\main.cpp">
