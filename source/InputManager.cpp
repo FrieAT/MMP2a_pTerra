@@ -6,6 +6,7 @@ Copyright (c) MultiMediaTechnology, 2015
 
 #include "InputManager.h"
 #include "Game.h"
+#include "SoundManager.h"
 
 void InputManager::Update(sf::RenderWindow* pWindow, tgui::Gui* pGui)
 {

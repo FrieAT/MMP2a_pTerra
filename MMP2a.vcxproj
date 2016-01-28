@@ -197,6 +197,7 @@
     <ClCompile Include="source\SerializeNode.cpp" />
     <ClCompile Include="source\ShipMovement.cpp" />
     <ClCompile Include="source\SimpleAI.cpp" />
+    <ClCompile Include="source\SoundManager.cpp" />
     <ClCompile Include="source\SpriteDrawing.cpp" />
     <ClCompile Include="source\StaticView.cpp" />
     <ClCompile Include="source\stdafx.cpp" />
@@ -285,6 +286,7 @@
     <ClInclude Include="include\SerializeNode.h" />
     <ClInclude Include="include\ShipMovement.h" />
     <ClInclude Include="include\SimpleAI.h" />
+    <ClInclude Include="include\SoundManager.h" />
     <ClInclude Include="include\SpriteDrawing.h" />
     <ClInclude Include="include\ICollision.h" />
     <ClInclude Include="include\StaticView.h" />

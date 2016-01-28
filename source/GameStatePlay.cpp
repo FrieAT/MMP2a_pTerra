@@ -14,6 +14,7 @@ Copyright (c) MultiMediaTechnology, 2015
 #include "FrameManager.h"
 #include "AIManager.h"
 #include "GUIManager.h"
+#include "SoundManager.h"
 
 #include "eventbus\EventBus.hpp"
 #include "GUIPlayerStatus.h"
@@ -80,6 +81,7 @@ void GameStatePlay::Update(sf::Time DeltaTime, sf::RenderWindow* pWindow)
 	CollisionManager::GetInstance().Update(DeltaTime);
 	AIManager::GetInstance().Update(DeltaTime);
 	GUIManager::GetInstance().Update(DeltaTime);
+	SoundManager::GetInstance().Update();
 
 	// Rendering
 	ObjectManager::GetInstance().Draw(pWindow);

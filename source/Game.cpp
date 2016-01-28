@@ -15,6 +15,7 @@ Copyright (c) MultiMediaTechnology, 2015
 #include "TextureFactory.h"
 #include "ClassRegistry.h"
 #include "GUIManager.h"
+#include "SoundManager.h"
 
 #include "GameStateIntro.h"
 #include "GameStatePlay.h"
@@ -80,6 +81,7 @@ Game::~Game()
 	AIManager::GetInstance().Clear();
     TextureFactory::GetInstance().Clear();
 	GUIManager::GetInstance().Clear();
+	SoundManager::GetInstance().Clear();
 	EventBus::Clear();
 
 	delete m_pWindow;
@@ -125,6 +127,7 @@ void Game::Start()
 					CollisionManager::GetInstance().Clear();
 					AIManager::GetInstance().Clear();
 					GUIManager::GetInstance().Clear();
+					SoundManager::GetInstance().Clear();
 					EventBus::Clear();
 				}
 

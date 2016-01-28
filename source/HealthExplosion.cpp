@@ -7,12 +7,14 @@
 #include "HealthExplosion.h"
 #include "ObjectManager.h"
 #include "CollisionManager.h"
+#include "SoundManager.h"
 #include "Game.h"
 
 HealthExplosion::HealthExplosion(float fHealth)
 : IHealth()
 {
     this->m_fHealth = fHealth;
+	SoundManager::GetInstance().PlaySoundExplosion();
 }
 
 HealthExplosion::~HealthExplosion()

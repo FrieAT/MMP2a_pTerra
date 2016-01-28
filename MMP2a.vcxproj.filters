@@ -240,6 +240,9 @@
     <ClCompile Include="source\EngineEnergy.cpp">
       <Filter>Source Files\Components\IEngine</Filter>
     </ClCompile>
+    <ClCompile Include="source\SoundManager.cpp">
+      <Filter>Source Files\Managers\SoundManager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\IComponent.h">
@@ -502,6 +505,9 @@
     </ClInclude>
     <ClInclude Include="include\PlayerFuelEvent.h">
       <Filter>Source Files\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SoundManager.h">
+      <Filter>Source Files\Managers\SoundManager</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
