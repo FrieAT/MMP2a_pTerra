@@ -41,7 +41,6 @@ void GameStateGameOver::Init(sf::RenderWindow* pWindow)
 	{
 		auto terraBackground = std::make_shared<tgui::Picture>("assets/lilee/planet_earth.png");
 		terraBackground->move(tgui::Layout2d(-55, -900));
-		//terraBackground->setSize(static_cast<float>(Game::m_iWindowWidth), static_cast<float>(Game::m_iWindowHeight));
 		m_Gui.add(terraBackground);
 		terraBackground->moveToBack();
 	}
