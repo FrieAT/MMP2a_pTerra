@@ -374,6 +374,16 @@ void WorldManager::LoadGame(std::string strPath)
     
     rapidxml::xml_node<>* pRoot = doc.first_node("savegame");
     m_iSeed = atoi(pRoot->first_attribute("seed")->value());
+	srand(m_iSeed);
+
+	m_RandomCoordinates.clear();
+	for (unsigned long i = 0; i < m_MaxRandomCoordinates; i++)
+	{
+		float x = static_cast<float>(rand() % static_cast<int>(m_ChunkSize.x));
+		float y = static_cast<float>(rand() % static_cast<int>(m_ChunkSize.y));
+		m_RandomCoordinates.push_back(sf::Vector2f(x, y));
+	}
+	m_IndexRandomCoordinates = 0;
     
     rapidxml::xml_node<>* pMapnode = pRoot->first_node("GameObject");
     while(pMapnode)
