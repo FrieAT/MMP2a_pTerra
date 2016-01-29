@@ -55,7 +55,7 @@ GameObject * GameObjectFactory::CreateEnemyShip(sf::Vector2f Position)
 	pShip->SetComponent(new PixelPosition(sf::Vector2f(Position), sf::Vector2f(32.f, 51.f)));
 	ShipMovement* aimove = new ShipMovement('E');
 	aimove->SetMass(8);
-	aimove->SetFirerate(0.7f);
+	aimove->SetFirerate(1.0f);
 	pShip->SetComponent(aimove);
 	SpriteDrawing* pSpriteComponent = new SpriteDrawing(std::string("assets/lilee/ship_regierung.png"), sf::Vector2f(192.f, 128.f));
 	pSpriteComponent->SetTextureArea(sf::FloatRect(0.f, 0.f, 64.f, 102.f));
@@ -169,7 +169,7 @@ GameObject* GameObjectFactory::CreateExplosion(sf::Vector2f Position)
     
     pExplosion->SetComponent(new PixelPosition(Position, sf::Vector2f()));
     pExplosion->SetComponent(new HealthExplosion(((iAmountInXAxis * iAmountInYAxis) / (float)Game::m_iFrameRate * 20)));
-    SpriteDrawing* pSpriteDrawing = new SpriteDrawing("assets/lilee/explosion.png");
+    SpriteDrawing* pSpriteDrawing = new SpriteDrawing("assets/lilee/explosion.png", false);
     pSpriteDrawing->SetUpdateFrameRate(Game::m_iFrameRate);
     pSpriteDrawing->GenerateTextureAreas(iAmountInXAxis, iAmountInYAxis);
     pExplosion->SetComponent(pSpriteDrawing);

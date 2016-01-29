@@ -45,7 +45,15 @@ void AIStateFlee::Update(GameObject* obj)
 	
 	if (diffLeft < diffRight)
 	{
-		pmov->setShipState(1, true);
+		// avoid jittery behavior with rotation (trying to get exact angle)
+		if (diffLeft < 10)
+		{
+			pmov->setShipState(1, false);
+		}
+		else
+		{
+			pmov->setShipState(1, true);
+		}
 		pmov->setShipState(0, false);
 		pmov->setShipState(2, true);
 		pmov->setShipState(4, false);
@@ -53,7 +61,15 @@ void AIStateFlee::Update(GameObject* obj)
 	}
 	else
 	{
-		pmov->setShipState(0, true);
+		// avoid jittery behavior with rotation (trying to get exact angle)
+		if (diffRight < 10)
+		{
+			pmov->setShipState(0, false);
+		}
+		else
+		{
+			pmov->setShipState(0, true);
+		}
 		pmov->setShipState(1, false);
 		pmov->setShipState(2, true);
 		pmov->setShipState(4, false);

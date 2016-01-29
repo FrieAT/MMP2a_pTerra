@@ -9,8 +9,8 @@ Copyright (c) MultiMediaTechnology, 2015
 class SpriteDrawing : public IDrawing
 {
 public:
-    SpriteDrawing(std::string strRessourcePath);
-    SpriteDrawing(std::string strRessourcePath, sf::Vector2f ScaleToSize);
+    SpriteDrawing(std::string strRessourcePath, bool loop = true);
+    SpriteDrawing(std::string strRessourcePath, sf::Vector2f ScaleToSize, bool loop = true);
     ~SpriteDrawing();
     void Update();
 	void Draw(sf::RenderWindow* pWindow);
@@ -33,4 +33,5 @@ protected:
     int m_iTextureRectsCount;
     int m_iTextureFrameUpdateCount;
     int m_iCurrentFrameCount;
+	bool m_bLoop;
 };

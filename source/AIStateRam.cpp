@@ -71,7 +71,7 @@ void AIStateRam::Update(GameObject* obj)
 	else // turn right
 	{
 		// avoid jittery behavior with rotation (trying to get exact angle)
-		if (diffRight < 3)
+		if (diffRight < 10)
 		{
 			pmov->setShipState(0, false);
 		}

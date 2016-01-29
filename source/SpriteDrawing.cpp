@@ -10,18 +10,19 @@ Copyright (c) MultiMediaTechnology, 2015
 #include "TextureFactory.h"
 #include "Game.h"
 
-SpriteDrawing::SpriteDrawing(std::string strRessourcePath)
+SpriteDrawing::SpriteDrawing(std::string strRessourcePath, bool loop)
 : m_strResPath(strRessourcePath)
 , m_ScaleToSize(sf::Vector2f(0.f, 0.f))
 , m_iTextureRectsCount(0)
 , m_iTextureFrameUpdateCount(Game::m_iFrameRate)
 , m_iCurrentFrameCount(0)
+, m_bLoop(loop)
 {
     m_pTexture = TextureFactory::GetInstance().GetTexture(strRessourcePath);
 	m_pSprite = new sf::Sprite(*m_pTexture);
 }
 
-SpriteDrawing::SpriteDrawing(std::string strRessourcePath, sf::Vector2f ScaleToSize) : SpriteDrawing(strRessourcePath)
+SpriteDrawing::SpriteDrawing(std::string strRessourcePath, sf::Vector2f ScaleToSize, bool loop) : SpriteDrawing(strRessourcePath, loop)
 {
     m_ScaleToSize = ScaleToSize;
     
@@ -49,7 +50,7 @@ void SpriteDrawing::Update()
         m_iCurrentFrameCount = 0;
         m_iTextureRectsCount++;
     }
-	if (m_iTextureRectsCount >= iTextureAreasSize)
+	if (m_iTextureRectsCount >= iTextureAreasSize && m_bLoop)
 	{
 		m_iTextureRectsCount = 0;
 	}
