@@ -85,7 +85,7 @@
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)bin\</OutDir>
     <IntDir>$(SolutionDir)tmp\$(Platform)\$(Configuration)\</IntDir>
-    <TargetName>$(ProjectName)-$(PlatformShortName)-$(Configuration)</TargetName>
+    <TargetName>pTerra</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -304,6 +304,13 @@
     <ClInclude Include="include\WorldObjectInformation.h" />
     <ClInclude Include="include\XMLReadVisitor.h" />
     <ClInclude Include="include\XMLWriteVisitor.h" />
+    <ClInclude Include="resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="MMP2a.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="bin\assets\windows_icon.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -33,7 +33,7 @@ GameObject* GameObjectFactory::CreatePlayerShip(sf::Vector2f Position, char cPla
 	GameObject* pShip = new GameObject(std::string("ship"));
 	pShip->SetComponent(new QuadrantPosition(sf::Vector2f(Position), sf::Vector2f(32.f, 51.f)));
 	pShip->SetComponent(new ShipMovement(cPlayer));
-    SpriteDrawing* pSpriteComponent = new SpriteDrawing(std::string("assets/lilee/ship_player.png"), sf::Vector2f(192.f, 128.f));
+    SpriteDrawing* pSpriteComponent = new SpriteDrawing(std::string("assets/ship_player.png"), sf::Vector2f(192.f, 128.f));
     pSpriteComponent->SetUpdateFrameRate(20);
     pSpriteComponent->SetTextureArea(sf::FloatRect(0.f, 0.f, 64.f, 102.f));
     pShip->SetComponent(pSpriteComponent);
@@ -59,7 +59,7 @@ GameObject * GameObjectFactory::CreateEnemyShip(sf::Vector2f Position)
 	aimove->SetMass(8);
 	aimove->SetFirerate(1.0f);
 	pShip->SetComponent(aimove);
-	SpriteDrawing* pSpriteComponent = new SpriteDrawing(std::string("assets/lilee/ship_regierung.png"), sf::Vector2f(192.f, 128.f));
+	SpriteDrawing* pSpriteComponent = new SpriteDrawing(std::string("assets/ship_regierung.png"), sf::Vector2f(192.f, 128.f));
 	pSpriteComponent->SetTextureArea(sf::FloatRect(0.f, 0.f, 64.f, 102.f));
 	pShip->SetComponent(pSpriteComponent);
 	//pShip->SetComponent(new DynamicView(sf::FloatRect(0, 0, static_cast<float>(Game::m_iWindowWidth), static_cast<float>(Game::m_iWindowHeight)), sf::Vector2f(1920.f - static_cast<float>(Game::m_iWindowWidth), 0), 20.f));
@@ -85,7 +85,7 @@ GameObject* GameObjectFactory::CreateMissile(GameObject* pOwner, IPosition* pPos
 	pMissile->SetComponent(new HealthMissile(10, pOwner));
 	pMissile->SetComponent(new PixelPosition(pPosition->GetPosition(), sf::Vector2f(15.f, 30.f)));
 	pMissile->SetComponent(new LinearMovement(pPosition->GetRotation(), 800.f, 1.f, ShipSpeed, true));
-    SpriteDrawing* pSpriteComponent = new SpriteDrawing(std::string("assets/lilee/rakete_player.png"),sf::Vector2f(30,60));
+    SpriteDrawing* pSpriteComponent = new SpriteDrawing(std::string("assets/rakete_player.png"),sf::Vector2f(30,60));
     pSpriteComponent->SetTextureArea(sf::FloatRect(96.f, 0.f, 96.f, 899.f));
     pSpriteComponent->SetTextureArea(sf::FloatRect(192.f, 0.f, 96.f, 899.f));
 	pMissile->SetComponent(pSpriteComponent);
@@ -100,7 +100,7 @@ GameObject* GameObjectFactory::CreateAsteroid(sf::Vector2f vPosition, float fRot
 	GameObject* pAsteroid = new GameObject(std::string("asteroid"));
 	pAsteroid->SetComponent(new PixelPosition(vPosition, sf::Vector2f(35.f, 30.f)));
 	pAsteroid->SetComponent(new LinearMovement(fRotation, fSpeed,15));
-	pAsteroid->SetComponent(new SpriteDrawing(std::string("assets/lilee/asteroid.png"), sf::Vector2f(70.f, 60.f)));
+	pAsteroid->SetComponent(new SpriteDrawing(std::string("assets/asteroid.png"), sf::Vector2f(70.f, 60.f)));
 	//pAsteroid->SetComponent(new CircleCollision(40.f, pos));
 	pAsteroid->SetComponent(new BoxCollision(70.f, 70.f));
 	pAsteroid->SetComponent(new HealthAsteroid(100.f));
@@ -150,7 +150,7 @@ GameObject* GameObjectFactory::CreateExplosion(sf::Vector2f Position)
     
     pExplosion->SetComponent(new PixelPosition(Position, sf::Vector2f()));
     pExplosion->SetComponent(new HealthExplosion(((iAmountInXAxis * iAmountInYAxis) / (float)Game::m_iFrameRate * 20)));
-    SpriteDrawing* pSpriteDrawing = new SpriteDrawing("assets/lilee/explosion.png", false);
+    SpriteDrawing* pSpriteDrawing = new SpriteDrawing("assets/explosion.png", false);
     pSpriteDrawing->SetUpdateFrameRate(Game::m_iFrameRate);
     pSpriteDrawing->GenerateTextureAreas(iAmountInXAxis, iAmountInYAxis);
     pExplosion->SetComponent(pSpriteDrawing);
@@ -171,13 +171,13 @@ GameObject* GameObjectFactory::CreateFontText(sf::Vector2f Position, std::string
 GameObject* GameObjectFactory::CreatePlanet(sf::Vector2f Position, EWorldObjectType eType)
 {
     std::vector<std::string> SpaceStationsRes;
-    SpaceStationsRes.push_back("assets/lilee/planet_ice.png");
-    SpaceStationsRes.push_back("assets/lilee/planet_sand.png");
+    SpaceStationsRes.push_back("assets/planet_ice.png");
+    SpaceStationsRes.push_back("assets/planet_sand.png");
     
     if(eType == EWorldObjectType::Terra)
     {
         SpaceStationsRes.clear();
-        SpaceStationsRes.push_back("assets/lilee/planet_earth.png");
+        SpaceStationsRes.push_back("assets/planet_earth.png");
     }
     
     GameObject* pPlanet = new GameObject(std::string("planet"));

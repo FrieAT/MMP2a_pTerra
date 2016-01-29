@@ -5,9 +5,13 @@ Copyright (c) MultiMediaTechnology, 2015
 #include "stdafx.h"
 
 #include "Game.h"
+#include <Windows.h>
 
 int main(int argc, char const** argv)
 {
+	HWND console = GetConsoleWindow();
+	ShowWindow(console, 0);
+
 	bool bFullScreen = true;
 	bool bRotateCamera = false;
 

@@ -38,6 +38,14 @@ Game::Game(bool bToggleFullScreen, bool bRotateCamera)
 	// Create the main window
 	m_pWindow = new sf::RenderWindow(sf::VideoMode(Game::m_iWindowWidth, Game::m_iWindowHeight), "pTerra", (bToggleFullScreen ? sf::Style::Fullscreen : sf::Style::Default));
 
+	// Set icon
+	sf::Image icon;
+	if (!icon.loadFromFile("assets/icon.png"))
+	{
+		throw std::runtime_error("Unable to load assets/icon.png");
+	}
+	m_pWindow->setIcon(256, 256, icon.getPixelsPtr());
+
 	// Play music
 	m_pMusic = new sf::Music();
 	m_pMusic->setLoop(true);

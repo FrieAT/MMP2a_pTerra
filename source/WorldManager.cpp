@@ -63,7 +63,7 @@ void WorldManager::AddQuadrant(Quadrant *Quadrant, bool bIgnoreGenerationBehavio
     
     // This Background for example may be allowed to create everytime, if its needed. Cuz it isn´t saved up in a savegame
     // See setting the TemporaryState to true.
-    GameObject* pBackground = GameObjectFactory::CreateBackgroundSprite(std::string("assets/lilee/BG.png"), TopLeftPosition, m_ChunkSize);
+    GameObject* pBackground = GameObjectFactory::CreateBackgroundSprite(std::string("assets/BG.png"), TopLeftPosition, m_ChunkSize);
     pBackground->SetTemporaryState(true);
     
     // Only generate dynamic things, if it is allowed to (not allowed, if loading from a savegame)

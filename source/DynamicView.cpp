@@ -27,7 +27,7 @@ DynamicView::DynamicView(sf::FloatRect ViewSize, sf::Vector2f MoveVector)
 	m_pVignett->SetTemporaryState(true);
 	m_pVignett->SetAssistedState(true);
 	m_pVignett->SetComponent(new PixelPosition(sf::Vector2f(), sf::Vector2f(Game::m_iWindowWidth / 2.f, Game::m_iWindowHeight / 2.f)));
-	m_pVignett->SetComponent(new SpriteDrawing("assets/lilee/FG_vignette.png", sf::Vector2f(static_cast<float>(Game::m_iWindowWidth), static_cast<float>(Game::m_iWindowHeight))));
+	m_pVignett->SetComponent(new SpriteDrawing("assets/FG_vignette.png", sf::Vector2f(static_cast<float>(Game::m_iWindowWidth), static_cast<float>(Game::m_iWindowHeight))));
 }
 
 DynamicView::~DynamicView()
