@@ -7,6 +7,8 @@ Copyright (c) MultiMediaTechnology, 2015
 #include "ObjectManager.h"
 #include "IPosition.h"
 #include "WorldManager.h"
+#include "eventbus\EventBus.hpp"
+#include "DynamicView.h"
 
 ObjectManager::ObjectManager()
 {
@@ -38,6 +40,17 @@ void ObjectManager::AddGameObject(GameObject* pObject)
     {
         throw std::runtime_error("Given GameObject-object has a null-pointer-reference.");
     }
+
+	if (pObject->GetID().compare("ship") == 0)
+	{
+		DynamicView* pPlayerView = dynamic_cast<DynamicView*>(pObject->GetComponent(EComponentType::View));
+		if (pPlayerView != nullptr)
+		{
+			EventBus::AddHandler<PlayerDamageEvent>(pPlayerView);
+		}
+		ObjectManager::GetInstance().SetPlayer(pObject);
+	}
+
     auto key = GetKeyFromGameObject(pObject);
 	
 	// Check if game object already exists in this quadrant

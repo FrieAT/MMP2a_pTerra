@@ -41,7 +41,6 @@ GameObject* GameObjectFactory::CreatePlayerShip(sf::Vector2f Position, char cPla
 	// Create view and add event handler for screen shake
 	DynamicView* playerView = new DynamicView(sf::FloatRect(0, 0, static_cast<float>(Game::m_iWindowWidth), static_cast<float>(Game::m_iWindowHeight)), sf::Vector2f(1920.f - static_cast<float>(Game::m_iWindowWidth), 0));
 	pShip->SetComponent(playerView);
-	EventBus::AddHandler<PlayerDamageEvent>(playerView);
 	
 	pShip->SetComponent(new BoxCollision(64.f, 102.f));
     pShip->SetComponent(new HealthShip(100.f));
@@ -49,7 +48,6 @@ GameObject* GameObjectFactory::CreatePlayerShip(sf::Vector2f Position, char cPla
     pShip->SetComponent(new ResearchScore(50, 100));
 	pShip->SetComponent(new LogicTime(10 * 60)); // 10 Minuten GameTime
 	pShip->SetComponent(new EngineEnergy(100.f, 40.f));
-	ObjectManager::GetInstance().SetPlayer(pShip);
 	return pShip;
 }
 
