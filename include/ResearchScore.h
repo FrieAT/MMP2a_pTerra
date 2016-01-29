@@ -22,4 +22,5 @@ protected:
     int m_iLevelLimit;
     int m_iLevelUpCostFactor;
     int m_iCurrentLevel;
+	bool m_bTerraCreated = false;
 };
