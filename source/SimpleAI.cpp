@@ -80,8 +80,6 @@ void SimpleAI::Update()
 void SimpleAI::Serialize(SerializeNode* pParentNode)
 {
 	IAI::Serialize(pParentNode);
-
-
 }
 
 IComponent* SimpleAI::Deserialize(SerializeNode* pNode)
