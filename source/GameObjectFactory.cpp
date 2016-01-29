@@ -37,8 +37,12 @@ GameObject* GameObjectFactory::CreatePlayerShip(sf::Vector2f Position, char cPla
     pSpriteComponent->SetUpdateFrameRate(20);
     pSpriteComponent->SetTextureArea(sf::FloatRect(0.f, 0.f, 64.f, 102.f));
     pShip->SetComponent(pSpriteComponent);
-    pShip->SetComponent(new DynamicView(sf::FloatRect(0, 0, static_cast<float>(Game::m_iWindowWidth), static_cast<float>(Game::m_iWindowHeight)), sf::Vector2f(1920.f - static_cast<float>(Game::m_iWindowWidth), 0)));
-    //pShip->SetComponent(new CircleCollision(30.f,pos));
+    
+	// Create view and add event handler for screen shake
+	DynamicView* playerView = new DynamicView(sf::FloatRect(0, 0, static_cast<float>(Game::m_iWindowWidth), static_cast<float>(Game::m_iWindowHeight)), sf::Vector2f(1920.f - static_cast<float>(Game::m_iWindowWidth), 0));
+	pShip->SetComponent(playerView);
+	EventBus::AddHandler<PlayerDamageEvent>(playerView);
+	
 	pShip->SetComponent(new BoxCollision(64.f, 102.f));
     pShip->SetComponent(new HealthShip(100.f));
     pShip->SetComponent(new NavigationCursor());

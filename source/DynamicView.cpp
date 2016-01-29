@@ -13,6 +13,9 @@
 #include "SpriteDrawing.h"
 #include "ObjectManager.h"
 
+#define _USE_MATH_DEFINES
+#include <math.h>
+
 DynamicView::DynamicView(sf::FloatRect ViewSize, sf::Vector2f MoveVector)
 {
     m_CurrentMovePosition = sf::Vector2f(0.f, 0.f);
@@ -97,7 +100,50 @@ void DynamicView::OnFrameDraw(sf::RenderWindow* pWindow)
 	}
 
 	view.setSize(NewSize);
+
+	// Add screen shake
+	if (m_ScreenShake != sf::Vector2f(0.f, 0.f))
+	{
+		view.move(m_ScreenShake);
+		m_ScreenShake = m_ScreenShake / 1.05f;
+
+		if (sqrt(m_ScreenShake.x * m_ScreenShake.x + m_ScreenShake.y * m_ScreenShake.y) < 0.01f)
+		{
+			m_ScreenShake = sf::Vector2f(0.f, 0.f);
+		}
+		else
+		{
+			// Randomly rotate vector
+			float radians = (rand() % 360) / 180 * M_PI;
+			m_ScreenShake.x = m_ScreenShake.x * cos(radians) - m_ScreenShake.y * sin(radians);
+			m_ScreenShake.y = m_ScreenShake.x * sin(radians) - m_ScreenShake.y * cos(radians);
+		}
+	}
+
 	Game::m_pEngine->SetView(view); // pWindow->setView(m_pView);
+}
+
+void DynamicView::onEvent(PlayerDamageEvent* e)
+{
+	float currentShakeLength = sqrt(m_ScreenShake.x * m_ScreenShake.x + m_ScreenShake.y * m_ScreenShake.y);
+	
+	sf::Vector2f shakeDirection;
+	if (currentShakeLength == 0.f)
+	{
+		// Use random shake direction
+		float randVal = (rand() % 100) / 100.f;
+		shakeDirection = sf::Vector2f(randVal, 1 - randVal);
+	}
+	else
+	{
+		shakeDirection = sf::Vector2f(m_ScreenShake.x / currentShakeLength, m_ScreenShake.y / currentShakeLength);
+	}
+
+	// Add damage received to shake length
+	currentShakeLength += e->GetDamage();
+
+	// Calculate new shake vector
+	m_ScreenShake = shakeDirection * currentShakeLength;
 }
 
 void DynamicView::Serialize(SerializeNode *pParentNode)

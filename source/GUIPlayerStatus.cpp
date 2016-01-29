@@ -44,7 +44,7 @@ void GUIPlayerStatus::Init()
 	m_ShieldBar = std::make_shared<tgui::ProgressBar>();
 	m_ShieldBar->setPosition(80, Game::m_iWindowHeight - (70 * 2));
 	m_ShieldBar->setFillDirection(tgui::ProgressBar::FillDirection::LeftToRight);
-	m_ShieldBar->showWithEffect(tgui::ShowAnimationType::SlideFromLeft, sf::milliseconds(800));
+	m_ShieldBar->showWithEffect(tgui::ShowAnimationType::SlideFromLeft, sf::milliseconds(850));
 	m_ShieldBar->setMinimum(0);
 	m_ShieldBar->setMaximum(100);
 	m_ShieldBar->setValue(100);
@@ -66,7 +66,7 @@ void GUIPlayerStatus::Init()
 	m_EnergyBar = std::make_shared<tgui::ProgressBar>();
 	m_EnergyBar->setPosition(80, Game::m_iWindowHeight - (70 * 1));
 	m_EnergyBar->setFillDirection(tgui::ProgressBar::FillDirection::LeftToRight);
-	m_EnergyBar->showWithEffect(tgui::ShowAnimationType::SlideFromLeft, sf::milliseconds(800));
+	m_EnergyBar->showWithEffect(tgui::ShowAnimationType::SlideFromLeft, sf::milliseconds(900));
 	m_EnergyBar->setMinimum(0);
 	m_EnergyBar->setMaximum(100);
 	m_EnergyBar->setValue(100);

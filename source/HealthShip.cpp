@@ -44,7 +44,7 @@ HealthShip::~HealthShip()
 void HealthShip::Damage(float fDamage)
 {
     IHealth::Damage(fDamage);
-	EventBus::FireEvent(PlayerDamageEvent(this, GetAssignedGameObject(), m_fHealth, m_fShield));
+	EventBus::FireEvent(PlayerDamageEvent(this, GetAssignedGameObject(), m_fHealth, m_fShield, fDamage));
 
 	if (m_fHealth <= 0.f)
 	{
