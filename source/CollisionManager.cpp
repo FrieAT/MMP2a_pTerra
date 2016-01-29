@@ -130,8 +130,6 @@ void CollisionManager::HandleCollisions()
         {
 			sf::Vector2f addForce = /*body1->GetVelocity()*/-0.5f * Impulse;
 
-			std::cout << "ImpulseX: " << Impulse.x << " / " << Impulse.y << std::endl;
-
 			// Apply impulse
 			body1->AddForce(addForce);
         }

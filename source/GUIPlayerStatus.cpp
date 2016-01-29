@@ -36,7 +36,6 @@ void GUIPlayerStatus::Init()
 	m_Health = std::make_shared<tgui::Label>();
 	m_Health->setTextColor(sf::Color::Red);
 	m_Health->setText("100");
-	std::cout << m_Health->getFullSize().x << std::endl;
 	m_Health->setPosition(24, Game::m_iWindowHeight - (70 * 3) - 4);
 	m_gui.add(m_Health);
 

@@ -321,7 +321,6 @@ void ObjectManager::Draw(sf::RenderWindow* pWindow)
         auto value = RemoveGameObjectsFromList[i];
         auto key = value.first;
         auto it_game_object = value.second;
-        std::cout << "Try to delete obect at index " << (it_game_object) << " with id " << key.first << " in Quadrant " << (key.second->GetIndex()).first << " / " << (key.second->GetIndex()).second << " !" << std::endl;
         m_Objects[key].erase(m_Objects[key].begin() + it_game_object);
     }
     
