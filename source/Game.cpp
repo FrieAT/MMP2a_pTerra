@@ -26,17 +26,17 @@ Copyright (c) MultiMediaTechnology, 2015
 Game* Game::m_pEngine = nullptr;
 
 Game::Game(bool bToggleFullScreen, bool bRotateCamera)
-: m_bRotateCamera(bRotateCamera)
+	: m_bRotateCamera(bRotateCamera)
 {
-    if(m_pEngine != nullptr) delete m_pEngine;
-    m_pEngine = this;
-    m_pCurrentState = nullptr;
+	if (m_pEngine != nullptr) delete m_pEngine;
+	m_pEngine = this;
+	m_pCurrentState = nullptr;
 
 	// Initialize ClassRegistry
 	ClassRegistry::GetInstance().Init();
-    
-    // Create the main window
-	m_pWindow = new sf::RenderWindow(sf::VideoMode(Game::m_iWindowWidth, Game::m_iWindowHeight), "pTerra" , (bToggleFullScreen ? sf::Style::Fullscreen : sf::Style::Default));
+
+	// Create the main window
+	m_pWindow = new sf::RenderWindow(sf::VideoMode(Game::m_iWindowWidth, Game::m_iWindowHeight), "pTerra", (bToggleFullScreen ? sf::Style::Fullscreen : sf::Style::Default));
 
 	// Play music
 	m_pMusic = new sf::Music();
@@ -56,12 +56,12 @@ Game::~Game()
 {
 	delete m_pMusic;
 
-    while(!m_States.empty())
-    {
-        IGameState* pState = m_States.back();
-        delete pState;
-        m_States.pop_back();
-    }
+	while (!m_States.empty())
+	{
+		IGameState* pState = m_States.back();
+		delete pState;
+		m_States.pop_back();
+	}
 
 	auto itr = m_mGameStateStorage.begin();
 	while (itr != m_mGameStateStorage.end())
@@ -80,44 +80,44 @@ Game::~Game()
 	ObjectManager::GetInstance().Clear();
 	CollisionManager::GetInstance().Clear();
 	AIManager::GetInstance().Clear();
-    TextureFactory::GetInstance().Clear();
+	TextureFactory::GetInstance().Clear();
 	GUIManager::GetInstance().Clear();
 	SoundManager::GetInstance().Clear();
 	EventBus::Clear();
 
 	delete m_pWindow;
-    m_pEngine = nullptr;
+	m_pEngine = nullptr;
 }
 
 void Game::Start()
-{    
-    IGameState* pGameState;
+{
+	IGameState* pGameState;
 	sf::Clock DeltaClock;
 
 	m_View = sf::View();
 	m_View.reset(sf::FloatRect(0.f, 0.f, static_cast<float>(Game::m_iWindowWidth), static_cast<float>(Game::m_iWindowHeight)));
-    
+
 	// Start the game loop
-    while (m_pWindow->isOpen())
+	while (m_pWindow->isOpen())
 	{
 		// Get time since last loop
 		sf::Time deltaTime = DeltaClock.restart();
 
 		// Clear screen
-        m_pWindow->clear();
-        
-        if(m_States.empty())
-        {
-            m_pWindow->close();
-            break;
-        }
-        
-        pGameState = m_States.back();
-        
-        if(pGameState != m_pCurrentState)
-        {
-            if(m_pCurrentState != nullptr && m_pCurrentState->bClearOnGameStateChange)
-            {
+		m_pWindow->clear();
+
+		if (m_States.empty())
+		{
+			m_pWindow->close();
+			break;
+		}
+
+		pGameState = m_States.back();
+
+		if (pGameState != m_pCurrentState)
+		{
+			if (m_pCurrentState != nullptr && m_pCurrentState->bClearOnGameStateChange)
+			{
 				// Only clear for GameStatePlay
 				if (m_mGameStateStorage[EGameState::GameStatePlay] == m_pCurrentState)
 				{
@@ -142,12 +142,12 @@ void Game::Start()
 				}
 
 				// Delete the GameState
-                delete m_pCurrentState;
+				delete m_pCurrentState;
 				m_pCurrentState = nullptr;
-            }
-            
-            m_pCurrentState = pGameState;
-        }
+			}
+
+			m_pCurrentState = pGameState;
+		}
 
 		// Set current View
 		m_pWindow->setView(m_View);
@@ -156,7 +156,7 @@ void Game::Start()
 		m_pCurrentState->Update(deltaTime, m_pWindow);
 
 		// Update the window
-        m_pWindow->display();
+		m_pWindow->display();
 	}
 
 	// Before exit set nullptr in GameStateStorage
@@ -225,12 +225,12 @@ void Game::ChangeState(EGameState GameState)
 		pState = m_mGameStateStorage[GameState];
 	}
 
-    // cleanup the current state
-    if ( !m_States.empty())
-    {
-        m_States.pop_back();
-    }
+	// cleanup the current state
+	if (!m_States.empty())
+	{
+		m_States.pop_back();
+	}
 
-    // store and init the new state
-    m_States.push_back(pState);
+	// store and init the new state
+	m_States.push_back(pState);
 }

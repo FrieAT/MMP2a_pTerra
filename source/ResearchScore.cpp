@@ -9,6 +9,7 @@
 #include "INavigation.h"
 #include "WorldManager.h"
 #include "GameObjectFactory.h"
+#include "ObjectManager.h"
 
 ResearchScore::ResearchScore(int iLevelLimit, int iLevelUpCostFactor)
 : IScore()
@@ -43,7 +44,11 @@ void ResearchScore::AddScore(int iScore)
             sf::Vector2f NextCoords = WorldManager::GetInstance().GetNextNearestObjectPos(pPositionOwner->GetPosition(), EWorldObjectType::Terra);
             
             // Generate Terra
-            GameObjectFactory::CreatePlanet(NextCoords, EWorldObjectType::Terra);
+			if (!m_bTerraCreated)
+			{
+				GameObjectFactory::CreatePlanet(NextCoords, EWorldObjectType::Terra);
+				m_bTerraCreated = true;
+			}
             
             // Set Navigation to Terra.
             pNavigationComponent->SetNavigationPoint(NextCoords);

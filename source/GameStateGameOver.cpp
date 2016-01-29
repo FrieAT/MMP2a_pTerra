@@ -14,6 +14,7 @@
 #include "WorldManager.h"
 #include "IScore.h"
 #include "SoundManager.h"
+#include "INavigation.h"
 
 GameStateGameOver::~GameStateGameOver()
 {
@@ -26,6 +27,8 @@ void GameStateGameOver::Init(sf::RenderWindow* pWindow)
 	std::remove("savegame.txt");
 
 	GameObject* pPlayer = ObjectManager::GetInstance().GetPlayer();
+	INavigation* pNavigation = static_cast<INavigation*>(pPlayer->GetComponent(EComponentType::Navigation));
+	bool foundTerra = pNavigation->FoundTerra();
 
 	// Initialize GUI
 	m_Gui.setWindow(*pWindow);
@@ -33,9 +36,25 @@ void GameStateGameOver::Init(sf::RenderWindow* pWindow)
 	auto theme = std::make_shared<tgui::Theme>("Theme.cfg");
 
 	// Create GUI for this GameState
+	// Background Terra for winning
+	if (foundTerra)
+	{
+		auto terraBackground = std::make_shared<tgui::Picture>("assets/lilee/planet_earth.png");
+		terraBackground->move(tgui::Layout2d(-55, -900));
+		m_Gui.add(terraBackground);
+		terraBackground->moveToBack();
+	}
+
 	// Game Over label
 	auto labelGameOver = std::make_shared<tgui::Label>();
-	labelGameOver->setText("Game over");
+	if (foundTerra)
+	{
+		labelGameOver->setText("You won");
+	}
+	else
+	{
+		labelGameOver->setText("Game over");
+	}
 	labelGameOver->setTextSize(100);
 	labelGameOver->setPosition(Game::m_iWindowWidth / 2 - tgui::bindWidth(labelGameOver) / 2, 100.f);
 	labelGameOver->setTextColor(sf::Color::White);
@@ -62,8 +81,8 @@ void GameStateGameOver::Init(sf::RenderWindow* pWindow)
 	buttonMenu->setTextSize(28);
 	buttonMenu->setPosition(Game::m_iWindowWidth / 2 - tgui::bindWidth(buttonMenu) / 2, 500.f);
 	buttonMenu->connect("clicked", []() {
-		Game::m_pEngine->ChangeState(EGameState::GameStateIntro);
 		SoundManager::GetInstance().PlaySoundClick();
+		Game::m_pEngine->ChangeState(EGameState::GameStateIntro);
 	});
 	m_Gui.add(buttonMenu, "buttonMenu");
 }

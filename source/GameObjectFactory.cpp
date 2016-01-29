@@ -140,27 +140,6 @@ GameObject* GameObjectFactory::CreateBackgroundSprite(std::string strBackgroundP
     return pBackground;
 }
 
-GameObject* GameObjectFactory::CreateBackgroundStar(sf::Vector2f Position)
-{
-    float TextureWidth = 100.f;
-    float TextureHeight = 100.f;
-    int TextureAmountX = 6;
-    int TextureAmountY = 3;
-    
-    float TextureX = static_cast<float>((rand() % TextureAmountX) * TextureWidth);
-	float TextureY = static_cast<float>((rand() % TextureAmountY) * TextureHeight);
-    
-    GameObject* pStarBackground = new GameObject(std::string("background"));
-    SpriteDrawing* pSprite = new SpriteDrawing("assets/Star-Sprites.png", sf::Vector2f(0.f,0.f));
-    
-    pSprite->SetTextureArea(sf::FloatRect(TextureX, TextureY, TextureWidth, TextureHeight));
-    
-    pStarBackground->SetComponent(new PixelPosition(Position, sf::Vector2f(0.f, 0.f)));
-    pStarBackground->SetComponent(pSprite);
-    
-    return pStarBackground;
-}
-
 GameObject* GameObjectFactory::CreateExplosion(sf::Vector2f Position)
 {
     const int iAmountInXAxis = 6;
@@ -187,16 +166,6 @@ GameObject* GameObjectFactory::CreateFontText(sf::Vector2f Position, std::string
     pFontText->SetComponent(new FontDrawing(strFontPath, strText, iCharSize));
     
     return pFontText;
-}
-
-GameObject* GameObjectFactory::CreateSpaceStation(sf::Vector2f Position)
-{
-    GameObject* pSpaceStation = new GameObject(std::string("space_station"));
-    
-    pSpaceStation->SetComponent(new PixelPosition(Position, sf::Vector2f(0.f, 0.f)));
-    pSpaceStation->SetComponent(new SpriteDrawing("assets/space_station.png", sf::Vector2f(500.f, 500.f)));
-    
-    return pSpaceStation;
 }
 
 GameObject* GameObjectFactory::CreatePlanet(sf::Vector2f Position, EWorldObjectType eType)

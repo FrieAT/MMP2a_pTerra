@@ -16,6 +16,7 @@ public:
 	virtual void SetNavigationCursorColor(sf::Color Color) = 0;
     virtual bool IsNavigationActive() { return m_bActive; }
     virtual float GetDistanceToPoint() { return m_fDistance; }
+	virtual bool FoundTerra() { return m_bTerraFound;  }
     
     virtual void Serialize(SerializeNode* pParentNode)
     {
@@ -42,4 +43,5 @@ protected:
     sf::Vector2f m_NavigationPoint;
     bool m_bActive;
     float m_fDistance;
+	bool m_bTerraFound = false;
 };

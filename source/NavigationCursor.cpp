@@ -120,6 +120,8 @@ void NavigationCursor::OnFrameUpdate(sf::Time DeltaTime)
 				}
 
 				// Game Over
+				m_bTerraFound = true;
+				Game::m_pEngine->StoreCurrentState(false);
 				Game::m_pEngine->ChangeState(EGameState::GameStateGameOver);
             }
             else
