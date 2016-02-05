@@ -35,6 +35,8 @@ void SoundManager::PlaySoundExplosion()
 	sf::Sound* sound = new sf::Sound();
 	sound->setBuffer(*m_pExplosion);
 	sound->setVolume(90.f);
+	int randPitch = rand() % 30;
+	sound->setPitch(0.7f + randPitch / 100.f);
 	sound->play();
 	m_pSounds.push_back(sound);
 }
