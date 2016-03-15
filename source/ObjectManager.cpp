@@ -7,7 +7,7 @@ Copyright (c) MultiMediaTechnology, 2015
 #include "ObjectManager.h"
 #include "IPosition.h"
 #include "WorldManager.h"
-#include "eventbus\EventBus.hpp"
+#include "eventbus/EventBus.hpp"
 #include "DynamicView.h"
 
 ObjectManager::ObjectManager()

@@ -5,7 +5,7 @@
 #pragma once
 
 #include "IComponent.h"
-#include "eventbus\EventBus.hpp"
+#include "eventbus/EventBus.hpp"
 #include "ScoreEvent.h"
 #include "SoundManager.h"
 
@@ -19,7 +19,8 @@ public:
 		m_iScore += iScore;
 		if (GetAssignedGameObject() != nullptr && GetAssignedGameObject()->GetID().compare("ship") == 0)
 		{
-			EventBus::FireEvent(ScoreEvent(this, iScore, GetAssignedGameObject(), nullptr));
+            ScoreEvent event(this, iScore, GetAssignedGameObject(), nullptr);
+			EventBus::FireEvent(event);
 			SoundManager::GetInstance().PlaySoundScore();
 		}
 	}
@@ -27,7 +28,8 @@ public:
 	{
 		if (GetAssignedGameObject() != nullptr && GetAssignedGameObject()->GetID().compare("ship") == 0)
 		{
-			EventBus::FireEvent(ScoreEvent(this, iScore - m_iScore, GetAssignedGameObject(), nullptr));
+            ScoreEvent event(this, iScore - m_iScore, GetAssignedGameObject(), nullptr);
+			EventBus::FireEvent(event);
 		}
 		m_iScore = iScore;
 	}

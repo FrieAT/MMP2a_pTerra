@@ -25,8 +25,7 @@ Copyright (c) MultiMediaTechnology, 2015
 
 Game* Game::m_pEngine = nullptr;
 
-Game::Game(bool bToggleFullScreen, bool bRotateCamera)
-	: m_bRotateCamera(bRotateCamera)
+Game::Game() : m_bRotateCamera(false)
 {
 	if (m_pEngine != nullptr) delete m_pEngine;
 	m_pEngine = this;
@@ -36,7 +35,7 @@ Game::Game(bool bToggleFullScreen, bool bRotateCamera)
 	ClassRegistry::GetInstance().Init();
 
 	// Create the main window
-	m_pWindow = new sf::RenderWindow(sf::VideoMode(Game::m_iWindowWidth, Game::m_iWindowHeight), "pTerra", (bToggleFullScreen ? sf::Style::Fullscreen : sf::Style::Default));
+	m_pWindow = new sf::RenderWindow(sf::VideoMode(Game::m_iWindowWidth, Game::m_iWindowHeight), "pTerra", sf::Style::Default);
 
 	// Set icon
 	sf::Image icon;

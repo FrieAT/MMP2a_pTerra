@@ -5,56 +5,12 @@ Copyright (c) MultiMediaTechnology, 2015
 #include "stdafx.h"
 
 #include "Game.h"
-#include <Windows.h>
 
 int main(int argc, char const** argv)
 {
-	HWND console = GetConsoleWindow();
-	ShowWindow(console, 0);
-
-	bool bFullScreen = true;
-	bool bRotateCamera = false;
-
-	// Get Arguments
-	int current_argc = 1;
-	while (current_argc++ < argc)
-	{
-		std::string param(argv[current_argc - 1]);
-		int pos = param.find('=', 0);
-		if (pos == std::string::npos)
-		{
-			continue;
-		}
-		std::string key = param.substr(0, pos);
-		std::string value = param.substr(pos + 1);
-
-		if (key.compare("fullscreen") == 0)
-		{
-			bFullScreen = (stoi(value) > 0 ? true : false);
-		}
-		else if (key.compare("rotate") == 0)
-		{
-			bRotateCamera = (stoi(value) > 0 ? true : false);
-		}
-	}
-
     // Initialize the "game engine"
 	Game* pGameEngine;
-	pGameEngine = new Game(bFullScreen, bRotateCamera);
-	/*try
-	{
-		pGameEngine = new Game();
-	}
-	catch (tgui::Exception& e)
-	{
-		std::cout << e.what() << std::endl;
-	}
-	catch (...)
-	{
-		std::cout << "unhandled exception" << std::endl;
-	}*/
-        
-    // Delete all connected ressources and the game engine itself.
+	pGameEngine = new Game();
     delete pGameEngine;
     
     return EXIT_SUCCESS;

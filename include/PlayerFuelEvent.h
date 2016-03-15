@@ -18,7 +18,7 @@ public:
 
 	}
 
-	virtual ~PlayerFuelEvent()
+	~PlayerFuelEvent()
 	{
 
 	}

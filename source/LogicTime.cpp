@@ -12,7 +12,7 @@ Copyright (c) MultiMediaTechnology, 2015
 #include "INavigation.h"
 #include "IPosition.h"
 #include "FrameManager.h"
-#include "eventbus\EventBus.hpp"
+#include "eventbus/EventBus.hpp"
 #include "TimerEvent.h"
 #include "Game.h"
 
@@ -41,7 +41,8 @@ void LogicTime::Action(GameObject* pPossibleOther)
 void LogicTime::OnFrameUpdate(sf::Time DeltaTime)
 {
 	m_fRemainingTime -= DeltaTime.asSeconds();
-	EventBus::FireEvent(TimerEvent(this, static_cast<int>(m_fRemainingTime)));
+    TimerEvent event(this, static_cast<int>(m_fRemainingTime));
+	EventBus::FireEvent(event);
 	if (m_fRemainingTime <= 0)
 	{
 		// GameOver

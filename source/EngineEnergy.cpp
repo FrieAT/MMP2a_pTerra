@@ -6,7 +6,7 @@ Copyright (c) MultiMediaTechnology, 2015
 
 #include "EngineEnergy.h"
 #include "FrameManager.h"
-#include "eventbus\EventBus.hpp"
+#include "eventbus/EventBus.hpp"
 #include "PlayerFuelEvent.h"
 
 EngineEnergy::EngineEnergy(float fMaxFuel, float fFuel)
@@ -44,7 +44,8 @@ void EngineEnergy::AddFuel(float fAddFuel)
 		m_LastDrained.restart();
 	}*/
 	m_fEnergy += fAddFuel;
-	EventBus::FireEvent(PlayerFuelEvent(this, m_fEnergy, this->GetAssignedGameObject()));
+    PlayerFuelEvent event(this, m_fEnergy, this->GetAssignedGameObject());
+	EventBus::FireEvent(event);
 
 	if (m_fEnergy > m_fMaxEnergy)
 	{

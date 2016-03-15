@@ -10,7 +10,7 @@
 #include "PixelPosition.h"
 #include "SpriteDrawing.h"
 #include "IScore.h"
-#include "eventbus\EventBus.hpp"
+#include "eventbus/EventBus.hpp"
 #include "ScoreEvent.h"
 #include "LogicTime.h"
 #include "Game.h"

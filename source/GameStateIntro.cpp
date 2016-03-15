@@ -19,6 +19,9 @@ GameStateIntro::~GameStateIntro()
 
 void GameStateIntro::Init(sf::RenderWindow* pWindow)
 {
+    const float addGUIHeight = 150.f;
+    const int guiFontSize = 20;
+    
 	// Initialize GUI
 	m_Gui.setWindow(*pWindow);
 	m_Gui.setFont("assets/Starjedi.ttf");
@@ -46,7 +49,7 @@ void GameStateIntro::Init(sf::RenderWindow* pWindow)
 	title->setTextColor(sf::Color::White);
 	m_Gui.add(title, "title");*/
 
-    float fCurrentHeight = 200.f;
+    float fCurrentHeight = addGUIHeight;
     
 	// Startbutton
 	tgui::Button::Ptr buttonStart = theme->load("Button"); // Verwenden von Theme für Button
@@ -68,10 +71,10 @@ void GameStateIntro::Init(sf::RenderWindow* pWindow)
 			std::remove("savegame.txt");
 		});
 	}
-	buttonStart->setTextSize(28);
+	buttonStart->setTextSize(guiFontSize);
 	buttonStart->setPosition(Game::m_iWindowWidth / 2 - tgui::bindWidth(buttonStart) / 2, fCurrentHeight);
 	m_Gui.add(buttonStart, "buttonStart");
-    fCurrentHeight += 200.f;
+    fCurrentHeight += addGUIHeight;
 
     // Load Last SaveGame, but only show if a savegame exists.
     std::ifstream ifile("savegame.txt");
@@ -85,10 +88,10 @@ void GameStateIntro::Init(sf::RenderWindow* pWindow)
             GameStatePlay* pNewState = static_cast<GameStatePlay*>(Game::m_pEngine->GetLastState());
             pNewState->SetLoadGame("savegame.txt");
         });
-        buttonLoad->setTextSize(28);
+        buttonLoad->setTextSize(guiFontSize);
         buttonLoad->setPosition(Game::m_iWindowWidth / 2 - tgui::bindWidth(buttonLoad) / 2, fCurrentHeight);
         m_Gui.add(buttonLoad, "buttonLoad");
-        fCurrentHeight += 200.f;
+        fCurrentHeight += addGUIHeight;
     }
     
 	// Startbutton
@@ -98,10 +101,10 @@ void GameStateIntro::Init(sf::RenderWindow* pWindow)
 			Game::m_pEngine->ChangeState(EGameState::GameStateCredits);
 			SoundManager::GetInstance().PlaySoundClick();
 		});
-	buttonCredits->setTextSize(28);
+	buttonCredits->setTextSize(guiFontSize);
 	buttonCredits->setPosition(Game::m_iWindowWidth / 2 - tgui::bindWidth(buttonCredits) / 2, fCurrentHeight);
 	m_Gui.add(buttonCredits, "buttonCredits");
-	fCurrentHeight += 200.f;
+	fCurrentHeight += addGUIHeight;
 
 	// Exit button
 	tgui::Button::Ptr buttonExit = theme->load("Button"); // Verwenden von Theme für Button
@@ -110,10 +113,10 @@ void GameStateIntro::Init(sf::RenderWindow* pWindow)
 		m_bExit = true;
 		SoundManager::GetInstance().PlaySoundClick();
 	});
-	buttonExit->setTextSize(28);
+	buttonExit->setTextSize(guiFontSize);
 	buttonExit->setPosition(Game::m_iWindowWidth / 2 - tgui::bindWidth(buttonExit) / 2, fCurrentHeight);
 	m_Gui.add(buttonExit, "buttonExit");
-    fCurrentHeight += 200.f;
+    fCurrentHeight += addGUIHeight;
 }
 
 void GameStateIntro::Update(sf::Time DeltaTime, sf::RenderWindow* pWindow)

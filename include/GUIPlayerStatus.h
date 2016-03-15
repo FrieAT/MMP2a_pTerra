@@ -6,7 +6,7 @@ Copyright (c) MultiMediaTechnology, 2015
 
 #include "IGUI.h"
 #include "IDrawing.h"
-#include "eventbus\EventHandler.hpp"
+#include "eventbus/EventHandler.hpp"
 #include "PlayerDamageEvent.h"
 #include "PlayerShieldRegenerationEvent.h"
 #include "ScoreEvent.h"

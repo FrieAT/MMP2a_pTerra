@@ -6,7 +6,7 @@ Copyright (c) MultiMediaTechnology, 2015
 
 #include <iomanip>
 
-#include "..\include\GUIPlayerStatus.h"
+#include "GUIPlayerStatus.h"
 #include "Game.h"
 #include "IScore.h"
 

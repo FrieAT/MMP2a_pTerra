@@ -19,7 +19,7 @@ public:
 
 	}
 
-	virtual ~ScoreEvent()
+	~ScoreEvent()
 	{
 
 	}

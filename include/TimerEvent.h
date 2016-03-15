@@ -17,7 +17,7 @@ public:
 
 	}
 
-	virtual ~TimerEvent()
+	~TimerEvent()
 	{
 
 	}

@@ -40,7 +40,7 @@ void GameStateGameOver::Init(sf::RenderWindow* pWindow)
 	if (foundTerra)
 	{
 		auto terraBackground = std::make_shared<tgui::Picture>("assets/planet_earth.png");
-		terraBackground->move(tgui::Layout2d(-55, -900));
+		terraBackground->move(tgui::Layout2d(-512, -900));
 		m_Gui.add(terraBackground);
 		terraBackground->moveToBack();
 	}

@@ -17,7 +17,7 @@ Copyright (c) MultiMediaTechnology, 2015
 #include "SoundManager.h"
 #include "IHealth.h"
 
-#include "eventbus\EventBus.hpp"
+#include "eventbus/EventBus.hpp"
 #include "GUIPlayerStatus.h"
 #include "PlayerDamageEvent.h"
 #include "PlayerFuelEvent.h"

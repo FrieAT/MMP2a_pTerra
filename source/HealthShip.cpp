@@ -13,7 +13,7 @@ Copyright (c) MultiMediaTechnology, 2015
 #include "INavigation.h"
 #include "IScore.h"
 #include "LogicTime.h"
-#include "eventbus\EventBus.hpp"
+#include "eventbus/EventBus.hpp"
 #include "PlayerDamageEvent.h"
 #include "IEngine.h"
 
@@ -44,7 +44,8 @@ HealthShip::~HealthShip()
 void HealthShip::Damage(float fDamage)
 {
     IHealth::Damage(fDamage);
-	EventBus::FireEvent(PlayerDamageEvent(this, GetAssignedGameObject(), m_fHealth, m_fShield, fDamage));
+    PlayerDamageEvent event(this, GetAssignedGameObject(), m_fHealth, m_fShield, fDamage);
+	EventBus::FireEvent(event);
 
 	if (m_fHealth <= 0.f)
 	{

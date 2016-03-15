@@ -22,19 +22,11 @@ DynamicView::DynamicView(sf::FloatRect ViewSize, sf::Vector2f MoveVector)
     m_MoveVector = MoveVector;
     m_zoom = 1.f;
 	m_ViewSize = ViewSize;
-
-	m_pVignett = new GameObject("screen");
-	m_pVignett->SetTemporaryState(true);
-	m_pVignett->SetAssistedState(true);
-	m_pVignett->SetComponent(new PixelPosition(sf::Vector2f(), sf::Vector2f(Game::m_iWindowWidth / 2.f, Game::m_iWindowHeight / 2.f)));
-	m_pVignett->SetComponent(new SpriteDrawing("assets/FG_vignette.png", sf::Vector2f(static_cast<float>(Game::m_iWindowWidth), static_cast<float>(Game::m_iWindowHeight))));
 }
 
 DynamicView::~DynamicView()
 {
     FrameManager::GetInstance().UnregisterEventObserver(this);
-	m_pVignett->SetAssistedState(true);
-	ObjectManager::GetInstance().RemoveGameObject(m_pVignett);
 }
 
 void DynamicView::Init()
@@ -60,17 +52,6 @@ void DynamicView::OnFrameDraw(sf::RenderWindow* pWindow)
 		{
 			view.setRotation(pPositionComponent->GetRotation());
 		}
-		IPosition* pVignettPosition = static_cast<IPosition*>(m_pVignett->GetComponent(EComponentType::Position));
-		if (pVignettPosition != nullptr)
-		{
-			// sf::Vector2f CurrentSize = m_pView->getSize();
-			// pVignettPosition->SetOrigin(sf::Vector2f(CurrentSize.x / 2.f, CurrentSize.y / 2.f));
-			pVignettPosition->SetPosition(pPositionComponent->GetPosition());
-			if (Game::m_pEngine->m_bRotateCamera)
-			{
-				pVignettPosition->SetRotation(pPositionComponent->GetRotation());
-			}
-		}
 	}
 
 	// Set zoom based on player ship speed
@@ -92,12 +73,6 @@ void DynamicView::OnFrameDraw(sf::RenderWindow* pWindow)
 		: m_zoom;
 
 	sf::Vector2f NewSize(sf::Vector2f(pWindow->getSize()) / m_zoom);
-
-	IDrawing* pVignettDrawing = static_cast<IDrawing*>(m_pVignett->GetComponent(EComponentType::Drawing));
-	if (pVignettDrawing != nullptr)
-	{
-		pVignettDrawing->SetScale(NewSize * 1.25f);
-	}
 
 	view.setSize(NewSize);
 

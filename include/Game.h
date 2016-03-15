@@ -10,7 +10,7 @@ Copyright (c) MultiMediaTechnology, 2015
 class Game
 {
 public:
-	Game(bool bToggleFullScreen = true, bool bRotateCamera = false);
+	Game();
     ~Game();
     
     void Start();
@@ -22,8 +22,8 @@ public:
 	void SetView(sf::View View) { m_View = View; }
 
     static Game* m_pEngine;
-    static const int m_iWindowWidth = 1920;
-    static const int m_iWindowHeight = 1080;
+    static const int m_iWindowWidth = 1024; //1920
+    static const int m_iWindowHeight = 768; //1080
     static const int m_iFrameRate = 50;
 	const bool m_bRotateCamera;
 protected:

@@ -9,7 +9,7 @@ Copyright (c) MultiMediaTechnology, 2015
 #include "SpriteDrawing.h"
 #include "ObjectManager.h"
 #include "IEngine.h"
-#include "eventbus\EventBus.hpp"
+#include "eventbus/EventBus.hpp"
 #include "PlayerShieldRegenerationEvent.h"
 
 class IHealth : public IComponent
@@ -106,7 +106,8 @@ protected:
 					{
 						m_fShield = 100.f;
 					}
-					EventBus::FireEvent(PlayerShieldRegenerationEvent(this, GetAssignedGameObject(), m_fShield));
+                    PlayerShieldRegenerationEvent event(this, GetAssignedGameObject(), m_fShield);
+					EventBus::FireEvent(event);
 				}
 
 				if (m_fShield <= 0.f)
